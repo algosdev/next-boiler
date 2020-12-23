@@ -186,6 +186,16 @@ const theme = createMuiTheme({
       fontFamily: 'sans-serif',
       fontSize: '16px',
     },
+    h2: {
+      fontSize: '48px',
+      lineHeight: '52px',
+      fontWeight: 600,
+    },
+    h3: {
+      fontSize: '19px',
+      lineHeight: '23px',
+      fontWeight: 600,
+    },
   },
   shape: {
     borderRadius: '18px',
