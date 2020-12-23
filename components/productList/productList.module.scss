@@ -1,0 +1,106 @@
+.productListWrapper {
+  width: 100%;
+  padding-bottom: 80px;
+  background-color: #fff;
+  .navBar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    border-bottom: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+    background-color: #fff;
+    .wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 44px;
+      padding-top: 21px;
+      padding-bottom: 17px;
+      .btn {
+        display: flex;
+        align-items: center;
+        border: none;
+        background: transparent;
+        font-size: 12px;
+        line-height: 18px;
+        color: #6e6e73;
+        cursor: pointer;
+        svg {
+          margin: 0 6px;
+        }
+      }
+    }
+  }
+}
+
+.productList {
+  display: flex;
+  width: 100%;
+  .filterWrapper {
+    width: 30%;
+    max-width: 238px;
+    padding: 34px 35px;
+    border-right: 1px solid var(--border);
+    .filterContent {
+      position: sticky;
+      top: 100px;
+      border-bottom: 1px solid var(--border);
+    }
+  }
+  .wrapper {
+    min-width: 70%;
+    .product {
+      display: block;
+      width: 100%;
+      //   min-width: 516px;
+      padding: 38px 0;
+      text-align: center;
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      &:hover {
+        .name {
+          color: var(--primary-color);
+        }
+      }
+      img {
+        max-width: 90%;
+        max-height: 90%;
+      }
+      .type {
+        display: block;
+        margin-top: 18px;
+        margin-bottom: 8px;
+        font-size: 12px;
+        line-height: 18px;
+        color: #e85d00;
+      }
+      .name {
+        margin: 0;
+        font-size: 17px;
+        font-weight: 500;
+        line-height: 25px;
+      }
+      .price {
+        display: block;
+        margin-top: 8px;
+        font-size: 17px;
+        line-height: 26px;
+        color: #333333;
+      }
+      .colors {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 12px;
+        .color {
+          width: 16px;
+          height: 16px;
+          margin-right: 6px;
+          border-radius: 50%;
+          background-color: #333333;
+        }
+      }
+    }
+  }
+}

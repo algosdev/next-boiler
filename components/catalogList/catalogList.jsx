@@ -44,7 +44,7 @@ export default function CatalogList({ title }) {
             {catalog.map((item, index) => (
               <Grid item xs={3} key={index}>
                 <Paper>
-                  <Link href='/'>
+                  <Link href='/shop'>
                     <a className={style.wrapper}>
                       <Typography variant='h3'>{item.name}</Typography>
                       <img
