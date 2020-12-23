@@ -9,7 +9,7 @@ export default function Home() {
     <>
       <SEO />
       <Hero />
-      <CatalogList />
+      <CatalogList title='Apple products' />
       <BannerContainer>
         <Banner
           size={9}
@@ -22,7 +22,7 @@ export default function Home() {
           src='images/delivery.jpg'
         />
       </BannerContainer>
-      <CatalogList />
+      <CatalogList title='Samsung products' />
       <BannerContainer>
         <Banner
           size={12}
@@ -30,6 +30,7 @@ export default function Home() {
           src='images/payment_plan.jpg'
         />
       </BannerContainer>
+      <CatalogList title='Acoustics' />
     </>
   )
 }

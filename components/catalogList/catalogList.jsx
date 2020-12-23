@@ -34,11 +34,11 @@ const catalog = [
   },
 ]
 
-export default function CatalogList() {
+export default function CatalogList({ title }) {
   return (
     <div className={style.catalogList}>
       <Container>
-        <Typography variant='h2'>Apple products</Typography>
+        <Typography variant='h2'>{title}</Typography>
         <Box my={6}>
           <Grid container spacing={3}>
             {catalog.map((item, index) => (

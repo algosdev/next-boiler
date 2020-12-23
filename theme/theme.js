@@ -196,6 +196,11 @@ const theme = createMuiTheme({
       lineHeight: '23px',
       fontWeight: 600,
     },
+    h6: {
+      fontSize: '14px',
+      lineHeight: '18px',
+      fontWeight: 600,
+    },
   },
   shape: {
     borderRadius: '18px',
