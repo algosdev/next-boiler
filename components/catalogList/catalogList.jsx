@@ -39,7 +39,7 @@ export default function CatalogList() {
     <div className={style.catalogList}>
       <Container>
         <Typography variant='h2'>Apple products</Typography>
-        <Box pt={6}>
+        <Box my={6}>
           <Grid container spacing={3}>
             {catalog.map((item, index) => (
               <Grid item xs={3} key={index}>
