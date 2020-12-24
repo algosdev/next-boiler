@@ -24,6 +24,7 @@
         font-size: 12px;
         line-height: 18px;
         color: #6e6e73;
+        outline: 0;
         cursor: pointer;
         svg {
           margin: 0 6px;
@@ -40,14 +41,28 @@
     width: 30%;
     max-width: 238px;
     padding: 34px 35px;
+    transition: 0.4s;
     border-right: 1px solid var(--border);
+    &.hide {
+      width: 0;
+      padding: 34px 0;
+      overflow: hidden;
+    }
     .filterContent {
+      &.hide {
+        width: 0;
+        padding: 0;
+        top: 100px;
+        overflow: hidden;
+      }
+      width: 170px;
       position: sticky;
       top: 100px;
       border-bottom: 1px solid var(--border);
     }
   }
   .wrapper {
+    transition: 0.4s;
     min-width: 70%;
     .product {
       display: block;

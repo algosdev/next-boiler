@@ -1,26 +1,69 @@
 import React, { useState, useEffect, useRef } from 'react'
 import style from './header.module.scss'
-import { Container } from '@material-ui/core'
+import {
+  Container,
+  ClickAwayListener,
+  FormControl,
+  MenuItem,
+  Select,
+  makeStyles,
+} from '@material-ui/core'
 import Link from 'next/link'
 import { BrandLogo } from '../svg'
 import { SearchOutlined, LocalMallOutlined } from '@material-ui/icons'
 import { motion, useAnimation, AnimatePresence } from 'framer-motion'
-import ClickAwayListener from '@material-ui/core/ClickAwayListener'
-import Grow from '@material-ui/core/Grow'
-import Paper from '@material-ui/core/Paper'
-import Popper from '@material-ui/core/Popper'
-import MenuItem from '@material-ui/core/MenuItem'
-import MenuList from '@material-ui/core/MenuList'
-import { makeStyles } from '@material-ui/core/styles'
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    borderRadius: '6px',
+import NavItem from './navItem'
+const useStyles = makeStyles(() => ({
+  select: {
+    '& .MuiInput-root::before': {
+      display: 'none',
+    },
+    '& .MuiInput-underline:after, & .MuiInput-underline:before,': {
+      border: '0',
+    },
+    '& .Mui-focused': {
+      background: 'transparent',
+    },
   },
 }))
+const navData = [
+  {
+    title: 'Apple products',
+    subCategs: [
+      { title: 'Mac1', link: '/subcateg' },
+      { title: 'Watch', link: '/subcateg' },
+      { title: 'Ipad', link: '/subcateg' },
+    ],
+  },
+  {
+    title: ' Samsung products',
+    subCategs: [
+      { title: 'Mac2', link: '/subcateg' },
+      { title: 'Watch', link: '/subcateg' },
+      { title: 'Ipad', link: '/subcateg' },
+    ],
+  },
+  {
+    title: 'Acoustics',
+    subCategs: [
+      { title: 'Mac3', link: '/subcateg' },
+      { title: 'Watch', link: '/subcateg' },
+      { title: 'Ipad', link: '/subcateg' },
+    ],
+  },
+  {
+    title: 'Accessories',
+    subCategs: [
+      { title: 'Mac4', link: '/subcateg' },
+      { title: 'Watch', link: '/subcateg' },
+      { title: 'Ipad', link: '/subcateg' },
+    ],
+  },
+]
 export default function Header() {
+  const classes = useStyles()
   const animationForm = useAnimation()
-  const animationBag = useAnimation()
+  const [lang, setLang] = useState('ru')
   const [isSearchVisible, setIsSearchVisible] = useState(false)
   const [isBagVisible, setIsBagVisible] = useState(false)
   const submitHandler = (e) => {
@@ -33,37 +76,6 @@ export default function Header() {
       animationForm.start('stable')
     }
   }, [isSearchVisible])
-  const classes = useStyles()
-  const [open, setOpen] = useState(false)
-  const anchorRef = useRef(null)
-
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen)
-  }
-
-  const handleClose = (event) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return
-    }
-
-    setOpen(false)
-  }
-
-  function handleListKeyDown(event) {
-    if (event.key === 'Tab') {
-      event.preventDefault()
-      setOpen(false)
-    }
-  }
-
-  const prevOpen = useRef(open)
-  useEffect(() => {
-    if (prevOpen.current === true && open === false) {
-      anchorRef.current.focus()
-    }
-
-    prevOpen.current = open
-  }, [open])
 
   return (
     <>
@@ -89,9 +101,21 @@ export default function Header() {
             </ul>
             <ul className={style.list}>
               <li className={style.listItem}>
-                <Link href='/'>
+                {/* <Link href='/'>
                   <a>Русский</a>
-                </Link>
+                </Link> */}
+                <FormControl className={classes.select}>
+                  <Select
+                    labelId='demo-simple-select-label'
+                    id='demo-simple-select'
+                    value={lang}
+                    onChange={(e) => setLang(e.target.value)}
+                  >
+                    <MenuItem value={'ru'}>Russian</MenuItem>
+                    <MenuItem value={'en'}>English</MenuItem>
+                    <MenuItem value={'uz'}>Uzbek</MenuItem>
+                  </Select>
+                </FormControl>
               </li>
             </ul>
           </div>
@@ -108,184 +132,11 @@ export default function Header() {
               </Link>
             </div>
             <ul className={style.list}>
-              <li className={style.listItem}>
-                <span
-                  ref={anchorRef}
-                  aria-controls={open ? 'menu-list-grow' : undefined}
-                  aria-haspopup='true'
-                  onClick={handleToggle}
-                >
-                  Apple products
-                </span>
-                <Popper
-                  open={open}
-                  anchorEl={anchorRef.current}
-                  role={undefined}
-                  transition
-                  disablePortal
-                >
-                  {({ TransitionProps, placement }) => (
-                    <Grow
-                      {...TransitionProps}
-                      style={{
-                        transformOrigin:
-                          placement === 'bottom'
-                            ? 'center top'
-                            : 'center bottom',
-                      }}
-                    >
-                      <Paper className={classes.paper}>
-                        <ClickAwayListener onClickAway={handleClose}>
-                          <MenuList
-                            autoFocusItem={open}
-                            id='menu-list-grow'
-                            onKeyDown={handleListKeyDown}
-                          >
-                            <MenuItem onClick={handleClose}>Profile</MenuItem>
-                            <MenuItem onClick={handleClose}>
-                              My account
-                            </MenuItem>
-                            <MenuItem onClick={handleClose}>Logout</MenuItem>
-                          </MenuList>
-                        </ClickAwayListener>
-                      </Paper>
-                    </Grow>
-                  )}
-                </Popper>
-              </li>
-              <li className={style.listItem}>
-                <span
-                  ref={anchorRef}
-                  aria-controls={open ? 'menu-list-grow' : undefined}
-                  aria-haspopup='true'
-                  onClick={handleToggle}
-                >
-                  Samsung products
-                </span>
-                <Popper
-                  open={open}
-                  anchorEl={anchorRef.current}
-                  role={undefined}
-                  transition
-                  disablePortal
-                >
-                  {({ TransitionProps, placement }) => (
-                    <Grow
-                      {...TransitionProps}
-                      style={{
-                        transformOrigin:
-                          placement === 'bottom'
-                            ? 'center top'
-                            : 'center bottom',
-                      }}
-                    >
-                      <Paper className={classes.paper}>
-                        <ClickAwayListener onClickAway={handleClose}>
-                          <MenuList
-                            autoFocusItem={open}
-                            id='menu-list-grow'
-                            onKeyDown={handleListKeyDown}
-                          >
-                            <MenuItem onClick={handleClose}>Profile</MenuItem>
-                            <MenuItem onClick={handleClose}></MenuItem>
-                            <MenuItem onClick={handleClose}>Logout</MenuItem>
-                          </MenuList>
-                        </ClickAwayListener>
-                      </Paper>
-                    </Grow>
-                  )}
-                </Popper>
-              </li>
-
-              <li className={style.listItem}>
-                <span
-                  ref={anchorRef}
-                  aria-controls={open ? 'menu-list-grow' : undefined}
-                  aria-haspopup='true'
-                  onClick={handleToggle}
-                >
-                  Acoustics
-                </span>
-                <Popper
-                  open={open}
-                  anchorEl={anchorRef.current}
-                  role={undefined}
-                  transition
-                  disablePortal
-                >
-                  {({ TransitionProps, placement }) => (
-                    <Grow
-                      {...TransitionProps}
-                      style={{
-                        transformOrigin:
-                          placement === 'bottom'
-                            ? 'center top'
-                            : 'center bottom',
-                      }}
-                    >
-                      <Paper className={classes.paper}>
-                        <ClickAwayListener onClickAway={handleClose}>
-                          <MenuList
-                            autoFocusItem={open}
-                            id='menu-list-grow'
-                            onKeyDown={handleListKeyDown}
-                          >
-                            <MenuItem onClick={handleClose}>Profile</MenuItem>
-                            <MenuItem onClick={handleClose}>Acoustics</MenuItem>
-                            <MenuItem onClick={handleClose}>Logout</MenuItem>
-                          </MenuList>
-                        </ClickAwayListener>
-                      </Paper>
-                    </Grow>
-                  )}
-                </Popper>
-              </li>
-
-              <li className={style.listItem}>
-                <span
-                  ref={anchorRef}
-                  aria-controls={open ? 'menu-list-grow' : undefined}
-                  aria-haspopup='true'
-                  onClick={handleToggle}
-                >
-                  Accessories
-                </span>
-                <Popper
-                  open={open}
-                  anchorEl={anchorRef.current}
-                  role={undefined}
-                  transition
-                  disablePortal
-                >
-                  {({ TransitionProps, placement }) => (
-                    <Grow
-                      {...TransitionProps}
-                      style={{
-                        transformOrigin:
-                          placement === 'bottom'
-                            ? 'center top'
-                            : 'center bottom',
-                      }}
-                    >
-                      <Paper className={classes.paper}>
-                        <ClickAwayListener onClickAway={handleClose}>
-                          <MenuList
-                            autoFocusItem={open}
-                            id='menu-list-grow'
-                            onKeyDown={handleListKeyDown}
-                          >
-                            <MenuItem onClick={handleClose}>Profile</MenuItem>
-                            <MenuItem onClick={handleClose}>
-                              Accessories
-                            </MenuItem>
-                            <MenuItem onClick={handleClose}>Logout</MenuItem>
-                          </MenuList>
-                        </ClickAwayListener>
-                      </Paper>
-                    </Grow>
-                  )}
-                </Popper>
-              </li>
+              {navData.map((item, index) => (
+                <li className={style.listItem} key={index}>
+                  <NavItem title={item.title} subCategs={item.subCategs} />
+                </li>
+              ))}
 
               <li className={style.listItem}>
                 <ClickAwayListener

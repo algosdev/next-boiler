@@ -203,7 +203,7 @@ const theme = createMuiTheme({
     },
   },
   shape: {
-    borderRadius: '18px',
+    borderRadius: '4px',
   },
   spacing: 8,
   props: {
@@ -229,6 +229,10 @@ const theme = createMuiTheme({
     },
     MuiCard: {
       elevation: 0,
+    },
+    MuiListItem: {
+      disableRipple: true,
+      disableFocusRipple: true,
     },
     MuiTabs: {
       disableRipple: false,
