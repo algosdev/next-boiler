@@ -3,62 +3,29 @@ import React from 'react'
 import style from './catalogList.module.scss'
 import Link from 'next/link'
 
-const catalog = [
-  {
-    name: 'iMac',
-    image: 'images/mac.png',
-  },
-  {
-    name: 'iPhone',
-    image: 'images/iphone.png',
-  },
-  {
-    name: 'iPad',
-    image: 'images/ipad.png',
-  },
-  {
-    name: 'Apple Watch',
-    image: 'images/apple_watch.png',
-  },
-  {
-    name: 'AirPods',
-    image: 'images/airpods.png',
-  },
-  {
-    name: 'Accessories',
-    image: 'images/accessories.png',
-  },
-  {
-    name: 'Macbook',
-    image: 'images/mac.png',
-  },
-]
-
-export default function CatalogList({ title }) {
+export default function CatalogList({ data }) {
   return (
     <div className={style.catalogList}>
       <Container>
-        <Typography variant='h2'>{title}</Typography>
-        <Box my={6}>
+        <Typography variant='h2'>{data.title}</Typography>
+        <div className={style.catalogListWrapper}>
           <Grid container spacing={3}>
-            {catalog.map((item, index) => (
+            {data.catalog.map((item, index) => (
               <Grid item xs={3} key={index}>
                 <Paper>
                   <Link href='/shop'>
                     <a className={style.wrapper}>
                       <Typography variant='h3'>{item.name}</Typography>
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className={style.catalogImage}
-                      />
+                      <div className={style.catalogImage}>
+                        <img src={item.image} alt={item.name} />
+                      </div>
                     </a>
                   </Link>
                 </Paper>
               </Grid>
             ))}
           </Grid>
-        </Box>
+        </div>
       </Container>
     </div>
   )
