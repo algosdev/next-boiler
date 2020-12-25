@@ -23,11 +23,58 @@
         background: transparent;
         font-size: 12px;
         line-height: 18px;
-        color: #6e6e73;
+        color: #1d1d1d;
         outline: 0;
         cursor: pointer;
-        svg {
-          margin: 0 6px;
+        span {
+          color: #6e6e73;
+          margin: 0 4px;
+        }
+        .arrow {
+          display: flex;
+          align-items: center;
+          svg {
+            width: 15px;
+          }
+          &.open {
+            transform: rotate(180deg);
+          }
+        }
+      }
+      .sort_cont {
+        position: relative;
+        .popup {
+          position: absolute;
+          padding: 16px;
+          top: 200%;
+          left: calc(50% - 13px);
+          width: 200px;
+          background: #fff;
+          border: 1px solid var(--border);
+          ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            li {
+              list-style: none;
+              border-bottom: 1px solid var(--border);
+              &:last-child {
+                border-bottom: 1px solid transparent;
+              }
+              button {
+                padding: 10px;
+                border: 0;
+                cursor: pointer;
+                background: transparent;
+                outline: 0;
+                color: #1d1d1d;
+                &:disabled {
+                  cursor: auto;
+                  color: var(--border-color);
+                }
+              }
+            }
+          }
         }
       }
     }

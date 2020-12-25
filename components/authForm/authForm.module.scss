@@ -1,0 +1,66 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 0;
+  .inner {
+    margin: 16px 0;
+    .fullName {
+      display: flex;
+      width: 100%;
+      max-width: 400px;
+      justify-content: space-between;
+      .input_cont {
+        &:first-child {
+          margin-right: 10px;
+        }
+        min-width: 180px;
+      }
+    }
+    .input_cont {
+      position: relative;
+      margin-bottom: 5px;
+      min-width: 280px;
+      .icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        height: 26px;
+        cursor: pointer;
+        width: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        svg {
+          color: #fff;
+          height: 20px;
+          width: 20px;
+        }
+      }
+      button {
+        margin-top: 10px;
+        background: var(--primary-color);
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+    .checkbox_cont {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .options {
+      margin-top: 20px;
+      & > div {
+        text-align: center;
+      }
+      a {
+        color: var(--primary-color);
+      }
+    }
+  }
+}

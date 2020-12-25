@@ -113,8 +113,9 @@
             transform: translateX(-50%);
             background: #fff;
             border-radius: 12px;
-            padding: 16px;
+            padding: 10px 16px;
             min-width: 200px;
+            border: 1px solid var(--border);
             p {
               text-align: center;
               opacity: 0.8;
@@ -129,6 +130,11 @@
                 color: var(--primary-color);
                 padding: 10px;
                 border-top: 1px solid var(--border);
+                a {
+                  color: var(--primary-color);
+                  display: block;
+                  padding: 0;
+                }
               }
             }
           }

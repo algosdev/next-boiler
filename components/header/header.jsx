@@ -18,7 +18,10 @@ const useStyles = makeStyles(() => ({
     '& .MuiInput-root::before': {
       display: 'none',
     },
-    '& .MuiInput-underline:after, & .MuiInput-underline:before,': {
+    '& .MuiInput-underline:after': {
+      border: '0',
+    },
+    '& .MuiInput-underline:before': {
       border: '0',
     },
     '& .Mui-focused': {
@@ -231,7 +234,11 @@ export default function Header() {
                             <li>Favourites</li>
                             <li>Orders</li>
                             <li>Account</li>
-                            <li>Sign in</li>
+                            <li>
+                              <Link href='/signIn'>
+                                <a>Sign in</a>
+                              </Link>
+                            </li>
                           </ul>
                         </motion.div>
                       </AnimatePresence>
