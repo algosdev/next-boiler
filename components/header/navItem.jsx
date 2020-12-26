@@ -12,9 +12,16 @@ import Link from 'next/link'
 const useStyles = makeStyles(() => ({
   paper: {
     borderRadius: '4px',
+    borderTopLeftRadius: '0',
+    borderTopRightRadius: '0',
     background: '#1d1d1d',
+
     '& .MuiMenuItem-root': {
+      padding: 0,
+    },
+    '& .MuiMenuItem-root a': {
       color: '#fff',
+      padding: '6px 20px',
     },
     '& .MuiList-root': {
       padding: '0',
@@ -25,6 +32,7 @@ const useStyles = makeStyles(() => ({
   },
   popper: {
     zIndex: '999',
+    top: '10px !important',
   },
 }))
 const NavItem = ({ title, subCategs }) => {

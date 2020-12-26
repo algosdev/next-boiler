@@ -65,6 +65,7 @@ const navData = [
 ]
 export default function Header() {
   const classes = useStyles()
+  const searchRef = useRef(null)
   const animationForm = useAnimation()
   const [lang, setLang] = useState('ru')
   const [isSearchVisible, setIsSearchVisible] = useState(false)
@@ -80,6 +81,15 @@ export default function Header() {
     }
   }, [isSearchVisible])
 
+  useEffect(() => {
+    if (searchRef.current) {
+      if (isSearchVisible) {
+        searchRef.current.focus()
+      } else {
+        searchRef.current.blur()
+      }
+    }
+  }, [isSearchVisible])
   return (
     <>
       <div className={style.topBar}>
@@ -181,6 +191,7 @@ export default function Header() {
                       transition={{
                         duration: 0,
                       }}
+                      ref={searchRef}
                       variants={{
                         visible: {
                           width: '100%',
@@ -227,15 +238,18 @@ export default function Header() {
                           initial={'stable'}
                           exit={'stable'}
                         >
-                          <p>Your bag is empty</p>
+                          <p>Your cart is empty</p>
                           <ul>
                             <li>
                               <Link href='/cart'>
                                 <a>Cart</a>
                               </Link>
                             </li>
-                            <li>Favourites</li>
-                            <li>Orders</li>
+                            <li>
+                              <Link href='/orders'>
+                                <a>Orders</a>
+                              </Link>
+                            </li>
                             <li>
                               <Link href='/account'>
                                 <a>Account</a>

@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Typography, Checkbox, CircularProgress } from '@material-ui/core'
 import style from './authForm.module.scss'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import { Link } from '../../i18n'
-import { useRouter } from 'next/router'
+import { Router } from '../../i18n'
 function SignInForm() {
-  const router = useRouter()
+  const router = Router
+  const phoneNumRef = useRef(null)
+  const passwordRef = useRef(null)
   const [rememberMe, setRememberMe] = useState(false)
   const [isPhoneNumValid, setIsPhoneNumValid] = useState(false)
   const [isPasswordValid, setIsPasswordValid] = useState(false)
@@ -37,6 +39,12 @@ function SignInForm() {
       router.push('/')
     }, 2000)
   }
+  useEffect(() => {
+    if (phoneNumRef.current && passwordRef.current && isPhoneNumValid) {
+      phoneNumRef.current.blur()
+      passwordRef.current.focus()
+    }
+  }, [isPhoneNumValid])
   return (
     <div className={style.wrapper}>
       <Typography variant='h3'>Sign in to MACBRO</Typography>
@@ -46,6 +54,7 @@ function SignInForm() {
             <input
               className={`input`}
               value={values.phoneNum}
+              ref={phoneNumRef}
               onChange={(e) =>
                 setValues({ ...values, phoneNum: e.target.value })
               }
@@ -75,6 +84,7 @@ function SignInForm() {
               <input
                 className='input'
                 value={values.password}
+                ref={passwordRef}
                 onChange={(e) =>
                   setValues({ ...values, password: e.target.value })
                 }

@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import style from './authForm.module.scss'
 import { Typography } from '@material-ui/core'
+import { Router } from '../../i18n'
 function VerifyCodeForm() {
   const [values, setValues] = useState({
     code: '',
   })
   const submitHandler = (e) => {
     e.preventDefault()
+    Router.push('/')
   }
   return (
     <div className={style.wrapper}>
@@ -22,6 +24,7 @@ function VerifyCodeForm() {
               onChange={(e) => setValues({ ...values, code: e.target.value })}
               type='num'
               placeholder='OTP code'
+              required
             />
           </div>
           <div className={style.input_cont}>

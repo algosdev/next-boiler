@@ -225,7 +225,9 @@ const theme = createMuiTheme({
       InputLabelProps: {
         shrink: true,
       },
+      border: '1px solid  var(--border)',
       color: 'primary',
+      fontFamily: ""
     },
     MuiPaper: {
       elevation: 0,
