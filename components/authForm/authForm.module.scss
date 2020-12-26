@@ -24,8 +24,10 @@
       min-width: 280px;
       .icon {
         position: absolute;
-        top: 10px;
+        top: 0;
         right: 10px;
+        border: 0;
+        outline: 0;
         background: var(--primary-color);
         border-radius: 50%;
         height: 26px;
@@ -34,6 +36,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        .progress {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
         svg {
           color: #fff;
           height: 20px;

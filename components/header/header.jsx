@@ -104,9 +104,6 @@ export default function Header() {
             </ul>
             <ul className={style.list}>
               <li className={style.listItem}>
-                {/* <Link href='/'>
-                  <a>Русский</a>
-                </Link> */}
                 <FormControl className={classes.select}>
                   <Select
                     labelId='demo-simple-select-label'
@@ -208,8 +205,9 @@ export default function Header() {
                     onClick={() => setIsBagVisible(!isBagVisible)}
                   >
                     <LocalMallOutlined />
-                    {isBagVisible ? (
-                      <AnimatePresence>
+
+                    <AnimatePresence>
+                      {isBagVisible ? (
                         <motion.div
                           className={style.popup}
                           variants={{
@@ -224,16 +222,25 @@ export default function Header() {
                               left: '50%',
                             },
                           }}
+                          transition={{ duration: 0.3 }}
                           animate={'visible'}
                           initial={'stable'}
                           exit={'stable'}
                         >
                           <p>Your bag is empty</p>
                           <ul>
-                            <li>Bag</li>
+                            <li>
+                              <Link href='/cart'>
+                                <a>Cart</a>
+                              </Link>
+                            </li>
                             <li>Favourites</li>
                             <li>Orders</li>
-                            <li>Account</li>
+                            <li>
+                              <Link href='/account'>
+                                <a>Account</a>
+                              </Link>
+                            </li>
                             <li>
                               <Link href='/signIn'>
                                 <a>Sign in</a>
@@ -241,10 +248,10 @@ export default function Header() {
                             </li>
                           </ul>
                         </motion.div>
-                      </AnimatePresence>
-                    ) : (
-                      ''
-                    )}
+                      ) : (
+                        ''
+                      )}
+                    </AnimatePresence>
                   </div>
                 </li>
               </ClickAwayListener>

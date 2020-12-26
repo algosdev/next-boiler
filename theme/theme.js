@@ -62,17 +62,14 @@ const theme = createMuiTheme({
     },
     MuiButton: {
       root: {
-        minWidth: '240px',
+        minWidth: '100px',
         textTransform: 'none',
-        padding: '17px 48px',
-        fontSize: '20px',
-        lineHeight: '30px',
+        padding: '10px 20px',
+        fontSize: '16px',
+        lineHeight: '24px',
         fontWeight: 'normal',
         transition: 'transform .2s ease-in-out',
         borderRadius: '6px',
-        '&:hover': {
-          transform: 'translateY(-1px)',
-        },
       },
       fullWidth: {
         maxWidth: '100%',
@@ -105,12 +102,13 @@ const theme = createMuiTheme({
       },
       containedPrimary: {
         '&:hover, &:active': {
-          backgroundColor: '#1B1F38',
+          backgroundColor: '#005bb6',
         },
       },
       containedSecondary: {
-        '&:hover': {
-          backgroundColor: '#fff',
+        background: '#d6d6d6 !important',
+        '&:hover, &:active': {
+          background: '#c3c3c3 !important',
         },
       },
     },
@@ -154,10 +152,15 @@ const theme = createMuiTheme({
     MuiDialog: {
       paper: {
         width: '70%',
-        padding: '0px 0 30px 0',
       },
       paperWidthSm: {
-        maxWidth: '100%',
+        maxWidth: '500px',
+      },
+    },
+    MuiDialogTitle: {
+      root: {
+        fontSize: '32px !important',
+        '& MuiTypography-root': {},
       },
     },
   },

@@ -1,0 +1,71 @@
+.wrapper_header {
+  padding: 10px 0 10px;
+  .top {
+    display: flex;
+    margin: 10px 0;
+    justify-content: flex-end;
+    color: var(--primary-color);
+    button,
+    span {
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid transparent;
+      outline: 0;
+      color: var(--primary-color);
+      cursor: pointer;
+      transition: 0.4s;
+      &:hover {
+        border-bottom: 1px solid var(--primary-color);
+      }
+    }
+  }
+  .title {
+    font-weight: 400;
+  }
+}
+.wrapper_item {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 16px;
+    & > div {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+    }
+    .leading {
+      margin-bottom: 10px;
+    }
+    .icon {
+      background: var(--primary-color);
+      color: #fff;
+      display: flex;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      margin-top: auto;
+      border-radius: 4px;
+    }
+  }
+}
+.title {
+  margin-bottom: 50px;
+  font-size: 32px;
+  font-weight: 600;
+}
+.mini_title {
+  font-size: 24px;
+  font-weight: 600;
+}
+.sub_title {
+  line-height: 1.6;
+  font-size: 16px;
+  font-weight: 600;
+}
+.dialog_title {
+  font-size: 24px;
+  font-weight: 600;
+  padding: 24px 24px 16px;
+}

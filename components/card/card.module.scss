@@ -1,0 +1,117 @@
+.wrapper_list {
+  .list_title {
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 50px;
+    padding-bottom: 10px;
+    // border-bottom: 1px solid var(--border);
+  }
+}
+.wrapper_summary {
+  position: sticky;
+  top: 20px;
+  padding: 0 16px;
+  .summary_inner {
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    padding: 16px;
+    .info,
+    .totalPrice {
+      display: flex;
+      justify-content: space-between;
+    }
+    .totalPrice {
+      font-weight: bold;
+    }
+    .back {
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .go {
+      cursor: pointer;
+      background: var(--primary-color);
+      color: #fff;
+    }
+  }
+}
+.wrapper_item {
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  .inner {
+    img {
+      width: 100%;
+      height: auto;
+    }
+    display: grid;
+    grid-template-columns: 3fr 6fr 5fr 5fr 1fr;
+    grid-gap: 10px;
+    align-items: center;
+    .details {
+      padding: 10px;
+      .title {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 24px;
+      }
+      .info {
+        font-size: 14px;
+        line-height: 24px;
+        color: var(--primary-color);
+      }
+    }
+    .quantity_cont {
+      display: flex;
+      flex-direction: column;
+      .quantity_inner {
+        display: grid;
+        grid-template-columns: 3fr 4fr 3fr;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        & > div {
+          &::selection {
+            background: transparent;
+          }
+          height: 36px;
+          border-left: 1px solid var(--border);
+          display: flex;
+          cursor: pointer;
+          font-weight: 600;
+          justify-content: center;
+          align-items: center;
+          &:first-child {
+            border-left: 1px solid transparent;
+          }
+        }
+        .quantity {
+          font-size: 16px;
+          cursor: auto;
+        }
+      }
+      .price {
+        text-align: center;
+        font-weight: 600;
+        font-size: 16px;
+        margin-top: 5px;
+      }
+    }
+    .total {
+      font-weight: bold;
+      font-size: 22px;
+      text-align: center;
+      padding: 10px;
+      line-height: 28px;
+    }
+    .trash {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .icon {
+        display: flex;
+        cursor: pointer;
+        padding: 5px;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}
