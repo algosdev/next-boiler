@@ -8,20 +8,24 @@ import {
   MenuList,
   makeStyles,
 } from '@material-ui/core'
+import ExpandLessIcon from '@material-ui/icons/ExpandLess'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Link from 'next/link'
 const useStyles = makeStyles(() => ({
   paper: {
-    borderRadius: '4px',
+    borderRadius: '6px',
     borderTopLeftRadius: '0',
     borderTopRightRadius: '0',
     background: '#1d1d1d',
-
+    overflow: 'hidden',
     '& .MuiMenuItem-root': {
       padding: 0,
     },
     '& .MuiMenuItem-root a': {
       color: '#fff',
-      padding: '6px 20px',
+      margin: '6px 20px',
+      minWidth: '100px',
+      justifyContent: 'flex-start !important',
     },
     '& .MuiList-root': {
       padding: '0',
@@ -77,7 +81,7 @@ const NavItem = ({ title, subCategs }) => {
         aria-haspopup='true'
         onClick={handleToggle}
       >
-        {title}
+        {title} {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
       </span>
       <Popper
         open={open}

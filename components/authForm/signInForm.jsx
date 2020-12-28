@@ -4,12 +4,16 @@ import style from './authForm.module.scss'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import { Link } from '../../i18n'
 import { Router } from '../../i18n'
+import { useForm } from 'react-hook-form'
+import composeRefs from '@seznam/compose-react-refs'
+import InputMask from 'react-input-mask'
 function SignInForm() {
   const router = Router
   const phoneNumRef = useRef(null)
   const passwordRef = useRef(null)
   const [rememberMe, setRememberMe] = useState(false)
   const [isPhoneNumValid, setIsPhoneNumValid] = useState(false)
+  const { register, handleSubmit, errors, watch } = useForm()
   const [isPasswordValid, setIsPasswordValid] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [values, setValues] = useState({
@@ -39,6 +43,15 @@ function SignInForm() {
       router.push('/')
     }, 2000)
   }
+  const checkPhoneNumberLength = (string) => {
+    let count = 0
+    string.split('').forEach((el) => {
+      if (el < 10) {
+        count++
+      }
+    })
+    return count >= 12 ? true : false
+  }
   useEffect(() => {
     if (phoneNumRef.current && passwordRef.current && isPhoneNumValid) {
       phoneNumRef.current.blur()
@@ -51,16 +64,40 @@ function SignInForm() {
       <div className={style.inner}>
         <form onSubmit={submitHandlerPhone}>
           <div className={style.input_cont}>
-            <input
-              className={`input`}
-              value={values.phoneNum}
-              ref={phoneNumRef}
-              onChange={(e) =>
-                setValues({ ...values, phoneNum: e.target.value })
+            <InputMask
+              mask='+99999-999-99-99'
+              disabled={false}
+              maskChar=' '
+              onChange={
+                (e) => {
+                  console.log(e.target)
+                }
+                // e.target.value.length
+                //   ? setIsPasswordValid(true)
+                //   : setIsPasswordValid(false)
               }
               type='tel'
+            >
+              {() => (
+                <input
+                  className='input'
+                  name='phoneNum'
+                  placeholder='Phone number'
+                  ref={register({
+                    validate: (value) => checkPhoneNumberLength(value),
+                    setValueAs: (value) =>
+                      value.trim().replace(/_/g, '').replace(/\s/g, ''),
+                  })}
+                />
+              )}
+            </InputMask>
+            {/* <input
+              className={`input`}
+              ref={composeRefs(phoneNumRef, register)}
+              type='tel'
+              name='phoneNum'
               placeholder='Phone number'
-            />
+            /> */}
             {!isPhoneNumValid ? (
               values.phoneNum ? (
                 <button className={style.icon} type='submit'>
@@ -83,12 +120,13 @@ function SignInForm() {
             <div className={style.input_cont}>
               <input
                 className='input'
-                value={values.password}
-                ref={passwordRef}
-                onChange={(e) =>
-                  setValues({ ...values, password: e.target.value })
-                }
+                // value={values.password}
+                ref={composeRefs(passwordRef, register)}
+                // onChange={(e) =>
+                //   setValues({ ...values, password: e.target.value })
+                // }
                 type='text'
+                name='password'
                 placeholder='Password'
               />
               {!isPasswordValid ? (

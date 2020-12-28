@@ -1,47 +1,25 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Typography, Checkbox } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 import style from './authForm.module.scss'
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
-import { Link } from '../../i18n'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff'
-import TextField from '@material-ui/core/TextField'
-import InputMask from 'react-input-mask'
 import { Router } from '../../i18n'
+import composeRefs from '@seznam/compose-react-refs'
+import InputMask from 'react-input-mask'
+import { useForm } from 'react-hook-form'
 function SignUpForm() {
-  const [rememberMe, setRememberMe] = useState(false)
   const [error, setError] = useState(false)
   const passwordRef = useRef(null)
   const passwordConfirmRef = useRef(null)
   const [showPassword, setShowPassword] = useState(false)
-  const [isPhoneNumValid, setIsPhoneNumValid] = useState(false)
-  const [isPasswordValid, setIsPasswordValid] = useState(false)
-  const [values, setValues] = useState({
-    phoneNum: '',
-    password: '',
-    passwordConfirm: '',
-    firstName: '',
-    lastName: '',
-  })
-  const submitHandler = (e) => {
-    e.preventDefault()
-    if (values.password === values.passwordConfirm) {
-      setError(false)
-      Router.push('/verifyCode')
-    } else {
-      setError(true)
-    }
+  const { register, handleSubmit, errors, watch } = useForm()
+  const password = useRef({})
+  password.current = watch('password', '')
+  const submitHandler = (data) => {
+    console.log(data)
+    Router.push('/verifyCode')
   }
-  const checkPhoneNum = () => {
-    setTimeout(() => {
-      setIsPhoneNumValid(true)
-    }, 2000)
-  }
-  const checkPassword = () => {
-    setTimeout(() => {
-      setIsPasswordValid(true)
-    }, 2000)
-  }
+
   useEffect(() => {
     if (passwordRef.current && passwordConfirmRef.current) {
       if (showPassword) {
@@ -51,24 +29,30 @@ function SignUpForm() {
         passwordRef.current.type = 'password'
         passwordConfirmRef.current.type = 'password'
       }
-      console.log(passwordRef.current.type)
     }
   }, [showPassword])
 
+  const checkPhoneNumber = (string) => {
+    let count = 0
+    string.split('').forEach((el) => {
+      if (el < 10) {
+        count++
+      }
+    })
+    return count >= 12 ? true : false
+  }
   return (
     <div className={style.wrapper}>
       <Typography variant='h3'>Sign up to MACBRO</Typography>
       <div className={style.inner}>
-        <form onSubmit={submitHandler}>
+        <form onSubmit={handleSubmit(submitHandler)}>
           <div className={style.fullName}>
             <div className={style.input_cont}>
               <input
                 className={`input`}
-                value={values.firstName}
                 required
-                onChange={(e) =>
-                  setValues({ ...values, firstName: e.target.value })
-                }
+                ref={register}
+                name='name'
                 type='text'
                 placeholder='Name'
               />
@@ -76,58 +60,50 @@ function SignUpForm() {
             <div className={style.input_cont}>
               <input
                 className={`input`}
-                value={values.lastName}
-                onChange={(e) =>
-                  setValues({ ...values, lastName: e.target.value })
-                }
+                name='surname'
                 type='text'
+                ref={register}
                 placeholder='Surname'
                 required
               />
             </div>
           </div>
           <div className={style.input_cont}>
-            {/* <InputMask
+            <InputMask
               mask='+99999-999-99-99'
               disabled={false}
               maskChar=' '
-              required
-              value={values.phoneNum}
-              onChange={(e) =>
-                setValues({ ...values, phoneNum: e.target.value })
-              }
-              placeholder={`+998 __ ___ __ __`}
+              type='tel'
             >
               {() => (
-                <TextField
-                  variant='outlined'
-                  fullWidth
+                <input
+                  className='input'
+                  name='phoneNum'
                   placeholder='Phone number'
+                  ref={register({
+                    validate: (value) => checkPhoneNumber(value),
+                    setValueAs: (value) =>
+                      value.trim().replace(/_/g, '').replace(/\s/g, ''),
+                  })}
                 />
               )}
-            </InputMask> */}
-            <input
-              className='input'
-              required
-              placeholder='Phone number'
-              value={values.phoneNum}
-              onChange={(e) =>
-                setValues({ ...values, phoneNum: e.target.value })
-              }
-              type='tel'
-              mask='/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/g/'
-            />
+            </InputMask>
           </div>
+          <span className={style.errorTxt}>
+            {errors.phoneNum && 'Fill in valid phone number'}
+          </span>
           <div className={style.input_cont}>
             <input
               className={`${error ? style.error : ''} input`}
               required
               onFocus={() => setError(false)}
-              value={values.password}
-              onChange={(e) =>
-                setValues({ ...values, password: e.target.value })
-              }
-              ref={passwordRef}
+              name='password'
+              ref={composeRefs(
+                register({
+                  required: true,
+                }),
+                passwordRef
+              )}
               type='password'
               placeholder='Password'
             />
@@ -142,15 +118,19 @@ function SignUpForm() {
             <input
               className={`${error ? style.error : ''} input`}
               required
-              ref={passwordConfirmRef}
+              name='password_repeat'
               onFocus={() => setError(false)}
-              value={values.passwordConfirm}
-              onChange={(e) =>
-                setValues({ ...values, passwordConfirm: e.target.value })
-              }
+              ref={composeRefs(
+                register({
+                  validate: (value) =>
+                    value === password.current || 'The passwords do not match',
+                }),
+                passwordConfirmRef
+              )}
               type='password'
               placeholder='Confirm password'
             />
+
             <div
               className={style.eye}
               onClick={() => setShowPassword(!showPassword)}
@@ -158,10 +138,8 @@ function SignUpForm() {
               {!showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
             </div>
           </div>
-          <span className={`${error ? style.errorTxt : style.leading}`}>
-            {error
-              ? "Passwords don't match"
-              : 'Make sure to fill in all fields with right details.'}
+          <span className={style.errorTxt}>
+            {errors.password_repeat && errors.password_repeat.message}
           </span>
           <div className={style.input_cont}>
             <button className='input' type='submit'>

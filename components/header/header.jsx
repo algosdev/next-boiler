@@ -9,6 +9,8 @@ import {
   makeStyles,
 } from '@material-ui/core'
 import Link from 'next/link'
+import CartDropdown from './CartDropdown'
+import LanguageDropdown from './LanguageDropdown'
 import { BrandLogo } from '../svg'
 import { SearchOutlined, LocalMallOutlined } from '@material-ui/icons'
 import { motion, useAnimation, AnimatePresence } from 'framer-motion'
@@ -67,9 +69,8 @@ export default function Header() {
   const classes = useStyles()
   const searchRef = useRef(null)
   const animationForm = useAnimation()
-  const [lang, setLang] = useState('ru')
   const [isSearchVisible, setIsSearchVisible] = useState(false)
-  const [isBagVisible, setIsBagVisible] = useState(false)
+
   const submitHandler = (e) => {
     e.preventDefault()
   }
@@ -92,7 +93,7 @@ export default function Header() {
   }, [isSearchVisible])
   return (
     <>
-      <div className={style.topBar}>
+      {/* <div className={style.topBar}>
         <Container>
           <div className={style.wrapper}>
             <ul className={style.list}>
@@ -130,7 +131,7 @@ export default function Header() {
             </ul>
           </div>
         </Container>
-      </div>
+      </div> */}
       <header className={style.header}>
         <Container>
           <div className={style.wrapper}>
@@ -171,7 +172,8 @@ export default function Header() {
                       },
                     }}
                     transition={{
-                      type: isSearchVisible ? 'spring' : 'twin',
+                      duration: 0.3,
+                      type: 'twin',
                       stiffness: 100,
                     }}
                     animate={animationForm}
@@ -209,66 +211,8 @@ export default function Header() {
                   </motion.form>
                 </ClickAwayListener>
               </li>
-              <ClickAwayListener onClickAway={() => setIsBagVisible(false)}>
-                <li className={style.listItem}>
-                  <div
-                    className={style.icon}
-                    onClick={() => setIsBagVisible(!isBagVisible)}
-                  >
-                    <LocalMallOutlined />
-
-                    <AnimatePresence>
-                      {isBagVisible ? (
-                        <motion.div
-                          className={style.popup}
-                          variants={{
-                            visible: {
-                              y: 0,
-                              opacity: 1,
-                            },
-                            stable: {
-                              y: -20,
-                              x: '-50%',
-                              opacity: 0,
-                              left: '50%',
-                            },
-                          }}
-                          transition={{ duration: 0.3 }}
-                          animate={'visible'}
-                          initial={'stable'}
-                          exit={'stable'}
-                        >
-                          <p>Your cart is empty</p>
-                          <ul>
-                            <li>
-                              <Link href='/cart'>
-                                <a>Cart</a>
-                              </Link>
-                            </li>
-                            <li>
-                              <Link href='/orders'>
-                                <a>Orders</a>
-                              </Link>
-                            </li>
-                            <li>
-                              <Link href='/account'>
-                                <a>Account</a>
-                              </Link>
-                            </li>
-                            <li>
-                              <Link href='/signIn'>
-                                <a>Sign in</a>
-                              </Link>
-                            </li>
-                          </ul>
-                        </motion.div>
-                      ) : (
-                        ''
-                      )}
-                    </AnimatePresence>
-                  </div>
-                </li>
-              </ClickAwayListener>
+              <CartDropdown />
+              <LanguageDropdown />
             </ul>
           </div>
         </Container>

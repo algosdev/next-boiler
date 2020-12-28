@@ -57,9 +57,11 @@
       position: relative;
       min-height: 55px;
       .listItem {
+        color: #fff;
         height: 55px;
         display: flex;
         align-items: center;
+        cursor: pointer;
         & > span {
           height: 100%;
           display: flex;
@@ -156,6 +158,10 @@
           fill: var(--secondary-color);
         }
       }
+    }
+    .cart_items {
+      padding: 30px 50px;
+      background: #333333;
     }
   }
 }
