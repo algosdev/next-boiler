@@ -24,6 +24,8 @@
   }
 }
 .wrapper_item {
+  border-top: 1px solid var(--border);
+  padding: 20px 0;
   .grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

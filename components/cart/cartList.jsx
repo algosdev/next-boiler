@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import CardListItem from './cardListItem'
-import CardSummary from './cardSummary'
+import CartListItem from './cartListItem'
+import CardSummary from './cartSummary'
 import { Grid } from '@material-ui/core'
-import style from './card.module.scss'
-function CardList() {
+import style from './cart.module.scss'
+function CartList() {
   const [totalPrice, setTotalPrice] = useState(0)
   const [totalQuantity, setTotalQuantity] = useState(0)
   const calculateTotal = (e) => {}
@@ -14,10 +14,10 @@ function CardList() {
         <Grid container justify='space-between' xs={12} spacing={2}>
           <Grid item xs={8}>
             <div className={style.inner}>
-              <CardListItem />
-              <CardListItem />
-              <CardListItem />
-              <CardListItem />
+              <CartListItem />
+              <CartListItem />
+              <CartListItem />
+              <CartListItem />
             </div>
           </Grid>
           <Grid item xs={4}>
@@ -32,4 +32,4 @@ function CardList() {
   )
 }
 
-export default CardList
+export default CartList

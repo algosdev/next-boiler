@@ -1,0 +1,130 @@
+.wrapper_summary {
+  position: sticky;
+  top: 20px;
+  padding: 0 16px;
+  .summary_inner {
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    padding: 16px;
+    .info,
+    .totalPrice,
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    p {
+      margin: 8px 0;
+    }
+    .header {
+      font-size: 20px;
+      font-weight: 600;
+      a {
+        font-size: 14px;
+        color: var(--primary-color);
+        font-weight: normal;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    .totalPrice {
+      font-weight: bold;
+      font-size: 20px;
+      padding: 10px 0;
+      border-top: 1px solid var(--border);
+      margin-bottom: 0;
+    }
+  }
+}
+.wrapper_form {
+  & > p {
+    border-top: 1px solid var(--border);
+  }
+  .input {
+    margin-bottom: 10px;
+  }
+}
+.list_title {
+  font-weight: 600;
+  margin: 20px 0;
+  font-size: 36px;
+  line-height: 50px;
+  //   border-bottom: 1px solid var(--border);
+}
+.form_section {
+  max-width: 500px;
+  .title {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 32px;
+    padding: 30px 0 20px;
+    margin: 0;
+  }
+  .submit {
+    background: var(--primary-color);
+    cursor: pointer;
+    color: #fff;
+    margin-top: 20px;
+  }
+  .flex {
+    display: flex;
+    justify-content: space-between;
+  }
+  .radio_input {
+    position: relative;
+    &:first-child {
+      margin-right: 20px;
+    }
+    input:checked + label div {
+      box-shadow: 0 0 2px 2px var(--primary-color);
+    }
+    label {
+      div {
+        width: 220px;
+        padding: 10px;
+        min-height: 90px;
+        border-radius: 4px;
+        box-shadow: 0 0 2px 1px var(--border);
+      }
+
+      cursor: pointer;
+      .opt_title {
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 30px;
+      }
+    }
+    input {
+      visibility: hidden;
+      position: absolute;
+      z-index: -1;
+    }
+  }
+}
+.wrapper_item {
+  .inner {
+    img {
+      width: 100%;
+      height: auto;
+    }
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-gap: 10px;
+    align-items: center;
+    .details {
+      padding: 10px;
+      font-weight: 500;
+      .title {
+        font-size: 14px;
+        line-height: 20px;
+      }
+      .info {
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 18px;
+      }
+    }
+  }
+}

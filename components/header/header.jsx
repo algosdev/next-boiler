@@ -98,17 +98,17 @@ export default function Header() {
             <ul className={style.list}>
               <li className={style.listItem}>
                 <Link href='/'>
-                  <a>Магазины</a>
+                  <a>Shops</a>
                 </Link>
               </li>
               <li className={style.listItem}>
                 <Link href='/'>
-                  <a>Доставка</a>
+                  <a>Shipmnet</a>
                 </Link>
               </li>
               <li className={style.listItem}>
                 <Link href='/'>
-                  <a>Блог</a>
+                  <a>Blog</a>
                 </Link>
               </li>
             </ul>

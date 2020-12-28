@@ -1,7 +1,7 @@
 .wrapper_list {
   .list_title {
     font-weight: 600;
-    font-size: 32px;
+    font-size: 36px;
     line-height: 50px;
     padding-bottom: 10px;
     // border-bottom: 1px solid var(--border);
@@ -15,6 +15,9 @@
     border-radius: 6px;
     border: 1px solid var(--border);
     padding: 16px;
+    p {
+      margin: 8px 0;
+    }
     .info,
     .totalPrice {
       display: flex;
@@ -22,6 +25,8 @@
     }
     .totalPrice {
       font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 10px;
     }
     .back {
       margin-top: 10px;

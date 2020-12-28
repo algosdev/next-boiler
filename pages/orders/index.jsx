@@ -1,16 +1,16 @@
 import React from 'react'
 import { Container } from '@material-ui/core'
-import CartList from '../components/cart/cartList'
-function cart() {
+import OrderContainer from '../../components/orders/orderContainer'
+function orders() {
   return (
     <>
       <div style={{ background: '#fff', padding: '50px 0' }}>
         <Container>
-          <CartList />
+          <OrderContainer />
         </Container>
       </div>
     </>
   )
 }
 
-export default cart
+export default orders

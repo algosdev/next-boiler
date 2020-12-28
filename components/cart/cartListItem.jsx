@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import style from './card.module.scss'
+import style from './cart.module.scss'
 import AddIcon from '@material-ui/icons/Add'
 import RemoveIcon from '@material-ui/icons/Remove'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { motion, AnimatePresence } from 'framer-motion'
-function CardListItem() {
+function CartListItem() {
   const [quantity, setQuantity] = useState(1)
   const [price, setPrice] = useState(250000)
   const [total, setTotal] = useState(1)
@@ -42,17 +42,17 @@ function CardListItem() {
               <div className={style.quantity_cont}>
                 <div className={style.quantity_inner}>
                   <div
-                    className={style.plus}
-                    onClick={() => changeQuantity('plus')}
-                  >
-                    <AddIcon />
-                  </div>
-                  <div className={style.quantity}>{quantity}</div>
-                  <div
                     className={style.minus}
                     onClick={() => changeQuantity('minus')}
                   >
                     <RemoveIcon />
+                  </div>
+                  <div className={style.quantity}>{quantity}</div>
+                  <div
+                    className={style.plus}
+                    onClick={() => changeQuantity('plus')}
+                  >
+                    <AddIcon />
                   </div>
                 </div>
                 <div className={style.price}>{price} soum/pc</div>
@@ -73,4 +73,4 @@ function CardListItem() {
   )
 }
 
-export default CardListItem
+export default CartListItem
