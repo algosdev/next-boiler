@@ -10,7 +10,7 @@ export default function Footer() {
       <Container>
         <Grid container spacing={2}>
           <Grid item xs={3}>
-            <Typography variant='h6'>Shop and Learn</Typography>
+            <Typography variant='h6'>Покупай и учись</Typography>
             <ul className={style.list}>
               <li className={style.listItem}>
                 <Link href='/'>

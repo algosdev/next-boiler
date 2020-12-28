@@ -13,16 +13,16 @@ export default function Hero() {
       />
       <div className={style.wrapper}>
         <Container>
-          <span className={style.new}>New</span>
+          <span className={style.new}>Новый</span>
           <h2 className={style.title}>Macbook Air</h2>
-          <div className={style.desc}>Power. It's in the Air.</div>
+          <div className={style.desc}>Мощность. Это в воздухе.</div>
           <p className={style.content}>
-            From $999 or <br />
-            $83.25/mo. for 12 mo.**
+            От $999 or <br />
+            $83.25/месяц на 12 месяцы.**
           </p>
           <div>
             <Link href='/'>
-              <a className={style.callToAction}>Buy</a>
+              <a className={style.callToAction}>Купить</a>
             </Link>
           </div>
         </Container>

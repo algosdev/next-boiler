@@ -6,7 +6,7 @@ import { Grid, Typography, ClickAwayListener } from '@material-ui/core'
 import { motion, AnimatePresence } from 'framer-motion'
 const productListData = [
   {
-    type: 'Free Engraving',
+    type: 'Бесплатная гравировка',
     price: '549.00',
     name: 'AirPods Max',
     img: 'images/airpods_max.jpg',
@@ -14,7 +14,7 @@ const productListData = [
     slug: 'slug',
   },
   {
-    type: 'New',
+    type: 'Новый',
     price: '99.00',
     name: 'HomePod mini',
     img: 'images/homepod_mini.jpeg',
@@ -22,7 +22,7 @@ const productListData = [
     slug: 'slug',
   },
   {
-    type: 'New',
+    type: 'Новый',
     price: '49.00',
     name: 'iPhone 12 Pro Max Silicone case',
     img: 'images/case.jpeg',
@@ -30,7 +30,7 @@ const productListData = [
     slug: 'slug',
   },
   {
-    type: 'New',
+    type: 'Новый',
     price: '49.00',
     name: 'iPhone 12 mini Silicone case',
     img: 'images/silicone_case.jpeg',
@@ -38,7 +38,7 @@ const productListData = [
     slug: 'slug',
   },
   {
-    type: 'New',
+    type: 'Новый',
     price: '59.00',
     name: 'iPhone Leather Wallet',
     img: 'images/wallet.jpeg',
@@ -47,13 +47,13 @@ const productListData = [
   },
 ]
 const sortByData = [
-  'Featured',
-  'Newest',
-  'Price: High to Low',
-  'Price: Low to High',
+  'Рекомендуемые',
+  'Новейшие',
+  'Цена: по убыванию',
+  'Цена: по возрастанию',
 ]
 export default function ProductList() {
-  const [activeSortBy, setActiveSortBy] = useState('Featured')
+  const [activeSortBy, setActiveSortBy] = useState('Рекомендуемые')
   const [showFilter, setShowFilter] = useState(true)
   const [sortByOpen, setSortByOpen] = useState(false)
   return (
@@ -66,7 +66,7 @@ export default function ProductList() {
               onClick={() => setShowFilter(!showFilter)}
             >
               <List />
-              Filter
+              Фильтр
             </button>
           </div>
 
@@ -75,7 +75,7 @@ export default function ProductList() {
               className={style.btn}
               onClick={() => setSortByOpen(!sortByOpen)}
             >
-              <span>Sort by: </span> {activeSortBy}
+              <span>Сортировать по: </span> {activeSortBy}
               <span
                 className={`${style.arrow} ${sortByOpen ? style.open : ''}`}
               >
@@ -148,9 +148,9 @@ export default function ProductList() {
               !showFilter ? style.hide : ''
             }`}
           >
-            <Typography variant='h6'>Brand</Typography>
+            <Typography variant='h6'>Марка</Typography>
             <p>Apple</p>
-            <p>Beats by Dr.Dre</p>
+            <p>Samsung</p>
           </div>
         </div>
         <div className={style.wrapper}>

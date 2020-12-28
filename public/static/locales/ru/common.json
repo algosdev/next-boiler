@@ -1,3 +1,16 @@
 {
-    "home": "Главная"
+  "home": "Главная",
+  "search": "Поиск",
+  "apple_p": "Продукты Apple",
+  "samsung_p": "Продукты Samsung",
+  "acoustics": "Акустика",
+  "accessories": "Аксессуары",
+  "wireless_headphones": "Наушники беспрово,дные",
+  "brand": "Марка",
+  "filter": "Фильтр",
+  "sort_by": "Сортировать по",
+  "galaxy_phones": "Смартфоны Galaxy",
+  "tablets": "Планшеты",
+  "watches": "Часы",
+  "buds": "Наушники"
 }

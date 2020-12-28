@@ -5,7 +5,7 @@ import BannerContainer from '../components/bannerContainer/bannerContainer'
 import Banner from '../components/banner/banner'
 
 const appleProducts = {
-  title: 'Apple products',
+  title: 'Продукция Apple',
   catalog: [
     {
       name: 'iPhone',
@@ -32,29 +32,29 @@ const appleProducts = {
       image: 'images/imac.jpg',
     },
     {
-      name: 'Accessories',
+      name: 'Аксессуары',
       image: 'images/accessories.png',
     },
   ],
 }
 
 const samsungProducts = {
-  title: 'Samsung products',
+  title: 'Продукция Samsung',
   catalog: [
     {
-      name: 'Galaxy smartphones',
+      name: 'Смартфоны Galaxy',
       image: 'images/galaxy_s20.jpg',
     },
     {
-      name: 'Tablets',
+      name: 'Планшеты',
       image: 'images/samsung_tabs.jpg',
     },
     {
-      name: 'Watches',
+      name: 'Часы',
       image: 'images/samsung_watches.png',
     },
     {
-      name: 'Buds',
+      name: 'Наушники',
       image: 'images/galaxy_buds.png',
     },
   ],

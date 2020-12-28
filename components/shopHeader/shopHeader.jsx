@@ -7,7 +7,7 @@ export default function ShopHeader() {
     <div className={style.shopHeader}>
       <Container>
         <div className={style.wrapper}>
-          <h1 className={style.title}>Wireless Headphones</h1>
+          <h1 className={style.title}>Наушники беспроводные</h1>
         </div>
       </Container>
     </div>

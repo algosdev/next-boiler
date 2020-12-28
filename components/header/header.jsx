@@ -15,6 +15,7 @@ import { BrandLogo } from '../svg'
 import { SearchOutlined, LocalMallOutlined } from '@material-ui/icons'
 import { motion, useAnimation, AnimatePresence } from 'framer-motion'
 import NavItem from './navItem'
+import { useTranslation } from '../../i18n'
 const useStyles = makeStyles(() => ({
   select: {
     '& .MuiInput-root::before': {
@@ -31,46 +32,50 @@ const useStyles = makeStyles(() => ({
     },
   },
 }))
-const navData = [
-  {
-    title: 'Apple products',
-    subCategs: [
-      { title: 'Mac1', link: '/subcateg' },
-      { title: 'Watch', link: '/subcateg' },
-      { title: 'Ipad', link: '/subcateg' },
-    ],
-  },
-  {
-    title: ' Samsung products',
-    subCategs: [
-      { title: 'Mac2', link: '/subcateg' },
-      { title: 'Watch', link: '/subcateg' },
-      { title: 'Ipad', link: '/subcateg' },
-    ],
-  },
-  {
-    title: 'Acoustics',
-    subCategs: [
-      { title: 'Mac3', link: '/subcateg' },
-      { title: 'Watch', link: '/subcateg' },
-      { title: 'Ipad', link: '/subcateg' },
-    ],
-  },
-  {
-    title: 'Accessories',
-    subCategs: [
-      { title: 'Mac4', link: '/subcateg' },
-      { title: 'Watch', link: '/subcateg' },
-      { title: 'Ipad', link: '/subcateg' },
-    ],
-  },
-]
-export default function Header() {
+
+function Header() {
+  const { t } = useTranslation()
   const classes = useStyles()
   const searchRef = useRef(null)
   const animationForm = useAnimation()
   const [isSearchVisible, setIsSearchVisible] = useState(false)
-
+  const navData = [
+    {
+      title: t('apple_p'),
+      subCategs: [
+        { title: 'Iphone', link: '/subcateg' },
+        { title: 'Ipad', link: '/subcateg' },
+        { title: 'Apple watch', link: '/subcateg' },
+        { title: 'AirPod', link: '/subcateg' },
+        { title: 'Macbook', link: '/subcateg' },
+        { title: 'iMac', link: '/subcateg' },
+      ],
+    },
+    {
+      title: t('samsung_p'),
+      subCategs: [
+        { title: t('galaxy_phones'), link: '/subcateg' },
+        { title: t('watches'), link: '/subcateg' },
+        { title: t('tablets'), link: '/subcateg' },
+        { title: t('buds'), link: '/subcateg' },
+      ],
+    },
+    {
+      title: t('acoustics'),
+      subCategs: [
+        { title: 'Колонки', link: '/subcateg' },
+        { title: 'Наушники', link: '/subcateg' },
+        { title: 'Микрофоны', link: '/subcateg' },
+      ],
+    },
+    {
+      title: t('accessories'),
+      subCategs: [
+        { title: 'Чехлы', link: '/subcateg' },
+        { title: 'Зарядчики', link: '/subcateg' },
+      ],
+    },
+  ]
   const submitHandler = (e) => {
     e.preventDefault()
   }
@@ -93,45 +98,6 @@ export default function Header() {
   }, [isSearchVisible])
   return (
     <>
-      {/* <div className={style.topBar}>
-        <Container>
-          <div className={style.wrapper}>
-            <ul className={style.list}>
-              <li className={style.listItem}>
-                <Link href='/'>
-                  <a>Shops</a>
-                </Link>
-              </li>
-              <li className={style.listItem}>
-                <Link href='/'>
-                  <a>Shipmnet</a>
-                </Link>
-              </li>
-              <li className={style.listItem}>
-                <Link href='/'>
-                  <a>Blog</a>
-                </Link>
-              </li>
-            </ul>
-            <ul className={style.list}>
-              <li className={style.listItem}>
-                <FormControl className={classes.select}>
-                  <Select
-                    labelId='demo-simple-select-label'
-                    id='demo-simple-select'
-                    value={lang}
-                    onChange={(e) => setLang(e.target.value)}
-                  >
-                    <MenuItem value={'ru'}>Russian</MenuItem>
-                    <MenuItem value={'en'}>English</MenuItem>
-                    <MenuItem value={'uz'}>Uzbek</MenuItem>
-                  </Select>
-                </FormControl>
-              </li>
-            </ul>
-          </div>
-        </Container>
-      </div> */}
       <header className={style.header}>
         <Container>
           <div className={style.wrapper}>
@@ -220,3 +186,4 @@ export default function Header() {
     </>
   )
 }
+export default Header
