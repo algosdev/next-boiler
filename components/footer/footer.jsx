@@ -97,7 +97,7 @@ export default function Footer() {
         </Grid>
         <div className='copyright'>
           <p>
-            Copyright © 2020 Интернет магазин MacBro.uz. Все права защищены.
+            Copyright © 2020 Online shopping MacBro.uz. All rights reserved.
           </p>
           <p>
             Created by{' '}

@@ -10,9 +10,18 @@ function CheckoutListItem() {
             <div className={style.inner}>
               <div className={style.header}>Order {'#00001'}</div>
               <div className={style.details}>
-                <p>Date: {'2020-10-29 18:16:26'}</p>
-                <p>Status: {'In progress'}</p>
-                <p>Total: {'600000 soum'}</p>
+                <p>
+                  <span>Date: </span>
+                  {'2020-10-29 18:16:26'}
+                </p>
+                <p>
+                  <span>Status: </span>
+                  {'In progress'}
+                </p>
+                <p>
+                  <span>Total: </span>
+                  {'600000 soum'}
+                </p>
               </div>
             </div>
           </div>
