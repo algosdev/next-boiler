@@ -10,6 +10,12 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   grid-gap: 20px;
+  a {
+    color: #1f1f1f;
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
 .wrapper_item {
   cursor: pointer;

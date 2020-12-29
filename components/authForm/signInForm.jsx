@@ -23,7 +23,6 @@ function SignInForm() {
     password: '',
   })
   const submitHandlerPhone = (e) => {
-    e.preventDefault()
     checkPhoneNum()
   }
   const submitHandlerPassword = (e) => {
@@ -52,12 +51,9 @@ function SignInForm() {
         count++
       }
     })
-    if (count >= 12) {
-      setIsPhoneNumValid(true)
-    } else {
-      setIsPhoneNumValid(false)
-    }
-    return count >= 12 ? true : false
+    const result = count >= 12 ? true : false
+
+    return result
   }
   useEffect(() => {
     if (phoneNumRef.current && passwordRef.current && isPhoneNumValid) {
@@ -65,24 +61,23 @@ function SignInForm() {
       passwordRef.current.focus()
     }
   }, [isPhoneNumValid])
+
   return (
     <div className={style.wrapper}>
       <Typography variant='h3'>{t('signin_title')}</Typography>
       <div className={style.inner}>
-        <form onSubmit={submitHandlerPhone}>
+        <form onSubmit={handleSubmit(submitHandlerPhone)}>
           <div className={style.input_cont}>
             <InputMask
               mask='+99999-999-99-99'
               disabled={false}
-              maskChar=' '
+              maskChar={' '}
+              defaultValue='+998'
               type='tel'
-              onChange={(e) =>
-                setValues({ ...values, phoneNum: e.target.value })
-              }
             >
               {() => (
                 <input
-                  className='input'
+                  className={`input ${errors.phoneNum ? 'error' : ''}`}
                   name='phoneNum'
                   placeholder={t('phone_num')}
                   ref={register({
@@ -94,17 +89,13 @@ function SignInForm() {
               )}
             </InputMask>
             {!isPhoneNumValid ? (
-              values.phoneNum ? (
-                <button className={style.icon} type='submit'>
-                  {isLoading ? (
-                    <CircularProgress className={style.progress} />
-                  ) : (
-                    <ArrowForwardIcon />
-                  )}
-                </button>
-              ) : (
-                ''
-              )
+              <button className={style.icon} type='submit'>
+                {isLoading ? (
+                  <CircularProgress className={style.progress} />
+                ) : (
+                  <ArrowForwardIcon />
+                )}
+              </button>
             ) : (
               ''
             )}

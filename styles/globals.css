@@ -73,6 +73,13 @@ a {
 .input.margin {
   margin-bottom: 10px;
 }
+.input.error {
+  border: 1px solid red;
+}
+
+.input.error:focus {
+  border: 1px solid red;
+}
 
 /* input.input:hover {
   border: 1px solid #1d1d1d;

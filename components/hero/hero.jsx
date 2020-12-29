@@ -55,20 +55,22 @@ export default function Hero() {
             className={style.background}
           />
           <Carousel.Caption>
-            <div className={style.wrapper}>
-              <span className={style.new}>{t('new')}</span>
-              <h2 className={style.title}>Macbook Air</h2>
-              <div className={style.desc}>{data1[i18n.language]?.slogan}</div>
-              <p className={style.content}>
-                {data1[i18n.language]?.t2} <br />
-                {data1[i18n.language]?.t3}
-              </p>
-              <div>
-                <Link href='/'>
-                  <a className={style.callToAction}>{t('buy')}</a>
-                </Link>
+            <Container>
+              <div className={style.wrapper}>
+                <span className={style.new}>{t('new')}</span>
+                <h2 className={style.title}>Macbook Air</h2>
+                <div className={style.desc}>{data1[i18n.language]?.slogan}</div>
+                <p className={style.content}>
+                  {data1[i18n.language]?.t2} <br />
+                  {data1[i18n.language]?.t3}
+                </p>
+                <div>
+                  <Link href='/'>
+                    <a className={style.callToAction}>{t('buy')}</a>
+                  </Link>
+                </div>
               </div>
-            </div>
+            </Container>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -79,20 +81,22 @@ export default function Hero() {
           />
 
           <Carousel.Caption>
-            <div className={style.wrapper}>
-              <span className={style.new}>{t('new')}</span>
-              <h2 className={style.title}>Macbook Pro</h2>
-              <div className={style.desc}>{data2[i18n.language]?.slogan}</div>
-              <p className={style.content}>
-                {data2[i18n.language]?.t2} <br />
-                {data2[i18n.language]?.t3}
-              </p>
-              <div>
-                <Link href='/'>
-                  <a className={style.callToAction}>{t('buy')}</a>
-                </Link>
+            <Container>
+              <div className={style.wrapper}>
+                <span className={style.new}>{t('new')}</span>
+                <h2 className={style.title}>Macbook Pro</h2>
+                <div className={style.desc}>{data2[i18n.language]?.slogan}</div>
+                <p className={style.content}>
+                  {data2[i18n.language]?.t2} <br />
+                  {data2[i18n.language]?.t3}
+                </p>
+                <div>
+                  <Link href='/'>
+                    <a className={style.callToAction}>{t('buy')}</a>
+                  </Link>
+                </div>
               </div>
-            </div>
+            </Container>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>

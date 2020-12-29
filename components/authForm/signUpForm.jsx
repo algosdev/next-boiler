@@ -74,7 +74,8 @@ function SignUpForm() {
             <InputMask
               mask='+99999-999-99-99'
               disabled={false}
-              maskChar=' '
+              maskChar={' '}
+              defaultValue='+998'
               type='tel'
             >
               {() => (
