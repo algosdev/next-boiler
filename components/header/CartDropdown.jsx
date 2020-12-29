@@ -118,27 +118,27 @@ const CartDropdown = ({ title, subCategs }) => {
                       onClick={handleClose}
                       diableRipple
                     >
-                      <p>Your cart is empty</p>
+                      <p>Ваша корзина пуста</p>
                     </div>
 
                     <MenuItem onClick={handleClose} diableRipple>
                       <Link href='/cart'>
-                        <a>Cart</a>
+                        <a>Корзина</a>
                       </Link>
                     </MenuItem>
                     <MenuItem onClick={handleClose} diableRipple>
                       <Link href='/orders'>
-                        <a>Orders</a>
+                        <a>Заказы</a>
                       </Link>
                     </MenuItem>
                     <MenuItem onClick={handleClose} diableRipple>
                       <Link href='/account'>
-                        <a>Account</a>
+                        <a>Счет</a>
                       </Link>
                     </MenuItem>
                     <MenuItem onClick={handleClose} diableRipple>
                       <Link href='/signIn'>
-                        <a>Sign in</a>
+                        <a>Логин</a>
                       </Link>
                     </MenuItem>
                   </MenuList>
