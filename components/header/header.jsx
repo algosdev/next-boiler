@@ -155,7 +155,7 @@ function Header() {
                     </div>
                     <motion.input
                       type='text'
-                      placeholder='Search'
+                      placeholder={t('search')}
                       transition={{
                         duration: 0,
                       }}

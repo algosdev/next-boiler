@@ -7,7 +7,9 @@ import { Router } from '../../i18n'
 import composeRefs from '@seznam/compose-react-refs'
 import InputMask from 'react-input-mask'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from '../../i18n'
 function SignUpForm() {
+  const { t } = useTranslation()
   const [error, setError] = useState(false)
   const passwordRef = useRef(null)
   const passwordConfirmRef = useRef(null)
@@ -17,7 +19,7 @@ function SignUpForm() {
   password.current = watch('password', '')
   const submitHandler = (data) => {
     console.log(data)
-    Router.push('/verifyCode')
+    Router.push('/verify-code')
   }
 
   useEffect(() => {
@@ -43,7 +45,7 @@ function SignUpForm() {
   }
   return (
     <div className={style.wrapper}>
-      <Typography variant='h3'>Sign up to MACBRO</Typography>
+      <Typography variant='h3'>{t('signup_title')}</Typography>
       <div className={style.inner}>
         <form onSubmit={handleSubmit(submitHandler)}>
           <div className={style.fullName}>
@@ -54,7 +56,7 @@ function SignUpForm() {
                 ref={register}
                 name='name'
                 type='text'
-                placeholder='Name'
+                placeholder={t('name')}
               />
             </div>
             <div className={style.input_cont}>
@@ -63,7 +65,7 @@ function SignUpForm() {
                 name='surname'
                 type='text'
                 ref={register}
-                placeholder='Surname'
+                placeholder={t('surname')}
                 required
               />
             </div>
@@ -79,7 +81,7 @@ function SignUpForm() {
                 <input
                   className='input'
                   name='phoneNum'
-                  placeholder='Phone number'
+                  placeholder={t('phone_num')}
                   ref={register({
                     validate: (value) => checkPhoneNumber(value),
                     setValueAs: (value) =>
@@ -90,7 +92,7 @@ function SignUpForm() {
             </InputMask>
           </div>
           <span className={style.errorTxt}>
-            {errors.phoneNum && 'Fill in valid phone number'}
+            {errors.phoneNum && t('phone_invalid')}
           </span>
           <div className={style.input_cont}>
             <input
@@ -105,7 +107,7 @@ function SignUpForm() {
                 passwordRef
               )}
               type='password'
-              placeholder='Password'
+              placeholder={t('password')}
             />
             <div
               className={style.eye}
@@ -123,12 +125,12 @@ function SignUpForm() {
               ref={composeRefs(
                 register({
                   validate: (value) =>
-                    value === password.current || 'The passwords do not match',
+                    value === password.current || t('passwords_dont_match'),
                 }),
                 passwordConfirmRef
               )}
               type='password'
-              placeholder='Confirm password'
+              placeholder={t('confirm_password')}
             />
 
             <div
@@ -143,7 +145,7 @@ function SignUpForm() {
           </span>
           <div className={style.input_cont}>
             <button className='input' type='submit'>
-              Continue
+              {t('continue')}
             </button>
           </div>
         </form>

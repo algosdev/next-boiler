@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import style from './authForm.module.scss'
 import { Typography } from '@material-ui/core'
+import { useTranslation } from '../../i18n'
 function NewPasswordForm() {
+  const { t } = useTranslation()
   const [values, setValues] = useState({
     password: '',
     passwordConfirm: '',
@@ -11,7 +13,7 @@ function NewPasswordForm() {
   }
   return (
     <div className={style.wrapper}>
-      <Typography variant='h3'>Enter new password</Typography>
+      <Typography variant='h3'>{t('enter_new_password')}</Typography>
       <div className={style.inner}>
         <form onSubmit={submitHandler}>
           <div className={style.input_cont}>
@@ -22,7 +24,7 @@ function NewPasswordForm() {
                 setValues({ ...values, password: e.target.value })
               }
               type='num'
-              placeholder='Password'
+              placeholder={t('password')}
             />
           </div>
           <div className={style.input_cont}>
@@ -33,12 +35,12 @@ function NewPasswordForm() {
                 setValues({ ...values, passwordConfirm: e.target.value })
               }
               type='num'
-              placeholder='Confirm password'
+              placeholder={t('confirm_password')}
             />
           </div>
           <div className={style.input_cont}>
             <button className='input' type='submit'>
-              Change
+              {t('change')}
             </button>
           </div>
         </form>

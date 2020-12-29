@@ -7,7 +7,9 @@ import { Router } from '../../i18n'
 import { useForm } from 'react-hook-form'
 import composeRefs from '@seznam/compose-react-refs'
 import InputMask from 'react-input-mask'
+import { useTranslation } from '../../i18n'
 function SignInForm() {
+  const { t } = useTranslation()
   const router = Router
   const phoneNumRef = useRef(null)
   const passwordRef = useRef(null)
@@ -50,6 +52,11 @@ function SignInForm() {
         count++
       }
     })
+    if (count >= 12) {
+      setIsPhoneNumValid(true)
+    } else {
+      setIsPhoneNumValid(false)
+    }
     return count >= 12 ? true : false
   }
   useEffect(() => {
@@ -60,7 +67,7 @@ function SignInForm() {
   }, [isPhoneNumValid])
   return (
     <div className={style.wrapper}>
-      <Typography variant='h3'>Sign in to MACBRO</Typography>
+      <Typography variant='h3'>{t('signin_title')}</Typography>
       <div className={style.inner}>
         <form onSubmit={submitHandlerPhone}>
           <div className={style.input_cont}>
@@ -68,21 +75,16 @@ function SignInForm() {
               mask='+99999-999-99-99'
               disabled={false}
               maskChar=' '
-              onChange={
-                (e) => {
-                  console.log(e.target)
-                }
-                // e.target.value.length
-                //   ? setIsPasswordValid(true)
-                //   : setIsPasswordValid(false)
-              }
               type='tel'
+              onChange={(e) =>
+                setValues({ ...values, phoneNum: e.target.value })
+              }
             >
               {() => (
                 <input
                   className='input'
                   name='phoneNum'
-                  placeholder='Phone number'
+                  placeholder={t('phone_num')}
                   ref={register({
                     validate: (value) => checkPhoneNumberLength(value),
                     setValueAs: (value) =>
@@ -91,13 +93,6 @@ function SignInForm() {
                 />
               )}
             </InputMask>
-            {/* <input
-              className={`input`}
-              ref={composeRefs(phoneNumRef, register)}
-              type='tel'
-              name='phoneNum'
-              placeholder='Phone number'
-            /> */}
             {!isPhoneNumValid ? (
               values.phoneNum ? (
                 <button className={style.icon} type='submit'>
@@ -122,12 +117,12 @@ function SignInForm() {
                 className='input'
                 // value={values.password}
                 ref={composeRefs(passwordRef, register)}
-                // onChange={(e) =>
-                //   setValues({ ...values, password: e.target.value })
-                // }
+                onChange={(e) =>
+                  setValues({ ...values, password: e.target.value })
+                }
                 type='text'
                 name='password'
-                placeholder='Password'
+                placeholder={t('password')}
               />
               {!isPasswordValid ? (
                 values.password ? (
@@ -155,18 +150,18 @@ function SignInForm() {
             checked={rememberMe}
             onChange={(e) => setRememberMe(e.target.checked)}
           />
-          <span>Remember me</span>
+          <span>{t('remember_me')}</span>
         </div>
 
         <div className={style.options}>
           <div>
             <Link href='/forgot'>
-              <a>Forgot password?</a>
+              <a>{t('forgot_password')}</a>
             </Link>
           </div>
           <div>
-            <Link href='/signUp'>
-              <a>Don’t have an account? Create yours</a>
+            <Link href='/signup'>
+              <a>{t('create_yours')}</a>
             </Link>
           </div>
         </div>

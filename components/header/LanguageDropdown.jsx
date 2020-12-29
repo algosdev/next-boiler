@@ -8,7 +8,7 @@ import {
   MenuList,
   makeStyles,
 } from '@material-ui/core'
-import { i18n } from '../../i18n'
+import { i18n, useTranslation } from '../../i18n'
 import style from './header.module.scss'
 const useStyles = makeStyles(() => ({
   paper: {
@@ -16,13 +16,15 @@ const useStyles = makeStyles(() => ({
     borderTopLeftRadius: '0',
     borderTopRightRadius: '0',
     background: '#1d1d1d',
-
+    fontFamily:
+      '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
     overflow: 'hidden',
 
     '& .MuiMenuItem-root': {
-      padding: 0,
       color: '#fff',
       padding: '10px 20px',
+      fontFamily:
+        '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
     },
 
     '& .MuiList-root': {
@@ -38,6 +40,7 @@ const useStyles = makeStyles(() => ({
   },
 }))
 const LanguageDropdown = ({ title, subCategs }) => {
+  const { t } = useTranslation()
   const [isBagVisible, setIsBagVisible] = useState(false)
   const classes = useStyles()
   const [open, setOpen] = useState(false)
@@ -80,7 +83,7 @@ const LanguageDropdown = ({ title, subCategs }) => {
         aria-haspopup='true'
         onClick={handleToggle}
       >
-        {i18n?.language?.toUpperCase()}
+        {t(i18n?.language)}
         <Popper
           open={open}
           anchorEl={anchorRef.current}
@@ -104,33 +107,45 @@ const LanguageDropdown = ({ title, subCategs }) => {
                     id='menu-list-grow'
                     onKeyDown={handleListKeyDown}
                   >
-                    <MenuItem
-                      onClick={(e) => {
-                        handleClose(e)
-                        i18n.changeLanguage('ru')
-                      }}
-                      diableRipple
-                    >
-                      RU
-                    </MenuItem>
-                    <MenuItem
-                      onClick={(e) => {
-                        handleClose(e)
-                        i18n.changeLanguage('en')
-                      }}
-                      diableRipple
-                    >
-                      EN
-                    </MenuItem>
-                    <MenuItem
-                      onClick={(e) => {
-                        handleClose(e)
-                        i18n.changeLanguage('uz')
-                      }}
-                      diableRipple
-                    >
-                      UZ
-                    </MenuItem>
+                    {i18n.language !== 'ru' ? (
+                      <MenuItem
+                        onClick={(e) => {
+                          handleClose(e)
+                          i18n.changeLanguage('ru')
+                        }}
+                        diableRipple
+                      >
+                        {t('ru')}
+                      </MenuItem>
+                    ) : (
+                      ''
+                    )}
+                    {i18n.language !== 'en' ? (
+                      <MenuItem
+                        onClick={(e) => {
+                          handleClose(e)
+                          i18n.changeLanguage('en')
+                        }}
+                        diableRipple
+                      >
+                        {t('en')}
+                      </MenuItem>
+                    ) : (
+                      ''
+                    )}
+                    {i18n.language !== 'uz' ? (
+                      <MenuItem
+                        onClick={(e) => {
+                          handleClose(e)
+                          i18n.changeLanguage('uz')
+                        }}
+                        diableRipple
+                      >
+                        {t('uz')}
+                      </MenuItem>
+                    ) : (
+                      ''
+                    )}
                   </MenuList>
                 </ClickAwayListener>
               </Paper>

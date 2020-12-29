@@ -116,7 +116,7 @@ function CheckoutForm() {
           </div>
           <p>
             By clicking "Confirm order", you agree to the terms of use of the
-            MyShop marketplace. Detailed delivery terms can be found on the
+            MACBRO marketplace. Detailed delivery terms can be found on the
             delivery page
           </p>
           <div className={style.form_section}>

@@ -11,6 +11,7 @@ import {
 import { LocalMallOutlined } from '@material-ui/icons'
 import Link from 'next/link'
 import style from './header.module.scss'
+import { useTranslation } from '../../i18n'
 const useStyles = makeStyles(() => ({
   paper: {
     borderRadius: '6px',
@@ -46,6 +47,7 @@ const useStyles = makeStyles(() => ({
   },
 }))
 const CartDropdown = ({ title, subCategs }) => {
+  const { t } = useTranslation()
   const [isBagVisible, setIsBagVisible] = useState(false)
   const classes = useStyles()
   const [open, setOpen] = useState(false)
@@ -113,32 +115,32 @@ const CartDropdown = ({ title, subCategs }) => {
                     id='menu-list-grow'
                     onKeyDown={handleListKeyDown}
                   >
-                    <div
+                    <li
                       className={style.cart_items}
                       onClick={handleClose}
                       diableRipple
                     >
-                      <p>Ваша корзина пуста</p>
-                    </div>
+                      <p>{t('empty_cart')}</p>
+                    </li>
 
                     <MenuItem onClick={handleClose} diableRipple>
                       <Link href='/cart'>
-                        <a>Корзина</a>
+                        <a>{t('cart')}</a>
                       </Link>
                     </MenuItem>
                     <MenuItem onClick={handleClose} diableRipple>
                       <Link href='/orders'>
-                        <a>Заказы</a>
+                        <a>{t('orders')}</a>
                       </Link>
                     </MenuItem>
                     <MenuItem onClick={handleClose} diableRipple>
                       <Link href='/account'>
-                        <a>Профиль</a>
+                        <a>{t('profile')}</a>
                       </Link>
                     </MenuItem>
                     <MenuItem onClick={handleClose} diableRipple>
-                      <Link href='/signIn'>
-                        <a>Логин</a>
+                      <Link href='/signin'>
+                        <a>{t('signin')}</a>
                       </Link>
                     </MenuItem>
                   </MenuList>

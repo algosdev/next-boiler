@@ -2,18 +2,20 @@ import React, { useState } from 'react'
 import style from './authForm.module.scss'
 import { Typography } from '@material-ui/core'
 import { Router } from '../../i18n'
+import { useTranslation } from '../../i18n'
 function VerifyCodeForm() {
+  const { t } = useTranslation()
   const [values, setValues] = useState({
     code: '',
   })
   const submitHandler = (e) => {
     e.preventDefault()
-    Router.push('/')
+    Router.push('/new-password')
   }
   return (
     <div className={style.wrapper}>
       <Typography variant='h3'>
-        Enter OTP which has been sent to +99897777777
+        {t('enter_otp')} {' +99897777777'}
       </Typography>
       <div className={style.inner}>
         <form onSubmit={submitHandler}>

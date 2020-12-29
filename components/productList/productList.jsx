@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { List, KeyboardArrowDown } from '@material-ui/icons'
 import { Grid, Typography, ClickAwayListener } from '@material-ui/core'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTranslation } from '../../i18n'
 const productListData = [
   {
     type: 'Бесплатная гравировка',
@@ -46,13 +47,15 @@ const productListData = [
     slug: 'slug',
   },
 ]
-const sortByData = [
-  'Рекомендуемые',
-  'Новейшие',
-  'Цена: по убыванию',
-  'Цена: по возрастанию',
-]
+
 export default function ProductList() {
+  const { t } = useTranslation()
+  const sortByData = [
+    t('sort_recommended'),
+    t('sort_new'),
+    t('sort_price_low'),
+    t('sort_price_high'),
+  ]
   const [activeSortBy, setActiveSortBy] = useState('Рекомендуемые')
   const [showFilter, setShowFilter] = useState(true)
   const [sortByOpen, setSortByOpen] = useState(false)
@@ -66,7 +69,7 @@ export default function ProductList() {
               onClick={() => setShowFilter(!showFilter)}
             >
               <List />
-              Фильтр
+              {t('filter')}
             </button>
           </div>
 
@@ -75,7 +78,7 @@ export default function ProductList() {
               className={style.btn}
               onClick={() => setSortByOpen(!sortByOpen)}
             >
-              <span>Сортировать по: </span> {activeSortBy}
+              <span>{t('sort_by')}: </span> {activeSortBy}
               <span
                 className={`${style.arrow} ${sortByOpen ? style.open : ''}`}
               >
@@ -148,7 +151,7 @@ export default function ProductList() {
               !showFilter ? style.hide : ''
             }`}
           >
-            <Typography variant='h6'>Марка</Typography>
+            <Typography variant='h6'>{t('brand')}</Typography>
             <p>Apple</p>
             <p>Samsung</p>
           </div>
