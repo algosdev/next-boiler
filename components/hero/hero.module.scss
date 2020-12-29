@@ -8,8 +8,8 @@
   min-height: 500px;
   .background {
     position: absolute;
-    top: 50%;
-    right: 40%;
+    top: 60%;
+    right: 35%;
     width: 1025px;
     height: 556px;
     object-fit: cover;
@@ -24,6 +24,10 @@
     height: 100%;
     color: var(--secondary-color);
     z-index: 10;
+    margin-bottom: 50px;
+    & * {
+      text-align: left;
+    }
     .new {
       display: block;
       margin-bottom: 5px;
@@ -58,6 +62,10 @@
       min-width: 26px;
       padding: 12px 22px;
       border-radius: 22px;
+      color: #fff;
+      &:hover {
+        text-decoration: none;
+      }
       background-color: #0071e3;
       &:hover {
         background-color: #0077ed;

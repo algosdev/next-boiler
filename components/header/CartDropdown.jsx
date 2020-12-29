@@ -30,6 +30,9 @@ const useStyles = makeStyles(() => ({
       justifyContent: 'flex-start !important',
       padding: '6px 20px',
     },
+    '& .MuiMenuItem-root a:hover': {
+      textDecoration: 'none',
+    },
     '& .MuiMenuItem-root p': {
       color: '#fff',
       padding: '50px',

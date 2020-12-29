@@ -42,6 +42,7 @@ const useStyles = makeStyles(() => ({
 const LanguageDropdown = ({ title, subCategs }) => {
   const { t } = useTranslation()
   const [isBagVisible, setIsBagVisible] = useState(false)
+  const [activeLang, setActiveLang] = useState('')
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const anchorRef = useRef(null)
@@ -73,6 +74,15 @@ const LanguageDropdown = ({ title, subCategs }) => {
 
     prevOpen.current = open
   }, [open])
+  useEffect(() => {
+    if (i18n.language === 'ru') {
+      setActiveLang('РУ')
+    } else if (i18n.language === 'en') {
+      setActiveLang('EN')
+    } else if (i18n.language === 'uz') {
+      setActiveLang("O'Z")
+    }
+  }, [i18n.language])
 
   return (
     <>
@@ -83,7 +93,7 @@ const LanguageDropdown = ({ title, subCategs }) => {
         aria-haspopup='true'
         onClick={handleToggle}
       >
-        {t(i18n?.language)}
+        {activeLang}
         <Popper
           open={open}
           anchorEl={anchorRef.current}

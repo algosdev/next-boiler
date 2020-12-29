@@ -80,3 +80,12 @@ a {
 input.input:focus {
   border: 1px solid var(--primary-color);
 }
+.carousel.slide {
+  height: 100%;
+}
+.carousel-inner {
+  height: 100%;
+}
+.carousel-item {
+  height: 100%;
+}
