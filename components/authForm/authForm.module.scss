@@ -1,9 +1,10 @@
 .wrapper {
   display: flex;
   justify-content: center;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
   padding: 50px 0;
+  margin: auto 0;
   .inner {
     margin: 16px 0;
     .fullName {

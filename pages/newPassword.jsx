@@ -4,7 +4,7 @@ import NewPasswordForm from '../components/authForm/newPasswordForm'
 function NewPassword() {
   return (
     <>
-      <Container>
+      <Container style={{ marginTop: 'auto' }}>
         <NewPasswordForm />
       </Container>
     </>

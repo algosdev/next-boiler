@@ -4,7 +4,7 @@ import ForgotForm from '../components/authForm/forgotForm'
 function forgot() {
   return (
     <>
-      <Container>
+      <Container style={{ marginTop: 'auto' }}>
         <ForgotForm />
       </Container>
     </>

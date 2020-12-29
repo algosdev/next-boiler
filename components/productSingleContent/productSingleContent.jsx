@@ -1,7 +1,46 @@
 import React, { useState } from 'react'
 import style from './productSingleContent.module.scss'
 import { Container, Grid, Typography } from '@material-ui/core'
-const colorsData = ['Черный', 'Серый', 'Красный', 'Синий']
+const colorsData = [
+  { ru: 'Черный', en: 'Black' },
+  { ru: 'Серый', en: 'Grey' },
+  { ru: 'Красный', en: 'Red' },
+  { ru: 'Синий', en: 'Blue' },
+]
+const techSpecsData = [
+  {
+    title: 'Основные параметры',
+    details: [
+      { name: 'Тип устройства:', value: 'беспроводные наушники' },
+      { name: 'Микрофон:', value: 'есть' },
+      { name: 'Тип:', value: 'вкладыши' },
+      { name: 'Технология:', value: 'динамические' },
+    ],
+  },
+  {
+    title: 'Беспроводная связь',
+    details: [
+      { name: 'Тип беспроводного соединения:', value: 'Bluetooth' },
+      { name: 'Версия Bluetooth:', value: '5.0' },
+      {
+        name: 'Поддержка профилей работы:',
+        value: 'Handsfree, A2DP, Headset, AVRCP',
+      },
+    ],
+  },
+  {
+    title: 'Особенности',
+    details: [
+      { name: 'Чехол/футляр в комплекте:', value: 'есть' },
+      { name: 'Поддержка iPhone:', value: 'есть' },
+      {
+        name: 'Дополнительная информация',
+        value:
+          'беспроводная зарядка кейса; голосовое управление; 15 минут зарядки хватает на 3 часа работы или 2 часа в режиме разговора; кейс - 44.3*53.5*21.3 мм, 398 мАч, 40 г; вес одного наушника - 4г; функция «Совместный доступ к аудио» позволяет слушать песни, подкасты и любое другое аудио через две пары наушников AirPods',
+      },
+    ],
+  },
+]
 function ProductSingleContent() {
   const [activeColorIndex, setActiveColorIndex] = useState(0)
   return (
@@ -36,10 +75,10 @@ function ProductSingleContent() {
                     <div className={style.inner}>
                       <div
                         className={`${style.color_ball} ${
-                          style[item.toLowerCase()]
+                          style[item.en.toLowerCase()]
                         }`}
                       ></div>
-                      <div className={style.color_name}>{item}</div>
+                      <div className={style.color_name}>{item.ru}</div>
                     </div>
                   </div>
                 </Grid>
@@ -80,14 +119,23 @@ function ProductSingleContent() {
               компьютерных игр стала до 30% ниже. Поэтому, чем бы вы ни
               занимались — играли в игры, слушали музыку или подкасты, —
               качество звучания всегда будет потрясающим.
-              <div className={style.title}>Знают, когда вы слушаете</div>
-              Акселерометр и оптические сенсоры, взаимодействуя друг с другом,
-              управляют различными аудио‑функциями: активируют микрофоны для
-              телефонных звонков и голосовых команд Siri, а также позволяют
-              AirPods воспроизводить звук, когда наушники уже в ушах. При этом
-              вы можете использовать и оба наушника, и только один. А ещё
-              AirPods распознают двойные касания, с помощью которых удобно
-              включать и выключать музыку или переключать треки.
+            </div>
+            <div className={style.main_title}>Характеристики</div>
+            <div className={style.tech_specs}>
+              {techSpecsData.map((el, index) => (
+                <>
+                  <div className={style.title}>{el.title}</div>
+                  <ul>
+                    {el.details.map((item, index) => (
+                      <li>
+                        <div className={style.specs_name}>{item.name}</div>
+                        <p></p>
+                        <div className={style.specs_value}>{item.value}</div>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ))}
             </div>
           </div>
         </div>

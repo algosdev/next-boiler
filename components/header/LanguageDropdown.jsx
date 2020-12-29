@@ -80,7 +80,7 @@ const LanguageDropdown = ({ title, subCategs }) => {
         aria-haspopup='true'
         onClick={handleToggle}
       >
-        RU
+        {i18n?.language?.toUpperCase()}
         <Popper
           open={open}
           anchorEl={anchorRef.current}

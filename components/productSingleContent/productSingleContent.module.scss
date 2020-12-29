@@ -40,6 +40,32 @@
         margin: 30px 0 10px;
       }
     }
+    .tech_specs {
+      ul {
+        li {
+          display: flex;
+          margin: 5px 0;
+          line-height: 24px;
+          justify-content: space-between;
+          .specs_name {
+            text-align: left;
+            flex-grow: auto;
+          }
+          .specs_value {
+            text-align: right;
+            flex-grow: auto;
+          }
+          p {
+            border-bottom: 1px dotted var(--border);
+            width: 100%;
+            flex-grow: 1;
+            height: 24px;
+            margin: 0 10px;
+            align-self: flex-start;
+          }
+        }
+      }
+    }
     .color_cont {
       width: 100%;
       cursor: pointer;

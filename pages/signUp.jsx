@@ -4,7 +4,7 @@ import SignUpForm from '../components/authForm/signUpForm'
 function signUp() {
   return (
     <>
-      <Container>
+      <Container style={{ marginTop: 'auto' }}>
         <SignUpForm />
       </Container>
     </>

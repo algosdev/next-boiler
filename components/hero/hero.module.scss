@@ -4,15 +4,17 @@
   height: 80vh;
   background-color: #000000;
   overflow: hidden;
+  max-height: 800px;
+  min-height: 500px;
   .background {
     position: absolute;
     top: 50%;
-    left: 25%;
+    right: 40%;
     width: 1025px;
     height: 556px;
     object-fit: cover;
     -o-object-fit: cover;
-    transform: translateY(-50%);
+    transform: translate(50%, -50%);
   }
   .wrapper {
     position: relative;

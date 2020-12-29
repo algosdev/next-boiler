@@ -4,7 +4,7 @@ import VerifyCodeForm from '../components/authForm/verifyCodeForm'
 function VerifyCode() {
   return (
     <>
-      <Container>
+      <Container style={{ marginTop: 'auto' }}>
         <VerifyCodeForm />
       </Container>
     </>

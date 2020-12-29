@@ -133,7 +133,7 @@ const CartDropdown = ({ title, subCategs }) => {
                     </MenuItem>
                     <MenuItem onClick={handleClose} diableRipple>
                       <Link href='/account'>
-                        <a>Счет</a>
+                        <a>Профиль</a>
                       </Link>
                     </MenuItem>
                     <MenuItem onClick={handleClose} diableRipple>
