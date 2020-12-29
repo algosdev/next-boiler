@@ -115,7 +115,7 @@ const LanguageDropdown = ({ title, subCategs }) => {
                         }}
                         diableRipple
                       >
-                        {t('ru')}
+                        РУ
                       </MenuItem>
                     ) : (
                       ''
@@ -128,7 +128,7 @@ const LanguageDropdown = ({ title, subCategs }) => {
                         }}
                         diableRipple
                       >
-                        {t('en')}
+                        EN
                       </MenuItem>
                     ) : (
                       ''
@@ -141,7 +141,7 @@ const LanguageDropdown = ({ title, subCategs }) => {
                         }}
                         diableRipple
                       >
-                        {t('uz')}
+                        O'Z
                       </MenuItem>
                     ) : (
                       ''

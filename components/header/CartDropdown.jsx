@@ -9,7 +9,7 @@ import {
   makeStyles,
 } from '@material-ui/core'
 import { LocalMallOutlined } from '@material-ui/icons'
-import Link from 'next/link'
+import { Link } from '../../i18n'
 import style from './header.module.scss'
 import { useTranslation } from '../../i18n'
 const useStyles = makeStyles(() => ({

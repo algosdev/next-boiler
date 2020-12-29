@@ -3,64 +3,65 @@ import Hero from '../components/hero/hero'
 import SEO from '../components/seo'
 import BannerContainer from '../components/bannerContainer/bannerContainer'
 import Banner from '../components/banner/banner'
-
-const appleProducts = {
-  title: 'Продукция Apple',
-  catalog: [
-    {
-      name: 'iPhone',
-      image: 'images/iphone.png',
-    },
-    {
-      name: 'iPad',
-      image: 'images/ipad.png',
-    },
-    {
-      name: 'Apple Watch',
-      image: 'images/apple_watch.png',
-    },
-    {
-      name: 'AirPods',
-      image: 'images/airpods.png',
-    },
-    {
-      name: 'Macbook',
-      image: 'images/mac_m1.jpg',
-    },
-    {
-      name: 'iMac',
-      image: 'images/imac.jpg',
-    },
-    {
-      name: 'Аксессуары',
-      image: 'images/accessories.png',
-    },
-  ],
-}
-
-const samsungProducts = {
-  title: 'Продукция Samsung',
-  catalog: [
-    {
-      name: 'Смартфоны Galaxy',
-      image: 'images/galaxy_s20.jpg',
-    },
-    {
-      name: 'Планшеты',
-      image: 'images/samsung_tabs.jpg',
-    },
-    {
-      name: 'Часы',
-      image: 'images/samsung_watches.png',
-    },
-    {
-      name: 'Наушники',
-      image: 'images/galaxy_buds.png',
-    },
-  ],
-}
-
+import { useTranslation } from '../i18n'
 export default function Home() {
+  const { t } = useTranslation()
+  const appleProducts = {
+    title: t('apple_p'),
+    catalog: [
+      {
+        name: 'iPhone',
+        image: 'images/iphone.png',
+      },
+      {
+        name: 'iPad',
+        image: 'images/ipad.png',
+      },
+      {
+        name: 'Apple Watch',
+        image: 'images/apple_watch.png',
+      },
+      {
+        name: 'AirPods',
+        image: 'images/airpods.png',
+      },
+      {
+        name: 'Macbook',
+        image: 'images/mac_m1.jpg',
+      },
+      {
+        name: 'iMac',
+        image: 'images/imac.jpg',
+      },
+      {
+        name: t('accessories'),
+        image: 'images/accessories.png',
+      },
+    ],
+  }
+
+  const samsungProducts = {
+    title: t('samsung_p'),
+    catalog: [
+      {
+        name: t('galaxy_phones'),
+        image: 'images/galaxy_s20.jpg',
+      },
+      {
+        name: t('tablets'),
+        image: 'images/samsung_tabs.jpg',
+      },
+      {
+        name: t('watches'),
+        image: 'images/samsung_watches.png',
+      },
+      {
+        name: t('buds'),
+        image: 'images/galaxy_buds.png',
+      },
+    ],
+  }
+
   return (
     <>
       <SEO />

@@ -52,5 +52,12 @@
   "cart": "Cart",
   "orders": "Orders",
   "profile": "Profile",
-  "empty_cart": "Your cart is empty"
+  "empty_cart": "Your cart is empty",
+  "colors": "Colors",
+  "add_to_cart": "Add to Cart",
+  "free_engraving": "Free engraving",
+  "new": "New",
+  "overview": "Overview",
+  "techspecs": "Techspecs",
+  "buy": "Buy"
 }

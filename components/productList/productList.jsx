@@ -1,52 +1,10 @@
 import React, { useState } from 'react'
 import style from './productList.module.scss'
-import Link from 'next/link'
+import { Link } from '../../i18n'
 import { List, KeyboardArrowDown } from '@material-ui/icons'
 import { Grid, Typography, ClickAwayListener } from '@material-ui/core'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from '../../i18n'
-const productListData = [
-  {
-    type: 'Бесплатная гравировка',
-    price: '549.00',
-    name: 'AirPods Max',
-    img: 'images/airpods_max.jpg',
-    colors: ['green', 'yellow', 'black'],
-    slug: 'slug',
-  },
-  {
-    type: 'Новый',
-    price: '99.00',
-    name: 'HomePod mini',
-    img: 'images/homepod_mini.jpeg',
-    colors: ['yellow', 'black'],
-    slug: 'slug',
-  },
-  {
-    type: 'Новый',
-    price: '49.00',
-    name: 'iPhone 12 Pro Max Silicone case',
-    img: 'images/case.jpeg',
-    colors: ['orange'],
-    slug: 'slug',
-  },
-  {
-    type: 'Новый',
-    price: '49.00',
-    name: 'iPhone 12 mini Silicone case',
-    img: 'images/silicone_case.jpeg',
-    colors: ['plum'],
-    slug: 'slug',
-  },
-  {
-    type: 'Новый',
-    price: '59.00',
-    name: 'iPhone Leather Wallet',
-    img: 'images/wallet.jpeg',
-    colors: ['brown'],
-    slug: 'slug',
-  },
-]
 
 export default function ProductList() {
   const { t } = useTranslation()
@@ -56,7 +14,49 @@ export default function ProductList() {
     t('sort_price_low'),
     t('sort_price_high'),
   ]
-  const [activeSortBy, setActiveSortBy] = useState('Рекомендуемые')
+  const productListData = [
+    {
+      type: t('new'),
+      price: '549.00',
+      name: 'AirPods Max',
+      img: 'images/airpods_max.jpg',
+      colors: ['green', 'yellow', 'black'],
+      slug: 'slug',
+    },
+    {
+      type: t('new'),
+      price: '99.00',
+      name: 'HomePod mini',
+      img: 'images/homepod_mini.jpeg',
+      colors: ['yellow', 'black'],
+      slug: 'slug',
+    },
+    {
+      type: t('new'),
+      price: '49.00',
+      name: 'iPhone 12 Pro Max Silicone case',
+      img: 'images/case.jpeg',
+      colors: ['orange'],
+      slug: 'slug',
+    },
+    {
+      type: t('new'),
+      price: '49.00',
+      name: 'iPhone 12 mini Silicone case',
+      img: 'images/silicone_case.jpeg',
+      colors: ['plum'],
+      slug: 'slug',
+    },
+    {
+      type: t('new'),
+      price: '59.00',
+      name: 'iPhone Leather Wallet',
+      img: 'images/wallet.jpeg',
+      colors: ['brown'],
+      slug: 'slug',
+    },
+  ]
+  const [activeSortBy, setActiveSortBy] = useState(0)
   const [showFilter, setShowFilter] = useState(true)
   const [sortByOpen, setSortByOpen] = useState(false)
   return (
@@ -78,7 +78,7 @@ export default function ProductList() {
               className={style.btn}
               onClick={() => setSortByOpen(!sortByOpen)}
             >
-              <span>{t('sort_by')}: </span> {activeSortBy}
+              <span>{t('sort_by')}: </span> {sortByData[activeSortBy]}
               <span
                 className={`${style.arrow} ${sortByOpen ? style.open : ''}`}
               >
@@ -123,10 +123,10 @@ export default function ProductList() {
                         <li key={index}>
                           <button
                             onClick={() => {
-                              setActiveSortBy(item)
+                              setActiveSortBy(index)
                               setSortByOpen(false)
                             }}
-                            disabled={item === activeSortBy ? true : false}
+                            disabled={index === activeSortBy ? true : false}
                           >
                             {item}
                           </button>

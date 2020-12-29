@@ -1,19 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import style from './header.module.scss'
-import {
-  Container,
-  ClickAwayListener,
-  FormControl,
-  MenuItem,
-  Select,
-  makeStyles,
-} from '@material-ui/core'
-import Link from 'next/link'
+import { Container, ClickAwayListener, makeStyles } from '@material-ui/core'
+import { Link } from '../../i18n'
 import CartDropdown from './CartDropdown'
 import LanguageDropdown from './LanguageDropdown'
 import { BrandLogo } from '../svg'
-import { SearchOutlined, LocalMallOutlined } from '@material-ui/icons'
-import { motion, useAnimation, AnimatePresence } from 'framer-motion'
+import { SearchOutlined } from '@material-ui/icons'
+import { motion, useAnimation } from 'framer-motion'
 import NavItem from './navItem'
 import { useTranslation } from '../../i18n'
 const useStyles = makeStyles(() => ({

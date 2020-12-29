@@ -3,18 +3,18 @@ import {
   Grid,
   Paper,
   Typography,
-  Box,
   makeStyles,
 } from '@material-ui/core'
 import React from 'react'
 import style from './catalogList.module.scss'
-import Link from 'next/link'
+import { Link, useTranslation } from '../../i18n'
 const useStyles = makeStyles(() => ({
   root: {
     borderRadius: '18px',
   },
 }))
 export default function CatalogList({ data }) {
+  const { t } = useTranslation()
   const classes = useStyles()
   return (
     <div className={style.catalogList}>

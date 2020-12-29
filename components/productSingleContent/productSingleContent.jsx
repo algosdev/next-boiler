@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import style from './productSingleContent.module.scss'
-import { Container, Grid, Typography } from '@material-ui/core'
+import { i18n, useTranslation } from '../../i18n'
+import { Container, Grid } from '@material-ui/core'
 const colorsData = [
-  { ru: 'Черный', en: 'Black' },
-  { ru: 'Серый', en: 'Grey' },
-  { ru: 'Красный', en: 'Red' },
-  { ru: 'Синий', en: 'Blue' },
+  { ru: 'Черный', en: 'Black', uz: 'Qora' },
+  { ru: 'Серый', en: 'Grey', uz: 'Kulrang' },
+  { ru: 'Красный', en: 'Red', uz: 'Qizil' },
+  { ru: 'Синий', en: 'Blue', kok: "Ko'k" },
 ]
 const techSpecsData = [
   {
@@ -42,12 +43,14 @@ const techSpecsData = [
   },
 ]
 function ProductSingleContent() {
+  const { language } = i18n
+  const { t } = useTranslation()
   const [activeColorIndex, setActiveColorIndex] = useState(0)
   return (
     <div className={style.wrapper}>
       <Container>
         <div className={style.inner}>
-          <div className={style.type}>Бесплатная гравировка</div>
+          <div className={style.type}>{t('new')}</div>
           <div className={style.name}>
             Беспроводные наушники Apple AirPods 2
           </div>
@@ -58,7 +61,7 @@ function ProductSingleContent() {
             watchOS;
           </div>
           <div className={style.colors_cont}>
-            <div className={style.colors_title}>Цвета</div>
+            <div className={style.colors_title}>{t('colors')}</div>
             <Grid container xs={12} spacing={2}>
               {colorsData.map((item, index) => (
                 <Grid
@@ -78,7 +81,7 @@ function ProductSingleContent() {
                           style[item.en.toLowerCase()]
                         }`}
                       ></div>
-                      <div className={style.color_name}>{item.ru}</div>
+                      <div className={style.color_name}>{item[language]}</div>
                     </div>
                   </div>
                 </Grid>
@@ -87,10 +90,10 @@ function ProductSingleContent() {
           </div>
           <div className={style.price}>$549.00</div>
           <div className={style.add}>
-            <button className='input'>Добавить в корзину</button>
+            <button className='input'>{t('add_to_cart')}</button>
           </div>
           <div className={style.overview}>
-            <div className={style.main_title}>Обзор</div>
+            <div className={style.main_title}>{t('overview')}</div>
             <div className={style.content}>
               <div className={style.title}>
                 Ноль проводов. Максимум преимуществ
@@ -120,21 +123,21 @@ function ProductSingleContent() {
               занимались — играли в игры, слушали музыку или подкасты, —
               качество звучания всегда будет потрясающим.
             </div>
-            <div className={style.main_title}>Характеристики</div>
+            <div className={style.main_title}>{t('techspecs')}</div>
             <div className={style.tech_specs}>
               {techSpecsData.map((el, index) => (
-                <>
+                <React.Fragment key={index}>
                   <div className={style.title}>{el.title}</div>
                   <ul>
-                    {el.details.map((item, index) => (
-                      <li>
+                    {el.details.map((item, ind) => (
+                      <li key={ind}>
                         <div className={style.specs_name}>{item.name}</div>
                         <p></p>
                         <div className={style.specs_value}>{item.value}</div>
                       </li>
                     ))}
                   </ul>
-                </>
+                </React.Fragment>
               ))}
             </div>
           </div>

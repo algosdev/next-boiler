@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core'
 import ExpandLessIcon from '@material-ui/icons/ExpandLess'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import Link from 'next/link'
+import { Link } from '../../i18n'
 const useStyles = makeStyles(() => ({
   paper: {
     borderRadius: '6px',
