@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 @import 'react-image-lightbox/style.css';
+/* @import './_bootstrap'; */
 :root {
   --primary-color: #0066cc;
   --secondary-color: #f5f5f7;
@@ -72,6 +73,12 @@ a {
 }
 .input.margin {
   margin-bottom: 10px;
+}
+body > div > a {
+  text-decoration: none;
+}
+body > div > p {
+  margin-bottom: 0;
 }
 .input.error {
   border: 1px solid red;

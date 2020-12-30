@@ -4,11 +4,13 @@ import { Container, ClickAwayListener, makeStyles } from '@material-ui/core'
 import { Link } from '../../i18n'
 import CartDropdown from './CartDropdown'
 import LanguageDropdown from './LanguageDropdown'
-import { BrandLogo, CloseIcon } from '../svg'
+import { BrandLogo, CloseIcon, ProfileIcon } from '../svg'
 import { SearchOutlined } from '@material-ui/icons'
 import { motion, useAnimation, AnimatePresence } from 'framer-motion'
 import NavItem from './navItem'
 import { useTranslation } from '../../i18n'
+import { LocalMallOutlined } from '@material-ui/icons'
+import ProfileDropdown from './ProfileDropdown'
 const useStyles = makeStyles(() => ({
   select: {
     '& .MuiInput-root::before': {
@@ -118,9 +120,11 @@ function Header() {
             </div>
             <ul className={style.list}>
               {navData.map((item, index) => (
-                <li className={style.listItem} key={index}>
-                  <NavItem title={item.title} subCategs={item.subCategs} />
-                </li>
+                <NavItem
+                  key={index}
+                  title={item.title}
+                  subCategs={item.subCategs}
+                />
               ))}
 
               <li className={style.listItem}>
@@ -218,7 +222,15 @@ function Header() {
                   </motion.form>
                 </ClickAwayListener>
               </li>
-              <CartDropdown />
+              <li className={`${style.listItem} ${style.cartIcon}`}>
+                <Link href='/cart'>
+                  <a>
+                    <LocalMallOutlined />
+                  </a>
+                </Link>
+              </li>
+              {/* <CartDropdown /> */}
+              <ProfileDropdown />
               <LanguageDropdown />
             </ul>
           </div>

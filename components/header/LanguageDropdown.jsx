@@ -27,6 +27,7 @@ const useStyles = makeStyles(() => ({
       minWidth: '70px',
       // fontSize: '16px',
       display: 'flex',
+      fontWeight: '500',
       justifyContent: 'space-between',
       fontFamily:
         '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',

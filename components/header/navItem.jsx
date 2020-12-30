@@ -8,6 +8,7 @@ import {
   MenuList,
   makeStyles,
 } from '@material-ui/core'
+import style from './header.module.scss'
 import ExpandLessIcon from '@material-ui/icons/ExpandLess'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { Link } from '../../i18n'
@@ -39,7 +40,8 @@ const useStyles = makeStyles(() => ({
   },
   popper: {
     zIndex: '999',
-    top: '10px !important',
+    paddingTop: '10px',
+    top: '0 !important',
   },
 }))
 const NavItem = ({ title, subCategs }) => {
@@ -77,13 +79,16 @@ const NavItem = ({ title, subCategs }) => {
   }, [open])
 
   return (
-    <>
-      <span
-        ref={anchorRef}
-        aria-controls={open ? 'menu-list-grow' : undefined}
-        aria-haspopup='true'
-        onClick={handleToggle}
-      >
+    <li
+      className={style.listItem}
+      ref={anchorRef}
+      aria-controls={open ? 'menu-list-grow' : undefined}
+      aria-haspopup='true'
+      // onClick={handleToggle}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <span>
         {title} {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
       </span>
       <Popper
@@ -122,7 +127,7 @@ const NavItem = ({ title, subCategs }) => {
           </Grow>
         )}
       </Popper>
-    </>
+    </li>
   )
 }
 
