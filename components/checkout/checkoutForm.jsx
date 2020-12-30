@@ -1,35 +1,38 @@
 import React, { useState } from 'react'
 import style from './checkout.module.scss'
 import { CashIn, CreditCard } from '../svg'
+import { useTranslation } from '../../i18n'
 function CheckoutForm() {
+  const { t } = useTranslation()
+
   return (
     <>
       <div className={style.wrapper_form}>
         <p></p>
         <form>
           <div className={style.form_section}>
-            <p className={style.title}>Address</p>
+            <p className={style.title}>{t('shipping_address')}</p>
             <input
               required
               className={`${style.input} input`}
-              placeholder='Fullname'
+              placeholder={t('full_name')}
               type='text'
             />
             <input
               required
               className={`${style.input} input`}
-              placeholder='Address'
+              placeholder={t('shipping_address')}
               type='text'
             />
             <input
               required
               className={`${style.input} input`}
-              placeholder='Phone number'
+              placeholder={t('phone_num')}
               type='text'
             />
           </div>
           <div className={style.form_section}>
-            <p className={style.title}>Method of obtaining</p>
+            <p className={style.title}>{t('obtaining')}</p>
             <div className={style.flex}>
               <div className={style.radio_input}>
                 <input
@@ -41,10 +44,8 @@ function CheckoutForm() {
                 />
                 <label htmlFor='opt1'>
                   <div>
-                    <p className={style.opt_title}>Pickup</p>
-                    <p className={style.opt_desc}>
-                      Hands-free and when convenient
-                    </p>
+                    <p className={style.opt_title}>{t('pickup')}</p>
+                    <p className={style.opt_desc}>{t('pickup_txt')}</p>
                   </div>
                 </label>
               </div>
@@ -58,17 +59,15 @@ function CheckoutForm() {
                 />
                 <label htmlFor='opt2'>
                   <div>
-                    <p className={style.opt_title}>Courier</p>
-                    <p className={style.opt_desc}>
-                      On a convenient day and time interval for you
-                    </p>
+                    <p className={style.opt_title}>{t('courier')}</p>
+                    <p className={style.opt_desc}>{t('courier_txt')}</p>
                   </div>
                 </label>
               </div>
             </div>
           </div>
           <div className={style.form_section}>
-            <p className={style.title}>Payment method</p>
+            <p className={style.title}>{t('payment_method')}</p>
             <div className={style.flex}>
               <div className={style.radio_input}>
                 <input
@@ -80,7 +79,7 @@ function CheckoutForm() {
                 />
                 <label htmlFor='opt3'>
                   <div>
-                    <p className={style.opt_title}>In cash</p>
+                    <p className={style.opt_title}>{t('incash')}</p>
                     <p className={style.opt_desc}>
                       <CashIn />
                     </p>
@@ -97,7 +96,7 @@ function CheckoutForm() {
                 />
                 <label htmlFor='opt4'>
                   <div>
-                    <p className={style.opt_title}>Credit card</p>
+                    <p className={style.opt_title}>{t('credit_card')}</p>
                     <p className={style.opt_desc}>
                       <CreditCard />
                     </p>
@@ -107,25 +106,21 @@ function CheckoutForm() {
             </div>
           </div>
           <div className={style.form_section}>
-            <p className={style.title}>Additional</p>
+            <p className={style.title}>{t('additional')}</p>
             <input
               className={`${style.input} input`}
-              placeholder='Commment to order'
+              placeholder={t('comment_to_order')}
               type='text'
             />
           </div>
-          <p>
-            By clicking "Confirm order", you agree to the terms of use of the
-            MACBRO marketplace. Detailed delivery terms can be found on the
-            delivery page
-          </p>
+          <p>{t('confirm_txt')}</p>
           <div className={style.form_section}>
             <button
               className={`${style.submit} input`}
               placeholder='Commment to order'
               type='submit'
             >
-              Confirm order
+              {t('confirm_order')}
             </button>
           </div>
         </form>

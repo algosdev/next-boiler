@@ -1,40 +1,48 @@
 import { Link } from '../../i18n'
-import React from 'react'
+import React, { useState } from 'react'
+import { useTranslation } from '../../i18n'
 import style from './checkout.module.scss'
 import CheckoutListItem from './checkoutListItem'
 function CheckoutDetails({ quantity, totalPrice }) {
+  const { t } = useTranslation()
+  const [shippingFee, setShippingFee] = useState(50000)
+  const [discount, setDiscount] = useState(10000)
   return (
     <div className={style.wrapper_summary}>
       <div className={style.summary_inner}>
         <div className={style.header}>
-          <p>Your order</p>
+          <p>{t('your_order')}</p>
           <Link href='/cart'>
-            <a>Edit</a>
+            <a>{t('edit')}</a>
           </Link>
         </div>
+
         <div className={style.info}>
-          <p>Products({quantity || 4})</p>
-          <p>{totalPrice || '450000 soum'}</p>
+          <p>
+            {t('products')}({quantity || 2})
+          </p>
+          <p>{totalPrice || '450000'}</p>
         </div>
         <div className={style.info}>
-          <p>Shipping fee</p>
-          <p>{totalPrice || '450000 soum'}</p>
+          <p> {t('shipping_fee')}</p>
+          <p>{totalPrice !== 0 ? shippingFee : '0'}</p>
         </div>
         <div className={style.info}>
-          <p>Sale</p>
-          <p>{totalPrice || '450000 soum'}</p>
+          <p>{t('discount')}</p>
+          <p>{totalPrice !== 0 ? discount : '0'}</p>
         </div>
         <div className={style.totalPrice}>
-          <p>Total</p>
-          <p>{totalPrice || '450000 soum'}</p>
+          <p>{t('total')}</p>
+          <p>
+            {totalPrice || '450000'} {t('soum')}
+          </p>
         </div>
         <div className={style.list}>
           <div className={style.totalPrice}>
-            <p>Order List</p>
+            <p>{t('order_list')}</p>
           </div>
-          <CheckoutListItem />
-          <CheckoutListItem />
-          <CheckoutListItem />
+          <CheckoutListItem quantityProp={4} src='images/homepod_mini.jpeg' />
+          <CheckoutListItem quantityProp={1} src='/images/airpods_max.jpg' />
         </div>
       </div>
     </div>

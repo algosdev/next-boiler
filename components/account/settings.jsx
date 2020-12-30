@@ -21,8 +21,8 @@ function AccountSettings() {
   const { t } = useTranslation()
   const [open, setOpen] = useState(false)
   const [data, setData] = useState({
-    firstname: 'Sam',
-    lastname: 'Andar',
+    firstname: 'Samandar',
+    lastname: 'Toshkuvvatov',
     phone_num: '+998916545454',
     address: "45, Istiqbol ko'chasi, Mirobod tumani, Toshkent",
   })

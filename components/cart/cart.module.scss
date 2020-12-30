@@ -33,6 +33,7 @@
       cursor: pointer;
     }
     .go {
+      outline: 0;
       cursor: pointer;
       background: var(--primary-color);
       color: #fff;
@@ -42,6 +43,11 @@
 .wrapper_item {
   padding: 20px 0;
   border-top: 1px solid var(--border);
+  .noItem {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 20px;
+  }
   .inner {
     img {
       width: 100%;
