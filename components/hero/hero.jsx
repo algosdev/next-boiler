@@ -10,7 +10,7 @@ export default function Hero() {
     en: {
       slogan: "Power. It's in the air.",
       t2: 'From $999 or',
-      t3: '$83.25/m на 12 months.',
+      t3: '$83.25/m for 12 months.',
     },
     ru: {
       slogan: 'Мощность. Это в воздухе.',
@@ -27,7 +27,7 @@ export default function Hero() {
     en: {
       slogan: 'Feel real speed',
       t2: 'From $1599 or',
-      t3: '$145.25/m на 12 months.',
+      t3: '$145.25/m for 12 months.',
     },
     ru: {
       slogan: 'Почувствуйте настоящую скорость',

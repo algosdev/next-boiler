@@ -14,10 +14,24 @@ function CartList() {
         <Grid container justify='space-between' xs={12} spacing={2}>
           <Grid item xs={8}>
             <div className={style.inner}>
-              <CartListItem />
-              <CartListItem />
-              <CartListItem />
-              <CartListItem />
+              <CartListItem
+                name='Airpods Max Series 6, Gold Aluminum Case'
+                quantityProp='14'
+                priceProp='25000'
+                src='/images/airpods_max.jpg'
+              />
+              <CartListItem
+                name='HomePod mini'
+                quantityProp='6'
+                priceProp='140000'
+                src='images/homepod_mini.jpeg'
+              />
+              <CartListItem
+                name='iPhone 12 Pro Max Silicone case'
+                quantityProp='23'
+                priceProp='99000'
+                src='images/case.jpeg'
+              />
             </div>
           </Grid>
           <Grid item xs={4}>

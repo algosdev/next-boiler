@@ -4,9 +4,9 @@ import AddIcon from '@material-ui/icons/Add'
 import RemoveIcon from '@material-ui/icons/Remove'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { motion, AnimatePresence } from 'framer-motion'
-function CartListItem() {
+function CartListItem({ src, name, quantityProp, priceProp }) {
   const [quantity, setQuantity] = useState(1)
-  const [price, setPrice] = useState(250000)
+  const [price, setPrice] = useState(priceProp)
   const [total, setTotal] = useState(1)
   const [isdeleted, setIsDeleted] = useState(false)
   const changeQuantity = (operator) => {
@@ -31,13 +31,13 @@ function CartListItem() {
           >
             <div className={style.inner}>
               <div className={style.img}>
-                <img src='/images/airpods_max.jpg' alt='' />
+                <img src={src} alt='' />
               </div>
               <div className={style.details}>
-                <div className={style.title}>
-                  Airpods Max Series 6, Gold Aluminum Case
+                <div className={style.title}>{name}</div>
+                <div className={style.info}>
+                  {quantityProp} pieces available
                 </div>
-                <div className={style.info}>36 pieces available</div>
               </div>
               <div className={style.quantity_cont}>
                 <div className={style.quantity_inner}>
