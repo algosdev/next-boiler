@@ -56,16 +56,16 @@ function Header() {
     {
       title: t('acoustics'),
       subCategs: [
-        { title: 'Колонки', link: '/subcateg' },
-        { title: 'Наушники', link: '/subcateg' },
-        { title: 'Микрофоны', link: '/subcateg' },
+        { title: t('speakers'), link: '/subcateg' },
+        { title: t('earphones'), link: '/subcateg' },
+        { title: t('microphones'), link: '/subcateg' },
       ],
     },
     {
       title: t('accessories'),
       subCategs: [
-        { title: 'Чехлы', link: '/subcateg' },
-        { title: 'Зарядчики', link: '/subcateg' },
+        { title: t('covers'), link: '/subcateg' },
+        { title: t('chargers'), link: '/subcateg' },
       ],
     },
   ]

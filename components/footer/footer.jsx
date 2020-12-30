@@ -3,14 +3,15 @@ import React from 'react'
 import style from './footer.module.scss'
 import Link from 'next/link'
 import { Facebook, Instagram, Telegram, YouTube } from '@material-ui/icons'
-
+import { useTranslation } from '../../i18n'
 export default function Footer() {
+  const { t } = useTranslation()
   return (
     <div className={style.footer}>
       <Container>
         <Grid container spacing={2}>
           <Grid item xs={3}>
-            <Typography variant='h6'>Покупай и учись</Typography>
+            <Typography variant='h6'>{t('buy_and_learn')}</Typography>
             <ul className={style.list}>
               <li className={style.listItem}>
                 <Link href='/'>
@@ -30,47 +31,47 @@ export default function Footer() {
             </ul>
           </Grid>
           <Grid item xs={3}>
-            <Typography variant='h6'>Компания</Typography>
+            <Typography variant='h6'>{t('company')}</Typography>
             <ul className={style.list}>
               <li className={style.listItem}>
                 <Link href='/'>
-                  <a>Новости</a>
+                  <a>{t('news')}</a>
                 </Link>
               </li>
               <li className={style.listItem}>
                 <Link href='/'>
-                  <a>О компании</a>
+                  <a>{t('about_company')}</a>
                 </Link>
               </li>
               <li className={style.listItem}>
                 <Link href='/'>
-                  <a>Адреса магазинов</a>
+                  <a>{t('address_of_shops')}</a>
                 </Link>
               </li>
             </ul>
           </Grid>
           <Grid item xs={3}>
-            <Typography variant='h6'>Информация</Typography>
+            <Typography variant='h6'>{t('information')}</Typography>
             <ul className={style.list}>
               <li className={style.listItem}>
                 <Link href='/'>
-                  <a>Рассрочка</a>
+                  <a>{t('installment')}</a>
                 </Link>
               </li>
               <li className={style.listItem}>
                 <Link href='/'>
-                  <a>Доставка</a>
+                  <a>{t('delivery')}</a>
                 </Link>
               </li>
               <li className={style.listItem}>
                 <Link href='/'>
-                  <a>Бонусы</a>
+                  <a>{t('bonuses')}</a>
                 </Link>
               </li>
             </ul>
           </Grid>
           <Grid item xs={3}>
-            <Typography variant='h6'>Свяжитесь с нами</Typography>
+            <Typography variant='h6'>{t('contact_us')}</Typography>
             <ul className={style.social}>
               <li className={style.socialItem}>
                 <a href='/'>
@@ -96,9 +97,7 @@ export default function Footer() {
           </Grid>
         </Grid>
         <div className='copyright'>
-          <p>
-            Copyright © 2020 Online shopping MacBro.uz. All rights reserved.
-          </p>
+          <p>{t('copyright_txt')}</p>
           <p>
             Created by{' '}
             <a

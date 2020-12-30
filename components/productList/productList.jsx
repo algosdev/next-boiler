@@ -17,7 +17,7 @@ export default function ProductList() {
   const productListData = [
     {
       type: t('new'),
-      price: '549.00',
+      price: '5490000',
       name: 'AirPods Max',
       img: 'images/airpods_max.jpg',
       colors: ['green', 'yellow', 'black'],
@@ -25,7 +25,7 @@ export default function ProductList() {
     },
     {
       type: t('new'),
-      price: '99.00',
+      price: '990000',
       name: 'HomePod mini',
       img: 'images/homepod_mini.jpeg',
       colors: ['yellow', 'black'],
@@ -33,7 +33,7 @@ export default function ProductList() {
     },
     {
       type: t('new'),
-      price: '49.00',
+      price: '490000',
       name: 'iPhone 12 Pro Max Silicone case',
       img: 'images/case.jpeg',
       colors: ['orange'],
@@ -41,7 +41,7 @@ export default function ProductList() {
     },
     {
       type: t('new'),
-      price: '49.00',
+      price: '850000',
       name: 'iPhone 12 mini Silicone case',
       img: 'images/silicone_case.jpeg',
       colors: ['plum'],
@@ -49,7 +49,7 @@ export default function ProductList() {
     },
     {
       type: t('new'),
-      price: '59.00',
+      price: '590000',
       name: 'iPhone Leather Wallet',
       img: 'images/wallet.jpeg',
       colors: ['brown'],
@@ -165,7 +165,9 @@ export default function ProductList() {
                     <img src={item.img} alt={item.name} />
                     <span className={style.type}>{item.type}</span>
                     <h3 className={style.name}>{item.name}</h3>
-                    <span className={style.price}>${item.price}</span>
+                    <span className={style.price}>
+                      {item.price} {t('soum')}
+                    </span>
                     <div className={style.colors}>
                       {item.colors.map((color, ind) => (
                         <span

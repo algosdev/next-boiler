@@ -88,7 +88,7 @@ function ProductSingleContent() {
               ))}
             </Grid>
           </div>
-          <div className={style.price}>$549.00</div>
+          <div className={style.price}>5490000 {t('soum')}</div>
           <div className={style.add}>
             <button className='input'>{t('add_to_cart')}</button>
           </div>
