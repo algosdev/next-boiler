@@ -92,6 +92,8 @@ const CartDropdown = ({ title, subCategs }) => {
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup='true'
         onClick={handleToggle}
+        // onMouseEnter={() => setOpen(true)}
+        // onMouseLeave={() => setOpen(false)}
       >
         <LocalMallOutlined />
 

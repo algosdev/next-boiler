@@ -64,11 +64,9 @@ export default function Hero() {
                   {data1[i18n.language]?.t2} <br />
                   {data1[i18n.language]?.t3}
                 </p>
-                <div>
-                  <Link href='/'>
-                    <a className={style.callToAction}>{t('buy')}</a>
-                  </Link>
-                </div>
+                <Link href='/'>
+                  <a className={style.callToAction}>{t('buy')}</a>
+                </Link>
               </div>
             </Container>
           </Carousel.Caption>
@@ -90,11 +88,9 @@ export default function Hero() {
                   {data2[i18n.language]?.t2} <br />
                   {data2[i18n.language]?.t3}
                 </p>
-                <div>
-                  <Link href='/'>
-                    <a className={style.callToAction}>{t('buy')}</a>
-                  </Link>
-                </div>
+                <Link href='/'>
+                  <a className={style.callToAction}>{t('buy')}</a>
+                </Link>
               </div>
             </Container>
           </Carousel.Caption>

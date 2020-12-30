@@ -4,9 +4,9 @@ import { Container, ClickAwayListener, makeStyles } from '@material-ui/core'
 import { Link } from '../../i18n'
 import CartDropdown from './CartDropdown'
 import LanguageDropdown from './LanguageDropdown'
-import { BrandLogo } from '../svg'
+import { BrandLogo, CloseIcon } from '../svg'
 import { SearchOutlined } from '@material-ui/icons'
-import { motion, useAnimation } from 'framer-motion'
+import { motion, useAnimation, AnimatePresence } from 'framer-motion'
 import NavItem from './navItem'
 import { useTranslation } from '../../i18n'
 const useStyles = makeStyles(() => ({
@@ -89,6 +89,21 @@ function Header() {
       }
     }
   }, [isSearchVisible])
+  useEffect(() => {
+    document.addEventListener(
+      'keydown',
+      (e) => {
+        if (e.keyCode === 27) {
+          setIsSearchVisible(false)
+        }
+      },
+      false
+    )
+
+    return () => {
+      document.removeEventListener('keydown', (e) => console.log(e), false)
+    }
+  }, [])
   return (
     <>
       <header className={style.header}>
@@ -167,6 +182,39 @@ function Header() {
                       initial={'stable'}
                       exit={'stable'}
                     />
+                    <AnimatePresence>
+                      {isSearchVisible ? (
+                        <motion.div
+                          className={style.closeSearch}
+                          variants={{
+                            visible: {
+                              opacity: 1,
+                              transition: {
+                                delay: 0.3,
+                                duration: 0.4,
+                              },
+                            },
+                            stable: {
+                              opacity: 0,
+                              transition: {
+                                duration: 0.1,
+                              },
+                            },
+                          }}
+                          transition={{
+                            type: 'twin',
+                          }}
+                          animate={'visible'}
+                          initial={'stable'}
+                          exit={'stable'}
+                          onClick={() => setIsSearchVisible(false)}
+                        >
+                          <CloseIcon />
+                        </motion.div>
+                      ) : (
+                        ''
+                      )}
+                    </AnimatePresence>
                   </motion.form>
                 </ClickAwayListener>
               </li>

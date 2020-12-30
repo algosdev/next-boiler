@@ -4,12 +4,13 @@ import { Container } from '@material-ui/core'
 import Lightbox from 'react-image-lightbox'
 const carouselData = [
   '/images/airpods_max.jpg',
-  '/images/airpods.png',
-  '/images/apple_watch.png',
+  '/images/case.jpeg',
+  '/images/homepod_mini.jpeg',
 ]
 function ProductSingleCarousel() {
   const [photoIndex, setPhotoIndex] = useState(0)
   const [isLightBoxOpen, setIsLightBoxOpen] = useState(false)
+  console.log(photoIndex)
   return (
     <>
       <div className={style.wrapper}>
@@ -19,12 +20,36 @@ function ProductSingleCarousel() {
               <div
                 className={style.img_cont}
                 onClick={() => {
-                  setPhotoIndex(photoIndex)
+                  // setPhotoIndex(photoIndex)
                   setIsLightBoxOpen(true)
                 }}
               >
                 <img src={carouselData[photoIndex]} alt='AirPods Max' />
               </div>
+            </div>
+            <div className={style.thumb_slide}>
+              {carouselData.map((el, ind) => (
+                <div
+                  key={ind}
+                  className={`${style.img_cont} ${
+                    photoIndex === ind ? style.active : ''
+                  }`}
+                  onClick={() => {
+                    setPhotoIndex(ind)
+                  }}
+                >
+                  <img src={el} alt='AirPods Max' />
+                </div>
+              ))}
+              {/* <div
+                className={style.img_cont}
+                onClick={() => {
+                  setPhotoIndex(photoIndex)
+                  setIsLightBoxOpen(true)
+                }}
+              >
+                <img src={carouselData[photoIndex]} alt='AirPods Max' />
+              </div> */}
             </div>
           </div>
         </Container>

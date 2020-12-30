@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core'
 import { i18n, useTranslation } from '../../i18n'
 import style from './header.module.scss'
+import { English, Uzbek, Russian } from '../svg'
 const useStyles = makeStyles(() => ({
   paper: {
     borderRadius: '6px',
@@ -22,7 +23,11 @@ const useStyles = makeStyles(() => ({
 
     '& .MuiMenuItem-root': {
       color: '#fff',
-      padding: '10px 20px',
+      padding: '10px !important',
+      minWidth: '70px',
+      // fontSize: '16px',
+      display: 'flex',
+      justifyContent: 'space-between',
       fontFamily:
         '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
     },
@@ -87,13 +92,20 @@ const LanguageDropdown = ({ title, subCategs }) => {
   return (
     <>
       <li
-        className={style.listItem}
+        className={`${style.listItem} ${style.lang}`}
         ref={anchorRef}
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup='true'
         onClick={handleToggle}
       >
         {activeLang}
+        {activeLang === "O'Z" ? (
+          <Uzbek />
+        ) : activeLang === 'РУ' ? (
+          <Russian />
+        ) : (
+          <English />
+        )}
         <Popper
           open={open}
           anchorEl={anchorRef.current}
@@ -125,7 +137,7 @@ const LanguageDropdown = ({ title, subCategs }) => {
                         }}
                         diableRipple
                       >
-                        РУ
+                        РУ <Russian />
                       </MenuItem>
                     ) : (
                       ''
@@ -138,7 +150,7 @@ const LanguageDropdown = ({ title, subCategs }) => {
                         }}
                         diableRipple
                       >
-                        EN
+                        EN <English />
                       </MenuItem>
                     ) : (
                       ''
@@ -151,7 +163,7 @@ const LanguageDropdown = ({ title, subCategs }) => {
                         }}
                         diableRipple
                       >
-                        O'Z
+                        O'Z <Uzbek />
                       </MenuItem>
                     ) : (
                       ''

@@ -62,6 +62,11 @@
         display: flex;
         align-items: center;
         cursor: pointer;
+        &.lang {
+          svg {
+            margin-left: 5px;
+          }
+        }
         & > span {
           height: 100%;
           display: flex;
@@ -77,21 +82,29 @@
         .searchForm {
           display: flex;
           padding: 10px 0;
+          cursor: auto;
           align-items: center;
           position: absolute;
           top: 50%;
           transform: translateY(-50%);
           &.animate {
             top: 50%;
+            padding: 10px 0;
             transform: translateY(-50%);
+            input {
+              padding: 10px;
+            }
+          }
+          .closeSearch {
+            padding: 6px 16px;
           }
           input {
-            padding: 10px;
+            padding: 10px 0;
             outline: 0;
             border: 0;
             box-shadow: none;
             background: transparent;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             font-size: 14px;
             color: var(--secondary-color);
             &::placeholder {
@@ -102,8 +115,10 @@
               letter-spacing: 1px;
             }
           }
-
           background: #1d1d1f;
+          .icon {
+            padding: 6px 0px;
+          }
         }
         .icon {
           position: relative;
