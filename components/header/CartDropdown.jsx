@@ -87,7 +87,7 @@ const CartDropdown = ({ title, subCategs }) => {
   return (
     <>
       <li
-        className={style.listItem}
+        className={`${style.listItem} ${style.cartIcon}`}
         ref={anchorRef}
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup='true'
