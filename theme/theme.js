@@ -11,7 +11,8 @@ const theme = createMuiTheme({
           fontSize: '14px',
           lineHeight: '20px',
           color: '#1d1d1f',
-          fontFamily: 'Montserrat',
+          fontFamily:
+            '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
         },
       },
     },
@@ -179,14 +180,16 @@ const theme = createMuiTheme({
     },
   },
   typography: {
-    fontFamily: 'Montserrat',
+    fontFamily:
+      '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
     body1: {
       fontSize: '14px',
       lineHeight: '20px',
       color: '#1d1d1f',
     },
     body2: {
-      fontFamily: 'sans-serif',
+      fontFamily:
+        '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
       fontSize: '16px',
     },
     h2: {
@@ -227,7 +230,8 @@ const theme = createMuiTheme({
       },
       border: '1px solid  var(--border)',
       color: 'primary',
-      fontFamily: ""
+      fontFamily:
+        '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
     },
     MuiPaper: {
       elevation: 0,

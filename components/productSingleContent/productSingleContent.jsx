@@ -1,12 +1,40 @@
 import React, { useState } from 'react'
 import style from './productSingleContent.module.scss'
 import { i18n, useTranslation } from '../../i18n'
-import { Container, Grid } from '@material-ui/core'
+import {
+  Container,
+  Grid,
+  Accordion,
+  AccordionSummary,
+  Typography,
+  AccordionDetails,
+  Box,
+} from '@material-ui/core'
+import Rating from '@material-ui/lab/Rating'
+import { makeStyles } from '@material-ui/core/styles'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 const colorsData = [
   { ru: 'Черный', en: 'Black', uz: 'Qora' },
   { ru: 'Серый', en: 'Grey', uz: 'Kulrang' },
   { ru: 'Красный', en: 'Red', uz: 'Qizil' },
   { ru: 'Синий', en: 'Blue', kok: "Ko'k" },
+]
+const overviewData = [
+  {
+    title: 'Ноль проводов. Максимум преимуществ',
+    details:
+      'AirPods настраиваются в одно касание. Автоматически включаются иустанавливают соединение. Пользоваться ими невероятно легко. Они оснащены специальными сенсорами, поэтому когда вы снимаете наушники, воспроизведение останавливается. При этом AirPods великолепно взаимодействуют как с iPhone, так и с Apple Watch, iPad и Mac.',
+  },
+  {
+    title: 'Ваш верный помощник Siri',
+    details:
+      'Вам что‑то понадобилось? Просто скажите: «Привет, Siri». И ваш помощник решит вопрос — вам даже не придётся брать в руки iPhone. А благодаря функции «Объявление о сообщениях» Siri может автоматически озвучивать входящие сообщения от тех контактов, которые вы выберете сами. При этом Siri не будет мешать, если вы говорите по телефону или включили музыку в режиме совместного прослушивания.',
+  },
+  {
+    title: 'Возможности звучат мощно',
+    details:
+      'Новый чип H1, разработанный Apple, обеспечивает более стабильное беспроводное соединение с вашими устройствами и более быструю передачу данных: до 2 раз быстрее при переключении между активными устройствами и в 1,5 раза быстрее при телефонных звонках. Благодаря чипу H1 теперь Siri можно активировать с помощью голоса, а ещё задержка сигнала при использовании наушников во время компьютерных игр стала до 30% ниже. Поэтому, чем бы вы ни занимались — играли в игры, слушали музыку или подкасты, — качество звучания всегда будет потрясающим.',
+  },
 ]
 const techSpecsData = [
   {
@@ -42,7 +70,26 @@ const techSpecsData = [
     ],
   },
 ]
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+  },
+  heading: {
+    fontSize: '22px',
+    lineHeight: '1.5',
+    fontWeight: 'bold',
+  },
+  details: {
+    fontSize: '16px',
+  },
+  summary: {
+    padding: '0',
+  },
+}))
+
 function ProductSingleContent() {
+  const classes = useStyles()
+  const [ratingValue, setRatingValue] = useState(0)
   const { language } = i18n
   const { t } = useTranslation()
   const [activeColorIndex, setActiveColorIndex] = useState(0)
@@ -93,53 +140,77 @@ function ProductSingleContent() {
             <button className='input'>{t('add_to_cart')}</button>
           </div>
           <div className={style.overview}>
-            <div className={style.main_title}>{t('overview')}</div>
-            <div className={style.content}>
-              <div className={style.title}>
-                Ноль проводов. Максимум преимуществ
-              </div>
-              AirPods настраиваются в одно касание. Автоматически включаются и
-              устанавливают соединение. Пользоваться ими невероятно легко. Они
-              оснащены специальными сенсорами, поэтому когда вы снимаете
-              наушники, воспроизведение останавливается. При этом AirPods
-              великолепно взаимодействуют как с iPhone, так и с Apple Watch,
-              iPad и Mac.
-              <div className={style.title}>Ваш верный помощник Siri</div>
-              Вам что‑то понадобилось? Просто скажите: «Привет, Siri». И ваш
-              помощник решит вопрос — вам даже не придётся брать в руки iPhone.
-              А благодаря функции «Объявление о сообщениях» Siri может
-              автоматически озвучивать входящие сообщения от тех контактов,
-              которые вы выберете сами. При этом Siri не будет мешать, если вы
-              говорите по телефону или включили музыку в режиме совместного
-              прослушивания.
-              <div className={style.title}>Возможности звучат мощно</div>
-              Новый чип H1, разработанный Apple, обеспечивает более стабильное
-              беспроводное соединение с вашими устройствами и более быструю
-              передачу данных: до 2 раз быстрее при переключении между активными
-              устройствами и в 1,5 раза быстрее при телефонных звонках.
-              Благодаря чипу H1 теперь Siri можно активировать с помощью голоса,
-              а ещё задержка сигнала при использовании наушников во время
-              компьютерных игр стала до 30% ниже. Поэтому, чем бы вы ни
-              занимались — играли в игры, слушали музыку или подкасты, —
-              качество звучания всегда будет потрясающим.
-            </div>
-            <div className={style.main_title}>{t('techspecs')}</div>
-            <div className={style.tech_specs}>
-              {techSpecsData.map((el, index) => (
-                <React.Fragment key={index}>
-                  <div className={style.title}>{el.title}</div>
-                  <ul>
-                    {el.details.map((item, ind) => (
-                      <li key={ind}>
-                        <div className={style.specs_name}>{item.name}</div>
-                        <p></p>
-                        <div className={style.specs_value}>{item.value}</div>
-                      </li>
+            <div className={classes.root}>
+              <Accordion>
+                <AccordionSummary
+                  className={classes.summary}
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls='panel1a-content'
+                  id='panel1a-header'
+                >
+                  <Typography className={classes.heading}>
+                    {t('overview')}
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails className={classes.summary}>
+                  <div className={style.content}>
+                    {overviewData.map(({ title, details }, index) => (
+                      <div key={index}>
+                        <div className={style.title}>{title}</div>
+                        {details}
+                      </div>
                     ))}
-                  </ul>
-                </React.Fragment>
-              ))}
+                  </div>
+                </AccordionDetails>
+              </Accordion>
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls='panel2a-content'
+                  id='panel2a-header'
+                  className={classes.summary}
+                >
+                  <Typography className={classes.heading}>
+                    {t('techspecs')}
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails className={classes.summary}>
+                  <div className={style.tech_specs}>
+                    {techSpecsData.map((el, index) => (
+                      <React.Fragment key={index}>
+                        <div className={style.title}>{el.title}</div>
+                        <ul>
+                          {el.details.map((item, ind) => (
+                            <li key={ind}>
+                              <div className={style.specs_name}>
+                                {item.name}
+                              </div>
+                              <p></p>
+                              <div className={style.specs_value}>
+                                {item.value}
+                              </div>
+                            </li>
+                          ))}
+                        </ul>
+                      </React.Fragment>
+                    ))}
+                  </div>
+                </AccordionDetails>
+              </Accordion>
             </div>
+          </div>
+          <div className={style.feedback_container}>
+            <div className={style.main_title}>Отзывы</div>
+            <Box component='fieldset' mb={3} borderColor='transparent'>
+              <Rating
+                name='simple-controlled'
+                value={ratingValue}
+                onChange={(event, newValue) => {
+                  setRatingValue(newValue)
+                }}
+              />
+            </Box>
+            <textarea className='input' placeholder='Комментировать'></textarea>
           </div>
         </div>
       </Container>
