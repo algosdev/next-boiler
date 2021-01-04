@@ -10,7 +10,7 @@
     .fullName {
       display: flex;
       width: 100%;
-      max-width: 400px;
+      max-width: 380px;
       justify-content: space-between;
       .input_cont {
         &:first-child {
@@ -27,11 +27,15 @@
     }
     .submit {
       margin-top: 10px;
+      outline: 0;
+      height: 53px;
     }
     .input_cont {
       position: relative;
       margin-bottom: 5px;
-      min-width: 280px;
+      min-width: 320px;
+      width: 100%;
+      max-width: 380px;
       .error {
         border-color: red;
       }
@@ -61,6 +65,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
+          color: #fff;
         }
         svg {
           color: #fff;
@@ -68,12 +73,11 @@
           width: 20px;
         }
       }
-      button {
-        margin-top: 10px;
-        background: var(--primary-color);
-        color: #fff;
-        cursor: pointer;
-      }
+      // button {
+      //   background: var(--primary-color);
+      //   color: #fff;
+      //   cursor: pointer;
+      // }
     }
     .checkbox_cont {
       margin-top: 20px;

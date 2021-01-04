@@ -65,6 +65,9 @@ a {
 .slick-dots li button:before {
   font-size: 12px;
 }
+.white_bg {
+  background: #fff;
+}
 .copyright {
   display: flex;
   justify-content: space-between;

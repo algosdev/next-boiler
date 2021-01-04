@@ -37,7 +37,7 @@ const theme = createMuiTheme({
         '&:hover': {
           backgroundColor: '#fff',
         },
-        borderRadius: '4px',
+        borderRadius: '10px',
       },
 
       // underline: {
@@ -61,31 +61,7 @@ const theme = createMuiTheme({
       //   },
       // },
     },
-    MuiOutlinedInput: {
-      root: {
-        backgroundColor: '#FFFFFF',
-        fontSize: '16px',
-        lineHeight: '26px',
-      },
-      notchedOutline: {
-        borderColor: '#FFFFFF',
-        borderWidth: '1px !important',
-      },
-      input: {
-        padding: '13px 16px',
-      },
-      multiline: {
-        backgroundColor: '#FFF',
-      },
-    },
-    MuiInputLabel: {
-      root: {
-        backgroundColor: 'yellow',
-      },
-    },
-    MuiTextField: {
-      root: {},
-    },
+
     MuiButton: {
       root: {
         minWidth: '100px',
@@ -95,7 +71,7 @@ const theme = createMuiTheme({
         lineHeight: '24px',
         fontWeight: 'normal',
         transition: 'transform .2s ease-in-out',
-        borderRadius: '6px',
+        borderRadius: '10px',
       },
       fullWidth: {
         maxWidth: '100%',
@@ -249,10 +225,7 @@ const theme = createMuiTheme({
       size: 'small',
     },
     MuiTextField: {
-      variant: 'outlined',
-      InputLabelProps: {
-        shrink: true,
-      },
+      variant: 'filled',
       border: '1px solid  var(--border)',
       color: 'primary',
       fontFamily:

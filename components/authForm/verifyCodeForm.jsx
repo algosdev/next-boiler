@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import style from './authForm.module.scss'
-import { Typography } from '@material-ui/core'
+import { Typography, Button, TextField } from '@material-ui/core'
 import { Router } from '../../i18n'
 import { useTranslation } from '../../i18n'
+import { useStyles } from './textFieldStyle'
 function VerifyCodeForm() {
+  const classes = useStyles()
   const { t } = useTranslation()
   const [values, setValues] = useState({
     code: '',
@@ -20,19 +22,35 @@ function VerifyCodeForm() {
       <div className={style.inner}>
         <form onSubmit={submitHandler}>
           <div className={style.input_cont}>
-            <input
+            {/* <input
               className={`input`}
               value={values.code}
               onChange={(e) => setValues({ ...values, code: e.target.value })}
               type='num'
               placeholder='OTP code'
               required
+            /> */}
+            <TextField
+              id='filled-basic'
+              name='otp'
+              variant='filled'
+              fullWidth
+              type='number'
+              className={classes.root}
+              // onChange={(e) =>
+              //   setValues({ ...values, phoneNum: e.target.value })
+              // }
+              required
+              label={t('otp')}
             />
           </div>
           <div className={style.input_cont}>
-            <button className='input' type='submit'>
+            <Button fullWidth type='submit'>
+              {t('continue')}
+            </Button>
+            {/* <button className='input' type='submit'>
               Submit
-            </button>
+            </button> */}
           </div>
         </form>
       </div>

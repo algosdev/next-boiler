@@ -4,9 +4,8 @@ import {
   Checkbox,
   CircularProgress,
   Button,
-  makeStyles,
+  TextField,
 } from '@material-ui/core'
-import TextField from '@material-ui/core/TextField'
 import style from './authForm.module.scss'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import { Link } from '../../i18n'
@@ -15,28 +14,7 @@ import { useForm, Controller } from 'react-hook-form'
 import composeRefs from '@seznam/compose-react-refs'
 import InputMask from 'react-input-mask'
 import { useTranslation } from '../../i18n'
-const useStyles = makeStyles(() => ({
-  root: {
-    background: 'transparent',
-    '& .MuiInputLabel-root': {
-      background: 'transparent',
-    },
-    '& .MuiFilledInput-underline:hover:before, & .MuiFilledInput-underline:hover:after, & .MuiFilledInput-underline:hover:after,  & .MuiFilledInput-underline:after,  & .MuiFilledInput-underline:before': {
-      display: 'none',
-    },
-    '& .MuiFilledInput-root': {
-      border: '1px solid var(--border)',
-    },
-    '& .MuiFormLabel-root.Mui-focused': {
-      color: 'var(--primary-color)',
-    },
-
-    '& .MuiFilledInput-root.Mui-focused': {
-      background: '#fff',
-      border: '1px solid var(--primary-color)',
-    },
-  },
-}))
+import { useStyles } from './textFieldStyle'
 function SignInForm() {
   const { t } = useTranslation()
   const classes = useStyles()
@@ -66,6 +44,9 @@ function SignInForm() {
       setIsPhoneNumValid(true)
       setIsLoading(false)
     }, 2000)
+    if (isPhoneNumValid) {
+      checkPassword()
+    }
   }
   const checkPassword = () => {
     setIsLoading(true)
@@ -95,21 +76,21 @@ function SignInForm() {
 
   return (
     <div className={style.wrapper}>
-      <Typography variant='h3'>{t('signin_title')}</Typography>
+      <Typography variant='h3'>{t('signin')}</Typography>
       <div className={style.inner}>
-        <form
-          onSubmit={submitHandlerPhone}
-          className={classes.root}
-          noValidate
-          autoComplete='off'
-        >
+        <form onSubmit={submitHandlerPhone} autoComplete='off'>
           <div className={style.input_cont}>
             <TextField
               id='filled-basic'
               name='phoneNum'
               variant='filled'
               fullWidth
+              type='tel'
               className={classes.root}
+              onChange={(e) =>
+                setValues({ ...values, phoneNum: e.target.value })
+              }
+              required
               label={t('phone_num')}
             />
             {/* <Controller
@@ -155,8 +136,34 @@ function SignInForm() {
               )}
             /> */}
           </div>
+          {isPhoneNumValid ? (
+            <div className={style.input_cont}>
+              <TextField
+                id='filled-basic'
+                name='password'
+                onChange={(e) =>
+                  setValues({ ...values, password: e.target.value })
+                }
+                variant='filled'
+                required
+                type='password'
+                fullWidth
+                className={classes.root}
+                label={t('password')}
+              />
+            </div>
+          ) : (
+            ''
+          )}
+          <Button fullWidth type='submit'>
+            {isLoading ? (
+              <CircularProgress className={style.progress} color='inherit' />
+            ) : (
+              t('signin')
+            )}
+          </Button>
         </form>
-        <form onSubmit={submitHandlerPassword}>
+        {/* <form onSubmit={submitHandlerPassword}>
           <TextField
             id='filled-basic'
             name='password'
@@ -164,8 +171,8 @@ function SignInForm() {
             fullWidth
             className={classes.root}
             label={t('password')}
-          />
-          {/* {isPhoneNumValid ? (
+          /> */}
+        {/* {isPhoneNumValid ? (
             <div className={style.input_cont}>
               <input
                 className='input'
@@ -196,10 +203,10 @@ function SignInForm() {
           ) : (
             ''
           )} */}
-          <Button fullWidth type='submit' className={style.submit}>
+        {/* <Button fullWidth type='submit' className={style.submit}>
             Sign In
           </Button>
-        </form>
+        </form> */}
 
         <div className={style.checkbox_cont}>
           <Checkbox
