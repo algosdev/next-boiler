@@ -10,7 +10,7 @@ export default function Footer() {
     <div className={style.footer}>
       <Container>
         <Grid container spacing={2}>
-          <Grid item xs={3}>
+          <Grid item xs={3} md={3} sm={6} xs={6}>
             <Typography variant='h6'>{t('buy_and_learn')}</Typography>
             <ul className={style.list}>
               <li className={style.listItem}>
@@ -30,7 +30,7 @@ export default function Footer() {
               </li>
             </ul>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={3} md={3} sm={6} xs={6}>
             <Typography variant='h6'>{t('company')}</Typography>
             <ul className={style.list}>
               <li className={style.listItem}>
@@ -50,7 +50,7 @@ export default function Footer() {
               </li>
             </ul>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={3} md={3} sm={6} xs={6}>
             <Typography variant='h6'>{t('information')}</Typography>
             <ul className={style.list}>
               <li className={style.listItem}>
@@ -70,7 +70,7 @@ export default function Footer() {
               </li>
             </ul>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={3} md={3} sm={6} xs={6}>
             <Typography variant='h6'>{t('contact_us')}</Typography>
             <ul className={style.social}>
               <li className={style.socialItem}>

@@ -4,6 +4,9 @@
   padding-bottom: 20px;
   margin-top: auto;
   border-top: 1px solid var(--border);
+  @media (max-width: 600px) {
+    padding: 30px 0;
+  }
   .list {
     list-style-type: none;
     padding: 0;

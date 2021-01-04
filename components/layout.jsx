@@ -6,6 +6,7 @@ export default function Layout({ children }) {
   return (
     <div className='main_container'>
       <Header />
+      <div className='header_margin'></div>
       {children}
       <Footer />
     </div>

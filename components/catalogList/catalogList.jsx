@@ -19,11 +19,13 @@ export default function CatalogList({ data }) {
   return (
     <div className={style.catalogList}>
       <Container>
-        <Typography variant='h2'>{data.title}</Typography>
+        <Typography variant='h2' className={style.section_title}>
+          {data.title}
+        </Typography>
         <div className={style.catalogListWrapper}>
           <Grid container spacing={3}>
             {data.catalog.map((item, index) => (
-              <Grid item xs={3} key={index}>
+              <Grid item lg={3} sm={6} xs={12} key={index}>
                 <Paper className={classes.root}>
                   <Link href='/shop'>
                     <a className={style.wrapper}>

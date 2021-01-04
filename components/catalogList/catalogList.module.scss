@@ -1,7 +1,15 @@
 .catalogList {
   width: 100%;
-  margin: 80px 0;
+  margin: 50px 0;
   text-align: center;
+  .section_title {
+    @media (max-width: 720px) {
+      font-size: 36px;
+    }
+    @media (max-width: 576px) {
+      font-size: 24px;
+    }
+  }
   .wrapper {
     display: block;
     padding: 30px 20px;
