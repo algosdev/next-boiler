@@ -1,0 +1,19 @@
+.wrapper {
+  .feedback_container {
+    margin-top: 30px;
+    fieldset {
+      border: 0;
+      margin-bottom: 10px;
+    }
+    textarea {
+      max-width: 100%;
+      resize: vertical;
+    }
+    .main_title {
+      font-size: 28px;
+      line-height: 1.5;
+      font-weight: bold;
+      padding: 10px 0;
+    }
+  }
+}

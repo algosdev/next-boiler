@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   heading: {
-    fontSize: '22px',
+    fontSize: '28px',
     lineHeight: '1.5',
     fontWeight: 'bold',
   },
@@ -198,19 +198,6 @@ function ProductSingleContent() {
                 </AccordionDetails>
               </Accordion>
             </div>
-          </div>
-          <div className={style.feedback_container}>
-            <div className={style.main_title}>Отзывы</div>
-            <Box component='fieldset' mb={3} borderColor='transparent'>
-              <Rating
-                name='simple-controlled'
-                value={ratingValue}
-                onChange={(event, newValue) => {
-                  setRatingValue(newValue)
-                }}
-              />
-            </Box>
-            <textarea className='input' placeholder='Комментировать'></textarea>
           </div>
         </div>
       </Container>

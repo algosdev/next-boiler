@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 @import 'react-image-lightbox/style.css';
+@import 'slick-carousel/slick/slick.css';
+@import 'slick-carousel/slick/slick-theme.css';
 /* @import './_bootstrap'; */
 :root {
   --primary-color: #0066cc;
@@ -38,6 +40,30 @@ a {
 *::after {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+.slider_custom_arrow {
+  color: rgb(138, 138, 138);
+  background: rgb(236, 236, 236);
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.slider_custom_arrow::before {
+  display: none;
+}
+.slider_custom_arrow:hover {
+  color: rgb(97, 97, 97);
+  background: rgb(236, 236, 236);
+}
+.slider_custom_arrow.slick-disabled {
+  display: none;
+}
+.slick-dots li button:before {
+  font-size: 12px;
 }
 .copyright {
   display: flex;

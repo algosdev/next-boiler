@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import style from './productSingleCarousel.module.scss'
-import { Container } from '@material-ui/core'
+import { Container, Box } from '@material-ui/core'
 import Lightbox from 'react-image-lightbox'
+import Rating from '@material-ui/lab/Rating'
 const carouselData = [
   '/images/airpods_max.jpg',
   '/images/case.jpeg',

@@ -33,8 +33,33 @@ const theme = createMuiTheme({
     },
     MuiFilledInput: {
       root: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#fff',
+        '&:hover': {
+          backgroundColor: '#fff',
+        },
+        borderRadius: '4px',
       },
+
+      // underline: {
+      //   '&:after': {
+      //     borderBottom: `2px solid #FFFFFF`,
+      //   },
+      //   '&$focused:after': {
+      //     borderBottomColor: `#FFFFFF`,
+      //   },
+      //   '&$error:after': {
+      //     borderBottomColor: `#FFFFFF`,
+      //   },
+      //   '&:before': {
+      //     borderBottom: `1px solid #FFFFFF`,
+      //   },
+      //   '&:hover:not($disabled):not($focused):not($error):before': {
+      //     borderBottom: `2px solid #FFFFFF`,
+      //   },
+      //   '&$disabled:before': {
+      //     borderBottom: `1px dotted #FFFFFF`,
+      //   },
+      // },
     },
     MuiOutlinedInput: {
       root: {

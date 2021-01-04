@@ -1,7 +1,10 @@
 .catalogList {
   width: 100%;
-  margin: 50px 0;
+  margin: 50px 0 20px;
   text-align: center;
+  @media (max-width: 576px) {
+    margin: 20px 0;
+  }
   .section_title {
     @media (max-width: 720px) {
       font-size: 36px;
@@ -35,5 +38,5 @@
   }
 }
 .catalogListWrapper {
-  margin: 50px 0;
+  margin: 30px 0;
 }

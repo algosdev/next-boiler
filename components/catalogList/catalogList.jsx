@@ -11,6 +11,7 @@ import { Link, useTranslation } from '../../i18n'
 const useStyles = makeStyles(() => ({
   root: {
     borderRadius: '18px',
+    boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
   },
 }))
 export default function CatalogList({ data }) {
