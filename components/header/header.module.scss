@@ -273,6 +273,7 @@
     cursor: auto;
     align-items: center;
     position: relative;
+    margin-bottom: 10px;
     .closeSearch {
       cursor: pointer;
       padding: 0 16px;
@@ -311,13 +312,13 @@
     list-style-type: none;
     margin: 0;
 
-    margin-top: 20px;
+    margin-top: 30px;
     li {
       a {
         color: #fff;
         font-size: 16px;
         display: block;
-        padding: 10px 0;
+        padding: 12px 0;
         text-decoration: none;
       }
       border-bottom: 1px solid lighten(#1d1d1d, 15%);

@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import style from './productSingleContent.module.scss'
+import { useDispatch, shallowEqual, useSelector } from 'react-redux'
 import { i18n, useTranslation } from '../../i18n'
+import { asyncAddToCartAction } from '../../redux/actions/cartActions/cartActions'
 import {
   Container,
   Grid,
@@ -8,11 +10,13 @@ import {
   AccordionSummary,
   Typography,
   AccordionDetails,
+  CircularProgress,
   Box,
 } from '@material-ui/core'
 import Rating from '@material-ui/lab/Rating'
 import { makeStyles } from '@material-ui/core/styles'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import { motion, AnimatePresence } from 'framer-motion'
 const colorsData = [
   { ru: 'Черный', en: 'Black', uz: 'Qora' },
   { ru: 'Серый', en: 'Grey', uz: 'Kulrang' },
@@ -87,20 +91,46 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function ProductSingleContent() {
+function ProductSingleContent({ data }) {
   const classes = useStyles()
-  const [ratingValue, setRatingValue] = useState(0)
+  const dispatch = useDispatch()
+  const productsInCart = useSelector(
+    (state) => state?.cart?.cartItems,
+    shallowEqual
+  )
+  const [isLoading, setIsLoading] = useState(false)
+  const check = productsInCart.filter((el) => el.id === data.id)?.length
+    ? true
+    : false
+  const [addedToCart, setAddedToCart] = useState(
+    productsInCart.some((el) => el.id === data.id)?.length ? true : false
+  )
   const { language } = i18n
   const { t } = useTranslation()
   const [activeColorIndex, setActiveColorIndex] = useState(0)
+  const addToCart = () => {
+    if (!addedToCart) {
+      dispatch(asyncAddToCartAction(data))
+      setIsLoading(true)
+      setTimeout(() => {
+        setAddedToCart(true)
+        setIsLoading(false)
+      }, 1000)
+    }
+  }
+  useEffect(() => {
+    const check = productsInCart.filter((el) => el.id === data.id)?.length
+      ? true
+      : false
+    setAddedToCart(check)
+  }, [data])
+
   return (
     <div className={style.wrapper}>
       <Container>
         <div className={style.inner}>
           <div className={style.type}>{t('new')}</div>
-          <div className={style.name}>
-            Беспроводные наушники Apple AirPods 2
-          </div>
+          <div className={style.name}>{data.name}</div>
           <div className={style.desc}>
             Требуются AirPods Max с последней версией программного обеспечения и
             модели iPhone и iPod touch с последней версией iOS; модели iPad с
@@ -109,7 +139,7 @@ function ProductSingleContent() {
           </div>
           <div className={style.colors_cont}>
             <div className={style.colors_title}>{t('colors')}</div>
-            <Grid container xs={12} spacing={2}>
+            <Grid container spacing={2}>
               {colorsData.map((item, index) => (
                 <Grid
                   item
@@ -135,9 +165,35 @@ function ProductSingleContent() {
               ))}
             </Grid>
           </div>
-          <div className={style.price}>5490000 {t('soum')}</div>
+          <div className={style.price}>
+            {data.price} {t('soum')}
+          </div>
           <div className={style.add}>
-            <button className='input'>{t('add_to_cart')}</button>
+            <button
+              className={`input ${isLoading ? style.disabled : ''} ${
+                addedToCart ? style.added : ''
+              }`}
+              onClick={addToCart}
+              disabled={isLoading}
+            >
+              <AnimatePresence>
+                {addedToCart && (
+                  <motion.span
+                    animate={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0, scale: 0 }}
+                    exit={{ opacity: 0, scale: 0 }}
+                  >
+                    {t('added_to_cart')}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+              {!addedToCart &&
+                (isLoading ? (
+                  <CircularProgress color='inherit' />
+                ) : (
+                  t('add_to_cart')
+                ))}
+            </button>
           </div>
           <div className={style.overview}>
             <div className={classes.root}>

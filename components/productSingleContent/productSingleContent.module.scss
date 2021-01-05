@@ -26,8 +26,27 @@
         background: var(--primary-color);
         border: 0;
         outline: 0;
+        height: 48px;
         color: #fff;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.4s;
+        div {
+          height: 32px !important;
+          width: 32px !important;
+        }
+        &.disabled {
+          cursor: auto;
+          background-color: var(--border) !important;
+          div {
+            color: #1d1d1d;
+          }
+        }
+        &.added {
+          cursor: auto;
+        }
       }
     }
     .overview {

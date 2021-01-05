@@ -5,6 +5,7 @@ import { Grid } from '@material-ui/core'
 import style from './cart.module.scss'
 import NoItemInCart from './NoItemInCart'
 import { useTranslation } from '../../i18n'
+import { useSelector, shallowEqual } from 'react-redux'
 const cartData = [
   {
     name: 'Airpods Max Series 6, Gold Aluminum Case',
@@ -33,13 +34,30 @@ const cartData = [
 ]
 function CartList() {
   const { t } = useTranslation()
-  const [totalPrice, setTotalPrice] = useState(0)
-  const [cardItems, setCartItems] = useState(cartData)
-  const [totalQuantity, setTotalQuantity] = useState(0)
-  const deleteItem = (id) => {
-    const newItems = cardItems.filter((el) => el.id !== id)
-    setCartItems(newItems)
+  const calculateTotalQuantity = (data) => {
+    let sum = 0
+    data.forEach((el) => {
+      sum += el.quantity
+    })
+    return sum
   }
+  const calculateTotalPrice = (data) => {
+    let sum = 0
+    data.forEach((el) => {
+      sum += el.quantity * el.price
+    })
+    return sum
+  }
+  const productsInCart = useSelector(
+    (state) => state?.cart?.cartItems,
+    shallowEqual
+  )
+  const [totalPrice, setTotalPrice] = useState(0)
+  const [cardItems, setCartItems] = useState(productsInCart)
+  const [totalQuantity, setTotalQuantity] = useState(
+    calculateTotalQuantity(productsInCart)
+  )
+
   const calculateTotal = (id, quantity) => {
     const newItems = cardItems.map((el) => {
       if (el.id === id) {
@@ -64,12 +82,19 @@ function CartList() {
   useEffect(() => {
     updateSummary()
   }, [cardItems])
-  console.log(cardItems)
+  useEffect(() => {
+    setCartItems(productsInCart)
+  }, [productsInCart])
+  useEffect(() => {
+    setTotalQuantity(calculateTotalQuantity(cardItems))
+    setTotalPrice(calculateTotalPrice(cardItems))
+  }, [cardItems])
+  console.log(totalQuantity)
   return (
     <>
       <div className={style.wrapper_list}>
         <p className={style.list_title}>
-          {t('incart1')} {cardItems.length} {t('incart2')}
+          {t('incart1')} {totalQuantity} {t('incart2')}
         </p>
         <Grid container justify='space-between' xs={12} spacing={2}>
           <Grid item xs={8}>
@@ -77,13 +102,8 @@ function CartList() {
               {cardItems.length ? (
                 cardItems.map((el) => (
                   <CartListItem
-                    name={el.name}
-                    availableQuantity={el.availableQuantity}
+                    data={el}
                     key={el.id}
-                    id={el.id}
-                    priceProp={el.price}
-                    src={el.src}
-                    deleteItem={deleteItem}
                     calculateTotal={calculateTotal}
                   />
                 ))

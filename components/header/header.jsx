@@ -61,6 +61,7 @@ function Header(props) {
   const searchRef = useRef(null)
   const animationForm = useAnimation()
   const [isSearchVisible, setIsSearchVisible] = useState(false)
+
   const navData = [
     {
       title: t('apple_p'),
@@ -140,7 +141,6 @@ function Header(props) {
       document.removeEventListener('keydown', (e) => console.log(e), false)
     }
   }, [])
-  console.log(isMobile)
   return (
     <>
       <HideOnScroll {...props}>

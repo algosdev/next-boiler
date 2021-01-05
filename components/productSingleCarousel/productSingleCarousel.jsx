@@ -8,10 +8,10 @@ const carouselData = [
   '/images/case.jpeg',
   '/images/homepod_mini.jpeg',
 ]
-function ProductSingleCarousel() {
+function ProductSingleCarousel({ data }) {
+  const carouselData = data.carouselData
   const [photoIndex, setPhotoIndex] = useState(0)
   const [isLightBoxOpen, setIsLightBoxOpen] = useState(false)
-  console.log(photoIndex)
   return (
     <>
       <div className={style.wrapper}>

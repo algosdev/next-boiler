@@ -2,10 +2,16 @@ import React, { useState } from 'react'
 import style from './cart.module.scss'
 import { Router } from '../../i18n'
 import { useTranslation } from '../../i18n'
+import { useSelector, shallowEqual } from 'react-redux'
 function CartSummary({ totalQuantity, totalPrice }) {
+  const productsInCart = useSelector(
+    (state) => state?.cart?.cartItems,
+    shallowEqual
+  )
   const { t } = useTranslation()
   const [shippingFee, setShippingFee] = useState(50000)
   const [discount, setDiscount] = useState(10000)
+  console.log('Summary', productsInCart)
   return (
     <div className={style.wrapper_summary}>
       <div className={style.summary_inner}>
