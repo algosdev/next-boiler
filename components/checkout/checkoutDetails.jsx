@@ -1,12 +1,44 @@
 import { Link } from '../../i18n'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTranslation } from '../../i18n'
 import style from './checkout.module.scss'
 import CheckoutListItem from './checkoutListItem'
-function CheckoutDetails({ quantity, totalPrice }) {
+import { useSelector, shallowEqual } from 'react-redux'
+function CheckoutDetails() {
   const { t } = useTranslation()
+  const productsInCart = useSelector(
+    (state) => state?.cart?.cartItems,
+    shallowEqual
+  )
+  const calculateTotalPrice = (data) => {
+    let sum = 0
+    data.forEach((el) => {
+      sum += el.quantity * el.price
+    })
+    return sum
+  }
+  const calculateTotalQuantity = (data) => {
+    let sum = 0
+    data.forEach((el) => {
+      sum += el.quantity
+    })
+    return sum
+  }
+  const [totalPrice, setTotalPrice] = useState(0)
+  const [cardItems, setCartItems] = useState(productsInCart)
+  const [totalQuantity, setTotalQuantity] = useState(
+    calculateTotalQuantity(productsInCart)
+  )
+
   const [shippingFee, setShippingFee] = useState(50000)
   const [discount, setDiscount] = useState(10000)
+  useEffect(() => {
+    setCartItems(productsInCart)
+  }, [productsInCart])
+  useEffect(() => {
+    setTotalQuantity(calculateTotalQuantity(cardItems))
+    setTotalPrice(calculateTotalPrice(cardItems))
+  }, [cardItems])
   return (
     <div className={style.wrapper_summary}>
       <div className={style.summary_inner}>
@@ -19,9 +51,9 @@ function CheckoutDetails({ quantity, totalPrice }) {
 
         <div className={style.info}>
           <p>
-            {t('products')}({quantity || 2})
+            {t('products')}({totalQuantity || 0})
           </p>
-          <p>{totalPrice || '450000'}</p>
+          <p>{totalPrice || '0'}</p>
         </div>
         <div className={style.info}>
           <p> {t('shipping_fee')}</p>
@@ -34,15 +66,18 @@ function CheckoutDetails({ quantity, totalPrice }) {
         <div className={style.totalPrice}>
           <p>{t('total')}</p>
           <p>
-            {totalPrice || '450000'} {t('soum')}
+            {`${
+              totalPrice !== 0 ? totalPrice + shippingFee - discount : '0'
+            } ${t('soum')}`}
           </p>
         </div>
         <div className={style.list}>
           <div className={style.totalPrice}>
             <p>{t('order_list')}</p>
           </div>
-          <CheckoutListItem quantityProp={4} src='images/homepod_mini.jpeg' />
-          <CheckoutListItem quantityProp={1} src='/images/airpods_max.jpg' />
+          {cardItems.map((el) => (
+            <CheckoutListItem data={el} />
+          ))}
         </div>
       </div>
     </div>

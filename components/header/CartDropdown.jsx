@@ -8,7 +8,7 @@ import {
   MenuList,
   makeStyles,
 } from '@material-ui/core'
-import { LocalMallOutlined } from '@material-ui/icons'
+import { InfoSharp, LocalMallOutlined } from '@material-ui/icons'
 import { Link } from '../../i18n'
 import style from './header.module.scss'
 import { useSelector, shallowEqual } from 'react-redux'
@@ -103,7 +103,9 @@ const CartDropdown = ({ title, subCategs }) => {
   }, [open])
   useEffect(() => {
     setBadgeCount(calculateTotalQuantity(productsInCart))
-    animateInPeriod()
+    if (productsInCart?.length) {
+      animateInPeriod()
+    }
   }, [productsInCart])
   const animateInPeriod = () => {
     setAnimate(true)
@@ -119,53 +121,53 @@ const CartDropdown = ({ title, subCategs }) => {
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup='true'
         onMouseEnter={() => setOpen(true)}
-        // onMouseLeave={() => setOpen(false)}
-        onClick={animateInPeriod}
+        onMouseLeave={() => setOpen(false)}
       >
-        {/* <Link href='/cart'>
-          <a> */}
-        <div className={`${style.icon} ${animate ? style.animate : ''}`}>
-          <LocalMallOutlined />
-        </div>
-
-        {calculateTotalQuantity(productsInCart) !== 0 ? (
-          <div className={style.badge_cont}>
-            <div className={`${style.badge} ${animate ? style.animate : ''}`}>
-              <span>{badgeCount}</span>
+        <Link href='/cart'>
+          <a>
+            <div className={`${style.icon} ${animate ? style.animate : ''}`}>
+              <LocalMallOutlined />
             </div>
-          </div>
-        ) : (
-          ''
-        )}
-        {/* </a>
-        </Link> */}
 
-        <Popper
-          open={open}
-          anchorEl={anchorRef.current}
-          className={classes.popper}
-          role={undefined}
-          transition
-          disablePortal
-        >
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              style={{
-                transformOrigin:
-                  placement === 'bottom' ? 'center top' : 'center bottom',
-              }}
-            >
-              <Paper className={classes.paper}>
-                <ClickAwayListener onClickAway={handleClose}>
-                  <Link href='/cart'>
-                    <li
-                      className={style.cart_items}
-                      onClick={handleClose}
-                      diableRipple
-                    >
-                      {productsInCart?.length ? (
-                        productsInCart.map((el, ind) => (
+            {calculateTotalQuantity(productsInCart) !== 0 ? (
+              <div className={style.badge_cont}>
+                <div
+                  className={`${style.badge} ${animate ? style.animate : ''}`}
+                >
+                  <span>{badgeCount}</span>
+                </div>
+              </div>
+            ) : (
+              ''
+            )}
+          </a>
+        </Link>
+        {productsInCart?.length ? (
+          <Popper
+            open={open}
+            anchorEl={anchorRef.current}
+            className={classes.popper}
+            role={undefined}
+            transition
+            disablePortal
+          >
+            {({ TransitionProps, placement }) => (
+              <Grow
+                {...TransitionProps}
+                style={{
+                  transformOrigin:
+                    placement === 'bottom' ? 'center top' : 'center bottom',
+                }}
+              >
+                <Paper className={classes.paper}>
+                  <ClickAwayListener onClickAway={handleClose}>
+                    <Link href='/cart'>
+                      <li
+                        className={style.cart_items}
+                        onClick={handleClose}
+                        diableRipple
+                      >
+                        {productsInCart.map((el, ind) => (
                           <div className={style.item} key={ind}>
                             <div className={style.img}>
                               <img src={el.img} alt={el.name} />
@@ -178,14 +180,11 @@ const CartDropdown = ({ title, subCategs }) => {
                               </p>
                             </div>
                           </div>
-                        ))
-                      ) : (
-                        <p>{t('empty_cart')}</p>
-                      )}
-                    </li>
-                  </Link>
+                        ))}
+                      </li>
+                    </Link>
 
-                  {/* <MenuItem onClick={handleClose} diableRipple>
+                    {/* <MenuItem onClick={handleClose} diableRipple>
                       <Link href='/cart'>
                         <a>{t('cart')}</a>
                       </Link>
@@ -205,11 +204,14 @@ const CartDropdown = ({ title, subCategs }) => {
                         <a>{t('signin')}</a>
                       </Link>
                     </MenuItem>*/}
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
+                  </ClickAwayListener>
+                </Paper>
+              </Grow>
+            )}
+          </Popper>
+        ) : (
+          ''
+        )}
       </li>
     </>
   )
