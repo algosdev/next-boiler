@@ -93,7 +93,7 @@ a {
   min-height: 100vh;
 }
 .main_container .header_margin {
-  margin-top: 60px !important;
+  margin-top: 75px !important;
 }
 .input {
   border: 1px solid var(--border);

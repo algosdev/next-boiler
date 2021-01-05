@@ -11,6 +11,7 @@ import {
 import { LocalMallOutlined } from '@material-ui/icons'
 import { Link } from '../../i18n'
 import style from './header.module.scss'
+import { useSelector, shallowEqual } from 'react-redux'
 import { useTranslation } from '../../i18n'
 const useStyles = makeStyles(() => ({
   paper: {
@@ -23,19 +24,21 @@ const useStyles = makeStyles(() => ({
 
     '& .MuiMenuItem-root': {
       padding: 0,
-      minWidth: '200px',
     },
     '& .MuiMenuItem-root a': {
       color: '#fff',
       justifyContent: 'flex-start !important',
       padding: '6px 20px',
+      display: 'block',
+      width: '100%',
     },
     '& .MuiMenuItem-root a:hover': {
       textDecoration: 'none',
     },
     '& .MuiMenuItem-root p': {
       color: '#fff',
-      padding: '50px',
+      maxWidth: '100%',
+      wordBreak: 'break-word',
     },
     '& .MuiList-root': {
       padding: '0',
@@ -52,7 +55,22 @@ const useStyles = makeStyles(() => ({
 const CartDropdown = ({ title, subCategs }) => {
   const { t } = useTranslation()
   const [isBagVisible, setIsBagVisible] = useState(false)
+  const [animate, setAnimate] = useState(false)
   const classes = useStyles()
+  const calculateTotalQuantity = (data) => {
+    let sum = 0
+    data.forEach((el) => {
+      sum += el.quantity
+    })
+    return sum
+  }
+  const productsInCart = useSelector(
+    (state) => state?.cart?.cartItems,
+    shallowEqual
+  )
+  const [badgeCount, setBadgeCount] = useState(
+    calculateTotalQuantity(productsInCart)
+  )
   const [open, setOpen] = useState(false)
   const anchorRef = useRef(null)
 
@@ -83,7 +101,16 @@ const CartDropdown = ({ title, subCategs }) => {
 
     prevOpen.current = open
   }, [open])
-
+  useEffect(() => {
+    setBadgeCount(calculateTotalQuantity(productsInCart))
+    animateInPeriod()
+  }, [productsInCart])
+  const animateInPeriod = () => {
+    setAnimate(true)
+    setTimeout(() => {
+      setAnimate(false)
+    }, 1500)
+  }
   return (
     <>
       <li
@@ -91,11 +118,27 @@ const CartDropdown = ({ title, subCategs }) => {
         ref={anchorRef}
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup='true'
-        onClick={handleToggle}
-        // onMouseEnter={() => setOpen(true)}
+        onMouseEnter={() => setOpen(true)}
         // onMouseLeave={() => setOpen(false)}
+        onClick={animateInPeriod}
       >
-        <LocalMallOutlined />
+        {/* <Link href='/cart'>
+          <a> */}
+        <div className={`${style.icon} ${animate ? style.animate : ''}`}>
+          <LocalMallOutlined />
+        </div>
+
+        {calculateTotalQuantity(productsInCart) !== 0 ? (
+          <div className={style.badge_cont}>
+            <div className={`${style.badge} ${animate ? style.animate : ''}`}>
+              <span>{badgeCount}</span>
+            </div>
+          </div>
+        ) : (
+          ''
+        )}
+        {/* </a>
+        </Link> */}
 
         <Popper
           open={open}
@@ -115,20 +158,34 @@ const CartDropdown = ({ title, subCategs }) => {
             >
               <Paper className={classes.paper}>
                 <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList
-                    autoFocusItem={open}
-                    id='menu-list-grow'
-                    onKeyDown={handleListKeyDown}
-                  >
+                  <Link href='/cart'>
                     <li
                       className={style.cart_items}
                       onClick={handleClose}
                       diableRipple
                     >
-                      <p>{t('empty_cart')}</p>
-                    </li>
+                      {productsInCart?.length ? (
+                        productsInCart.map((el, ind) => (
+                          <div className={style.item} key={ind}>
+                            <div className={style.img}>
+                              <img src={el.img} alt={el.name} />
+                            </div>
 
-                    <MenuItem onClick={handleClose} diableRipple>
+                            <div className={style.details}>
+                              <p className={style.title}>{el.name}</p>
+                              <p className={style.desc}>
+                                {t('price')}: {el.price} {t('soum')}
+                              </p>
+                            </div>
+                          </div>
+                        ))
+                      ) : (
+                        <p>{t('empty_cart')}</p>
+                      )}
+                    </li>
+                  </Link>
+
+                  {/* <MenuItem onClick={handleClose} diableRipple>
                       <Link href='/cart'>
                         <a>{t('cart')}</a>
                       </Link>
@@ -147,8 +204,7 @@ const CartDropdown = ({ title, subCategs }) => {
                       <Link href='/signin'>
                         <a>{t('signin')}</a>
                       </Link>
-                    </MenuItem>
-                  </MenuList>
+                    </MenuItem>*/}
                 </ClickAwayListener>
               </Paper>
             </Grow>

@@ -143,152 +143,150 @@ function Header(props) {
   }, [])
   return (
     <>
-      <HideOnScroll {...props}>
-        <AppBar>
-          <header className={style.header}>
-            <Container>
-              {!isMobile ? (
-                <div className={style.wrapper}>
-                  <div className={style.brandLogo}>
-                    <Link href='/'>
-                      <a>
-                        <BrandLogo />
-                      </a>
-                    </Link>
-                  </div>
-                  <div className={style.nav}>
-                    <ul className={style.list}>
-                      {navData.map((item, index) => (
-                        <NavItem
-                          key={index}
-                          title={item.title}
-                          subCategs={item.subCategs}
-                        />
-                      ))}
+      {/* <HideOnScroll {...props}> */}
+      <AppBar elevation={0}>
+        <header className={style.header}>
+          <Container>
+            {!isMobile ? (
+              <div className={style.wrapper}>
+                <div className={style.brandLogo}>
+                  <Link href='/'>
+                    <a>
+                      <BrandLogo />
+                    </a>
+                  </Link>
+                </div>
+                <div className={style.nav}>
+                  <ul className={style.list}>
+                    {navData.map((item, index) => (
+                      <NavItem
+                        key={index}
+                        title={item.title}
+                        subCategs={item.subCategs}
+                      />
+                    ))}
 
-                      <li className={style.listItem}>
-                        <ClickAwayListener
-                          onClickAway={() => setIsSearchVisible(false)}
+                    <li className={style.listItem}>
+                      <ClickAwayListener
+                        onClickAway={() => setIsSearchVisible(false)}
+                      >
+                        <motion.form
+                          className={`${style.searchForm} ${
+                            isSearchVisible ? style.animate : ''
+                          }`}
+                          variants={{
+                            visible: {
+                              left: '0',
+                              right: 'auto',
+                              // x: '-100%',
+                              top: '50%',
+                              y: '-50%',
+                              width: '100%',
+                            },
+                            stable: {
+                              right: '50px',
+                              left: 'auto',
+                              // x: 0,
+                              flip: true,
+                              width: '0',
+                              top: 0,
+                              y: 0,
+                            },
+                          }}
+                          transition={{
+                            duration: 0.3,
+                            type: 'twin',
+                          }}
+                          animate={animationForm}
+                          initial={'stable'}
+                          exit={'stable'}
+                          onSubmit={submitHandler}
                         >
-                          <motion.form
-                            className={`${style.searchForm} ${
-                              isSearchVisible ? style.animate : ''
-                            }`}
+                          <div
+                            className={style.icon}
+                            onClick={() => setIsSearchVisible(!isSearchVisible)}
+                          >
+                            <SearchOutlined />
+                          </div>
+                          <motion.input
+                            type='text'
+                            placeholder={t('search')}
+                            transition={{
+                              duration: 0,
+                            }}
+                            ref={searchRef}
                             variants={{
                               visible: {
-                                left: '0',
-                                right: 'auto',
-                                // x: '-100%',
-                                top: '50%',
-                                y: '-50%',
                                 width: '100%',
+                                opacity: 1,
                               },
                               stable: {
-                                right: '50px',
-                                left: 'auto',
-                                // x: 0,
-                                flip: true,
                                 width: '0',
-                                top: 0,
-                                y: 0,
+                                opacity: 0,
                               },
-                            }}
-                            transition={{
-                              duration: 0.3,
-                              type: 'twin',
                             }}
                             animate={animationForm}
                             initial={'stable'}
                             exit={'stable'}
-                            onSubmit={submitHandler}
-                          >
-                            <div
-                              className={style.icon}
-                              onClick={() =>
-                                setIsSearchVisible(!isSearchVisible)
-                              }
-                            >
-                              <SearchOutlined />
-                            </div>
-                            <motion.input
-                              type='text'
-                              placeholder={t('search')}
-                              transition={{
-                                duration: 0,
-                              }}
-                              ref={searchRef}
-                              variants={{
-                                visible: {
-                                  width: '100%',
-                                  opacity: 1,
-                                },
-                                stable: {
-                                  width: '0',
-                                  opacity: 0,
-                                },
-                              }}
-                              animate={animationForm}
-                              initial={'stable'}
-                              exit={'stable'}
-                            />
-                            <AnimatePresence>
-                              {isSearchVisible ? (
-                                <motion.div
-                                  className={style.closeSearch}
-                                  variants={{
-                                    visible: {
-                                      opacity: 1,
-                                      transition: {
-                                        delay: 0.3,
-                                        duration: 0.4,
-                                      },
+                          />
+                          <AnimatePresence>
+                            {isSearchVisible ? (
+                              <motion.div
+                                className={style.closeSearch}
+                                variants={{
+                                  visible: {
+                                    opacity: 1,
+                                    transition: {
+                                      delay: 0.3,
+                                      duration: 0.4,
                                     },
-                                    stable: {
-                                      opacity: 0,
-                                      transition: {
-                                        duration: 0.1,
-                                      },
+                                  },
+                                  stable: {
+                                    opacity: 0,
+                                    transition: {
+                                      duration: 0.1,
                                     },
-                                  }}
-                                  transition={{
-                                    type: 'twin',
-                                  }}
-                                  animate={'visible'}
-                                  initial={'stable'}
-                                  exit={'stable'}
-                                  onClick={() => setIsSearchVisible(false)}
-                                >
-                                  <CloseIcon />
-                                </motion.div>
-                              ) : (
-                                ''
-                              )}
-                            </AnimatePresence>
-                          </motion.form>
-                        </ClickAwayListener>
-                      </li>
-                    </ul>
-                    <ul className={style.icon_list}>
-                      <li className={`${style.listItem} ${style.cartIcon}`}>
-                        <Link href='/cart'>
-                          <a>
-                            <LocalMallOutlined />
-                          </a>
-                        </Link>
-                      </li>
-                      {/* <CartDropdown /> */}
-                      <ProfileDropdown />
-                      <LanguageDropdown />
-                    </ul>
-                  </div>
+                                  },
+                                }}
+                                transition={{
+                                  type: 'twin',
+                                }}
+                                animate={'visible'}
+                                initial={'stable'}
+                                exit={'stable'}
+                                onClick={() => setIsSearchVisible(false)}
+                              >
+                                <CloseIcon />
+                              </motion.div>
+                            ) : (
+                              ''
+                            )}
+                          </AnimatePresence>
+                        </motion.form>
+                      </ClickAwayListener>
+                    </li>
+                  </ul>
+                  <ul className={style.icon_list}>
+                    {/* <li className={`${style.listItem} ${style.cartIcon}`}>
+                      <Link href='/cart'>
+                        <a>
+                          <LocalMallOutlined />
+                        </a>
+                      </Link>
+                    </li> */}
+                    <CartDropdown />
+                    <ProfileDropdown />
+                    <LanguageDropdown />
+                  </ul>
                 </div>
-              ) : (
-                <MobileHeader data={navData} />
-              )}
-            </Container>
-          </header>
-        </AppBar>
-      </HideOnScroll>
+              </div>
+            ) : (
+              <MobileHeader data={navData} />
+            )}
+          </Container>
+        </header>
+      </AppBar>
+      {/* </HideOnScroll> */}
     </>
   )
 }

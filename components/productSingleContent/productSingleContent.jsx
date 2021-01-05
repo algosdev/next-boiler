@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import style from './productSingleContent.module.scss'
 import { useDispatch, shallowEqual, useSelector } from 'react-redux'
-import { i18n, useTranslation } from '../../i18n'
+import { i18n, useTranslation, Link } from '../../i18n'
 import { asyncAddToCartAction } from '../../redux/actions/cartActions/cartActions'
 import {
   Container,
@@ -170,21 +170,21 @@ function ProductSingleContent({ data }) {
           </div>
           <div className={style.add}>
             <button
-              className={`input ${isLoading ? style.disabled : ''} ${
-                addedToCart ? style.added : ''
-              }`}
+              className={`input ${isLoading ? style.disabled : ''}`}
               onClick={addToCart}
               disabled={isLoading}
             >
               <AnimatePresence>
                 {addedToCart && (
-                  <motion.span
-                    animate={{ opacity: 1, scale: 1 }}
-                    initial={{ opacity: 0, scale: 0 }}
-                    exit={{ opacity: 0, scale: 0 }}
-                  >
-                    {t('added_to_cart')}
-                  </motion.span>
+                  <Link href='/cart'>
+                    <motion.a
+                      animate={{ opacity: 1, scale: 1 }}
+                      initial={{ opacity: 0, scale: 0 }}
+                      exit={{ opacity: 0, scale: 0 }}
+                    >
+                      {t('added_to_cart')}
+                    </motion.a>
+                  </Link>
                 )}
               </AnimatePresence>
               {!addedToCart &&

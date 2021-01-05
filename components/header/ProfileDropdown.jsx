@@ -93,7 +93,7 @@ const ProfileDropdown = ({ title, subCategs }) => {
   return (
     <>
       <li
-        className={`${style.listItem} ${style.cartIcon}`}
+        className={`${style.listItem}`}
         ref={anchorRef}
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup='true'

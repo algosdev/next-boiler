@@ -88,8 +88,8 @@ const NavItem = ({ title, subCategs }) => {
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <span>
-        {title} {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+      <span className={open ? style.open : ''}>
+        {title} <ExpandLessIcon />
       </span>
       <Popper
         open={open}
