@@ -13,7 +13,7 @@ function CheckoutContainer() {
     <>
       <div className={style.wrapper}>
         <p className={style.list_title}>{t('checkout')}</p>
-        <Grid container justify='space-between' xs={12} spacing={2}>
+        <Grid container justify='space-between' spacing={2}>
           <Grid item xs={8}>
             <div className={style.inner}>
               <CheckoutForm />

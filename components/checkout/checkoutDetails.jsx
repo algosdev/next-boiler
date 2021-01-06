@@ -75,8 +75,8 @@ function CheckoutDetails() {
           <div className={style.totalPrice}>
             <p>{t('order_list')}</p>
           </div>
-          {cardItems.map((el) => (
-            <CheckoutListItem data={el} />
+          {cardItems.map((el, ind) => (
+            <CheckoutListItem key={ind} data={el} />
           ))}
         </div>
       </div>
