@@ -8,7 +8,7 @@ function Feedback() {
   return (
     <div className={style.wrapper}>
       <div className={style.feedback_container}>
-        <div className={style.main_title}>Отзывы</div>
+        {/* <div className={style.main_title}>Отзывы</div> */}
         <Box component='fieldset' mb={3} borderColor='transparent'>
           <Rating
             name='simple-controlled'

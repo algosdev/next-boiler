@@ -1,9 +1,9 @@
 .wrapper {
   .feedback_container {
-    margin-top: 30px;
     fieldset {
       border: 0;
       margin-bottom: 10px;
+      padding-top: 0;
     }
     textarea {
       max-width: 100%;

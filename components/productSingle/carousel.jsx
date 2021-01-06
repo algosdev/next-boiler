@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import style from './productSingleCarousel.module.scss'
+import style from './productSingle.module.scss'
 import { Container, Box } from '@material-ui/core'
 import Lightbox from 'react-image-lightbox'
 import Rating from '@material-ui/lab/Rating'
@@ -14,7 +14,7 @@ function ProductSingleCarousel({ data }) {
   const [isLightBoxOpen, setIsLightBoxOpen] = useState(false)
   return (
     <>
-      <div className={style.wrapper}>
+      <div className={style.wrapper_carousel}>
         <Container>
           <div className={style.carousel}>
             <div className={style.main_slide}>

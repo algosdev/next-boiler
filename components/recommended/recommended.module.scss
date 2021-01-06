@@ -10,14 +10,18 @@
     }
     .product {
       outline: 0;
-      //   display: block;
-      //   width: 100%;
-      //   min-width: 516px;
+
+      a {
+        text-transform: none;
+        color: #1d1d1d;
+        transition: 0.4s;
+      }
+      a:hover {
+        text-decoration: none;
+      }
       padding: 38px 0;
       text-align: center;
       text-decoration: none;
-      //   border-bottom: 1px solid var(--border);
-      //   border-right: 1px solid var(--border);
       &:hover {
         .name {
           color: var(--primary-color);

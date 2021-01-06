@@ -102,7 +102,8 @@ const CartDropdown = ({ title, subCategs }) => {
     prevOpen.current = open
   }, [open])
   useEffect(() => {
-    setBadgeCount(calculateTotalQuantity(productsInCart))
+    setTimeout(() => setBadgeCount(calculateTotalQuantity(productsInCart)), 500)
+
     if (productsInCart?.length) {
       animateInPeriod()
     }
@@ -174,10 +175,16 @@ const CartDropdown = ({ title, subCategs }) => {
                             </div>
 
                             <div className={style.details}>
-                              <p className={style.title}>{el.name}</p>
-                              <p className={style.desc}>
-                                {t('price')}: {el.price} {t('soum')}
-                              </p>
+                              <div className={style.title}>{el.name}</div>
+                              <div className={style.desc}>
+                                <p>
+                                  {t('price')}: {el.price} {t('soum')}
+                                </p>
+                                <p>
+                                  {t('quantity')}: {el.quantity}{' '}
+                                  {el.quantity > 1 ? t('pc2') : t('pc1')}
+                                </p>
+                              </div>
                             </div>
                           </div>
                         ))}

@@ -95,6 +95,12 @@ a {
 .main_container .header_margin {
   margin-top: 75px !important;
 }
+#macbro_container div button:focus {
+  outline: 0;
+}
+.MuiDialog-root button {
+  outline: 0 !important;
+}
 .input {
   border: 1px solid var(--border);
   border-radius: 4px;

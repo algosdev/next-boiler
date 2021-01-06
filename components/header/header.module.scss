@@ -69,6 +69,7 @@
                 &::before,
                 &::after {
                   animation: badge 1s ease-in-out forwards;
+                  animation-delay: 0.5s;
                 }
               }
               &::before,
@@ -89,6 +90,7 @@
           .icon {
             &.animate {
               animation: cartIcon 1s ease-in-out forwards;
+              animation-delay: 0.5s;
             }
             svg {
               font-size: 26px;
@@ -261,6 +263,7 @@
         display: grid;
         grid-template-columns: 1fr 3fr;
         margin-bottom: 10px;
+        align-items: center;
         .img {
           width: 50px !important;
           height: 50px !important;
@@ -284,8 +287,12 @@
             margin: 0;
           }
           .desc {
-            margin: 0;
-            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            font-size: 12px;
+            p {
+              margin: 0;
+            }
           }
         }
       }

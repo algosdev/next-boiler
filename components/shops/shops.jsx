@@ -29,7 +29,7 @@ function Shops() {
   return (
     <div className={style.wrapper}>
       <div className={style.inner}>
-        <div className={style.main_title}>Наличие в магазинах</div>
+        {/* <div className={style.main_title}>Наличие в магазинах</div> */}
         <div className={style.header}>
           <Grid container className={style.field_container}>
             <Grid item xs={3} className={style.field}>
