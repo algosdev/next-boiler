@@ -89,7 +89,6 @@ function CartList() {
     setTotalQuantity(calculateTotalQuantity(cardItems))
     setTotalPrice(calculateTotalPrice(cardItems))
   }, [cardItems])
-  console.log(totalQuantity)
   return (
     <>
       <div className={style.wrapper_list}>

@@ -9,25 +9,45 @@ import NoItemInCart from './NoItemInCart'
 import {
   asyncAddToCartAction,
   asyncReduceCartItemQuantityAction,
+  asyncIncreaseCartItemQuantityAction,
   asyncRemoveFromCartAction,
 } from '../../redux/actions/cartActions/cartActions'
 import { useTranslation } from '../../i18n'
 function CartListItem({ id, data, calculateTotal }) {
   const dispatch = useDispatch()
+  const [quantity, setQuantity] = useState(data?.quantity)
   const { t } = useTranslation()
   const [total, setTotal] = useState(0)
+
+  const [error, setError] = useState(false)
   const [isdeleted, setIsDeleted] = useState(false)
   const changeQuantity = (operator) => {
     if (operator === 'plus') {
       if (data?.availableQuantity > data?.quantity) {
         dispatch(asyncAddToCartAction(data))
-        // setQuantity((old) => ++old)
+        setQuantity((old) => ++old)
       }
     } else if (operator === 'minus') {
       if (data?.quantity !== 1) {
         dispatch(asyncReduceCartItemQuantityAction(data))
-        // setQuantity((old) => --old)
+        setQuantity((old) => --old)
       }
+    }
+  }
+  const setCustomQuantity = (value) => {
+    const validQuantity = value > 0 ? value : 0
+    console.log(value)
+    if (validQuantity <= data?.availableQuantity) {
+      setQuantity(value > 0 ? value : '')
+      setError(false)
+      dispatch(
+        asyncIncreaseCartItemQuantityAction({
+          ...data,
+          customQuantity: validQuantity,
+        })
+      )
+    } else {
+      setError(true)
     }
   }
   const deleteItem = () => {
@@ -71,7 +91,27 @@ function CartListItem({ id, data, calculateTotal }) {
                   >
                     <RemoveIcon />
                   </div>
-                  <div className={style.quantity}>{data?.quantity}</div>
+                  <div
+                    className={`${style.quantity} ${error ? style.error : ''}`}
+                  >
+                    <input
+                      type='number'
+                      min={0}
+                      pattern='[0-9]'
+                      max={data?.availableQuantity}
+                      value={quantity}
+                      onBlur={(e) => {
+                        if (e.target.value === '') {
+                          setCustomQuantity(1)
+                        }
+                      }}
+                      onChange={(e) =>
+                        setCustomQuantity(
+                          e.target.value.replace(/[e\+\-\.]/gi, '')
+                        )
+                      }
+                    ></input>
+                  </div>
                   <div
                     className={style.plus}
                     onClick={() => changeQuantity('plus')}

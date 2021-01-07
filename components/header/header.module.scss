@@ -45,6 +45,11 @@
           a {
             color: #fff;
           }
+          .icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
           .badge_cont {
             position: absolute;
             top: 15%;
@@ -447,7 +452,7 @@
     transform: rotate(45deg);
   }
   80% {
-    transform: rotate(-65deg);
+    transform: rotate(-45deg);
   }
 
   100% {

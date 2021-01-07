@@ -90,38 +90,32 @@ export default function ProductList() {
                 <KeyboardArrowDown />
               </span>
             </button>
-            {sortByOpen ? (
-              <AnimatePresence>
+            <AnimatePresence>
+              {sortByOpen ? (
                 <ClickAwayListener onClickAway={() => setSortByOpen(false)}>
                   <motion.div
-                    layout
                     className={style.popup}
-                    key='someKey'
                     variants={{
                       visible: {
                         y: 0,
+                        position: 'absolute',
                         x: '-50%',
                         opacity: 1,
+                        top: '200%',
+                        left: 'calc(50% - 13px)',
                       },
                       stable: {
+                        position: 'absolute',
                         y: -20,
                         opacity: 0,
                         x: '-50%',
-                        transition: {
-                          duration: 1,
-                        },
+                        top: '200%',
+                        left: 'calc(50% - 13px)',
                       },
                     }}
                     animate={'visible'}
                     initial={'stable'}
-                    exit={{
-                      y: -20,
-                      opacity: 0,
-                      x: '-50%',
-                      transition: {
-                        duration: 1,
-                      },
-                    }}
+                    exit={'stable'}
                   >
                     <ul>
                       {sortByData.map((item, index) => (
@@ -140,10 +134,10 @@ export default function ProductList() {
                     </ul>
                   </motion.div>
                 </ClickAwayListener>
-              </AnimatePresence>
-            ) : (
-              ''
-            )}
+              ) : (
+                ''
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </div>

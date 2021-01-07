@@ -28,27 +28,12 @@
   padding: 20px 0;
   .grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     grid-gap: 16px;
     & > div {
       padding: 16px;
       display: flex;
       flex-direction: column;
-    }
-    .leading {
-      margin-bottom: 10px;
-    }
-    .icon {
-      background: var(--primary-color);
-      color: #fff;
-      display: flex;
-      cursor: pointer;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      margin-top: auto;
-      border-radius: 4px;
     }
   }
 }
@@ -57,24 +42,25 @@
   font-size: 32px;
   display: flex;
   justify-content: space-between;
-  font-weight: 600;
-  .icon {
-    background: var(--primary-color);
-    color: #fff;
-    display: flex;
-    padding: 0 10px;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    height: 32px;
-    font-weight: normal;
-    margin-top: auto;
-    font-size: 16px;
-    svg {
-      margin-right: 5px;
-    }
-    border-radius: 4px;
+  font-weight: 500;
+}
+.edit {
+  margin: 16px;
+  background: var(--primary-color);
+  color: #fff;
+  display: inline-flex;
+  padding: 0 10px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  font-weight: normal;
+  margin-top: auto;
+  font-size: 16px;
+  svg {
+    margin-right: 5px;
   }
+  border-radius: 4px;
 }
 .mini_title {
   font-size: 24px;
@@ -82,11 +68,21 @@
 }
 .sub_title {
   line-height: 1.6;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
 }
 .dialog_title {
   font-size: 24px;
   font-weight: 600;
   padding: 24px 24px 16px;
+}
+.leading {
+  line-height: 1.6;
+  font-size: 18px;
+  font-weight: 400;
+}
+.wrapper_single_item {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  align-items: center;
 }

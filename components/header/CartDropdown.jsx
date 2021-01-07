@@ -8,7 +8,7 @@ import {
   MenuList,
   makeStyles,
 } from '@material-ui/core'
-import { InfoSharp, LocalMallOutlined } from '@material-ui/icons'
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import { Link } from '../../i18n'
 import style from './header.module.scss'
 import { useSelector, shallowEqual } from 'react-redux'
@@ -102,7 +102,7 @@ const CartDropdown = ({ title, subCategs }) => {
     prevOpen.current = open
   }, [open])
   useEffect(() => {
-    setTimeout(() => setBadgeCount(calculateTotalQuantity(productsInCart)), 500)
+    setBadgeCount(calculateTotalQuantity(productsInCart))
 
     if (productsInCart?.length) {
       animateInPeriod()
@@ -127,7 +127,7 @@ const CartDropdown = ({ title, subCategs }) => {
         <Link href='/cart'>
           <a>
             <div className={`${style.icon} ${animate ? style.animate : ''}`}>
-              <LocalMallOutlined />
+              <ShoppingCartOutlinedIcon />
             </div>
 
             {calculateTotalQuantity(productsInCart) !== 0 ? (

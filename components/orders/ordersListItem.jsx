@@ -2,17 +2,15 @@ import React, { useState, useEffect } from 'react'
 import style from './orders.module.scss'
 import { Link } from '../../i18n'
 import { useTranslation } from '../../i18n'
-function OrderItem() {
+function OrderItem({ data }) {
   const { t } = useTranslation()
   return (
     <>
-      <Link href={`/orders/${'slug'}`}>
+      {/* <Link href={`/orders/${data.number}`}>
         <a>
           <div className={style.wrapper_item}>
             <div className={style.inner}>
-              <div className={style.header}>
-                {t('order')} {'#00001'}
-              </div>
+              <div className={style.header}>№ {data.number}</div>
               <div className={style.details}>
                 <p>
                   <span>{t('date')}: </span>
@@ -25,6 +23,25 @@ function OrderItem() {
                 <p>
                   <span>{t('total')}: </span>
                   {'600000'} {t('soum')}
+                </p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </Link> */}
+      <Link href={`/orders/${data.number}`}>
+        <a>
+          <div className={style.wrapper_item}>
+            <div className={style.inner}>
+              <div className={style.header}>№ {data.number}</div>
+              <div className={style.details}>
+                <span>{t('date')}: </span>
+                <span>{t('status')}: </span>
+                <span>{t('total')}: </span>
+                <p>{data.date}</p>
+                <p>{t('in_progress')}</p>
+                <p>
+                  {data.total} {t('soum')}
                 </p>
               </div>
             </div>

@@ -36,6 +36,18 @@ export const asyncReduceCartItemQuantityAction = (product) => (dispatch) => {
     payload: product,
   })
 }
+export const asyncIncreaseCartItemQuantityAction = (product) => (dispatch) => {
+  try {
+    // async code
+  } catch (error) {
+    // error
+  }
+
+  dispatch({
+    type: cartActionTypes.INCREASE_CART_ITEM_QUANTITY,
+    payload: product,
+  })
+}
 export const clearCartAction = () => ({
   type: cartActionTypes.CLEAR_CART,
 })

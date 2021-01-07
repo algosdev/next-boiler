@@ -24,7 +24,9 @@ function AccountSettings() {
     firstname: 'Samandar',
     lastname: 'Toshkuvvatov',
     phone_num: '+998916545454',
-    address: "45, Istiqbol ko'chasi, Mirobod tumani, Toshkent",
+    address1: "45, Istiqbol ko'chasi, Mirobod tumani, Toshkent",
+    address2: '',
+    address3: '',
   })
   const handleClickOpen = () => {
     setOpen(true)
@@ -38,10 +40,6 @@ function AccountSettings() {
       <Container>
         <div className={style.title}>
           <span>{t('account_settings')}</span>
-          <div className={style.icon} onClick={handleClickOpen}>
-            <EditIcon />
-            {t('edit')}
-          </div>
         </div>
         <div className={style.wrapper_item}>
           <div className={style.grid}>
@@ -55,9 +53,20 @@ function AccountSettings() {
               <Item title={t('phone_num')} details={data.phone_num} />
             </div>
             <div className={style.column}>
-              <Item title={t('shipping_address')} details={data.address} />
+              <div className={style.wrapper_single_item}>
+                <div className={style.sub_title}>{t('shipping_address')}</div>
+                <div className={style.leading}>
+                  {[data.address1, data.address2, data.address3].map((el) => (
+                    <p>{el}</p>
+                  ))}
+                </div>
+              </div>
+              {/* <Item title={t('shipping_address')} details={data.address1} /> */}
             </div>
           </div>
+        </div>
+        <div className={style.edit} onClick={handleClickOpen}>
+          {t('edit')}
         </div>
       </Container>
       <Dialog
@@ -71,47 +80,63 @@ function AccountSettings() {
         <div className={style.dialog_title}>{t('edit_as_title')}</div>
         <DialogContent>
           <DialogContentText>{t('edit_desc')}</DialogContentText>
-          <input
-            type='text'
-            className='input margin'
-            onChange={(e) => setData({ ...data, firstname: e.target.value })}
-            value={data.firstname}
-            placeholder={t('name')}
-          />
-          <input
-            type='text'
-            className='input margin'
-            onChange={(e) => setData({ ...data, lastname: e.target.value })}
-            value={data.lastname}
-            placeholder={t('surname')}
-          />
-          <input
-            type='text'
-            className='input margin'
-            onChange={(e) => setData({ ...data, phone_num: e.target.value })}
-            value={data.phone_num}
-            placeholder={t('phone_num')}
-          />
-          <input
-            type='text'
-            className='input margin'
-            onChange={(e) => setData({ ...data, address: e.target.value })}
-            value={data.address}
-            placeholder={t('shipping_address')}
-          />
+          <form>
+            <input
+              type='text'
+              className='input margin'
+              onChange={(e) => setData({ ...data, firstname: e.target.value })}
+              value={data.firstname}
+              placeholder={t('name')}
+            />
+            <input
+              type='text'
+              className='input margin'
+              onChange={(e) => setData({ ...data, lastname: e.target.value })}
+              value={data.lastname}
+              placeholder={t('surname')}
+            />
+            <input
+              type='text'
+              className='input margin'
+              onChange={(e) => setData({ ...data, phone_num: e.target.value })}
+              value={data.phone_num}
+              placeholder={t('phone_num')}
+            />
+            <input
+              type='text'
+              className='input margin'
+              onChange={(e) => setData({ ...data, address1: e.target.value })}
+              value={data.address1}
+              placeholder={`${t('shipping_address')} 1`}
+            />
+            <input
+              type='text'
+              className='input margin'
+              onChange={(e) => setData({ ...data, address2: e.target.value })}
+              value={data.address2}
+              placeholder={`${t('shipping_address')} 2`}
+            />
+            <input
+              type='text'
+              className='input margin'
+              onChange={(e) => setData({ ...data, address3: e.target.value })}
+              value={data.address3}
+              placeholder={`${t('shipping_address')} 3`}
+            />
+          </form>
+          <DialogActions>
+            <Button
+              onClick={handleClose}
+              variant='containedSecondary'
+              color='primary'
+            >
+              {t('cancel')}
+            </Button>
+            <Button onClick={handleClose} color='primary'>
+              {t('save')}
+            </Button>
+          </DialogActions>
         </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleClose}
-            variant='containedSecondary'
-            color='primary'
-          >
-            {t('cancel')}
-          </Button>
-          <Button onClick={handleClose} color='primary'>
-            {t('save')}
-          </Button>
-        </DialogActions>
       </Dialog>
     </div>
   )

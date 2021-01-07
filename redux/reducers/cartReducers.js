@@ -100,6 +100,15 @@ const cartReducers = (state = initialCartState, action) => {
             : cartItem
         ),
       }
+    case cartActionTypes.INCREASE_CART_ITEM_QUANTITY:
+      return {
+        ...state,
+        cartItems: state.cartItems.map((cartItem) =>
+          cartItem.id === payload.id
+            ? { ...cartItem, quantity: parseInt(payload.customQuantity) }
+            : cartItem
+        ),
+      }
     case cartActionTypes.CLEAR_CART:
       return {
         ...state,
@@ -115,7 +124,7 @@ function addNewProductToCart(cartItems, cartToAdd) {
   if (isInCart) {
     return cartItems.map((cartItem) => {
       return cartItem.id === cartToAdd.id
-        ? { ...cartToAdd, quantity: cartItem.quantity + 1 }
+        ? { ...cartToAdd, quantity: parseInt(cartItem.quantity) + 1 }
         : cartItem
     })
   }

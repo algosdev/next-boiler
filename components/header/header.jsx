@@ -66,36 +66,54 @@ function Header(props) {
     {
       title: t('apple_p'),
       subCategs: [
-        { title: 'Iphone', link: '/subcateg' },
-        { title: 'Ipad', link: '/subcateg' },
-        { title: 'Apple watch', link: '/subcateg' },
-        { title: 'AirPod', link: '/subcateg' },
-        { title: 'Macbook', link: '/subcateg' },
-        { title: 'iMac', link: '/subcateg' },
+        { title: 'Iphone', link: 'category=apple_p&subcategory=Iphone' },
+        { title: 'Ipad', link: 'category=apple_p&subcategory=Ipad' },
+        {
+          title: 'Apple watch',
+          link: 'category=apple_p&subcategory=Apple_watch',
+        },
+        { title: 'AirPod', link: 'category=apple_p&subcategory=AirPod' },
+        { title: 'Macbook', link: 'category=apple_p&subcategory=Macbook' },
+        { title: 'iMac', link: 'category=apple_p&subcategory=iMac' },
       ],
     },
     {
       title: t('samsung_p'),
       subCategs: [
-        { title: t('galaxy_phones'), link: '/subcateg' },
-        { title: t('watches'), link: '/subcateg' },
-        { title: t('tablets'), link: '/subcateg' },
-        { title: t('buds'), link: '/subcateg' },
+        {
+          title: t('galaxy_phones'),
+          link: 'category=samsung_p&subcategory=galaxy%phones',
+        },
+        { title: t('watches'), link: 'category=samsung_p&subcategory=watches' },
+        { title: t('tablets'), link: 'category=samsung_p&subcategory=tablets' },
+        { title: t('watches'), link: 'category=samsung_p&subcategory=watches' },
       ],
     },
     {
       title: t('acoustics'),
       subCategs: [
-        { title: t('speakers'), link: '/subcateg' },
-        { title: t('earphones'), link: '/subcateg' },
-        { title: t('microphones'), link: '/subcateg' },
+        {
+          title: t('speakers'),
+          link: 'category=acoustics&subcategory=speakers',
+        },
+        {
+          title: t('earphones'),
+          link: 'category=acoustics&subcategory=earphones',
+        },
+        {
+          title: t('microphones'),
+          link: 'category=acoustics&subcategory=microphones',
+        },
       ],
     },
     {
       title: t('accessories'),
       subCategs: [
-        { title: t('covers'), link: '/subcateg' },
-        { title: t('chargers'), link: '/subcateg' },
+        { title: t('covers'), link: 'category=accessories&subcategory=covers' },
+        {
+          title: t('chargers'),
+          link: 'category=accessories&subcategory=chargers',
+        },
       ],
     },
   ]

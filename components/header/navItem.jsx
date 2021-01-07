@@ -9,7 +9,6 @@ import {
   makeStyles,
 } from '@material-ui/core'
 import style from './header.module.scss'
-import ExpandLessIcon from '@material-ui/icons/ExpandLess'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { Link } from '../../i18n'
 const useStyles = makeStyles(() => ({
@@ -89,7 +88,7 @@ const NavItem = ({ title, subCategs }) => {
       onMouseLeave={() => setOpen(false)}
     >
       <span className={open ? style.open : ''}>
-        {title} <ExpandLessIcon />
+        {title} <ExpandMoreIcon />
       </span>
       <Popper
         open={open}
@@ -116,7 +115,7 @@ const NavItem = ({ title, subCategs }) => {
                 >
                   {subCategs?.map((item, index) => (
                     <MenuItem key={index} onClick={handleClose} diableRipple>
-                      <Link href='/shop'>
+                      <Link href={`/shop?${item.link}`}>
                         <a>{item.title}</a>
                       </Link>
                     </MenuItem>

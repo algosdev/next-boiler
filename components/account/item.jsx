@@ -26,13 +26,10 @@ function Item({ title, details }) {
     setOpen(false)
   }
   return (
-    <>
+    <div className={style.wrapper_single_item}>
       <div className={style.sub_title}>{title}</div>
       <div className={style.leading}>{details}</div>
-      {/* <div className={style.icon} onClick={handleClickOpen}>
-        <EditIcon />
-      </div> */}
-    </>
+    </div>
   )
 }
 
