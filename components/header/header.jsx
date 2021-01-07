@@ -82,7 +82,7 @@ function Header(props) {
       subCategs: [
         {
           title: t('galaxy_phones'),
-          link: 'category=samsung_p&subcategory=galaxy%phones',
+          link: 'category=samsung_p&subcategory=galaxy@phones',
         },
         { title: t('watches'), link: 'category=samsung_p&subcategory=watches' },
         { title: t('tablets'), link: 'category=samsung_p&subcategory=tablets' },

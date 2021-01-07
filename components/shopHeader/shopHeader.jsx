@@ -30,7 +30,7 @@ export default function ShopHeader() {
       subCategs: [
         {
           title: t('galaxy_phones'),
-          link: 'category=samsung_p&subcategory=galaxy%phones',
+          link: 'category=samsung_p&subcategory=galaxy@phones',
         },
         { title: t('watches'), link: 'category=samsung_p&subcategory=watches' },
         { title: t('tablets'), link: 'category=samsung_p&subcategory=tablets' },
@@ -140,7 +140,7 @@ export default function ShopHeader() {
       <Container>
         <div className={style.wrapper}>
           <h1 className={style.title}>
-            {t(router.query.subcategory.replace('_', '').replace('%', '_'))}
+            {t(router.query.subcategory.replace('_', '').replace('@', '_'))}
           </h1>
         </div>
       </Container>

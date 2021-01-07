@@ -1,7 +1,7 @@
 import { Container, Grid, Typography } from '@material-ui/core'
 import React from 'react'
 import style from './footer.module.scss'
-import Link from 'next/link'
+import { Link } from '../../i18n'
 import { Facebook, Instagram, Telegram, YouTube } from '@material-ui/icons'
 import { useTranslation } from '../../i18n'
 export default function Footer() {
@@ -54,12 +54,12 @@ export default function Footer() {
             <Typography variant='h6'>{t('information')}</Typography>
             <ul className={style.list}>
               <li className={style.listItem}>
-                <Link href='/'>
+                <Link href='/installment'>
                   <a>{t('installment')}</a>
                 </Link>
               </li>
               <li className={style.listItem}>
-                <Link href='/'>
+                <Link href='/delivery'>
                   <a>{t('delivery')}</a>
                 </Link>
               </li>

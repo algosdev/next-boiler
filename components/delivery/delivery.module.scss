@@ -1,0 +1,35 @@
+.wrapper_banner {
+  position: relative;
+  .img {
+    height: 350px;
+    img {
+      width: 100%;
+      object-position: right;
+      object-fit: cover;
+      height: 100%;
+    }
+  }
+  .content {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 64px;
+    color: #fff;
+    line-height: 80px;
+  }
+}
+.wrapper {
+  background: #fff;
+  padding: 30px 0;
+  h1 {
+    line-height: 32px;
+  }
+  h2 {
+    font-weight: 400;
+    margin: 30px 0 10px;
+  }
+  p {
+    line-height: 32px;
+    font-size: 16px;
+  }
+}

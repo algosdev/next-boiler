@@ -5,7 +5,7 @@ import { Container, Grid } from '@material-ui/core'
 import Shops from '../../components/shops/shops'
 import Feedback from '../../components/feedback/feedback'
 import { initializeStore } from '../../redux/store'
-import SEO from '../components/seo'
+import SEO from '../../components/seo'
 import Recommended from '../../components/recommended/recommended'
 import ProductTab from '../../components/productTab/productTab'
 function ProductSingle({ store, slug }) {
