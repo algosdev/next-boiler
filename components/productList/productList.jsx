@@ -2,11 +2,24 @@ import React, { useState } from 'react'
 import style from './productList.module.scss'
 import { Link } from '../../i18n'
 import { List, KeyboardArrowDown } from '@material-ui/icons'
-import { Grid, Typography, ClickAwayListener } from '@material-ui/core'
+import {
+  Grid,
+  Typography,
+  ClickAwayListener,
+  Checkbox,
+  FormControlLabel,
+} from '@material-ui/core'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from '../../i18n'
+import { numberToPrice } from '../../lib/numberToPrice'
+import Slider from '@material-ui/core/Slider'
 
 export default function ProductList() {
+  const [value, setValue] = useState([2000000, 9990000])
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue)
+  }
   const { t } = useTranslation()
   const sortByData = [
     t('sort_recommended'),
@@ -64,6 +77,10 @@ export default function ProductList() {
   const [activeSortBy, setActiveSortBy] = useState(0)
   const [showFilter, setShowFilter] = useState(true)
   const [sortByOpen, setSortByOpen] = useState(false)
+  const handlePriceChange = (e, newValue) => {
+    console.log(newValue)
+  }
+
   return (
     <div className={style.productListWrapper}>
       <div className={style.navBar}>
@@ -150,9 +167,81 @@ export default function ProductList() {
               !showFilter ? style.hide : ''
             }`}
           >
-            <Typography variant='h6'>{t('brand')}</Typography>
-            <p>Apple</p>
-            <p>Samsung</p>
+            <div className={style.price}>
+              <Typography variant='h6'>{t('price')}</Typography>
+              <p>
+                {numberToPrice(value[0])} &ndash; {numberToPrice(value[1])}
+              </p>
+
+              <Slider
+                value={value}
+                onChangeCommitted={handlePriceChange}
+                onChange={handleChange}
+                max={9990000}
+                track={false}
+                min={2000000}
+                aria-labelledby='range-slider'
+              />
+            </div>
+            <div className={style.brand}>
+              <Typography variant='h6'>{t('brand')}</Typography>
+              <div className={style.filter_item}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      // checked={gilad}
+                      // onChange={handleChange}
+                      name='gilad'
+                    />
+                  }
+                  label='Apple'
+                />
+              </div>
+              <div className={style.filter_item}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      // checked={gilad}
+                      // onChange={handleChange}
+                      name='gilad'
+                    />
+                  }
+                  label='Samsung'
+                />
+              </div>
+              <div className={style.filter_item}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                    // checked={gilad}
+                    // onChange={handleChange}
+                    />
+                  }
+                  label='Xiaomi'
+                />
+              </div>
+            </div>
+            <div className={style.color}>
+              <Typography variant='h6'>Цвет</Typography>
+              <div className={style.filter_item}>
+                <FormControlLabel control={<Checkbox />} label='Черный' />
+              </div>
+              <div className={style.filter_item}>
+                <FormControlLabel control={<Checkbox />} label='Синий' />
+              </div>
+              <div className={style.filter_item}>
+                <FormControlLabel control={<Checkbox />} label='Красный' />
+              </div>
+              <div className={style.filter_item}>
+                <FormControlLabel control={<Checkbox />} label='Серый' />
+              </div>
+              <div className={style.filter_item}>
+                <FormControlLabel control={<Checkbox />} label='Коричневый' />
+              </div>
+              <div className={style.filter_item}>
+                <FormControlLabel control={<Checkbox />} label='Белый' />
+              </div>
+            </div>
           </div>
         </div>
         <div className={style.wrapper}>
@@ -165,7 +254,7 @@ export default function ProductList() {
                     <span className={style.type}>{item.type}</span>
                     <h3 className={style.name}>{item.name}</h3>
                     <span className={style.price}>
-                      {item.price} {t('soum')}
+                      {numberToPrice(item.price)} {t('soum')}
                     </span>
                     <div className={style.colors}>
                       {item.colors.map((color, ind) => (

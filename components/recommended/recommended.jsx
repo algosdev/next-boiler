@@ -1,6 +1,7 @@
 import React from 'react'
 import style from './recommended.module.scss'
 import ReactSlick from 'react-slick'
+import { numberToPrice } from '../../lib/numberToPrice'
 import { NextArrow, PrevArrow } from '../carouselArrows'
 import { Link, useTranslation } from '../../i18n'
 function Recommended() {
@@ -96,7 +97,7 @@ function Recommended() {
                   <span className={style.type}>{item.type}</span>
                   <h3 className={style.name}>{item.name}</h3>
                   <span className={style.price}>
-                    {item.price} {t('soum')}
+                    {numberToPrice(item.price)} {t('soum')}
                   </span>
                   <div className={style.colors}>
                     {item.colors.map((color, ind) => (

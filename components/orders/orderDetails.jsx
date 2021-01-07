@@ -1,6 +1,7 @@
 import React from 'react'
 import style from './orders.module.scss'
 import { useTranslation } from '../../i18n'
+import { numberToPrice } from '../../lib/numberToPrice'
 function OrderDetails() {
   const { t } = useTranslation()
   return (
@@ -23,7 +24,9 @@ function OrderDetails() {
           </div>
           <div>
             <p className={style.bold}>{t('total_sum')}</p>
-            <p>5 200 000 {t('soum')}</p>
+            <p>
+              {numberToPrice(5200000)} {t('soum')}
+            </p>
           </div>
         </div>
         <p className={style.od_title}>{t('order_list')}</p>
@@ -34,7 +37,10 @@ function OrderDetails() {
           </div>
           <div>
             <p className={style.bold}>{t('price')}</p>
-            <p>2 700 000 {t('soum')}</p>
+            <p>
+              {' '}
+              {numberToPrice(2700000)} {t('soum')}
+            </p>
           </div>
           <div>
             <p className={style.bold}>{t('quantity')}</p>
@@ -42,7 +48,10 @@ function OrderDetails() {
           </div>
           <div>
             <p className={style.bold}>{t('total_sum')}</p>
-            <p>5 200 000 {t('soum')}</p>
+            <p>
+              {' '}
+              {numberToPrice(5200000)} {t('soum')}
+            </p>
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import style from './orders.module.scss'
 import { Link } from '../../i18n'
 import { useTranslation } from '../../i18n'
+import { numberToPrice } from '../../lib/numberToPrice'
 function OrderItem({ data }) {
   const { t } = useTranslation()
   return (
@@ -41,7 +42,7 @@ function OrderItem({ data }) {
                 <p>{data.date}</p>
                 <p>{t('in_progress')}</p>
                 <p>
-                  {data.total} {t('soum')}
+                  {numberToPrice(data.total)} {t('soum')}
                 </p>
               </div>
             </div>

@@ -1,7 +1,7 @@
 import { Container, ClickAwayListener } from '@material-ui/core'
 import React, { useState } from 'react'
 import style from './shopHeader.module.scss'
-import { useTranslation } from '../../i18n'
+import { useTranslation, Link, Router } from '../../i18n'
 import { useRouter } from 'next/router'
 import { KeyboardArrowDown } from '@material-ui/icons'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -30,7 +30,7 @@ export default function ShopHeader() {
       subCategs: [
         {
           title: t('galaxy_phones'),
-          link: 'category=samsung_p&subcategory=galaxy_phones',
+          link: 'category=samsung_p&subcategory=galaxy%phones',
         },
         { title: t('watches'), link: 'category=samsung_p&subcategory=watches' },
         { title: t('tablets'), link: 'category=samsung_p&subcategory=tablets' },
@@ -118,6 +118,7 @@ export default function ShopHeader() {
                           <li key={index}>
                             <button
                               onClick={() => {
+                                Router.push(`/shop?${item.link}`)
                                 setSortByOpen(false)
                               }}
                               disabled={index === 1 ? true : false}

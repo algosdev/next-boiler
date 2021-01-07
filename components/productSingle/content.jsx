@@ -13,6 +13,7 @@ import {
   CircularProgress,
   Box,
 } from '@material-ui/core'
+import { numberToPrice } from '../../lib/numberToPrice'
 import Rating from '@material-ui/lab/Rating'
 import { makeStyles } from '@material-ui/core/styles'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
@@ -116,7 +117,7 @@ function ProductSingleContent({ data }) {
             </Grid>
           </div>
           <div className={style.price}>
-            {data.price} {t('soum')}
+            {numberToPrice(data.price)} {t('soum')}
           </div>
           <div className={style.add}>
             <button

@@ -4,6 +4,7 @@ import SEO from '../components/seo'
 import BannerContainer from '../components/bannerContainer/bannerContainer'
 import Banner from '../components/banner/banner'
 import { useTranslation } from '../i18n'
+import SEO from '../components/seo'
 export default function Home() {
   const { t } = useTranslation()
   const appleProducts = {

@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import { Link } from '../../i18n'
+import { numberToPrice } from '../../lib/numberToPrice'
 import style from './header.module.scss'
 import { useSelector, shallowEqual } from 'react-redux'
 import { useTranslation } from '../../i18n'
@@ -178,7 +179,8 @@ const CartDropdown = ({ title, subCategs }) => {
                               <div className={style.title}>{el.name}</div>
                               <div className={style.desc}>
                                 <p>
-                                  {t('price')}: {el.price} {t('soum')}
+                                  {t('price')}: {numberToPrice(el.price)}{' '}
+                                  {t('soum')}
                                 </p>
                                 <p>
                                   {t('quantity')}: {el.quantity}{' '}

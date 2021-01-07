@@ -6,6 +6,7 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import { useDispatch } from 'react-redux'
 import { motion, AnimatePresence } from 'framer-motion'
 import NoItemInCart from './NoItemInCart'
+import { numberToPrice } from '../../lib/numberToPrice'
 import {
   asyncAddToCartAction,
   asyncReduceCartItemQuantityAction,
@@ -25,10 +26,12 @@ function CartListItem({ id, data, calculateTotal }) {
     if (operator === 'plus') {
       if (data?.availableQuantity > data?.quantity) {
         dispatch(asyncAddToCartAction(data))
+        setError(false)
         setQuantity((old) => ++old)
       }
     } else if (operator === 'minus') {
       if (data?.quantity !== 1) {
+        setError(false)
         dispatch(asyncReduceCartItemQuantityAction(data))
         setQuantity((old) => --old)
       }
@@ -101,6 +104,7 @@ function CartListItem({ id, data, calculateTotal }) {
                       max={data?.availableQuantity}
                       value={quantity}
                       onBlur={(e) => {
+                        setError(false)
                         if (e.target.value === '') {
                           setCustomQuantity(1)
                         }
@@ -120,11 +124,11 @@ function CartListItem({ id, data, calculateTotal }) {
                   </div>
                 </div>
                 <div className={style.price}>
-                  {data.price} {t('soum/pc')}
+                  {numberToPrice(data.price)} {t('soum/pc')}
                 </div>
               </div>
               <div className={style.total}>
-                {total} {t('soum')}
+                {numberToPrice(total)} {t('soum')}
               </div>
               <div className={style.trash}>
                 <div

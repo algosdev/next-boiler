@@ -3,9 +3,11 @@ import { Container, Grid } from '@material-ui/core'
 import CheckoutContainer from '../components/checkout/checkoutContainer'
 import CheckoutForm from '../components/checkout/checkoutForm'
 import CheckoutDetails from '../components/checkout/checkoutDetails'
+
 function checkout() {
   return (
     <>
+      <SEO />
       <div style={{ background: '#fff', padding: '50px 0' }}>
         <Container>
           <CheckoutContainer />

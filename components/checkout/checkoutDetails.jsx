@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { useTranslation } from '../../i18n'
 import style from './checkout.module.scss'
 import CheckoutListItem from './checkoutListItem'
+import { numberToPrice } from '../../lib/numberToPrice'
 import { useSelector, shallowEqual } from 'react-redux'
 function CheckoutDetails() {
   const { t } = useTranslation()
@@ -53,22 +54,22 @@ function CheckoutDetails() {
           <p>
             {t('products')}({totalQuantity || 0})
           </p>
-          <p>{totalPrice || '0'}</p>
+          <p>{numberToPrice(totalPrice) || '0'}</p>
         </div>
         <div className={style.info}>
           <p> {t('shipping_fee')}</p>
-          <p>{totalPrice !== 0 ? shippingFee : '0'}</p>
+          <p>{numberToPrice(totalPrice !== 0 ? shippingFee : '0')}</p>
         </div>
         <div className={style.info}>
           <p>{t('discount')}</p>
-          <p>{totalPrice !== 0 ? discount : '0'}</p>
+          <p>{numberToPrice(totalPrice !== 0 ? discount : '0')}</p>
         </div>
         <div className={style.totalPrice}>
           <p>{t('total')}</p>
           <p>
-            {`${
+            {`${numberToPrice(
               totalPrice !== 0 ? totalPrice + shippingFee - discount : '0'
-            } ${t('soum')}`}
+            )} ${t('soum')}`}
           </p>
         </div>
         <div className={style.list}>
