@@ -39,7 +39,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li className={style.listItem}>
-                <Link href='/'>
+                <Link href='/about'>
                   <a>{t('about_company')}</a>
                 </Link>
               </li>
