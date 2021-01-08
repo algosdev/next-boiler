@@ -4,11 +4,14 @@ import { Container } from '@material-ui/core'
 function NewsBanner() {
   return (
     <div className={style.wrapper_banner}>
-      <div className={style.img}>
+      {/* <div className={style.img}>
         <img src='/images/delivery2.jpg' alt='' />
-      </div>
+      </div> */}
       <Container>
-        <div className={style.content}>Новости</div>
+        <div className={style.content}>
+          <div className={style.main_title}>Последние новости</div>
+          <div className={style.full_item}></div>
+        </div>
       </Container>
     </div>
   )

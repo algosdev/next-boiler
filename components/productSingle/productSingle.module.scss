@@ -43,6 +43,14 @@
     margin-bottom: 10px;
     text-align: center;
   }
+  .desc {
+    text-align: center;
+  }
+  a {
+    width: 100%;
+    text-align: center;
+    color: var(--primary-color);
+  }
   .grid {
     max-width: 920px;
     margin: 30px auto;

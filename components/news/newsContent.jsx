@@ -40,8 +40,16 @@ function NewsContent() {
   return (
     <div className={style.wrapper}>
       <Container>
-        <div className={style.main_title}>
-          Посмотреть недавние события MacBro
+        <div className={style.main_title}>Последние новости</div>
+        <div className={`${style.grid} ${style.full}`}>
+          {newsData.map((item, index) =>
+            index < 1 ? <NewsItem key={index} data={item} /> : ''
+          )}
+        </div>
+        <div className={`${style.grid} ${style.double}`}>
+          {newsData.map((item, index) =>
+            index < 2 ? <NewsItem key={index} data={item} /> : ''
+          )}
         </div>
         <div className={style.grid}>
           {newsData.map((item, index) => (

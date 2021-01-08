@@ -10,6 +10,7 @@ export default function ShopHeader() {
   const router = useRouter()
   const { t } = useTranslation()
   const [sortByOpen, setSortByOpen] = useState(false)
+  const [activeSubCateg, setActiveSubCateg] = useState('')
   const navData = [
     {
       title: t('apple_p'),
@@ -118,10 +119,11 @@ export default function ShopHeader() {
                           <li key={index}>
                             <button
                               onClick={() => {
+                                setActiveSubCateg(index)
                                 Router.push(`/shop?${item.link}`)
                                 setSortByOpen(false)
                               }}
-                              disabled={index === 1 ? true : false}
+                              disabled={index === activeSubCateg ? true : false}
                             >
                               {item.title}
                             </button>
@@ -140,7 +142,7 @@ export default function ShopHeader() {
       <Container>
         <div className={style.wrapper}>
           <h1 className={style.title}>
-            {t(router.query.subcategory.replace('_', '').replace('@', '_'))}
+            {t(router.query.subcategory?.replace('_', '').replace('@', '_'))}
           </h1>
         </div>
       </Container>

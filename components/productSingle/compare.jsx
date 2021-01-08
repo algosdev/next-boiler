@@ -1,5 +1,6 @@
 import React from 'react'
 import style from './productSingle.module.scss'
+import { Link } from '../../i18n'
 const compareData = [
   {
     name: 'iPad Pro',
@@ -54,6 +55,12 @@ function Compare() {
   return (
     <div className={style.wrapper_compare}>
       <div className={style.main_title}>Сравнить</div>
+      <div className={style.desc}>
+        <Link href='/compare'>
+          <a>Сравните больше продуктов</a>
+        </Link>
+      </div>
+
       <div className={style.grid}>
         {compareData.map((item, index) => (
           <div className={style.column} key={index}>

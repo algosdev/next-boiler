@@ -6,7 +6,7 @@ function news() {
   return (
     <>
       <SEO />
-      <NewsBanner />
+      {/* <NewsBanner /> */}
       <NewsContent />
     </>
   )
