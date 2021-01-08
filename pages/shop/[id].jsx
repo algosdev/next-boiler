@@ -8,6 +8,7 @@ import { initializeStore } from '../../redux/store'
 import SEO from '../../components/seo'
 import Recommended from '../../components/recommended/recommended'
 import ProductTab from '../../components/productTab/productTab'
+import Compare from '../../components/productSingle/compare'
 function ProductSingle({ store, slug }) {
   function getData(slug) {
     const data = store.filter((el) => el.slug === slug)
@@ -29,6 +30,7 @@ function ProductSingle({ store, slug }) {
           <ProductTab />
           {/* <Shops />
           <Feedback /> */}
+          <Compare />
           <Recommended />
         </Container>
       </div>

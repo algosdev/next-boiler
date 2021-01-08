@@ -34,7 +34,7 @@ export default function Footer() {
             <Typography variant='h6'>{t('company')}</Typography>
             <ul className={style.list}>
               <li className={style.listItem}>
-                <Link href='/'>
+                <Link href='/news'>
                   <a>{t('news')}</a>
                 </Link>
               </li>

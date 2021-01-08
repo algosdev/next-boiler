@@ -36,7 +36,7 @@ function NewsContent() {
     <div className={style.wrapper}>
       <Container>
         <div className={style.main_title}>
-          Посмотреть недавние события Apple
+          Посмотреть недавние события MacBro
         </div>
         <div className={style.grid}>
           {newsData.map((item, index) => (

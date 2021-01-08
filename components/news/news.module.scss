@@ -33,6 +33,12 @@
     .wrapper_item {
       display: flex;
       justify-content: center;
+      a {
+        color: #1d1d1d;
+        &:hover {
+          text-decoration: none;
+        }
+      }
     }
     .item {
       max-width: 500px;
@@ -45,6 +51,7 @@
           object-position: center;
         }
       }
+
       .title {
         margin-top: 10px;
         font-weight: 600;

@@ -25,7 +25,7 @@ function Overview() {
         {overviewData.map(({ title, details }, index) => (
           <div key={index}>
             <div className={style.title}>{title}</div>
-            {details}
+            <p>{details}</p>
           </div>
         ))}
       </div>
