@@ -1,8 +1,13 @@
-import { Container } from '@material-ui/core'
 import React from 'react'
 import style from './news.module.scss'
+import ReactSlick from 'react-slick'
+import { numberToPrice } from '../../lib/numberToPrice'
+import { NextArrow, PrevArrow } from '../carouselArrows'
+import { Link, useTranslation } from '../../i18n'
+import { Container } from '@material-ui/core'
 import NewsItem from './newsItem'
-function NewsContent() {
+function LatestNewsCarousel() {
+  const { t } = useTranslation()
   const newsData = [
     {
       type: 'Обновления',
@@ -37,20 +42,51 @@ function NewsContent() {
       slug: 'slug',
     },
   ]
+  const responsive = [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: false,
+        dots: true,
+      },
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        initialSlide: 2,
+      },
+    },
+  ]
+
   return (
-    <div className={style.wrapper}>
-      <Container>
-        <div className={style.main_title}>
-          Посмотреть недавние события MacBro
+    <Container>
+      <div className={style.wrapper_latest}>
+        <div className={style.inner}>
+          <div className={style.main_title}>Последние новости</div>
+          <ReactSlick
+            {...{
+              dots: true,
+              infinite: false,
+              speed: 500,
+              slidesToShow: 2,
+              slidesToScroll: 1,
+              responsive,
+              nextArrow: <NextArrow />,
+              prevArrow: <PrevArrow />,
+            }}
+          >
+            {newsData.map((item, index) => (
+              <NewsItem key={index} data={item} />
+            ))}
+          </ReactSlick>
         </div>
-        <div className={style.grid}>
-          {newsData.map((item, index) => (
-            <NewsItem key={index} data={item} />
-          ))}
-        </div>
-      </Container>
-    </div>
+      </div>
+    </Container>
   )
 }
 
-export default NewsContent
+export default LatestNewsCarousel

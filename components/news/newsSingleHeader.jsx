@@ -1,11 +1,14 @@
 import React from 'react'
+import { Container } from '@material-ui/core'
 import style from './news.module.scss'
 function NewsSingleHeader() {
   return (
-    <div className={style.wrapper_header}>
-      <div className={style.type}></div>
-      <div className={style.date}></div>
-    </div>
+    <Container>
+      <div className={style.wrapper_header}>
+        <div className={style.type}>Новости</div>
+        <div className={style.date}>5 января 2021 г.</div>
+      </div>
+    </Container>
   )
 }
 
