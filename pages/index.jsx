@@ -67,13 +67,13 @@ export default function Home() {
       <SEO />
       <Hero />
       <CatalogList data={appleProducts} />
-      {/* <BannerContainer>
+      <BannerContainer>
         <Banner
           size={12}
           name='pervyi-banner-1720x260'
           src='images/poster_watches.jpg'
         />
-      </BannerContainer> */}
+      </BannerContainer>
       <CatalogList data={samsungProducts} />
     </>
   )
