@@ -6,23 +6,26 @@ function CompareFilter() {
   return (
     <div className={style.wrapper_filter}>
       <div className={style.main_title}>Сравните модели Mac</div>
-      <div className={style.grid}>
+      <div className={style.grid_option}>
         <div className={style.option}>
           <select>
             <option>MacBook</option>
-            <option>MacBook3</option>
+            <option>MacBook Air</option>
+            <option>MacBook Pro</option>
           </select>
         </div>
         <div className={style.option}>
           <select>
             <option>MacBook</option>
-            <option>MacBook3</option>
+            <option>MacBook Air</option>
+            <option>MacBook Pro</option>
           </select>
         </div>
         <div className={style.option}>
           <select>
             <option>MacBook</option>
-            <option>MacBook3</option>
+            <option>MacBook Air</option>
+            <option>MacBook Pro</option>
           </select>
         </div>
       </div>

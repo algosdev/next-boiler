@@ -16,6 +16,7 @@ export default function SEO({ title, description, image, keywords }) {
         content={title ? `${title} | MacBro` : `MacBro`}
         key='ogtitle'
       />
+      <meta name='theme-color' content='#1d1d1d' />
       <meta property='og:description' content={description} key='ogdesc' />
       <meta property='og:site_name' content='MacBro' key='ogsitename' />
       {/* <meta property="og:url" content={location.href} key="ogurl" /> */}

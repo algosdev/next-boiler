@@ -86,7 +86,6 @@ function Header(props) {
         },
         { title: t('watches'), link: 'category=samsung_p&subcategory=watches' },
         { title: t('tablets'), link: 'category=samsung_p&subcategory=tablets' },
-        { title: t('watches'), link: 'category=samsung_p&subcategory=watches' },
       ],
     },
     {

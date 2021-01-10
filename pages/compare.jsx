@@ -7,10 +7,12 @@ function compare() {
   return (
     <>
       <SEO />
-      <Container>
-        <CompareFilter />
-        {/* <CompareContent /> */}
-      </Container>
+      <div style={{ background: '#fff' }}>
+        <Container>
+          <CompareFilter />
+          {/* <CompareContent /> */}
+        </Container>
+      </div>
     </>
   )
 }

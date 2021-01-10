@@ -115,7 +115,7 @@ export default function ShopHeader() {
                         .filter(
                           (el) => el.title === t(router.query.category)
                         )?.[0]
-                        .subCategs.map((item, index) => (
+                        ?.subCategs.map((item, index) => (
                           <li key={index}>
                             <button
                               onClick={() => {
