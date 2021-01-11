@@ -34,8 +34,16 @@ function OrderList() {
   return (
     <>
       <div className={style.wrapper_list}>
+        <div className={style.header}>
+          <div className={style.column}>№</div>
+          <div className={style.column}>Заказ ID</div>
+          <div className={style.column}>{t('date')}</div>
+          <div className={style.column}>{t('status')}</div>
+          <div className={style.column}>{t('total_sum')}</div>
+          <div className={style.column}></div>
+        </div>
         {orderData.map((el, index) => (
-          <OrderListItem data={el} />
+          <OrderListItem data={el} index={index} />
         ))}
       </div>
     </>

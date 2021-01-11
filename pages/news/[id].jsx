@@ -8,9 +8,11 @@ function NewsSingle() {
   return (
     <>
       <SEO />
-      <NewsSingleHeader />
-      <NewsSingleContent />
-      <LatestNewsCarousel />
+      <div style={{ background: '#fff', padding: '50px 0' }}>
+        <NewsSingleHeader />
+        <NewsSingleContent />
+        <LatestNewsCarousel />
+      </div>
     </>
   )
 }

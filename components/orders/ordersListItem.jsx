@@ -1,36 +1,36 @@
 import React, { useState, useEffect } from 'react'
 import style from './orders.module.scss'
 import { Link } from '../../i18n'
-import { useTranslation } from '../../i18n'
+import { Button } from '@material-ui/core'
+import { useTranslation, Router } from '../../i18n'
 import { numberToPrice } from '../../lib/numberToPrice'
-function OrderItem({ data }) {
+function OrderItem({ data, index }) {
   const { t } = useTranslation()
   return (
     <>
       {/* <Link href={`/orders/${data.number}`}>
-        <a>
-          <div className={style.wrapper_item}>
-            <div className={style.inner}>
-              <div className={style.header}>№ {data.number}</div>
-              <div className={style.details}>
-                <p>
-                  <span>{t('date')}: </span>
-                  {'2020-10-29 18:16:26'}
-                </p>
-                <p>
-                  <span>{t('status')}: </span>
-                  {t('in_progress')}
-                </p>
-                <p>
-                  <span>{t('total')}: </span>
-                  {'600000'} {t('soum')}
-                </p>
-              </div>
-            </div>
+        <a> */}
+      <div className={style.wrapper_item}>
+        <div className={style.inner}>
+          <div className={style.column}>{index + 1}</div>
+          <div className={style.column}>{data.number}</div>
+          <div className={style.column}>{'2020-10-29 18:16:26'}</div>
+          <div className={style.column}>{t('in_progress')}</div>
+          <div className={style.column}>
+            <span>
+              {'600000'} {t('soum')}
+            </span>
           </div>
-        </a>
+          <div className={`${style.column} ${style.info}`}>
+            <Button onClick={() => Router.push(`/orders/${data.number}`)}>
+              Посмотреть
+            </Button>
+          </div>
+        </div>
+      </div>
+      {/* </a>
       </Link> */}
-      <Link href={`/orders/${data.number}`}>
+      {/* <Link href={`/orders/${data.number}`}>
         <a>
           <div className={style.wrapper_item}>
             <div className={style.inner}>
@@ -48,7 +48,7 @@ function OrderItem({ data }) {
             </div>
           </div>
         </a>
-      </Link>
+      </Link> */}
     </>
   )
 }

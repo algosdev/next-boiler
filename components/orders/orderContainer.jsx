@@ -13,7 +13,7 @@ function OrderContainer() {
       <div className={style.wrapper}>
         <p className={style.list_title}>{t('orders')}</p>
         <Grid container justify='space-between' xs={12} spacing={2}>
-          <Grid item xs={10}>
+          <Grid item xs={12}>
             <div className={style.inner}>
               <OrderList />
             </div>

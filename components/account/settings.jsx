@@ -36,37 +36,39 @@ function AccountSettings() {
     setOpen(false)
   }
   return (
-    <div style={{ background: '#fff', padding: '50px 0' }}>
+    <>
       <Container>
-        <div className={style.title}>
-          <span>{t('account_settings')}</span>
-        </div>
-        <div className={style.wrapper_item}>
-          <div className={style.grid}>
-            <div className={style.column}>
-              <Item title={t('name')} details={data.firstname} />
-            </div>
-            <div className={style.column}>
-              <Item title={t('surname')} details={data.lastname} />
-            </div>
-            <div className={style.column}>
-              <Item title={t('phone_num')} details={data.phone_num} />
-            </div>
-            <div className={style.column}>
-              <div className={style.wrapper_single_item}>
-                <div className={style.sub_title}>{t('shipping_address')}</div>
-                <div className={style.leading}>
-                  {[data.address1, data.address2, data.address3].map((el) => (
-                    <p>{el}</p>
-                  ))}
-                </div>
+        <div className={style.wrapper_content}>
+          <div className={style.title}>
+            <span>{t('account_settings')}</span>
+          </div>
+          <div className={style.wrapper_item}>
+            <div className={style.grid}>
+              <div className={style.column}>
+                <Item title={t('name')} details={data.firstname} />
               </div>
-              {/* <Item title={t('shipping_address')} details={data.address1} /> */}
+              <div className={style.column}>
+                <Item title={t('surname')} details={data.lastname} />
+              </div>
+              <div className={style.column}>
+                <Item title={t('phone_num')} details={data.phone_num} />
+              </div>
+              <div className={style.column}>
+                <div className={style.wrapper_single_item}>
+                  <div className={style.sub_title}>{t('shipping_address')}</div>
+                  <div className={style.leading}>
+                    {[data.address1, data.address2, data.address3].map((el) => (
+                      <p>{el}</p>
+                    ))}
+                  </div>
+                </div>
+                {/* <Item title={t('shipping_address')} details={data.address1} /> */}
+              </div>
             </div>
           </div>
-        </div>
-        <div className={style.edit} onClick={handleClickOpen}>
-          {t('edit')}
+          <div className={style.edit} onClick={handleClickOpen}>
+            {t('edit')}
+          </div>
         </div>
       </Container>
       <Dialog
@@ -138,7 +140,7 @@ function AccountSettings() {
           </DialogActions>
         </DialogContent>
       </Dialog>
-    </div>
+    </>
   )
 }
 

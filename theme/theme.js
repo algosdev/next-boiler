@@ -10,9 +10,7 @@ const theme = createMuiTheme({
           backgroundColor: '#f5f5f7',
           fontSize: '14px',
           lineHeight: '20px',
-          color: '#1d1d1f',
-          fontFamily:
-            '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+          fontFamily: "'San-Francisco', sans-serif",
         },
       },
     },
@@ -181,16 +179,14 @@ const theme = createMuiTheme({
     },
   },
   typography: {
-    fontFamily:
-      '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+    fontFamily: "'San-Francisco', sans-serif",
     body1: {
       fontSize: '14px',
       lineHeight: '20px',
       color: '#1d1d1f',
     },
     body2: {
-      fontFamily:
-        '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+      fontFamily: "'San-Francisco', sans-serif",
       fontSize: '16px',
     },
     h2: {
@@ -228,8 +224,7 @@ const theme = createMuiTheme({
       variant: 'filled',
       border: '1px solid  var(--border)',
       color: 'primary',
-      fontFamily:
-        '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+      fontFamily: "'San-Francisco', sans-serif",
     },
     MuiPaper: {
       elevation: 0,

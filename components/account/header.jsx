@@ -9,6 +9,7 @@ function AccountHeader() {
     <div className={style.wrapper_header}>
       <Container>
         <div className={style.top}>
+          <h5>Профиль</h5>
           <Link href='/'>
             <a className={style.btn}>{t('signout')}</a>
           </Link>

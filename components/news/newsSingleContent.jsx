@@ -31,6 +31,10 @@ function NewsSingleContent() {
             чтобы улучшить возможности для студентов с низким доходом и цветных
             студентов.
           </div>
+          <div className={style.img}>
+            <img src='/images/news_content.jpg' alt='Iphone' />
+          </div>
+
           <div className={style.part}>
             До того, как присоединиться к Фонду College Futures Foundation,
             Лозано 30 лет проработал в СМИ в качестве редактора и издателя La

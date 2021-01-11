@@ -20,8 +20,11 @@
 }
 .wrapper {
   background: #fff;
-  padding: 30px 0;
+  padding: 30px;
   font-size: 18px;
+  max-width: 80%;
+  border-radius: 16px;
+  margin: 50px auto;
   div {
     max-width: 700px;
     margin: 0 auto;

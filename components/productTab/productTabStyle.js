@@ -39,8 +39,7 @@ export const useStyles = makeStyles(() => ({
     },
     '& .MuiTabs-root': {
       backgroundColor: 'var(--secondary-color)',
-      height: '52px',
-      border: '2px solid var(--primary-color)',
+      height: '48px',
       alignItems: 'center',
       background: 'rgba(255,255,255,0.1)',
       borderRadius: '12px',

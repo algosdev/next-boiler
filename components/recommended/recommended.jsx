@@ -79,7 +79,7 @@ function Recommended() {
         <div className={style.main_title}>Рекомендуется</div>
         <ReactSlick
           {...{
-            dots: true,
+            dots: false,
             infinite: false,
             speed: 500,
             slidesToShow: 3,

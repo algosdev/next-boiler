@@ -32,7 +32,7 @@ const compareData = [
     type: 'Новый',
     img: '/images/compare3.jpeg',
     techspecs: [
-      '9,2-дюймовый дисплей Retina',
+      '9.2-дюймовый и 13.7-дюймовый дисплей Liquid Retina с ProMotion',
       'Бионический чип A12Z',
       'Совместимость с Magic Keyboard и Smart Keyboard Folio',
       'Совместим с Apple Pencil (2-го поколения)',
@@ -44,7 +44,7 @@ const compareData = [
     type: '',
     img: '/images/compare4.jpeg',
     techspecs: [
-      '10,9-дюймовый дисплей Liquid Retina',
+      '10,9-дюймовый и 11-дюймовый дисплей Liquid Retina с ProMotion',
       'A14 Bionic chip',
       'Совместимость с Magic Keyboard и Smart Keyboard Folio',
       'Совместим с Apple Pencil (2-го поколения)',
