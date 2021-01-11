@@ -8,9 +8,9 @@ export const useStyles = makeStyles(() => ({
     },
     '& .MuiTabs-indicator': {
       height: 'calc(100% - 8px)',
+      backgroundColor: 'var(--border-color)',
       borderRadius: '12px',
       top: '4px',
-      backgroundColor: '#fff',
       zIndex: '1',
       bottom: '4px',
       ['@media (max-width:576px)']: {
@@ -38,8 +38,9 @@ export const useStyles = makeStyles(() => ({
       width: '100%',
     },
     '& .MuiTabs-root': {
-      backgroundColor: 'var(--primary-color)',
-      height: '48px',
+      backgroundColor: 'var(--secondary-color)',
+      height: '52px',
+      border: '2px solid var(--primary-color)',
       alignItems: 'center',
       background: 'rgba(255,255,255,0.1)',
       borderRadius: '12px',
@@ -59,9 +60,8 @@ export const useStyles = makeStyles(() => ({
       fontFamily: "'Open Sans', sans-serif",
       fontWeight: '600',
       zIndex: '2',
-      color: '#fff',
+      color: '#1d1d1d',
       opacity: '1',
-
       borderRadius: '12px',
       transition: '0.5s',
       maxWidth: '100%',
@@ -74,7 +74,7 @@ export const useStyles = makeStyles(() => ({
       },
     },
     '& .MuiTab-root.Mui-selected': {
-      color: '#1d1d1d',
+      color: '#fff',
     },
 
     '& .MuiTouchRipple-root': {

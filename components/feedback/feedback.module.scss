@@ -9,6 +9,11 @@
       max-width: 100%;
       resize: vertical;
     }
+    .btn_cont {
+      margin: 10px 0;
+      display: flex;
+      justify-content: flex-end;
+    }
     .main_title {
       font-size: 28px;
       line-height: 1.5;
