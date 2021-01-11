@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import style from './productSingle.module.scss'
 import { useDispatch, shallowEqual, useSelector } from 'react-redux'
-import { i18n, useTranslation, Link } from '../../i18n'
+import { i18n, useTranslation, Link, Router } from '../../i18n'
 import { asyncAddToCartAction } from '../../redux/actions/cartActions/cartActions'
 import {
   Container,
   Grid,
   Accordion,
+  Button,
   AccordionSummary,
   Typography,
   AccordionDetails,
@@ -120,22 +121,26 @@ function ProductSingleContent({ data }) {
             {numberToPrice(data.price)} {t('soum')}
           </div>
           <div className={style.add}>
-            <button
+            <Button
               className={`input ${isLoading ? style.disabled : ''}`}
-              onClick={addToCart}
+              onClick={() => {
+                if (!addedToCart) {
+                  addToCart()
+                } else {
+                  Router.push('/cart')
+                }
+              }}
               disabled={isLoading}
             >
               <AnimatePresence>
                 {addedToCart && (
-                  <Link href='/cart'>
-                    <motion.a
-                      animate={{ opacity: 1, scale: 1 }}
-                      initial={{ opacity: 0, scale: 0 }}
-                      exit={{ opacity: 0, scale: 0 }}
-                    >
-                      {t('added_to_cart')}
-                    </motion.a>
-                  </Link>
+                  <motion.span
+                    animate={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0, scale: 0 }}
+                    exit={{ opacity: 0, scale: 0 }}
+                  >
+                    {t('added_to_cart')}
+                  </motion.span>
                 )}
               </AnimatePresence>
               {!addedToCart &&
@@ -144,7 +149,7 @@ function ProductSingleContent({ data }) {
                 ) : (
                   t('add_to_cart')
                 ))}
-            </button>
+            </Button>
           </div>
         </div>
       </Container>

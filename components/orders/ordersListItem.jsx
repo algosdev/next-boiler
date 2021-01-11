@@ -22,7 +22,10 @@ function OrderItem({ data, index }) {
             </span>
           </div>
           <div className={`${style.column} ${style.info}`}>
-            <Button onClick={() => Router.push(`/orders/${data.number}`)}>
+            <Button
+              className={`${style.btn}`}
+              onClick={() => Router.push(`/orders/${data.number}`)}
+            >
               Посмотреть
             </Button>
           </div>

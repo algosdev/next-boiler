@@ -31,6 +31,8 @@
     .back {
       margin-top: 10px;
       cursor: pointer;
+      background: var(--border);
+      color: #1d1d1d;
     }
     .go {
       outline: 0;

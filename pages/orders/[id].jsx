@@ -6,11 +6,9 @@ function orders() {
   return (
     <>
       <SEO />
-      <div style={{ background: '#fff', padding: '50px 0' }}>
-        <Container>
-          <OrderSingleContainer />
-        </Container>
-      </div>
+      <Container>
+        <OrderSingleContainer />
+      </Container>
     </>
   )
 }

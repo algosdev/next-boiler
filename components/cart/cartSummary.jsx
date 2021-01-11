@@ -4,6 +4,7 @@ import { Router } from '../../i18n'
 import { useTranslation } from '../../i18n'
 import { numberToPrice } from '../../lib/numberToPrice'
 import { useSelector, shallowEqual } from 'react-redux'
+import { Button } from '@material-ui/core'
 function CartSummary({ totalQuantity, totalPrice }) {
   const productsInCart = useSelector(
     (state) => state?.cart?.cartItems,
@@ -39,21 +40,21 @@ function CartSummary({ totalQuantity, totalPrice }) {
           } ${t('soum')}`}</p>
         </div>
         {totalQuantity !== 0 ? (
-          <button
+          <Button
             className={`input ${style.go}`}
             onClick={() => Router.push('/checkout')}
           >
             {t('go_to_payment')}
-          </button>
+          </Button>
         ) : (
           ''
         )}
-        <button
+        <Button
           className={`input ${style.back}`}
           onClick={() => Router.push('/')}
         >
           {t('back_to_menu')}
-        </button>
+        </Button>
       </div>
     </div>
   )
