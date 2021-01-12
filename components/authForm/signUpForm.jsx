@@ -77,22 +77,21 @@ function SignUpForm() {
   }
   return (
     <div className={style.wrapper}>
-      <Typography variant='h3'>{t('signup_title')}</Typography>
+      <Typography variant='h2'>{t('signup_title')}</Typography>
       <div className={style.inner}>
         <form onSubmit={handleSubmit(submitHandler)}>
-          <div className={style.fullName}>
-            <div className={style.input_cont}>
-              <TextField
-                id='filled-basic'
-                name='name'
-                variant='filled'
-                fullWidth
-                type='text'
-                className={classes.root}
-                required
-                label={t('name')}
-              />
-              {/* <input
+          <div className={style.input_cont}>
+            <TextField
+              id='filled-basic'
+              name='name'
+              variant='filled'
+              fullWidth
+              type='text'
+              className={classes.root}
+              required
+              label={t('name')}
+            />
+            {/* <input
                 className={`input`}
                 required
                 ref={register}
@@ -100,19 +99,19 @@ function SignUpForm() {
                 type='text'
                 placeholder={t('name')}
               /> */}
-            </div>
-            <div className={style.input_cont}>
-              <TextField
-                id='filled-basic'
-                name='name'
-                variant='filled'
-                fullWidth
-                type='text'
-                className={classes.root}
-                required
-                label={t('surname')}
-              />
-              {/* <input
+          </div>
+          <div className={style.input_cont}>
+            <TextField
+              id='filled-basic'
+              name='name'
+              variant='filled'
+              fullWidth
+              type='text'
+              className={classes.root}
+              required
+              label={t('surname')}
+            />
+            {/* <input
                 className={`input`}
                 name='surname'
                 type='text'
@@ -120,7 +119,6 @@ function SignUpForm() {
                 placeholder={t('surname')}
                 required
               /> */}
-            </div>
           </div>
           <div className={style.input_cont}>
             <TextField

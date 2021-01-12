@@ -24,7 +24,7 @@ function CartListItem({ id, data, calculateTotal }) {
   const [isdeleted, setIsDeleted] = useState(false)
   const changeQuantity = (operator) => {
     if (operator === 'plus') {
-      if (data?.availableQuantity > data?.quantity) {
+      if (1000000 > data?.quantity) {
         dispatch(asyncAddToCartAction(data))
         setError(false)
         setQuantity((old) => ++old)
@@ -40,7 +40,7 @@ function CartListItem({ id, data, calculateTotal }) {
   const setCustomQuantity = (value) => {
     const validQuantity = value > 0 ? value : 0
     console.log(value)
-    if (validQuantity <= data?.availableQuantity) {
+    if (validQuantity <= 1000000) {
       setQuantity(value > 0 ? value : '')
       setError(false)
       dispatch(
@@ -80,11 +80,11 @@ function CartListItem({ id, data, calculateTotal }) {
               </div>
               <div className={style.details}>
                 <div className={style.title}>{data.name}</div>
-                <div className={style.info}>
+                {/* <div className={style.info}>
                   {data?.availableQuantity}{' '}
                   {data?.availableQuantity > 1 ? t('pc1') : t('pc2')}{' '}
                   {t('available')}
-                </div>
+                </div> */}
               </div>
               <div className={style.quantity_cont}>
                 <div className={style.quantity_inner}>
@@ -99,9 +99,9 @@ function CartListItem({ id, data, calculateTotal }) {
                   >
                     <input
                       type='number'
-                      min={0}
+                      // min={0}
                       pattern='[0-9]'
-                      max={data?.availableQuantity}
+                      // max={data?.availableQuantity}
                       value={quantity}
                       onBlur={(e) => {
                         setError(false)
@@ -124,7 +124,7 @@ function CartListItem({ id, data, calculateTotal }) {
                   </div>
                 </div>
                 <div className={style.price}>
-                  {numberToPrice(data.price)}
+                  {/* {numberToPrice(data.price)} */}
                   {/* {t('soum/pc')} */}
                 </div>
               </div>

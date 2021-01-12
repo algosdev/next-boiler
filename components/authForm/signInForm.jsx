@@ -76,7 +76,7 @@ function SignInForm() {
 
   return (
     <div className={style.wrapper}>
-      <Typography variant='h3'>{t('signin')}</Typography>
+      <Typography variant='h2'>{t('signin')}</Typography>
       <div className={style.inner}>
         <form onSubmit={submitHandlerPhone} autoComplete='off'>
           <div className={style.input_cont}>

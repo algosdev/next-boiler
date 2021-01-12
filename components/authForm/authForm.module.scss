@@ -1,16 +1,23 @@
 .wrapper {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
   padding: 50px 0;
   margin: auto 0;
   .inner {
-    margin: 16px 0;
+    margin: 30px 0 16px;
+    width: 100%;
+    form {
+      max-width: 500px;
+      button {
+        height: 54px;
+      }
+    }
     .fullName {
       display: flex;
       width: 100%;
-      max-width: 380px;
+      // max-width: 380px;
       justify-content: space-between;
       .input_cont {
         &:first-child {
@@ -32,10 +39,9 @@
     }
     .input_cont {
       position: relative;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
       min-width: 320px;
       width: 100%;
-      max-width: 380px;
       .error {
         border-color: red;
       }
@@ -83,12 +89,12 @@
       margin-top: 20px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
     }
     .options {
       margin-top: 20px;
       & > div {
-        text-align: center;
+        text-align: left;
         margin: 5px 0;
       }
       a {

@@ -21,7 +21,7 @@ function OrderItem({ data, index }) {
   return (
     <>
       <Link href={`/orders/${data.number}`}>
-        <a title='Посмотреть больше'>
+        <a>
           <div className={style.wrapper_item}>
             <div className={style.inner}>
               <div className={style.column}>{index + 1}</div>

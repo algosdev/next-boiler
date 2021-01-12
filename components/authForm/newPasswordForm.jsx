@@ -15,7 +15,7 @@ function NewPasswordForm() {
   }
   return (
     <div className={style.wrapper}>
-      <Typography variant='h3'>{t('enter_new_password')}</Typography>
+      <Typography variant='h2'>{t('enter_new_password')}</Typography>
       <div className={style.inner}>
         <form onSubmit={submitHandler}>
           <div className={style.input_cont}>

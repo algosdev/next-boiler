@@ -157,7 +157,7 @@ function ProductSingleContent({ data }) {
                 Router.push('/compare')
               }}
             >
-              {t('compare')}
+              {t('compare_with_others')}
             </Button>
           </div>
         </div>

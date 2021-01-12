@@ -16,7 +16,7 @@ function forgotForm() {
   }
   return (
     <div className={style.wrapper}>
-      <Typography variant='h3'>{t('forgot_title')}</Typography>
+      <Typography variant='h2'>{t('forgot_title')}</Typography>
       <div className={style.inner}>
         <form onSubmit={submitHandler}>
           <div className={style.input_cont}>
