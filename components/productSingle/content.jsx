@@ -150,6 +150,15 @@ function ProductSingleContent({ data }) {
                   t('add_to_cart')
                 ))}
             </Button>
+            <Button
+              fullWidth
+              className={style.secondary}
+              onClick={() => {
+                Router.push('/compare')
+              }}
+            >
+              {t('compare')}
+            </Button>
           </div>
         </div>
       </Container>

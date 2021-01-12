@@ -124,7 +124,8 @@ function CartListItem({ id, data, calculateTotal }) {
                   </div>
                 </div>
                 <div className={style.price}>
-                  {numberToPrice(data.price)} {t('soum/pc')}
+                  {numberToPrice(data.price)}
+                  {/* {t('soum/pc')} */}
                 </div>
               </div>
               <div className={style.total}>

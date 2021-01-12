@@ -48,7 +48,7 @@
   "sort_price_low": "Price: High to Low",
   "sort_price_high": "Price: High to Low",
   "cart": "Cart",
-  "orders": "Orders",
+  "orders": "Order history",
   "profile": "Profile",
   "empty_cart": "Your cart is empty",
   "colors": "Colors",
@@ -115,5 +115,8 @@
   "microphones": "Microphones",
   "covers": "Covers",
   "chargers": "Chargers",
-  "browse_all": "Browse all"
+  "browse_all": "Browse all",
+  "delivered": " Delivered",
+  "finished": "Finished",
+  "compare": "Compare"
 }

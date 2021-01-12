@@ -144,25 +144,26 @@ const CartDropdown = ({ title, subCategs }) => {
             )}
           </a>
         </Link>
-        {productsInCart?.length ? (
-          <Popper
-            open={open}
-            anchorEl={anchorRef.current}
-            className={classes.popper}
-            role={undefined}
-            transition
-            disablePortal
-          >
-            {({ TransitionProps, placement }) => (
-              <Grow
-                {...TransitionProps}
-                style={{
-                  transformOrigin:
-                    placement === 'bottom' ? 'center top' : 'center bottom',
-                }}
-              >
-                <Paper className={classes.paper}>
-                  <ClickAwayListener onClickAway={handleClose}>
+
+        <Popper
+          open={open}
+          anchorEl={anchorRef.current}
+          className={classes.popper}
+          role={undefined}
+          transition
+          disablePortal
+        >
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{
+                transformOrigin:
+                  placement === 'bottom' ? 'center top' : 'center bottom',
+              }}
+            >
+              <Paper className={classes.paper}>
+                <ClickAwayListener onClickAway={handleClose}>
+                  {productsInCart?.length ? (
                     <Link href='/cart'>
                       <li
                         className={style.cart_items}
@@ -192,8 +193,10 @@ const CartDropdown = ({ title, subCategs }) => {
                         ))}
                       </li>
                     </Link>
-
-                    {/* <MenuItem onClick={handleClose} diableRipple>
+                  ) : (
+                    <div className={style.no_item}>{t('empty_cart')}</div>
+                  )}
+                  {/* <MenuItem onClick={handleClose} diableRipple>
                       <Link href='/cart'>
                         <a>{t('cart')}</a>
                       </Link>
@@ -213,14 +216,11 @@ const CartDropdown = ({ title, subCategs }) => {
                         <a>{t('signin')}</a>
                       </Link>
                     </MenuItem>*/}
-                  </ClickAwayListener>
-                </Paper>
-              </Grow>
-            )}
-          </Popper>
-        ) : (
-          ''
-        )}
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
       </li>
     </>
   )

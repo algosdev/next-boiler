@@ -35,7 +35,7 @@ const theme = createMuiTheme({
         '&:hover': {
           backgroundColor: '#fff',
         },
-        borderRadius: '10px',
+        borderRadius: '6px',
       },
 
       // underline: {
@@ -69,7 +69,7 @@ const theme = createMuiTheme({
         lineHeight: '24px',
         fontWeight: 'normal',
         transition: 'transform .2s ease-in-out',
-        borderRadius: '10px',
+        borderRadius: '8px',
       },
       fullWidth: {
         maxWidth: '100%',

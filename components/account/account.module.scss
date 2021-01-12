@@ -1,5 +1,5 @@
 .wrapper_header {
-  padding: 10px 0 10px;
+  padding: 50px 0 10px;
   .top {
     display: flex;
     margin: 10px 0 50px;
@@ -34,6 +34,16 @@
   background: #fff;
   padding: 36px;
   margin: 30px 0;
+  .actions {
+    button {
+      height: 32px;
+    }
+    .logout {
+      background: var(--border);
+      color: var(--black);
+      margin-left: 10px;
+    }
+  }
 }
 .wrapper_item {
   border-top: 1px solid var(--border);
@@ -56,24 +66,7 @@
   justify-content: space-between;
   font-weight: 500;
 }
-.edit {
-  margin: 16px;
-  background: var(--primary-color);
-  color: #fff;
-  display: inline-flex;
-  padding: 0 10px;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  height: 32px;
-  font-weight: normal;
-  margin-top: auto;
-  font-size: 16px;
-  svg {
-    margin-right: 5px;
-  }
-  border-radius: 4px;
-}
+
 .mini_title {
   font-size: 24px;
   font-weight: 600;

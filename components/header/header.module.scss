@@ -42,6 +42,11 @@
         cursor: pointer;
         &.cartIcon {
           position: relative;
+          .no_item {
+            min-width: 200px;
+            padding: 16px;
+            background: lighten(#1d1d1d, 5%);
+          }
           a {
             color: #fff;
           }

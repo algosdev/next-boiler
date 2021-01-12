@@ -122,6 +122,11 @@
         align-items: center;
         justify-content: center;
         transition: 0.4s;
+        max-width: 100%;
+        margin-bottom: 10px;
+        &.secondary {
+          background: var(--third-color);
+        }
         div {
           height: 32px !important;
           width: 32px !important;

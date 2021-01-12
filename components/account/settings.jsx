@@ -13,7 +13,7 @@ import {
   Slide,
   Container,
 } from '@material-ui/core'
-import { useTranslation } from '../../i18n'
+import { useTranslation, Router } from '../../i18n'
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />
 })
@@ -41,6 +41,14 @@ function AccountSettings() {
         <div className={style.wrapper_content}>
           <div className={style.title}>
             <span>{t('account_settings')}</span>
+            <div className={style.actions}>
+              <Button className={style.edit} onClick={handleClickOpen}>
+                {t('edit')}
+              </Button>
+              <Button className={style.logout} onClick={() => Router.push('/')}>
+                {t('signout')}
+              </Button>
+            </div>
           </div>
           <div className={style.wrapper_item}>
             <div className={style.grid}>
@@ -65,9 +73,6 @@ function AccountSettings() {
                 {/* <Item title={t('shipping_address')} details={data.address1} /> */}
               </div>
             </div>
-          </div>
-          <div className={style.edit} onClick={handleClickOpen}>
-            {t('edit')}
           </div>
         </div>
       </Container>

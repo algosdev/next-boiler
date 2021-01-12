@@ -11,6 +11,7 @@
   --border-color: #888888;
   --border: #d6d6d6;
   --black: #1d1d1d;
+  --third-color: #e85d00;
 }
 
 html,
@@ -18,6 +19,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'San-Francisco', sans-serif;
+  font-size: 17px;
   /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
 }

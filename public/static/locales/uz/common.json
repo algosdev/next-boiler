@@ -50,7 +50,7 @@
   "sort_price_low": "Narx: Qimmat",
   "sort_price_high": "Narx: Arzon",
   "cart": "Savatcha",
-  "orders": "Buyurtmalar",
+  "orders": "Buyurtmalar tarixi",
   "profile": "Hisob qaydnoma",
   "empty_cart": "Sizning savatingiz bo'sh",
   "colors": "Ranglar",
@@ -117,5 +117,8 @@
   "covers": "Qoplagichlar",
   "added_to_cart": "Savatchaga qo'shildi",
   "chargers": "Quvvatlagichlar",
-  "browse_all": "Barchasini ko'rish"
+  "browse_all": "Barchasini ko'rish",
+  "delivered": " Yetkazildi",
+  "finished": "Yakunlandi",
+  "compare": "Taqqoslash"
 }

@@ -48,7 +48,6 @@ const NavItem = ({ title, subCategs }) => {
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const anchorRef = useRef(null)
-
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen)
   }

@@ -8,12 +8,12 @@ function AccountHeader() {
   return (
     <div className={style.wrapper_header}>
       <Container>
-        <div className={style.top}>
+        {/* <div className={style.top}>
           <h5>Профиль</h5>
           <Link href='/'>
             <a className={style.btn}>{t('signout')}</a>
           </Link>
-        </div>
+        </div> */}
         <div className={style.title}>{t('hi')}, Samandar</div>
       </Container>
     </div>

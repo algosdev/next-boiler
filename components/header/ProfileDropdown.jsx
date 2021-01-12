@@ -52,7 +52,8 @@ const useStyles = makeStyles(() => ({
   },
   popper: {
     zIndex: '999',
-    top: '10px !important',
+    paddingTop: '10px',
+    top: '0 !important',
   },
 }))
 const ProfileDropdown = ({ title, subCategs }) => {
@@ -93,16 +94,19 @@ const ProfileDropdown = ({ title, subCategs }) => {
   return (
     <>
       <li
-        className={`${style.listItem}`}
+        className={`${style.listItem} ${style.cartIcon}`}
         ref={anchorRef}
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup='true'
-        onClick={handleToggle}
-        // onMouseEnter={() => setOpen(true)}
-        // onMouseLeave={() => setOpen(false)}
+        // onClick={handleToggle}
+        onMouseEnter={() => setOpen(true)}
+        onMouseLeave={() => setOpen(false)}
       >
-        <ProfileIcon />
-
+        <Link href='/account'>
+          <a>
+            <ProfileIcon />
+          </a>
+        </Link>
         <Popper
           open={open}
           anchorEl={anchorRef.current}
@@ -141,6 +145,11 @@ const ProfileDropdown = ({ title, subCategs }) => {
                         <a>{t('signin')}</a>
                       </Link>
                     </MenuItem>
+                    {/* <MenuItem onClick={handleClose} diableRipple>
+                      <Link href='/'>
+                        <a>{t('signout')}</a>
+                      </Link>
+                    </MenuItem> */}
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
