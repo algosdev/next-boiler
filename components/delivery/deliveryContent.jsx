@@ -1,6 +1,7 @@
 import React from 'react'
 import style from './delivery.module.scss'
 import { Container } from '@material-ui/core'
+import DeliveryCard from './deliveryCard'
 function DeliveryContent() {
   return (
     <div className={style.wrapper}>
@@ -10,7 +11,13 @@ function DeliveryContent() {
           городу Ташкент. Доставка производится в течение 48 часов с момента
           подтверждения заказа покупателем.
         </h1>
+        <div className={style.card_container}>
+          <DeliveryCard />
+          <DeliveryCard />
+          <DeliveryCard />
+        </div>
         <h2>Ташкент</h2>
+
         <p>Доставка в течение 48 рабочих часов в черте города Ташкент</p>
         <p>Доставка мелкой бытовой техники и электроники – 25 000 сум</p>
         <p>

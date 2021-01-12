@@ -63,6 +63,7 @@ export const useStyles = makeStyles(() => ({
       opacity: '1',
       borderRadius: '12px',
       transition: '0.5s',
+      fontSize: '16px',
       maxWidth: '100%',
       width: 'calc(100% / 3)',
       ['@media (max-width:576px)']: {

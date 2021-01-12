@@ -352,3 +352,45 @@ export const ProfileIcon = () => (
     />
   </svg>
 )
+export const OnTimeDeliveryIcon = () => (
+  <svg
+    width='45'
+    height='50'
+    viewBox='0 0 45 50'
+    fill='none'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <path
+      d='M5 50H40C42.7575 50 45 47.7575 45 45V10C45 7.2425 42.7575 5 40 5H35V0H30V5H15V0H10V5H5C2.2425 5 0 7.2425 0 10V45C0 47.7575 2.2425 50 5 50ZM20 41.035L10.7325 31.7675L14.2675 28.2325L20 33.965L30.7325 23.2325L34.2675 26.7675L20 41.035ZM5 12.5H40V17.5H5V12.5Z'
+      fill='#1D1D1D'
+    />
+  </svg>
+)
+export const FastDeliveryIcon = () => (
+  <svg
+    width='50'
+    height='50'
+    viewBox='0 0 50 50'
+    fill='none'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <path
+      d='M25 0C11.1979 0 0 11.1979 0 25C0 38.8062 11.1979 50 25 50C38.8042 50 50 38.8062 50 25C50 11.1979 38.8062 0 25 0ZM23.7 45.0417V29.3583H14.9792L27.5062 4.95833V20.6417H35.9L23.7 45.0417Z'
+      fill='#1D1D1D'
+    />
+  </svg>
+)
+export const SettingsIcon = () => (
+  <svg
+    width='50'
+    height='50'
+    viewBox='0 0 50 50'
+    fill='none'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <path
+      d='M25 0C11.1979 0 0 11.1979 0 25C0 38.8062 11.1979 50 25 50C38.8042 50 50 38.8062 50 25C50 11.1979 38.8062 0 25 0ZM23.7 45.0417V29.3583H14.9792L27.5062 4.95833V20.6417H35.9L23.7 45.0417Z'
+      fill='#1D1D1D'
+    />
+  </svg>
+)
