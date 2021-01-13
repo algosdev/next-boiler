@@ -3,6 +3,16 @@ import { red } from '@material-ui/core/colors'
 
 // Create a theme instance.
 const theme = createMuiTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sh: 375,
+      sm: 576,
+      md: 900,
+      lg: 1280,
+      xl: 1920,
+    },
+  },
   overrides: {
     MuiCssBaseline: {
       '@global': {

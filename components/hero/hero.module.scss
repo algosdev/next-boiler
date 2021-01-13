@@ -6,15 +6,29 @@
   overflow: hidden;
   max-height: 800px;
   min-height: 500px;
+  // @media (max-width: 576px){
+  //   height: 1;
+  // }
   .background {
     position: absolute;
-    top: 60%;
-    right: 35%;
-    width: 1025px;
-    height: 556px;
+    top: 50%;
+    right: -30%;
+    width: 100%;
+    z-index: 1;
+    max-width: 1025px;
     object-fit: cover;
     -o-object-fit: cover;
-    transform: translate(50%, -50%);
+    transform: translateY(-50%);
+    @media (min-width: 1620px) {
+      right: 0%;
+    }
+    @media (max-width: 576px) {
+      max-width: 100%;
+      top: -10%;
+      right: 0;
+      width: 500px;
+      transform: translate(0, 0) scale(1.5);
+    }
   }
   .wrapper {
     position: relative;
@@ -24,14 +38,16 @@
     align-items: flex-start;
     height: 100%;
     color: var(--secondary-color);
-    z-index: 10;
-    margin-bottom: 10%;
+    z-index: 2;
+    margin-bottom: 10vh;
     @media (max-width: 576px) {
-      margin-bottom: 20%;
+      margin-bottom: 10%;
+      align-items: center;
+      & * {
+        text-align: center;
+      }
     }
-    & * {
-      text-align: left;
-    }
+
     .new {
       display: block;
       margin-bottom: 5px;
@@ -40,6 +56,12 @@
       line-height: 25px;
       font-weight: 700;
       max-width: 400px;
+      @media (max-width: 720px) {
+        font-size: 16px;
+      }
+      @media (max-width: 576px) {
+        font-size: 14px;
+      }
     }
     .title {
       font-size: 56px;
@@ -48,11 +70,11 @@
       margin: 0;
       max-width: 400px;
       @media (max-width: 720px) {
-        font-size: 48px;
+        font-size: 36px;
       }
       @media (max-width: 576px) {
-        font-size: 32px;
-        line-height: 48px;
+        font-size: 28px;
+        line-height: 36px;
       }
     }
     .desc {
@@ -62,8 +84,12 @@
       font-weight: 600;
       line-height: 32px;
       max-width: 400px;
+      @media (max-width: 720px) {
+        font-size: 22px;
+        margin-top: 0;
+      }
       @media (max-width: 576px) {
-        font-size: 20px;
+        font-size: 18px;
       }
     }
     .content {
@@ -78,6 +104,7 @@
       margin-top: 16px;
       text-align: center;
       font-size: 17px;
+      max-height: 32px;
       min-width: 80px;
       padding: 12px 22px;
       border-radius: 22px;

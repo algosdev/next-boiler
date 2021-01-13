@@ -102,7 +102,7 @@ input[type='number'] {
   min-height: 100vh;
 }
 .main_container .header_margin {
-  margin-top: 75px !important;
+  height: 75px;
 }
 #macbro_container div button:focus {
   outline: 0;
@@ -151,4 +151,20 @@ input.input:focus {
 }
 .carousel-item {
   height: 100%;
+}
+.carousel.slide .carousel-control-next,
+.carousel.slide .carousel-control-prev {
+  z-index: 3;
+}
+.carousel-inner {
+  z-index: 1;
+}
+.carousel-inner .carousel-caption {
+  height: 80%;
+  display: flex;
+}
+@media (max-width: 876px) {
+  .main_container .header_margin {
+    height: 60px;
+  }
 }

@@ -47,13 +47,8 @@ export default function Hero() {
         alt='Macbook air'
         className={style.background}
       /> */}
-      <Carousel>
+      <Carousel interval={80000000}>
         <Carousel.Item>
-          <img
-            src='images/macbook_air.jpg'
-            alt='Macbook air'
-            className={style.background}
-          />
           <Carousel.Caption>
             <Container>
               <div className={style.wrapper}>
@@ -68,16 +63,15 @@ export default function Hero() {
                   <a className={style.callToAction}>{t('buy')}</a>
                 </Link>
               </div>
+              <img
+                src='images/macbook_air.jpg'
+                alt='Macbook air'
+                className={style.background}
+              />
             </Container>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <img
-            src='images/macbook_air2.jpg'
-            alt='Macbook air'
-            className={style.background}
-          />
-
           <Carousel.Caption>
             <Container>
               <div className={style.wrapper}>
@@ -93,6 +87,11 @@ export default function Hero() {
                 </Link>
               </div>
             </Container>
+            <img
+              src='images/macbook_air2.jpg'
+              alt='Macbook air'
+              className={style.background}
+            />
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>

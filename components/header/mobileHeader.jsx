@@ -3,6 +3,7 @@ import { Link, useTranslation } from '../../i18n'
 import style from './header.module.scss'
 import { BrandLogo, CloseIcon } from '../svg'
 import { LocalMallOutlined, SearchOutlined } from '@material-ui/icons'
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import { motion, useAnimation, AnimatePresence } from 'framer-motion'
 import MuiAccordion from '@material-ui/core/Accordion'
@@ -11,6 +12,7 @@ import MuiAccordionDetails from '@material-ui/core/AccordionDetails'
 import Typography from '@material-ui/core/Typography'
 import { ExpandMoreRounded } from '@material-ui/icons'
 import { withStyles } from '@material-ui/core/styles'
+import { ClickAwayListener } from '@material-ui/core'
 
 const Accordion = withStyles({
   root: {
@@ -176,93 +178,95 @@ function MobileHeader({ data }) {
           </Link>
         </div>
         <div className={style.cart_cont}>
-          <Link href='/'>
+          <Link href='/cart'>
             <a>
-              <LocalMallOutlined />
+              <ShoppingCartOutlinedIcon />
             </a>
           </Link>
         </div>
       </div>
       <AnimatePresence>
         {isOpen ? (
-          <motion.div
-            className={style.content}
-            variants={{
-              open: {
-                opacity: 1,
-                y: 0,
-              },
-              stable: {
-                // opacity: 0,
-                y: -600,
-              },
-            }}
-            transition={{
-              duration: 0.6,
-              type: 'twin',
-            }}
-            animate={'open'}
-            initial={'stable'}
-            exit={'stable'}
-          >
-            <form className={`${style.searchForm}`} onSubmit={submitHandler}>
-              <input type='text' placeholder={t('search')} />
-              <button className={style.icon} type='submit'>
-                <ArrowForwardIcon />
-              </button>
-            </form>
-            {data.map((categ, index) => {
-              return (
-                <Accordion
-                  square
-                  key={index}
-                  expanded={expanded === `panel${index}`}
-                  onChange={handleChange(`panel${index}`)}
-                >
-                  <AccordionSummary
-                    aria-controls='panel2d-content'
-                    id='panel2d-header'
-                    expandIcon={<ExpandMoreRounded />}
+          <ClickAwayListener onClickAway={() => setIsOpen(false)}>
+            <motion.div
+              className={style.content}
+              variants={{
+                open: {
+                  opacity: 1,
+                  y: 0,
+                },
+                stable: {
+                  // opacity: 0,
+                  y: -600,
+                },
+              }}
+              transition={{
+                duration: 0.6,
+                type: 'twin',
+              }}
+              animate={'open'}
+              initial={'stable'}
+              exit={'stable'}
+            >
+              <form className={`${style.searchForm}`} onSubmit={submitHandler}>
+                <input type='text' placeholder={t('search')} />
+                <button className={style.icon} type='submit'>
+                  <ArrowForwardIcon />
+                </button>
+              </form>
+              {data.map((categ, index) => {
+                return (
+                  <Accordion
+                    square
+                    key={index}
+                    expanded={expanded === `panel${index}`}
+                    onChange={handleChange(`panel${index}`)}
                   >
-                    <Typography>{categ.title}</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    {categ.subCategs.map((genre, ind) => (
-                      <Typography key={ind}>
-                        <Link href={`/shop`}>
-                          <a>{genre.title}</a>
-                        </Link>
-                      </Typography>
-                    ))}
-                  </AccordionDetails>
-                </Accordion>
-              )
-            })}
-            {/* {data.map((el, ind) => (
+                    <AccordionSummary
+                      aria-controls='panel2d-content'
+                      id='panel2d-header'
+                      expandIcon={<ExpandMoreRounded />}
+                    >
+                      <Typography>{categ.title}</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      {categ.subCategs.map((genre, ind) => (
+                        <Typography key={ind}>
+                          <Link href={`/shop`}>
+                            <a>{genre.title}</a>
+                          </Link>
+                        </Typography>
+                      ))}
+                    </AccordionDetails>
+                  </Accordion>
+                )
+              })}
+              {/* {data.map((el, ind) => (
               <li key={ind} onClick={() => setIsOpen(false)}>
                 <Link href='/shop'>
                   <a>{el.title}</a>
                 </Link>
               </li>
             ))} */}
-            <ul>
-              <li onClick={() => setIsOpen(false)}>
-                <Link href='/orders'>
-                  <a>{t('orders')}</a>
-                </Link>
-              </li>
-              <li onClick={() => setIsOpen(false)}>
-                <Link href='/account'>
-                  <a>{t('profile')}</a>
-                </Link>
-              </li>
-              <li onClick={() => setIsOpen(false)}>
-                <Link href='/signin'>
-                  <a>{t('signin')}</a>
-                </Link>
-              </li>
-            </ul>
-          </motion.div>
+              <ul>
+                <li onClick={() => setIsOpen(false)}>
+                  <Link href='/orders'>
+                    <a>{t('orders')}</a>
+                  </Link>
+                </li>
+                <li onClick={() => setIsOpen(false)}>
+                  <Link href='/account'>
+                    <a>{t('profile')}</a>
+                  </Link>
+                </li>
+                <li onClick={() => setIsOpen(false)}>
+                  <Link href='/signin'>
+                    <a>{t('signin')}</a>
+                  </Link>
+                </li>
+              </ul>
+            </motion.div>
+          </ClickAwayListener>
         ) : (
           ''
         )}

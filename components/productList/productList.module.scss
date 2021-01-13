@@ -6,72 +6,68 @@
     position: sticky;
     top: 0;
     width: 100%;
-    border-bottom: 1px solid var(--border);
-    border-top: 1px solid var(--border);
-    background-color: #fff;
-    .wrapper {
+    padding: 20px;
+    border: 1px solid var(--border);
+  }
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    .btn {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin: 0 20px;
-      padding-top: 21px;
-      padding-bottom: 17px;
-      .btn {
+      border: none;
+      background: transparent;
+      font-size: 12px;
+      line-height: 18px;
+      color: #1d1d1d;
+      outline: 0;
+      cursor: pointer;
+      span {
+        color: #6e6e73;
+        margin: 0 4px;
+      }
+      .arrow {
         display: flex;
         align-items: center;
-        border: none;
-        background: transparent;
-        font-size: 12px;
-        line-height: 18px;
-        color: #1d1d1d;
-        outline: 0;
-        cursor: pointer;
-        span {
-          color: #6e6e73;
-          margin: 0 4px;
+        transition: 0.2s;
+        transform: rotate(0);
+        svg {
+          width: 15px;
         }
-        .arrow {
-          display: flex;
-          align-items: center;
-          transition: 0.2s;
-          transform: rotate(0);
-          svg {
-            width: 15px;
-          }
-          &.open {
-            transform: rotate(180deg);
-          }
+        &.open {
+          transform: rotate(180deg);
         }
       }
-      .sort_cont {
-        position: relative;
-        .popup {
-          position: absolute;
-          padding: 16px;
-          width: 220px;
-          background: #fff;
-          border: 1px solid var(--border);
-          ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            li {
-              list-style: none;
-              border-bottom: 1px solid var(--border);
-              &:last-child {
-                border-bottom: 1px solid transparent;
-              }
-              button {
-                padding: 10px;
-                border: 0;
-                cursor: pointer;
-                background: transparent;
-                outline: 0;
-                color: #1d1d1d;
-                &:disabled {
-                  cursor: auto;
-                  color: var(--border-color);
-                }
+    }
+    .sort_cont {
+      position: relative;
+      .popup {
+        position: absolute;
+        padding: 16px;
+        width: 220px;
+        background: #fff;
+        border: 1px solid var(--border);
+        ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          li {
+            list-style: none;
+            border-bottom: 1px solid var(--border);
+            &:last-child {
+              border-bottom: 1px solid transparent;
+            }
+            button {
+              padding: 10px;
+              border: 0;
+              cursor: pointer;
+              background: transparent;
+              outline: 0;
+              color: #1d1d1d;
+              &:disabled {
+                cursor: auto;
+                color: var(--border-color);
               }
             }
           }
@@ -84,13 +80,19 @@
 .productList {
   display: flex;
   width: 100%;
+
   .filterWrapper {
+    min-width: 250px;
     width: 100%;
-    max-width: 250px;
+    max-width: 280px;
     padding: 30px 20px;
     transition: 0.4s;
     border-right: 1px solid var(--border);
+    @media (max-width: 576px) {
+      display: none;
+    }
     &.hide {
+      min-width: 0;
       width: 0;
       padding: 30px 0;
       overflow: hidden;
@@ -98,16 +100,16 @@
     .filterContent {
       transition: 0.4s;
       opacity: 1;
+      top: 0;
+      top: 100px;
+
       &.hide {
         min-width: 250px;
-        padding: 0;
         opacity: 0;
-        top: 100px;
         overflow: hidden;
       }
       width: 100%;
       position: sticky;
-      top: 100px;
       & > div {
         margin-bottom: 20px;
         border-bottom: 1px solid var(--border);
@@ -133,11 +135,12 @@
   }
   .wrapper {
     transition: 0.4s;
-    min-width: 70%;
     .product {
       display: block;
+
+      background-color: #fff;
       width: 100%;
-      //   min-width: 516px;
+      min-width: 100%;
       padding: 38px 0;
       text-align: center;
       text-decoration: none;
@@ -150,6 +153,8 @@
       }
       img {
         max-width: 90%;
+        width: 100%;
+        height: auto;
         max-height: 90%;
       }
       .type {

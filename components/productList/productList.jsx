@@ -13,20 +13,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from '../../i18n'
 import { numberToPrice } from '../../lib/numberToPrice'
 import Slider from '@material-ui/core/Slider'
+import ProductHeader from './productHeader'
+import ProductFilter from './productFilter'
 
 export default function ProductList() {
-  const [value, setValue] = useState([2000000, 9990000])
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue)
-  }
   const { t } = useTranslation()
-  const sortByData = [
-    t('sort_recommended'),
-    t('sort_new'),
-    t('sort_price_low'),
-    t('sort_price_high'),
-  ]
+
   const productListData = [
     {
       type: t('new'),
@@ -77,177 +69,16 @@ export default function ProductList() {
   const [activeSortBy, setActiveSortBy] = useState(0)
   const [showFilter, setShowFilter] = useState(true)
   const [sortByOpen, setSortByOpen] = useState(false)
-  const handlePriceChange = (e, newValue) => {
-    console.log(newValue)
-  }
 
   return (
     <div className={style.productListWrapper}>
-      <div className={style.navBar}>
-        <div className={style.wrapper}>
-          <div>
-            <button
-              className={style.btn}
-              onClick={() => setShowFilter(!showFilter)}
-            >
-              <List />
-              {t('filter')}
-            </button>
-          </div>
-
-          <div className={style.sort_cont}>
-            <button
-              className={style.btn}
-              onClick={() => setSortByOpen(!sortByOpen)}
-            >
-              <span>{t('sort_by')}: </span> {sortByData[activeSortBy]}
-              <span
-                className={`${style.arrow} ${sortByOpen ? style.open : ''}`}
-              >
-                <KeyboardArrowDown />
-              </span>
-            </button>
-            <AnimatePresence>
-              {sortByOpen ? (
-                <ClickAwayListener onClickAway={() => setSortByOpen(false)}>
-                  <motion.div
-                    className={style.popup}
-                    variants={{
-                      visible: {
-                        y: 0,
-                        position: 'absolute',
-                        x: '-50%',
-                        opacity: 1,
-                        top: '200%',
-                        left: 'calc(50% - 13px)',
-                      },
-                      stable: {
-                        position: 'absolute',
-                        y: -20,
-                        opacity: 0,
-                        x: '-50%',
-                        top: '200%',
-                        left: 'calc(50% - 13px)',
-                      },
-                    }}
-                    animate={'visible'}
-                    initial={'stable'}
-                    exit={'stable'}
-                  >
-                    <ul>
-                      {sortByData.map((item, index) => (
-                        <li key={index}>
-                          <button
-                            onClick={() => {
-                              setActiveSortBy(index)
-                              setSortByOpen(false)
-                            }}
-                            disabled={index === activeSortBy ? true : false}
-                          >
-                            {item}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                </ClickAwayListener>
-              ) : (
-                ''
-              )}
-            </AnimatePresence>
-          </div>
-        </div>
-      </div>
+      <ProductHeader showFilter={showFilter} setShowFilter={setShowFilter} />
       <div className={style.productList}>
-        <div
-          className={`${style.filterWrapper} ${!showFilter ? style.hide : ''}`}
-        >
-          <div
-            className={`${style.filterContent} ${
-              !showFilter ? style.hide : ''
-            }`}
-          >
-            <div className={style.price}>
-              <Typography variant='h6'>{t('price')}</Typography>
-              <p>
-                {numberToPrice(value[0])} &ndash; {numberToPrice(value[1])}
-              </p>
-
-              <Slider
-                value={value}
-                onChangeCommitted={handlePriceChange}
-                onChange={handleChange}
-                max={9990000}
-                track={false}
-                min={2000000}
-                aria-labelledby='range-slider'
-              />
-            </div>
-            <div className={style.brand}>
-              <Typography variant='h6'>{t('brand')}</Typography>
-              <div className={style.filter_item}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      // checked={gilad}
-                      // onChange={handleChange}
-                      name='gilad'
-                    />
-                  }
-                  label='Apple'
-                />
-              </div>
-              <div className={style.filter_item}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      // checked={gilad}
-                      // onChange={handleChange}
-                      name='gilad'
-                    />
-                  }
-                  label='Samsung'
-                />
-              </div>
-              <div className={style.filter_item}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                    // checked={gilad}
-                    // onChange={handleChange}
-                    />
-                  }
-                  label='Xiaomi'
-                />
-              </div>
-            </div>
-            <div className={style.color}>
-              <Typography variant='h6'>Цвет</Typography>
-              <div className={style.filter_item}>
-                <FormControlLabel control={<Checkbox />} label='Черный' />
-              </div>
-              <div className={style.filter_item}>
-                <FormControlLabel control={<Checkbox />} label='Синий' />
-              </div>
-              <div className={style.filter_item}>
-                <FormControlLabel control={<Checkbox />} label='Красный' />
-              </div>
-              <div className={style.filter_item}>
-                <FormControlLabel control={<Checkbox />} label='Серый' />
-              </div>
-              <div className={style.filter_item}>
-                <FormControlLabel control={<Checkbox />} label='Коричневый' />
-              </div>
-              <div className={style.filter_item}>
-                <FormControlLabel control={<Checkbox />} label='Белый' />
-              </div>
-            </div>
-          </div>
-        </div>
         <div className={style.wrapper}>
-          <Grid container xs={12}>
+          <ProductFilter showFilter={showFilter} />
+          <Grid container>
             {productListData.map((item, index) => (
-              <Grid item xs={3}>
+              <Grid item xs={6} xl={3} sm={6} lg={4} md={6} sh={12} key={index}>
                 <Link href={`/shop/${item.slug}`} key={index}>
                   <a className={style.product}>
                     <img src={item.img} alt={item.name} />

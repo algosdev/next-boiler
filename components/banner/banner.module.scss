@@ -2,6 +2,9 @@
   margin-bottom: 30px;
   max-height: 800px;
   min-height: 400px;
+  @media (max-width: 576px) {
+    min-height: auto;
+  }
   img {
     width: 100%;
     max-height: 400px;
