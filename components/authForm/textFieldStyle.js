@@ -20,5 +20,9 @@ export const useStyles = makeStyles(() => ({
       background: '#fff',
       border: '1px solid var(--primary-color)',
     },
+    '& .MuiFormLabel-root': {
+      display: 'flex',
+      flexDirection: 'row-reverse',
+    },
   },
 }))

@@ -100,7 +100,7 @@ function ProductSingleContent({ data }) {
     }
   }
   const setCustomQuantity = (value) => {
-    const validQuantity = value > 0 ? value : 0
+    const validQuantity = value > 0 ? value : ''
     console.log(value)
     if (validQuantity <= 1000000) {
       setQuantity(value > 0 ? value : '')

@@ -139,7 +139,10 @@ function addNewProductToCart(cartItems, cartToAdd) {
   return [...cartItems, { ...cartToAdd, quantity: 1 }]
 }
 function addNewProductToCartWithCustomQuantity(cartItems, cartToAdd) {
-  return [...cartItems, { ...cartToAdd, quantity: cartToAdd.customQuantity }]
+  return [
+    ...cartItems,
+    { ...cartToAdd, quantity: parseInt(cartToAdd.customQuantity) },
+  ]
 }
 
 export default cartReducers

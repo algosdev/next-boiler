@@ -53,7 +53,12 @@
   line-height: 50px;
   //   border-bottom: 1px solid var(--border);
 }
+.map_title {
+  margin: 10px 0;
+  font-weight: 500;
+}
 .form_section {
+  margin-top: 20px;
   &.limit {
     max-width: 500px;
     .flex {
@@ -62,6 +67,7 @@
       grid-gap: 10px;
     }
   }
+
   .title {
     font-weight: 600;
     font-size: 22px;
@@ -83,16 +89,26 @@
   .radio_input {
     position: relative;
 
-    input:checked + label div {
+    input:checked + label > div,
+    input:checked + label > p {
       box-shadow: 0 0 2px 2px var(--primary-color);
     }
     label {
       div {
         width: 100%;
         padding: 10px;
-        min-height: 80px;
+        min-height: 20px;
         border-radius: 4px;
         box-shadow: 0 0 2px 1px var(--border);
+      }
+      & > p {
+        min-height: 20px;
+        border-radius: 4px;
+        box-shadow: 0 0 2px 1px var(--border);
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       cursor: pointer;

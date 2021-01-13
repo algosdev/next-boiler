@@ -8,10 +8,11 @@ export const useStyles = makeStyles(() => ({
     },
     '& .MuiTabs-indicator': {
       height: 'calc(100% - 8px)',
-      backgroundColor: 'var(--border-color)',
+      backgroundColor: '#fff',
       borderRadius: '12px',
       top: '4px',
       zIndex: '1',
+      border: '1px solid var(--border)',
       bottom: '4px',
       ['@media (max-width:576px)']: {
         height: 'calc(100% - 4px)',
@@ -74,7 +75,7 @@ export const useStyles = makeStyles(() => ({
       },
     },
     '& .MuiTab-root.Mui-selected': {
-      color: '#fff',
+      color: '#1d1d1d',
     },
 
     '& .MuiTouchRipple-root': {

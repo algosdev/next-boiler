@@ -6,6 +6,8 @@ import {
   DefaultDelivery,
   PickUp,
   FastDelivery,
+  TerminalIcon,
+  InstallmentIcon,
 } from '../svg'
 import { useTranslation, i18n } from '../../i18n'
 import {
@@ -98,23 +100,47 @@ function CheckoutForm() {
           {values.obtaining !== 'self' && values.obtaining ? (
             <>
               <div className={style.form_section}>
-                <p className={style.title}>{t('shipping_address')}</p>
+                {/* <p className={style.title}>{t('shipping_address')}</p> */}
                 <input
                   required
                   className={`${style.input} input`}
                   placeholder={t('full_name')}
                   type='text'
                 />
+
                 <input
                   required
                   className={`${style.input} input`}
-                  placeholder={t('shipping_address')}
+                  placeholder={t('phone_num')}
                   type='text'
                 />
                 <input
                   required
                   className={`${style.input} input`}
-                  placeholder={t('phone_num')}
+                  placeholder={'Подъезд'}
+                  type='text'
+                />
+                <input
+                  required
+                  className={`${style.input} input`}
+                  placeholder={'Этаж'}
+                  type='text'
+                />
+                <input
+                  required
+                  className={`${style.input} input`}
+                  placeholder={'Номер квартиры / дома'}
+                  type='text'
+                />
+                <input
+                  required
+                  className={`${style.input} input`}
+                  placeholder={'Домофон'}
+                  type='text'
+                />
+                <input
+                  className={`${style.input} input`}
+                  placeholder={'Комментарий к заказу(необязательный)'}
                   type='text'
                 />
               </div>
@@ -130,7 +156,8 @@ function CheckoutForm() {
                 }}
                 apikey
               >
-                <div>My awesome application with maps!</div>
+                {/* <p className={style.map_title}>Локации</p> */}
+                {/* <div>My awesome application with maps!</div> */}
                 <Map
                   defaultState={{ center: [41.29, 69.2], zoom: 10 }}
                   width='100%'
@@ -144,9 +171,29 @@ function CheckoutForm() {
               </YMaps>
             </>
           ) : (
-            ''
+            <>
+              <div className={style.form_section}>
+                <input
+                  required
+                  className={`${style.input} input`}
+                  placeholder={t('full_name')}
+                  type='text'
+                />
+                <input
+                  required
+                  className={`${style.input} input`}
+                  placeholder={t('phone_num')}
+                  type='text'
+                />
+                <input
+                  className={`${style.input} input`}
+                  placeholder={'Комментарий к заказу(необязательный)'}
+                  type='text'
+                />
+              </div>
+            </>
           )}
-          <div className={`${style.form_section} ${style.limit}`}>
+          <div className={`${style.form_section}`}>
             <p className={style.title}>{t('payment_method')}</p>
             <div className={style.flex}>
               <div className={style.radio_input}>
@@ -182,17 +229,75 @@ function CheckoutForm() {
                   </div>
                 </label>
               </div>
+              <div className={style.radio_input}>
+                <input
+                  className={`${style.input} input`}
+                  type='radio'
+                  id='opt6'
+                  name='payment'
+                />
+                <label htmlFor='opt6'>
+                  <div>
+                    <p className={style.opt_title}>Терминал</p>
+                    <p className={style.opt_desc}>
+                      <TerminalIcon />
+                    </p>
+                  </div>
+                </label>
+              </div>
+              <div className={style.radio_input}>
+                <input
+                  className={`${style.input} input`}
+                  type='radio'
+                  id='opt9'
+                  name='payment'
+                />
+                <label htmlFor='opt9'>
+                  <div>
+                    <p className={style.opt_title}>Рассрочка</p>
+                    <p className={style.opt_desc}>
+                      <InstallmentIcon />
+                    </p>
+                  </div>
+                </label>
+              </div>
+              <div className={style.radio_input}>
+                <input
+                  className={`${style.input} input`}
+                  type='radio'
+                  id='opt7'
+                  name='payment'
+                />
+                <label htmlFor='opt7'>
+                  <p>
+                    <img src='/images/click.png' alt='Click' />
+                  </p>
+                </label>
+              </div>
+              <div className={style.radio_input}>
+                <input
+                  className={`${style.input} input`}
+                  type='radio'
+                  id='opt8'
+                  name='payment'
+                />
+                <label htmlFor='opt8'>
+                  <p>
+                    <img src='/images/payme.png' alt='Payme' />
+                  </p>
+                </label>
+              </div>
             </div>
           </div>
-          <div className={style.form_section}>
+          {/* <div className={style.form_section}>
             <p className={style.title}>{t('additional')}</p>
             <input
               className={`${style.input} input`}
               placeholder={t('comment_to_order')}
               type='text'
             />
-          </div>
-          <p>{t('confirm_txt')}</p>
+          </div> */}
+          {/* <p>{t('confirm_txt')}</p> */}
           <div className={style.form_section}>
             <button
               className={`${style.submit} input`}

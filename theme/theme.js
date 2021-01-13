@@ -161,7 +161,7 @@ const theme = createMuiTheme({
     },
     MuiDialog: {
       paper: {
-        width: '70%',
+        width: '100%',
       },
       paperWidthSm: {
         maxWidth: '500px',
