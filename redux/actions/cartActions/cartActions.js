@@ -12,6 +12,20 @@ export const asyncAddToCartAction = (product) => (dispatch) => {
     payload: product,
   })
 }
+export const asyncAddToCartActionWithCustomQuantity = (product) => (
+  dispatch
+) => {
+  try {
+    // async code
+  } catch (error) {
+    // error
+  }
+  console.log('product', product)
+  dispatch({
+    type: cartActionTypes.ADD_TO_CART_WITH_CUSTOM_QUANTITY,
+    payload: product,
+  })
+}
 export const asyncRemoveFromCartAction = (product) => (dispatch) => {
   try {
     // async code

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import style from './productSingle.module.scss'
 import { useDispatch, shallowEqual, useSelector } from 'react-redux'
 import { i18n, useTranslation, Link, Router } from '../../i18n'
-import { asyncAddToCartAction } from '../../redux/actions/cartActions/cartActions'
 import {
   Container,
   Grid,
@@ -14,11 +13,17 @@ import {
   CircularProgress,
   Box,
 } from '@material-ui/core'
+import AddIcon from '@material-ui/icons/Add'
+import RemoveIcon from '@material-ui/icons/Remove'
+import { motion, AnimatePresence } from 'framer-motion'
+import {
+  asyncAddToCartActionWithCustomQuantity,
+  asyncIncreaseCartItemQuantityAction,
+} from '../../redux/actions/cartActions/cartActions'
 import { numberToPrice } from '../../lib/numberToPrice'
 import Rating from '@material-ui/lab/Rating'
 import { makeStyles } from '@material-ui/core/styles'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import { motion, AnimatePresence } from 'framer-motion'
 const colorsData = [
   { ru: 'Черный', en: 'Black', uz: 'Qora' },
   { ru: 'Серый', en: 'Grey', uz: 'Kulrang' },
@@ -54,6 +59,8 @@ function ProductSingleContent({ data }) {
   const check = productsInCart.filter((el) => el.id === data.id)?.length
     ? true
     : false
+  const [error, setError] = useState(false)
+  const [quantity, setQuantity] = useState(1)
   const [addedToCart, setAddedToCart] = useState(
     productsInCart.some((el) => el.id === data.id)?.length ? true : false
   )
@@ -62,12 +69,50 @@ function ProductSingleContent({ data }) {
   const [activeColorIndex, setActiveColorIndex] = useState(0)
   const addToCart = () => {
     if (!addedToCart) {
-      dispatch(asyncAddToCartAction(data))
+      const validQuantity = quantity > 0 ? quantity : 0
+      dispatch(
+        asyncAddToCartActionWithCustomQuantity({
+          ...data,
+          customQuantity: validQuantity,
+        })
+      )
+      // dispatch(asyncAddToCartAction(data))
       setIsLoading(true)
       setTimeout(() => {
         setAddedToCart(true)
         setIsLoading(false)
       }, 1000)
+    }
+  }
+  const changeQuantity = (operator) => {
+    if (operator === 'plus') {
+      if (1000000 > quantity) {
+        // dispatch(asyncAddToCartAction(data))
+        setError(false)
+        setQuantity((old) => ++old)
+      }
+    } else if (operator === 'minus') {
+      if (quantity !== 1) {
+        setError(false)
+        // dispatch(asyncReduceCartItemQuantityAction(data))
+        setQuantity((old) => --old)
+      }
+    }
+  }
+  const setCustomQuantity = (value) => {
+    const validQuantity = value > 0 ? value : 0
+    console.log(value)
+    if (validQuantity <= 1000000) {
+      setQuantity(value > 0 ? value : '')
+      setError(false)
+      dispatch(
+        asyncIncreaseCartItemQuantityAction({
+          ...data,
+          customQuantity: validQuantity,
+        })
+      )
+    } else {
+      setError(true)
     }
   }
   useEffect(() => {
@@ -117,6 +162,44 @@ function ProductSingleContent({ data }) {
               ))}
             </Grid>
           </div>
+          {!addedToCart ? (
+            <div className={style.quantity_cont}>
+              <div className={style.quantity_inner}>
+                <button
+                  className={style.minus}
+                  onClick={() => changeQuantity('minus')}
+                >
+                  <RemoveIcon />
+                </button>
+                <div
+                  className={`${style.quantity} ${error ? style.error : ''}`}
+                >
+                  <input
+                    type='number'
+                    // min={0}
+                    pattern='[0-9]'
+                    // max={data?.availableQuantity}
+                    value={quantity}
+                    onBlur={(e) => {
+                      setError(false)
+                      if (e.target.value === '') {
+                        setCustomQuantity(1)
+                      }
+                    }}
+                    onChange={(e) => setQuantity(e.target.value)}
+                  ></input>
+                </div>
+                <button
+                  className={style.plus}
+                  onClick={() => changeQuantity('plus')}
+                >
+                  <AddIcon />
+                </button>
+              </div>
+            </div>
+          ) : (
+            ''
+          )}
           <div className={style.price}>
             {numberToPrice(data.price)} {t('soum')}
           </div>

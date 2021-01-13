@@ -125,7 +125,11 @@
         max-width: 100%;
         margin-bottom: 10px;
         &.secondary {
-          background: var(--third-color);
+          background: var(--secondary-color);
+          // border: 1px solid var(--border);
+          span {
+            color: var(--primary-color) !important;
+          }
         }
         div {
           height: 32px !important;
@@ -146,7 +150,80 @@
         }
       }
     }
+    .quantity_cont {
+      display: flex;
+      flex-direction: column;
+      max-width: 200px;
+      margin: 24px 0 0;
+      button {
+        background: transparent;
+        border: 0;
+        outline: 0;
+        cursor: pointer;
+      }
+      .quantity_inner {
+        display: grid;
+        grid-template-columns: 3fr 4fr 3fr;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        & > button {
+          &::selection {
+            background: transparent;
+          }
+          height: 36px;
+          border-left: 1px solid var(--border);
+          display: flex;
+          cursor: pointer;
+          font-weight: 600;
+          justify-content: center;
+          align-items: center;
+          &:first-child {
+            border-left: 1px solid transparent;
+            border-right: 1px solid var(--border);
+          }
+        }
+        .quantity {
+          font-size: 16px;
+          position: relative;
+          cursor: auto;
+          &.error {
+            input {
+              border: 1px solid red;
+            }
+            &::before {
+              content: 'Enter less than 1000000';
+              background: rgba(255, 0, 0, 0.6);
+              font-size: 12px;
+              width: 200px;
+              padding: 5px;
+              border-radius: 4px;
+              color: #fff;
+              position: absolute;
+              font-weight: 400;
+              top: -100%;
+            }
+          }
 
+          input {
+            width: 70px;
+            border: 0;
+            padding: 10px;
+            outline: 0;
+            appearance: none;
+            text-align: center;
+            &:focus {
+              outline: 0;
+            }
+          }
+        }
+      }
+      .price {
+        text-align: center;
+        font-weight: 600;
+        font-size: 16px;
+        margin-top: 5px;
+      }
+    }
     .color_cont {
       width: 100%;
       cursor: pointer;

@@ -98,15 +98,22 @@
       line-height: 25px;
       margin-bottom: 0;
       max-width: 400px;
+      text-align: left;
+      @media (max-width: 576px) {
+        text-align: center;
+      }
     }
     .callToAction {
-      display: inline;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       margin-top: 16px;
+      padding: 0 16px;
       text-align: center;
       font-size: 17px;
       max-height: 32px;
       min-width: 80px;
-      padding: 12px 22px;
+      min-height: 32px;
       border-radius: 22px;
       color: #fff;
       flex-grow: 1;

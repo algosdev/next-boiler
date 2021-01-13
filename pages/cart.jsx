@@ -6,7 +6,14 @@ function cart() {
   return (
     <>
       <SEO />
-      <div style={{ background: '#fff', padding: '50px 0' }}>
+      <div
+        style={{
+          background: '#fff',
+          padding: '50px 0',
+          flexGrow: '1',
+          height: '100%',
+        }}
+      >
         <Container>
           <CartList />
         </Container>

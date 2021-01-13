@@ -109,6 +109,14 @@ const cartReducers = (state = initialCartState, action) => {
             : cartItem
         ),
       }
+    case cartActionTypes.ADD_TO_CART_WITH_CUSTOM_QUANTITY:
+      return {
+        ...state,
+        cartItems: addNewProductToCartWithCustomQuantity(
+          state.cartItems,
+          payload
+        ),
+      }
     case cartActionTypes.CLEAR_CART:
       return {
         ...state,
@@ -129,6 +137,9 @@ function addNewProductToCart(cartItems, cartToAdd) {
     })
   }
   return [...cartItems, { ...cartToAdd, quantity: 1 }]
+}
+function addNewProductToCartWithCustomQuantity(cartItems, cartToAdd) {
+  return [...cartItems, { ...cartToAdd, quantity: cartToAdd.customQuantity }]
 }
 
 export default cartReducers
