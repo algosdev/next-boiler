@@ -27,6 +27,7 @@ function NewPasswordForm() {
               onChange={(e) =>
                 setValues({ ...values, password: e.target.value })
               }
+              className={classes.root}
               type='num'
               required
               label={t('password')}
@@ -46,6 +47,7 @@ function NewPasswordForm() {
               id='filled-basic'
               name='otp'
               variant='filled'
+              className={classes.root}
               fullWidth
               value={values.passwordConfirm}
               onChange={(e) =>

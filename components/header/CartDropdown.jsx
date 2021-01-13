@@ -134,9 +134,11 @@ const CartDropdown = ({ title, subCategs }) => {
             {calculateTotalQuantity(productsInCart) !== 0 ? (
               <div className={style.badge_cont}>
                 <div
-                  className={`${style.badge} ${animate ? style.animate : ''}`}
+                  className={`${style.badge} ${animate ? style.animate : ''} ${
+                    badgeCount > 99 ? 'badge_fix' : ''
+                  }`}
                 >
-                  <span>{badgeCount}</span>
+                  <span>{badgeCount > 99 ? '99+' : badgeCount}</span>
                 </div>
               </div>
             ) : (

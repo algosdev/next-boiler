@@ -28,6 +28,10 @@
       .categ {
         font-size: 24px;
         font-weight: 500;
+        @media (max-width: 576px) {
+          font-size: 18px;
+          font-weight: 500;
+        }
       }
       .dropdown {
         position: relative;

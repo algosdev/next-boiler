@@ -163,6 +163,10 @@ input.input:focus {
   height: 80%;
   display: flex;
 }
+.badge_fix {
+  padding: 10px;
+  font-size: 11px !important;
+}
 @media (max-width: 876px) {
   .main_container .header_margin {
     height: 60px;
