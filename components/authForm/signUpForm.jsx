@@ -85,6 +85,7 @@ function SignInForm() {
               value={values.textmask}
               variant='filled'
               fullWidth
+              type='tel'
               className={classes.root}
               name='phoneNum'
               id='formatted-text-mask-input'

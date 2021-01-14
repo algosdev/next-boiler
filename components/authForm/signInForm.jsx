@@ -87,6 +87,7 @@ function SignInForm() {
               fullWidth
               className={classes.root}
               name='phoneNum'
+              type='tel'
               id='formatted-text-mask-input'
               InputProps={{
                 inputComponent: PhoneNumberMask,
@@ -102,7 +103,7 @@ function SignInForm() {
               name='phoneNum'
               variant='filled'
               fullWidth
-              type='tel'
+             
               className={classes.root}
               onChange={(e) =>
                 setValues({ ...values, phoneNum: e.target.value })
