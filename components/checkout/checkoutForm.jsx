@@ -40,6 +40,7 @@ function CheckoutForm() {
                   className={`${style.input} input`}
                   type='radio'
                   id='opt1'
+                  defaultChecked
                   value='self'
                   onChange={(e) =>
                     setValues({ ...values, obtaining: e.target.value })
@@ -49,7 +50,7 @@ function CheckoutForm() {
                 <label htmlFor='opt1'>
                   <div>
                     <p className={style.opt_title}>Самовывоз</p>
-                    <p className={style.opt_desc}>
+                    <p className={style.opt_img}>
                       <PickUp />
                     </p>
                   </div>
@@ -69,7 +70,7 @@ function CheckoutForm() {
                 <label htmlFor='opt2'>
                   <div>
                     <p className={style.opt_title}>Доставка в течение дня</p>
-                    <p className={style.opt_desc}>
+                    <p className={style.opt_img}>
                       <DefaultDelivery />
                     </p>
                   </div>
@@ -89,7 +90,7 @@ function CheckoutForm() {
                 <label htmlFor='opt3'>
                   <div>
                     <p className={style.opt_title}>Быстрая доставка</p>
-                    <p className={style.opt_desc}>
+                    <p className={style.opt_img}>
                       <FastDelivery />
                     </p>
                   </div>
@@ -201,19 +202,27 @@ function CheckoutForm() {
                   required
                   className={`${style.input} input`}
                   type='radio'
+                  defaultChecked
                   id='opt4'
                   name='payment'
                 />
                 <label htmlFor='opt4'>
                   <div>
                     <p className={style.opt_title}>{t('incash')}</p>
-                    <p className={style.opt_desc}>
+                    {/* <p className={style.opt_desc}>
                       <CashIn />
+                    </p> */}
+                    <p className={style.opt_img}>
+                      <img
+                        className={style.grey}
+                        src='/images/cash.png'
+                        alt='Cash'
+                      />
                     </p>
                   </div>
                 </label>
               </div>
-              <div className={style.radio_input}>
+              {/* <div className={style.radio_input}>
                 <input
                   className={`${style.input} input`}
                   type='radio'
@@ -228,7 +237,7 @@ function CheckoutForm() {
                     </p>
                   </div>
                 </label>
-              </div>
+              </div> */}
               <div className={style.radio_input}>
                 <input
                   className={`${style.input} input`}
@@ -239,8 +248,15 @@ function CheckoutForm() {
                 <label htmlFor='opt6'>
                   <div>
                     <p className={style.opt_title}>Терминал</p>
-                    <p className={style.opt_desc}>
+                    {/* <p className={style.opt_desc}>
                       <TerminalIcon />
+                    </p> */}
+                    <p className={style.opt_img}>
+                      <img
+                        className={style.grey}
+                        src='/images/terminal.png'
+                        alt='Terminal'
+                      />
                     </p>
                   </div>
                 </label>
@@ -255,9 +271,16 @@ function CheckoutForm() {
                 <label htmlFor='opt9'>
                   <div>
                     <p className={style.opt_title}>Рассрочка</p>
-                    <p className={style.opt_desc}>
-                      <InstallmentIcon />
+                    <p className={style.opt_img}>
+                      <img
+                        className={style.grey}
+                        src='/images/installment2.png'
+                        alt='Installment'
+                      />
                     </p>
+                    {/* <p className={style.opt_desc}>
+                      <InstallmentIcon />
+                    </p> */}
                   </div>
                 </label>
               </div>
@@ -269,9 +292,12 @@ function CheckoutForm() {
                   name='payment'
                 />
                 <label htmlFor='opt7'>
-                  <p>
-                    <img src='/images/click.png' alt='Click' />
-                  </p>
+                  <div>
+                    <p className={style.opt_title}>Click</p>
+                    <p className={style.opt_img}>
+                      <img src='/images/click.png' alt='Click' />
+                    </p>
+                  </div>
                 </label>
               </div>
               <div className={style.radio_input}>
@@ -282,9 +308,12 @@ function CheckoutForm() {
                   name='payment'
                 />
                 <label htmlFor='opt8'>
-                  <p>
-                    <img src='/images/payme.png' alt='Payme' />
-                  </p>
+                  <div>
+                    <p className={style.opt_title}>Payme</p>
+                    <p className={style.opt_img}>
+                      <img src='/images/payme.png' alt='Payme' />
+                    </p>
+                  </div>
                 </label>
               </div>
             </div>

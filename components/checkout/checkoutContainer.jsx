@@ -4,7 +4,27 @@ import CheckoutForm from './checkoutForm'
 import { Grid } from '@material-ui/core'
 import style from './checkout.module.scss'
 import { useTranslation } from '../../i18n'
+import { makeStyles } from '@material-ui/core'
+const useStyles = makeStyles((theme) => ({
+  item1: {
+    [theme.breakpoints.up('md')]: {
+      order: 2,
+    },
+    [theme.breakpoints.up('sm')]: {
+      order: 1,
+    },
+  },
+  item2: {
+    [theme.breakpoints.up('md')]: {
+      order: 1,
+    },
+    [theme.breakpoints.up('sm')]: {
+      order: 2,
+    },
+  },
+}))
 function CheckoutContainer() {
+  const classes = useStyles()
   const { t } = useTranslation()
   const [totalPrice, setTotalPrice] = useState(0)
   const [totalQuantity, setTotalQuantity] = useState(0)
@@ -13,16 +33,16 @@ function CheckoutContainer() {
     <>
       <div className={style.wrapper}>
         <p className={style.list_title}>{t('checkout')}</p>
-        <Grid container justify='space-between' spacing={2}>
-          <Grid item xs={8}>
+        <div className={style.grid_container}>
+          <div className={style.grid_item}>
             <div className={style.inner}>
               <CheckoutForm />
             </div>
-          </Grid>
-          <Grid item xs={4}>
+          </div>
+          <div className={style.grid_item}>
             <CheckoutDetails />
-          </Grid>
-        </Grid>
+          </div>
+        </div>
       </div>
     </>
   )

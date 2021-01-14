@@ -54,7 +54,7 @@ const useStyles = makeStyles(() => ({
     paddingTop: '10px',
   },
 }))
-const CartDropdown = ({ title, subCategs }) => {
+const CartDropdown = ({ mobile }) => {
   const { t } = useTranslation()
   const [isBagVisible, setIsBagVisible] = useState(false)
   const [animate, setAnimate] = useState(false)
@@ -147,59 +147,59 @@ const CartDropdown = ({ title, subCategs }) => {
             )}
           </a>
         </Link>
+        {!mobile ? (
+          <Popper
+            open={open}
+            anchorEl={anchorRef.current}
+            className={classes.popper}
+            role={undefined}
+            transition
+            disablePortal
+          >
+            {({ TransitionProps, placement }) => (
+              <Grow
+                {...TransitionProps}
+                style={{
+                  transformOrigin:
+                    placement === 'bottom' ? 'center top' : 'center bottom',
+                }}
+              >
+                <Paper className={classes.paper}>
+                  <ClickAwayListener onClickAway={handleClose}>
+                    {productsInCart?.length ? (
+                      <Link href='/cart'>
+                        <li
+                          className={style.cart_items}
+                          onClick={handleClose}
+                          diableRipple
+                        >
+                          {productsInCart.map((el, ind) => (
+                            <div className={style.item} key={ind}>
+                              <div className={style.img}>
+                                <img src={el.img} alt={el.name} />
+                              </div>
 
-        <Popper
-          open={open}
-          anchorEl={anchorRef.current}
-          className={classes.popper}
-          role={undefined}
-          transition
-          disablePortal
-        >
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              style={{
-                transformOrigin:
-                  placement === 'bottom' ? 'center top' : 'center bottom',
-              }}
-            >
-              <Paper className={classes.paper}>
-                <ClickAwayListener onClickAway={handleClose}>
-                  {productsInCart?.length ? (
-                    <Link href='/cart'>
-                      <li
-                        className={style.cart_items}
-                        onClick={handleClose}
-                        diableRipple
-                      >
-                        {productsInCart.map((el, ind) => (
-                          <div className={style.item} key={ind}>
-                            <div className={style.img}>
-                              <img src={el.img} alt={el.name} />
-                            </div>
-
-                            <div className={style.details}>
-                              <div className={style.title}>{el.name}</div>
-                              <div className={style.desc}>
-                                <p>
-                                  {t('price')}: {numberToPrice(el.price)}{' '}
-                                  {t('soum')}
-                                </p>
-                                <p>
-                                  {t('quantity')}: {el.quantity}{' '}
-                                  {el.quantity > 1 ? t('pc2') : t('pc1')}
-                                </p>
+                              <div className={style.details}>
+                                <div className={style.title}>{el.name}</div>
+                                <div className={style.desc}>
+                                  <p>
+                                    {t('price')}: {numberToPrice(el.price)}{' '}
+                                    {t('soum')}
+                                  </p>
+                                  <p>
+                                    {t('quantity')}: {el.quantity}{' '}
+                                    {el.quantity > 1 ? t('pc2') : t('pc1')}
+                                  </p>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        ))}
-                      </li>
-                    </Link>
-                  ) : (
-                    <div className={style.no_item}>{t('empty_cart')}</div>
-                  )}
-                  {/* <MenuItem onClick={handleClose} diableRipple>
+                          ))}
+                        </li>
+                      </Link>
+                    ) : (
+                      <div className={style.no_item}>{t('empty_cart')}</div>
+                    )}
+                    {/* <MenuItem onClick={handleClose} diableRipple>
                       <Link href='/cart'>
                         <a>{t('cart')}</a>
                       </Link>
@@ -219,11 +219,14 @@ const CartDropdown = ({ title, subCategs }) => {
                         <a>{t('signin')}</a>
                       </Link>
                     </MenuItem>*/}
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
+                  </ClickAwayListener>
+                </Paper>
+              </Grow>
+            )}
+          </Popper>
+        ) : (
+          ''
+        )}
       </li>
     </>
   )

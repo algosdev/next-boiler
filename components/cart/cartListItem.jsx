@@ -88,12 +88,12 @@ function CartListItem({ id, data, calculateTotal }) {
               </div>
               <div className={style.quantity_cont}>
                 <div className={style.quantity_inner}>
-                  <div
+                  <button
                     className={style.minus}
                     onClick={() => changeQuantity('minus')}
                   >
                     <RemoveIcon />
-                  </div>
+                  </button>
                   <div
                     className={`${style.quantity} ${error ? style.error : ''}`}
                   >
@@ -116,12 +116,12 @@ function CartListItem({ id, data, calculateTotal }) {
                       }
                     ></input>
                   </div>
-                  <div
+                  <button
                     className={style.plus}
                     onClick={() => changeQuantity('plus')}
                   >
                     <AddIcon />
-                  </div>
+                  </button>
                 </div>
                 <div className={style.price}>
                   {/* {numberToPrice(data.price)} */}

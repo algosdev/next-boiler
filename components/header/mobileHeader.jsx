@@ -14,6 +14,7 @@ import { ExpandMoreRounded } from '@material-ui/icons'
 import { withStyles } from '@material-ui/core/styles'
 import { ClickAwayListener } from '@material-ui/core'
 import LanguageDropdown from './LanguageDropdown'
+import CartDropdown from './CartDropdown'
 
 const Accordion = withStyles({
   root: {
@@ -70,15 +71,15 @@ const AccordionDetails = withStyles((theme) => ({
     flexDirection: 'column',
     padding: '5px 0',
     '& .MuiTypography-root': {
-      padding: '5px 10px',
+      padding: '0',
       display: 'flex',
       color: '#fff',
       alignItems: 'center',
     },
     '& .MuiTypography-root a': {
       color: '#fff',
-      paddingTop: 0,
-      paddingBottom: 0,
+      padding: '5px 10px',
+      width: '100%',
     },
   },
 }))(MuiAccordionDetails)
@@ -179,11 +180,12 @@ function MobileHeader({ data }) {
           </Link>
         </div>
         <div className={style.cart_cont}>
-          <Link href='/cart'>
+          {/* <Link href='/cart'>
             <a>
               <ShoppingCartOutlinedIcon />
             </a>
-          </Link>
+          </Link> */}
+          <CartDropdown mobile={true} />
         </div>
         <LanguageDropdown />
         {/* <div className={style.cart_cont}>
@@ -239,8 +241,8 @@ function MobileHeader({ data }) {
                   </AccordionSummary>
                   <AccordionDetails>
                     {categ.subCategs.map((genre, ind) => (
-                      <Typography key={ind}>
-                        <Link href={`/shop`}>
+                      <Typography key={ind} onClick={() => setIsOpen(false)}>
+                        <Link href={`/shop?${genre.link}`}>
                           <a>{genre.title}</a>
                         </Link>
                       </Typography>

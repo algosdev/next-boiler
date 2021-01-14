@@ -96,7 +96,7 @@ function CartList() {
           {t('incart1')} {totalQuantity} {t('incart2')}
         </p>
         <Grid container justify='space-between' xs={12} spacing={2}>
-          <Grid item xs={8}>
+          <Grid item xs={12} md={7} lg={8}>
             <div className={style.inner}>
               {cardItems.length ? (
                 cardItems.map((el) => (
@@ -111,7 +111,7 @@ function CartList() {
               )}
             </div>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} md={5} lg={4}>
             <CardSummary
               totalPrice={totalPrice}
               totalQuantity={totalQuantity}

@@ -103,6 +103,7 @@ input[type='number'] {
 }
 .main_container .header_margin {
   height: 75px;
+  background: var(--black);
 }
 #macbro_container div button:focus {
   outline: 0;

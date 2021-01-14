@@ -124,127 +124,123 @@ function ProductSingleContent({ data }) {
 
   return (
     <div className={style.wrapper_content}>
-      <Container>
-        <div className={style.inner}>
-          <div className={style.type}>{t('new')}</div>
-          <div className={style.name}>{data.name}</div>
-          <div className={style.desc}>
-            Требуются AirPods Max с последней версией программного обеспечения и
-            модели iPhone и iPod touch с последней версией iOS; модели iPad с
-            последней версией iPadOS; Модели Apple Watch с последней версией
-            watchOS;
-          </div>
-          <div className={style.colors_cont}>
-            <div className={style.colors_title}>{t('colors')}</div>
-            <Grid container spacing={2}>
-              {colorsData.map((item, index) => (
-                <Grid
-                  item
-                  xs={6}
-                  key={index}
-                  onClick={() => setActiveColorIndex(index)}
-                >
-                  <div
-                    className={`${style.color_cont} ${
-                      activeColorIndex === index ? style.active : ''
-                    }`}
-                  >
-                    <div className={style.inner}>
-                      <div
-                        className={`${style.color_ball} ${
-                          style[item.en.toLowerCase()]
-                        }`}
-                      ></div>
-                      <div className={style.color_name}>{item[language]}</div>
-                    </div>
-                  </div>
-                </Grid>
-              ))}
-            </Grid>
-          </div>
-          {!addedToCart ? (
-            <div className={style.quantity_cont}>
-              <div className={style.quantity_inner}>
-                <button
-                  className={style.minus}
-                  onClick={() => changeQuantity('minus')}
-                >
-                  <RemoveIcon />
-                </button>
-                <div
-                  className={`${style.quantity} ${error ? style.error : ''}`}
-                >
-                  <input
-                    type='number'
-                    // min={0}
-                    pattern='[0-9]'
-                    // max={data?.availableQuantity}
-                    value={quantity}
-                    onBlur={(e) => {
-                      setError(false)
-                      if (e.target.value === '') {
-                        setCustomQuantity(1)
-                      }
-                    }}
-                    onChange={(e) => setQuantity(e.target.value)}
-                  ></input>
-                </div>
-                <button
-                  className={style.plus}
-                  onClick={() => changeQuantity('plus')}
-                >
-                  <AddIcon />
-                </button>
-              </div>
-            </div>
-          ) : (
-            ''
-          )}
-          <div className={style.price}>
-            {numberToPrice(data.price)} {t('soum')}
-          </div>
-          <div className={style.add}>
-            <Button
-              className={`input ${isLoading ? style.disabled : ''}`}
-              onClick={() => {
-                if (!addedToCart) {
-                  addToCart()
-                } else {
-                  Router.push('/cart')
-                }
-              }}
-              disabled={isLoading}
-            >
-              <AnimatePresence>
-                {addedToCart && (
-                  <motion.span
-                    animate={{ opacity: 1, scale: 1 }}
-                    initial={{ opacity: 0, scale: 0 }}
-                    exit={{ opacity: 0, scale: 0 }}
-                  >
-                    {t('added_to_cart')}
-                  </motion.span>
-                )}
-              </AnimatePresence>
-              {!addedToCart &&
-                (isLoading ? (
-                  <CircularProgress color='inherit' />
-                ) : (
-                  t('add_to_cart')
-                ))}
-            </Button>
-            <Button
-              fullWidth
-              className={style.secondary}
-              onClick={() => {
-                Router.push('/compare')
-              }}
-            >
-              {t('compare_with_others')}
-            </Button>
-          </div>
+      <div className={style.inner}>
+        <div className={style.type}>{t('new')}</div>
+        <div className={style.name}>{data.name}</div>
+        <div className={style.desc}>
+          Требуются AirPods Max с последней версией программного обеспечения и
+          модели iPhone и iPod touch с последней версией iOS; модели iPad с
+          последней версией iPadOS; Модели Apple Watch с последней версией
+          watchOS;
         </div>
-      </Container>
+        <div className={style.colors_cont}>
+          <div className={style.colors_title}>{t('colors')}</div>
+          <Grid container spacing={2}>
+            {colorsData.map((item, index) => (
+              <Grid
+                item
+                xs={6}
+                key={index}
+                onClick={() => setActiveColorIndex(index)}
+              >
+                <div
+                  className={`${style.color_cont} ${
+                    activeColorIndex === index ? style.active : ''
+                  }`}
+                >
+                  <div className={style.inner}>
+                    <div
+                      className={`${style.color_ball} ${
+                        style[item.en.toLowerCase()]
+                      }`}
+                    ></div>
+                    <div className={style.color_name}>{item[language]}</div>
+                  </div>
+                </div>
+              </Grid>
+            ))}
+          </Grid>
+        </div>
+        {!addedToCart ? (
+          <div className={style.quantity_cont}>
+            <div className={style.quantity_inner}>
+              <button
+                className={style.minus}
+                onClick={() => changeQuantity('minus')}
+              >
+                <RemoveIcon />
+              </button>
+              <div className={`${style.quantity} ${error ? style.error : ''}`}>
+                <input
+                  type='number'
+                  // min={0}
+                  pattern='[0-9]'
+                  // max={data?.availableQuantity}
+                  value={quantity}
+                  onBlur={(e) => {
+                    setError(false)
+                    if (e.target.value === '') {
+                      setCustomQuantity(1)
+                    }
+                  }}
+                  onChange={(e) => setQuantity(e.target.value)}
+                ></input>
+              </div>
+              <button
+                className={style.plus}
+                onClick={() => changeQuantity('plus')}
+              >
+                <AddIcon />
+              </button>
+            </div>
+          </div>
+        ) : (
+          ''
+        )}
+        <div className={style.price}>
+          {numberToPrice(data.price)} {t('soum')}
+        </div>
+        <div className={style.add}>
+          <Button
+            className={`input ${isLoading ? style.disabled : ''}`}
+            onClick={() => {
+              if (!addedToCart) {
+                addToCart()
+              } else {
+                Router.push('/cart')
+              }
+            }}
+            disabled={isLoading}
+          >
+            <AnimatePresence>
+              {addedToCart && (
+                <motion.span
+                  animate={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0, scale: 0 }}
+                  exit={{ opacity: 0, scale: 0 }}
+                >
+                  {t('added_to_cart')}
+                </motion.span>
+              )}
+            </AnimatePresence>
+            {!addedToCart &&
+              (isLoading ? (
+                <CircularProgress color='inherit' />
+              ) : (
+                t('add_to_cart')
+              ))}
+          </Button>
+          <Button
+            fullWidth
+            className={style.secondary}
+            onClick={() => {
+              Router.push('/compare')
+            }}
+          >
+            {t('compare_with_others')}
+          </Button>
+        </div>
+      </div>
     </div>
   )
 }

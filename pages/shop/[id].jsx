@@ -20,10 +20,10 @@ function ProductSingle({ store, slug }) {
       <div style={{ background: '#fff', padding: '50px 0' }}>
         <Container>
           <Grid container justify='space-between' spacing={2}>
-            <Grid item xs={6}>
+            <Grid item md={6} sm={12}>
               <ProductSingleCarousel data={getData(slug)} />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item md={6} sm={12}>
               <ProductSingleContent data={getData(slug)} />
             </Grid>
           </Grid>

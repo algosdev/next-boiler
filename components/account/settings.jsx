@@ -164,19 +164,17 @@ function AccountSettings() {
               required
             />
             <div className={style.form_actions}>
-              <DialogActions>
-                <Button
-                  onClick={handleSubmit}
-                  variant='containedSecondary'
-                  color='primary'
-                  type='submit'
-                >
-                  {t('cancel')}
-                </Button>
-                <Button type='submit' onClick={handleSubmit} color='primary'>
-                  {t('save')}
-                </Button>
-              </DialogActions>
+              <Button
+                onClick={handleSubmit}
+                variant='containedSecondary'
+                color='primary'
+                type='submit'
+              >
+                {t('cancel')}
+              </Button>
+              <Button type='submit' onClick={handleSubmit} color='primary'>
+                {t('save')}
+              </Button>
             </div>
           </form>
         </DialogContent>

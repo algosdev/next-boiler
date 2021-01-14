@@ -1,6 +1,9 @@
 .shopHeader {
   width: 100%;
   padding-bottom: 50px;
+  @media (max-width: 576px) {
+    padding-bottom: 30px;
+  }
   .wrapper {
     display: flex;
     align-items: center;
@@ -41,6 +44,9 @@
           border: 0;
           cursor: pointer;
           background: transparent;
+          @media (max-width: 576px) {
+            font-size: 14px;
+          }
         }
         .arrow {
           display: flex;

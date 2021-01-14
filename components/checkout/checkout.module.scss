@@ -1,7 +1,30 @@
+.grid_container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 30px;
+  @media (max-width: 960px) {
+    grid-template-columns: 3fr 2fr;
+  }
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    .grid_item:first-child {
+      order: 2;
+    }
+    .grid_item:last-child {
+      order: 1;
+    }
+  }
+}
 .wrapper_summary {
   position: sticky;
   top: 80px;
   padding: 0 16px;
+  @media (max-width: 960px) {
+    font-size: 14px;
+  }
+  @media (max-width: 767px) {
+    padding: 0;
+  }
   .summary_inner {
     border-radius: 6px;
     border: 1px solid var(--border);
@@ -20,6 +43,9 @@
     .header {
       font-size: 20px;
       font-weight: 600;
+      @media (max-width: 960px) {
+        font-size: 18px;
+      }
       a {
         font-size: 14px;
         color: var(--primary-color);
@@ -35,6 +61,9 @@
       padding: 10px 0;
       border-top: 1px solid var(--border);
       margin-bottom: 0;
+      @media (max-width: 960px) {
+        font-size: 18px;
+      }
     }
   }
 }
@@ -74,6 +103,10 @@
     line-height: 32px;
     padding: 30px 0 20px;
     margin: 0;
+    @media (max-width: 576px) {
+      font-size: 18px;
+      line-height: 24px;
+    }
   }
   .submit {
     background: var(--primary-color);
@@ -97,14 +130,20 @@
       div {
         width: 100%;
         padding: 10px;
+        height: 100%;
         min-height: 20px;
         border-radius: 4px;
         box-shadow: 0 0 2px 1px var(--border);
+        @media (max-width: 576px) {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
       }
       & > p {
+        text-align: center;
         min-height: 20px;
         border-radius: 4px;
-        box-shadow: 0 0 2px 1px var(--border);
         padding: 10px;
         display: flex;
         justify-content: center;
@@ -113,9 +152,36 @@
 
       cursor: pointer;
       .opt_title {
+        text-align: center;
         font-weight: 600;
         font-size: 18px;
         line-height: 30px;
+        @media (max-width: 576px) {
+          font-size: 14px;
+          line-height: 20px;
+        }
+      }
+      .opt_img {
+        img {
+          height: 50px;
+          @media (max-width: 576px) {
+            height: 30px;
+          }
+          width: auto;
+        }
+        svg {
+          height: 40px;
+          transform: scale(1.5);
+          @media (max-width: 576px) {
+            height: 30px;
+            transform: scale(1.2);
+          }
+        }
+        .grey {
+          filter: grayscale(1);
+        }
+        display: flex;
+        justify-content: center;
       }
     }
     input {

@@ -34,6 +34,10 @@ export const useStyles = makeStyles(() => ({
     },
     '& .MuiTabScrollButton-root': {
       display: 'none',
+      color: '#1d1d1d',
+      ['@media (max-width: "576px"']: {
+        display: 'block',
+      },
     },
     '& .MuiTabs-flexContainer,  & .MuiTabs-scrollable': {
       width: '100%',
@@ -49,7 +53,7 @@ export const useStyles = makeStyles(() => ({
       width: '100%',
       minHeight: '32px',
       ['@media (max-width:576px)']: {
-        height: '32px',
+        height: '48px',
         borderRadius: '8px',
       },
     },
@@ -60,6 +64,7 @@ export const useStyles = makeStyles(() => ({
       fontFamily: "'Open Sans', sans-serif",
       fontWeight: '600',
       zIndex: '2',
+      whiteSpace: 'nowrap',
       color: '#1d1d1d',
       opacity: '1',
       borderRadius: '12px',
@@ -69,8 +74,8 @@ export const useStyles = makeStyles(() => ({
       width: 'calc(100% / 3)',
       ['@media (max-width:576px)']: {
         height: '28px',
-        margin: '2px',
-        fontSize: '12px',
+        fontSize: '14px',
+        width: 'auto',
         borderRadius: '8px',
       },
     },

@@ -12,30 +12,37 @@ export default function Home() {
       {
         name: 'iPhone',
         image: 'images/iphone.png',
+        link: 'category=apple_p&subcategory=Iphone',
       },
       {
         name: 'iPad',
         image: 'images/ipad.png',
+        link: 'category=apple_p&subcategory=Ipad',
       },
       {
         name: 'Apple Watch',
         image: 'images/apple_watch.png',
+        link: 'category=apple_p&subcategory=Apple_watch',
       },
       {
         name: 'AirPods',
         image: 'images/airpods.png',
+        link: 'category=apple_p&subcategory=AirPod',
       },
       {
         name: 'Macbook',
         image: 'images/mac_m1.jpg',
+        link: 'category=apple_p&subcategory=Macbook',
       },
       {
         name: 'iMac',
         image: 'images/imac.jpg',
+        link: 'category=apple_p&subcategory=iMac',
       },
       {
         name: t('accessories'),
         image: 'images/accessories.png',
+        link: 'category=accessories&subcategory=covers',
       },
     ],
   }
@@ -46,18 +53,22 @@ export default function Home() {
       {
         name: t('galaxy_phones'),
         image: 'images/galaxy_s20.jpg',
+        link: 'category=samsung_p&subcategory=galaxy@phones',
       },
       {
         name: t('tablets'),
+        link: 'category=samsung_p&subcategory=tablets',
         image: 'images/samsung_tabs.jpg',
       },
       {
         name: t('watches'),
+        link: 'category=samsung_p&subcategory=watches',
         image: 'images/samsung_watches.png',
       },
       {
         name: t('buds'),
         image: 'images/galaxy_buds.png',
+        link: 'category=acoustics&subcategory=earphones',
       },
     ],
   }

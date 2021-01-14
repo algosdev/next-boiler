@@ -3,7 +3,7 @@ import style from './productList.module.scss'
 import { Link, useTranslation } from '../../i18n'
 import { List, KeyboardArrowDown } from '@material-ui/icons'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ClickAwayListener, makeStyles } from '@material-ui/core'
+import { ClickAwayListener, makeStyles, Container } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -16,13 +16,30 @@ import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import CloseIcon from '@material-ui/icons/Close'
 import Slide from '@material-ui/core/Slide'
+import ProductFilter from './productFilter'
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: 'relative',
+    padding: '6px 0',
+    background: 'var(--secondary-color)',
+    color: 'var(--black)',
+    boxShadow:
+      '0px 2px 4px -1px rgba(0,0,0,0.1), 0px 4px 10px 0px rgba(0,0,0,0.05), 0px 1px 10px 0px rgba(0,0,0,0.05)',
   },
   title: {
     marginLeft: theme.spacing(2),
     flex: 1,
+  },
+  btn: {
+    color: '#fff',
+    fontSize: '16px',
+
+    background: 'var(--primary-color)',
+  },
+  container: {
+    padding: '32px 16px',
+    maxWidth: '400px',
+    marginLeft: '0',
   },
 }))
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -57,8 +74,12 @@ function ProductHeader({ showFilter, setShowFilter }) {
             <button
               className={style.btn}
               onClick={() => {
-                handleClickOpen()
                 setShowFilter(!showFilter)
+                if (window) {
+                  if (window.innerWidth < 576) {
+                    handleClickOpen()
+                  }
+                }
               }}
             >
               <List />
@@ -135,7 +156,7 @@ function ProductHeader({ showFilter, setShowFilter }) {
         onClose={handleClose}
         TransitionComponent={Transition}
       >
-        <AppBar className={classes.appBar}>
+        <AppBar className={classes.appBar} elevation={0}>
           <Toolbar>
             <IconButton
               edge='start'
@@ -148,11 +169,19 @@ function ProductHeader({ showFilter, setShowFilter }) {
             <Typography variant='h6' className={classes.title}>
               Фильтр
             </Typography>
-            <Button autoFocus color='inherit' onClick={handleClose}>
+            <Button
+              color='inherit'
+              className={classes.btn}
+              onClick={handleClose}
+            >
               Применять
             </Button>
           </Toolbar>
         </AppBar>
+        <Container className={classes.container}>
+          <ProductFilter />
+        </Container>
+
         {/* <List>
           <ListItem button>
             <ListItemText primary='Phone ringtone' secondary='Titania' />

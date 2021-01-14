@@ -93,8 +93,8 @@
 .form_actions {
   display: flex;
   justify-content: flex-end;
-  & > div {
-    margin: 0 5px;
+  & > button:first-child {
+    margin-right: 10px;
   }
 }
 .actions {

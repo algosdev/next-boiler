@@ -59,7 +59,6 @@
             position: absolute;
             top: 15%;
             right: -6px;
-
             .badge {
               color: #fff;
               font-size: 12px;
@@ -331,6 +330,9 @@
     margin-left: 10px;
     align-items: center;
     font-size: 14px;
+    &.cartIcon {
+      width: 28px;
+    }
     svg {
       width: 24px;
     }
@@ -375,8 +377,50 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    position: relative;
     a {
       color: #fff;
+    }
+    .badge_cont {
+      position: absolute;
+      top: 15%;
+      right: -6px;
+      .badge {
+        color: #fff;
+        font-size: 12px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 17px;
+        width: 17px;
+        background: var(--primary-color);
+        position: relative;
+        span {
+          z-index: 2;
+        }
+        &.animate {
+          // background-color: red;
+          &::before,
+          &::after {
+            animation: badge 1s ease-in-out forwards;
+            animation-delay: 0.5s;
+          }
+        }
+        &::before,
+        &::after {
+          content: '';
+          position: absolute;
+          height: 17px;
+          width: 17px;
+          border-radius: 50%;
+          z-index: 1;
+          background: var(--primary-color);
+        }
+        &::after {
+          transition-delay: 0.5s;
+        }
+      }
     }
   }
 }
