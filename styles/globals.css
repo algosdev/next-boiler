@@ -133,9 +133,21 @@ body > div > p {
 .input.error {
   border: 1px solid red;
 }
-
+.news_carousel .slick-prev {
+  left: -50px;
+}
+.news_carousel .slick-next {
+  right: -50px;
+}
 .input.error:focus {
   border: 1px solid red;
+}
+.slick-track {
+  display: flex !important;
+}
+
+.slick-slide {
+  height: inherit !important;
 }
 
 /* input.input:hover {

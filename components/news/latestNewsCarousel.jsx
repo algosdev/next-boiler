@@ -44,9 +44,9 @@ function LatestNewsCarousel() {
   ]
   const responsive = [
     {
-      breakpoint: 1024,
+      breakpoint: 900,
       settings: {
-        slidesToShow: 1,
+        slidesToShow: 2,
         slidesToScroll: 1,
         infinite: false,
         dots: true,
@@ -63,14 +63,15 @@ function LatestNewsCarousel() {
 
   return (
     <Container>
-      <div className={style.wrapper_latest}>
+      <div className={`${style.wrapper_latest} news_carousel`}>
         <div className={style.inner}>
           <div className={style.main_title}>Последние новости</div>
           <ReactSlick
             {...{
-              infinite: false,
+              infinite: true,
               speed: 500,
-              slidesToShow: 1,
+              centerPadding: '100px',
+              slidesToShow: 3,
               slidesToScroll: 1,
               responsive,
               nextArrow: <NextArrow />,
@@ -79,6 +80,9 @@ function LatestNewsCarousel() {
           >
             {newsData.map((item, index) => (
               <NewsItem key={index} data={item} margin />
+            ))}
+            {newsData.map((item, index) => (
+              <NewsItem key={index + 3} data={item} margin />
             ))}
           </ReactSlick>
         </div>
