@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core'
+import MaskedInput from 'react-text-mask'
 export const useStyles = makeStyles(() => ({
   root: {
     background: 'transparent',
@@ -26,3 +27,36 @@ export const useStyles = makeStyles(() => ({
     },
   },
 }))
+export function PhoneNumberMask(props) {
+  const { inputRef, ...other } = props
+
+  return (
+    <MaskedInput
+      {...other}
+      ref={(ref) => {
+        inputRef(ref ? ref.inputElement : null)
+      }}
+      mask={[
+        '+',
+        '9',
+        '9',
+        '8',
+        /\d/,
+        /\d/,
+        ' ',
+        ' ',
+        /\d/,
+        /\d/,
+        /\d/,
+        ' ',
+        /\d/,
+        /\d/,
+        ' ',
+        /\d/,
+        /\d/,
+      ]}
+      placeholderChar={'\u2000'}
+      showMask
+    />
+  )
+}

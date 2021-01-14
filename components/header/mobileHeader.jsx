@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography'
 import { ExpandMoreRounded } from '@material-ui/icons'
 import { withStyles } from '@material-ui/core/styles'
 import { ClickAwayListener } from '@material-ui/core'
+import LanguageDropdown from './LanguageDropdown'
 
 const Accordion = withStyles({
   root: {
@@ -184,6 +185,14 @@ function MobileHeader({ data }) {
             </a>
           </Link>
         </div>
+        <LanguageDropdown />
+        {/* <div className={style.cart_cont}>
+          <Link href='/cart'>
+            <a>
+              <ShoppingCartOutlinedIcon />
+            </a>
+          </Link>
+        </div> */}
       </div>
       <AnimatePresence>
         {isOpen ? (

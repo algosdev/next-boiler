@@ -50,7 +50,8 @@ const useStyles = makeStyles(() => ({
   },
   popper: {
     zIndex: '999',
-    top: '10px !important',
+    top: '0 !important',
+    paddingTop: '10px',
   },
 }))
 const CartDropdown = ({ title, subCategs }) => {

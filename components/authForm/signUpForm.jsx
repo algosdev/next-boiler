@@ -1,293 +1,253 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {
   Typography,
-  TextField,
-  FormControl,
-  InputLabel,
-  FilledInput,
-  InputAdornment,
-  IconButton,
+  Checkbox,
+  CircularProgress,
   Button,
+  TextField,
 } from '@material-ui/core'
-import Visibility from '@material-ui/icons/Visibility'
-import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import style from './authForm.module.scss'
-import VisibilityIcon from '@material-ui/icons/Visibility'
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff'
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
+import { Link } from '../../i18n'
 import { Router } from '../../i18n'
+import { useForm, Controller } from 'react-hook-form'
 import composeRefs from '@seznam/compose-react-refs'
 import InputMask from 'react-input-mask'
-import { useForm } from 'react-hook-form'
 import { useTranslation } from '../../i18n'
-import { useStyles } from './textFieldStyle'
-function SignUpForm() {
-  const classes = useStyles()
+import { useStyles, PhoneNumberMask } from './textFieldStyle'
+function SignInForm() {
   const { t } = useTranslation()
-  const [error, setError] = useState(false)
+  const classes = useStyles()
+  const router = Router
+  const phoneNumRef = useRef(null)
   const passwordRef = useRef(null)
-  const passwordConfirmRef = useRef(null)
-  const [showPassword, setShowPassword] = useState(false)
-  const { register, handleSubmit, errors, watch } = useForm()
-  const password = useRef({})
-  password.current = watch('password', '')
-  const submitHandler = (data) => {
-    console.log(data)
-    Router.push('/verify-code')
-  }
-  const [values, setValues] = React.useState({
-    amount: '',
+  const [rememberMe, setRememberMe] = useState(false)
+  const [isPhoneNumValid, setIsPhoneNumValid] = useState(false)
+  const { register, handleSubmit, errors, watch, control } = useForm()
+  const [isPasswordValid, setIsPasswordValid] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [values, setValues] = useState({
+    phoneNum: '',
     password: '',
-    passwordConfirm: '',
-    weight: '',
-    weightRange: '',
-    showPassword: false,
   })
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value })
+  const submitHandlerPhone = (e) => {
+    e.preventDefault()
+    checkPhoneNum()
   }
-
-  const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword })
+  const submitHandlerPassword = (e) => {
+    e.preventDefault()
+    checkPassword()
   }
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault()
-  }
-
-  useEffect(() => {
-    if (passwordRef.current && passwordConfirmRef.current) {
-      if (showPassword) {
-        passwordRef.current.type = 'text'
-        passwordConfirmRef.current.type = 'text'
-      } else {
-        passwordRef.current.type = 'password'
-        passwordConfirmRef.current.type = 'password'
-      }
+  const checkPhoneNum = () => {
+    setIsLoading(true)
+    setTimeout(() => {
+      setIsPhoneNumValid(true)
+      setIsLoading(false)
+      router.push('/verify-code?signup=true')
+    }, 2000)
+    if (isPhoneNumValid) {
+      checkPassword()
     }
-  }, [showPassword])
-
-  const checkPhoneNumber = (string) => {
+  }
+  const checkPassword = () => {
+    setIsLoading(true)
+    setTimeout(() => {
+      setIsPasswordValid(true)
+      setIsLoading(false)
+      router.push('/verify-code?signup=true')
+    }, 2000)
+  }
+  const checkPhoneNumberLength = (string) => {
     let count = 0
     string.split('').forEach((el) => {
       if (el < 10) {
         count++
       }
     })
-    return count >= 12 ? true : false
+    const result = count >= 12 ? true : false
+    console.log(result)
+    return result
   }
+  useEffect(() => {
+    if (phoneNumRef.current && passwordRef.current && isPhoneNumValid) {
+      phoneNumRef.current.blur()
+      passwordRef.current.focus()
+    }
+  }, [isPhoneNumValid])
+
   return (
     <div className={style.wrapper}>
       <Typography variant='h2'>{t('signup_title')}</Typography>
       <div className={style.inner}>
-        <form onSubmit={handleSubmit(submitHandler)}>
+        <form onSubmit={submitHandlerPhone} autoComplete='off'>
           <div className={style.input_cont}>
             <TextField
-              id='filled-basic'
-              name='name'
+              value={values.textmask}
               variant='filled'
               fullWidth
-              type='text'
               className={classes.root}
+              name='phoneNum'
+              id='formatted-text-mask-input'
+              InputProps={{
+                inputComponent: PhoneNumberMask,
+              }}
+              onChange={(e) =>
+                setValues({ ...values, phoneNum: e.target.value })
+              }
               required
-              label={t('name')}
+              label={t('phone_num')}
             />
-            {/* <input
-                className={`input`}
-                required
-                ref={register}
-                name='name'
-                type='text'
-                placeholder={t('name')}
-              /> */}
-          </div>
-          <div className={style.input_cont}>
-            <TextField
-              id='filled-basic'
-              name='name'
-              variant='filled'
-              fullWidth
-              type='text'
-              className={classes.root}
-              required
-              label={t('surname')}
-            />
-            {/* <input
-                className={`input`}
-                name='surname'
-                type='text'
-                ref={register}
-                placeholder={t('surname')}
-                required
-              /> */}
-          </div>
-          <div className={style.input_cont}>
-            <TextField
+            {/* <TextField
               id='filled-basic'
               name='phoneNum'
               variant='filled'
               fullWidth
               type='tel'
               className={classes.root}
-              // onChange={(e) =>
-              //   setValues({ ...values, phoneNum: e.target.value })
-              // }
+              onChange={(e) =>
+                setValues({ ...values, phoneNum: e.target.value })
+              }
               required
               label={t('phone_num')}
-            />
-            {/* <InputMask
-              mask='+99999-999-99-99'
-              disabled={false}
-              maskChar={' '}
-              defaultValue='+998'
-              type='tel'
-            >
-              {() => (
-                <input
-                  className='input'
+            /> */}
+            {/* <Controller
+              as={TextField}
+              name={'phoneNum'}
+              control={control}
+              defaultValue=''
+              label={t('phone_num')}
+              fullWidth={true}
+              InputLabelProps={{
+                required: true,
+                variant: 'filled',
+              }}
+            /> */}
+            {/* <Controller
+              control={control}
+              name='test'
+              render={({ onChange, onBlur, value }) => (
+                <InputMask
+                  mask='+99999-999-99-99'
+                  disabled={false}
+                  maskChar={' '}
+                  defaultValue='+998'
                   name='phoneNum'
-                  placeholder={t('phone_num')}
-                  ref={register({
-                    validate: (value) => checkPhoneNumber(value),
-                    setValueAs: (value) =>
-                      value.trim().replace(/_/g, '').replace(/\s/g, ''),
-                  })}
-                />
+                  type='tel'
+                >
+                  {(inputProps) => (
+                    <TextField
+                      {...inputProps}
+                      disableunderline
+                      id='filled-basic'
+                      name='phoneNum'
+                      ref={register({
+                        validate: (value) => checkPhoneNumberLength(value),
+                        setValueAs: (value) =>
+                          value.trim().replace(/_/g, '').replace(/\s/g, ''),
+                      })}
+                      label={t('phone_num')}
+                      variant='filled'
+                    />
+                  )}
+                </InputMask>
               )}
-            </InputMask> */}
+            /> */}
           </div>
-          <span className={style.errorTxt}>
-            {errors.phoneNum && t('phone_invalid')}
-          </span>
-          <div className={style.input_cont}>
-            <FormControl
-              className={classes.root}
-              fullWidth
-              variant='filled'
-              required
-            >
-              <InputLabel htmlFor='filled-adornment-password'>
-                {t('password')}
-              </InputLabel>
-              <FilledInput
-                id='filled-adornment-password'
-                type={values.showPassword ? 'text' : 'password'}
-                value={values.password}
-                onChange={handleChange('password')}
-                endAdornment={
-                  <InputAdornment position='end'>
-                    <IconButton
-                      aria-label='toggle password visibility'
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge='end'
-                    >
-                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
+          {/* {isPhoneNumValid ? (
+            <div className={style.input_cont}>
+              <TextField
+                id='filled-basic'
+                name='password'
+                onChange={(e) =>
+                  setValues({ ...values, password: e.target.value })
                 }
+                variant='filled'
+                required
+                type='password'
+                fullWidth
+                className={classes.root}
+                label={t('password')}
               />
-            </FormControl>
-
-            {/* <input
-              className={`${error ? style.error : ''} input`}
-              required
-              onFocus={() => setError(false)}
-              name='password'
-              ref={composeRefs(
-                register({
-                  required: true,
-                }),
-                passwordRef
-              )}
-              type='password'
-              placeholder={t('password')}
-            /> */}
-            {/* <div
-              className={style.eye}
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {!showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-            </div> */}
-          </div>
-          <div className={style.input_cont}>
-            <FormControl
-              className={classes.root}
-              fullWidth
-              variant='filled'
-              required
-            >
-              <InputLabel htmlFor='filled-adornment-password'>
-                {t('confirm_password')}
-              </InputLabel>
-              <FilledInput
-                id='filled-adornment-password'
-                type={values.showPassword ? 'text' : 'password'}
-                value={values.passwordConfirm}
-                onChange={handleChange('passwordConfirm')}
-                endAdornment={
-                  <InputAdornment position='end'>
-                    <IconButton
-                      aria-label='toggle password visibility'
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge='end'
-                    >
-                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
-            </FormControl>
-            {/* <TextField
-              id='filled-basic'
-              name='passwordConfirm'
-              variant='filled'
-              fullWidth
-              type='text'
-              className={classes.root}
-              required
-              label={t('confirm_password')}
-            /> */}
-            {/* <input
-              className={`${error ? style.error : ''} input`}
-              required
-              name='password_repeat'
-              onFocus={() => setError(false)}
-              ref={composeRefs(
-                register({
-                  validate: (value) =>
-                    value === password.current || t('passwords_dont_match'),
-                }),
-                passwordConfirmRef
-              )}
-              type='password'
-              placeholder={t('confirm_password')}
-            /> */}
-
-            {/* <div
-              className={style.eye}
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {!showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-            </div> */}
-          </div>
-          <span className={style.errorTxt}>
-            {errors.password_repeat && errors.password_repeat.message}
-          </span>
-          <div className={style.input_cont}>
-            <Button type='submit' fullWidth>
-              {t('continue')}
-            </Button>
-          </div>
-          {/* <div className={style.input_cont}>
-            <button className='input' type='submit'>
-              {t('continue')}
-            </button>
-          </div> */}
+            </div>
+          ) : (
+            ''
+          )} */}
+          <Button fullWidth type='submit'>
+            {isLoading ? (
+              <CircularProgress className={style.progress} color='inherit' />
+            ) : (
+              t('signup')
+            )}
+          </Button>
         </form>
+        {/* <form onSubmit={submitHandlerPassword}>
+          <TextField
+            id='filled-basic'
+            name='password'
+            variant='filled'
+            fullWidth
+            className={classes.root}
+            label={t('password')}
+          /> */}
+        {/* {isPhoneNumValid ? (
+            <div className={style.input_cont}>
+              <input
+                className='input'
+                ref={composeRefs(passwordRef, register)}
+                onChange={(e) =>
+                  setValues({ ...values, password: e.target.value })
+                }
+                type='text'
+                name='password'
+                placeholder={t('password')}
+              />
+              {!isPasswordValid ? (
+                values.password ? (
+                  <button className={style.icon} type='submit'>
+                    {isLoading ? (
+                      <CircularProgress className={style.progress} />
+                    ) : (
+                      <ArrowForwardIcon />
+                    )}
+                  </button>
+                ) : (
+                  ''
+                )
+              ) : (
+                ''
+              )}
+            </div>
+          ) : (
+            ''
+          )} */}
+        {/* <Button fullWidth type='submit' className={style.submit}>
+            Sign In
+          </Button>
+        </form> */}
+
+        {/* <div className={style.checkbox_cont}>
+          <Checkbox
+            checked={rememberMe}
+            onChange={(e) => setRememberMe(e.target.checked)}
+          />
+          <span>{t('remember_me')}</span>
+        </div>
+
+        <div className={style.options}>
+          <div>
+            <Link href='/forgot'>
+              <a>{t('forgot_password')}</a>
+            </Link>
+          </div>
+          <div>
+            <Link href='/signup'>
+              <a>{t('create_yours')}</a>
+            </Link>
+          </div>
+        </div> */}
       </div>
     </div>
   )
 }
 
-export default SignUpForm
+export default SignInForm

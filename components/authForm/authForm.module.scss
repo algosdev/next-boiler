@@ -104,12 +104,12 @@
       margin-top: 20px;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
     }
     .options {
       margin-top: 20px;
       & > div {
-        text-align: left;
+        text-align: center;
         margin: 5px 0;
       }
       a {

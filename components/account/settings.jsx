@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Shipment from './shipment'
 import Payment from './payment'
 import style from './account.module.scss'
@@ -14,10 +14,12 @@ import {
   Container,
 } from '@material-ui/core'
 import { useTranslation, Router } from '../../i18n'
+import { useRouter } from 'next/router'
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />
 })
 function AccountSettings() {
+  const router = useRouter()
   const { t } = useTranslation()
   const [open, setOpen] = useState(false)
   const [data, setData] = useState({
@@ -31,10 +33,27 @@ function AccountSettings() {
   const handleClickOpen = () => {
     setOpen(true)
   }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    handleClose()
+  }
 
   const handleClose = () => {
     setOpen(false)
   }
+  useEffect(() => {
+    if (router.query.signup === 'true') {
+      setData({
+        firstname: '',
+        lastname: '',
+        phone_num: '',
+        address1: '',
+        address2: '',
+        address3: '',
+      })
+      setOpen(true)
+    }
+  }, [router])
   return (
     <>
       <Container>
@@ -74,6 +93,14 @@ function AccountSettings() {
               </div>
             </div>
           </div>
+          <div className={style.actions_mobile}>
+            <Button className={style.edit} onClick={handleClickOpen}>
+              {t('edit')}
+            </Button>
+            <Button className={style.logout} onClick={() => Router.push('/')}>
+              {t('signout')}
+            </Button>
+          </div>
         </div>
       </Container>
       <Dialog
@@ -87,13 +114,14 @@ function AccountSettings() {
         <div className={style.dialog_title}>{t('edit_as_title')}</div>
         <DialogContent>
           <DialogContentText>{t('edit_desc')}</DialogContentText>
-          <form>
+          <form onSubmit={handleSubmit}>
             <input
               type='text'
               className='input margin'
               onChange={(e) => setData({ ...data, firstname: e.target.value })}
               value={data.firstname}
               placeholder={t('name')}
+              required
             />
             <input
               type='text'
@@ -101,6 +129,7 @@ function AccountSettings() {
               onChange={(e) => setData({ ...data, lastname: e.target.value })}
               value={data.lastname}
               placeholder={t('surname')}
+              required
             />
             <input
               type='text'
@@ -108,6 +137,7 @@ function AccountSettings() {
               onChange={(e) => setData({ ...data, phone_num: e.target.value })}
               value={data.phone_num}
               placeholder={t('phone_num')}
+              required
             />
             <input
               type='text'
@@ -115,12 +145,14 @@ function AccountSettings() {
               onChange={(e) => setData({ ...data, address1: e.target.value })}
               value={data.address1}
               placeholder={`${t('shipping_address')} 1`}
+              required
             />
             <input
               type='text'
               className='input margin'
               onChange={(e) => setData({ ...data, address2: e.target.value })}
               value={data.address2}
+              required
               placeholder={`${t('shipping_address')} 2`}
             />
             <input
@@ -129,20 +161,24 @@ function AccountSettings() {
               onChange={(e) => setData({ ...data, address3: e.target.value })}
               value={data.address3}
               placeholder={`${t('shipping_address')} 3`}
+              required
             />
+            <div className={style.form_actions}>
+              <DialogActions>
+                <Button
+                  onClick={handleSubmit}
+                  variant='containedSecondary'
+                  color='primary'
+                  type='submit'
+                >
+                  {t('cancel')}
+                </Button>
+                <Button type='submit' onClick={handleSubmit} color='primary'>
+                  {t('save')}
+                </Button>
+              </DialogActions>
+            </div>
           </form>
-          <DialogActions>
-            <Button
-              onClick={handleClose}
-              variant='containedSecondary'
-              color='primary'
-            >
-              {t('cancel')}
-            </Button>
-            <Button onClick={handleClose} color='primary'>
-              {t('save')}
-            </Button>
-          </DialogActions>
         </DialogContent>
       </Dialog>
     </>

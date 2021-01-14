@@ -19,10 +19,10 @@
   .header {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
+    // border-top-left-radius: 6px;
+    // border-top-right-radius: 6px;
     overflow: hidden;
-    border: 1px solid var(--border);
+    // border-top: 1px solid var(--border);
     .column {
       padding: 16px;
       font-weight: 500;
@@ -31,14 +31,22 @@
     }
   }
 }
-
+.order_list {
+  a:nth-child(1) {
+    .wrapper_item {
+      border-top: 1px solid var(--border);
+    }
+  }
+}
 .wrapper_item {
   width: 100%;
   border-bottom: 1px solid var(--border);
   transition: 0.3s;
   background: #fff;
+
   &:hover {
     background: var(--secondary-color);
+    color: var(--primary-color);
   }
   .inner {
     display: grid;

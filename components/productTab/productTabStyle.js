@@ -12,7 +12,7 @@ export const useStyles = makeStyles(() => ({
       borderRadius: '12px',
       top: '4px',
       zIndex: '1',
-      border: '1px solid var(--border)',
+      // border: '1px solid var(--border)',
       bottom: '4px',
       ['@media (max-width:576px)']: {
         height: 'calc(100% - 4px)',

@@ -14,7 +14,7 @@ import { useForm, Controller } from 'react-hook-form'
 import composeRefs from '@seznam/compose-react-refs'
 import InputMask from 'react-input-mask'
 import { useTranslation } from '../../i18n'
-import { useStyles } from './textFieldStyle'
+import { useStyles, PhoneNumberMask } from './textFieldStyle'
 function SignInForm() {
   const { t } = useTranslation()
   const classes = useStyles()
@@ -43,6 +43,7 @@ function SignInForm() {
     setTimeout(() => {
       setIsPhoneNumValid(true)
       setIsLoading(false)
+      router.push('/verify-code?signin=true')
     }, 2000)
     if (isPhoneNumValid) {
       checkPassword()
@@ -53,7 +54,7 @@ function SignInForm() {
     setTimeout(() => {
       setIsPasswordValid(true)
       setIsLoading(false)
-      router.push('/')
+      router.push('/verify-code?signin=true')
     }, 2000)
   }
   const checkPhoneNumberLength = (string) => {
@@ -81,6 +82,22 @@ function SignInForm() {
         <form onSubmit={submitHandlerPhone} autoComplete='off'>
           <div className={style.input_cont}>
             <TextField
+              value={values.textmask}
+              variant='filled'
+              fullWidth
+              className={classes.root}
+              name='phoneNum'
+              id='formatted-text-mask-input'
+              InputProps={{
+                inputComponent: PhoneNumberMask,
+              }}
+              onChange={(e) =>
+                setValues({ ...values, phoneNum: e.target.value })
+              }
+              required
+              label={t('phone_num')}
+            />
+            {/* <TextField
               id='filled-basic'
               name='phoneNum'
               variant='filled'
@@ -92,7 +109,7 @@ function SignInForm() {
               }
               required
               label={t('phone_num')}
-            />
+            /> */}
             {/* <Controller
               as={TextField}
               name={'phoneNum'}
@@ -136,7 +153,7 @@ function SignInForm() {
               )}
             /> */}
           </div>
-          {isPhoneNumValid ? (
+          {/* {isPhoneNumValid ? (
             <div className={style.input_cont}>
               <TextField
                 id='filled-basic'
@@ -154,7 +171,7 @@ function SignInForm() {
             </div>
           ) : (
             ''
-          )}
+          )} */}
           <Button fullWidth type='submit'>
             {isLoading ? (
               <CircularProgress className={style.progress} color='inherit' />
@@ -217,11 +234,11 @@ function SignInForm() {
         </div>
 
         <div className={style.options}>
-          <div>
+          {/* <div>
             <Link href='/forgot'>
               <a>{t('forgot_password')}</a>
             </Link>
-          </div>
+          </div> */}
           <div>
             <Link href='/signup'>
               <a>{t('create_yours')}</a>

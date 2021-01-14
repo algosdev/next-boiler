@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import style from './authForm.module.scss'
 import { Typography, Button, TextField } from '@material-ui/core'
 import { Router } from '../../i18n'
+import { useRouter } from 'next/router'
 import { useTranslation } from '../../i18n'
 import { useStyles } from './textFieldStyle'
 function VerifyCodeForm() {
+  const router = useRouter()
   const classes = useStyles()
   const { t } = useTranslation()
   const [values, setValues] = useState({
@@ -12,7 +14,11 @@ function VerifyCodeForm() {
   })
   const submitHandler = (e) => {
     e.preventDefault()
-    Router.push('/new-password')
+    if (router.query.signup === 'true') {
+      Router.push('/account?signup=true')
+    } else {
+      Router.push('/')
+    }
   }
   return (
     <div className={style.wrapper}>
