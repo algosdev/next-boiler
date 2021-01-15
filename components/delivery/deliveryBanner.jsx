@@ -5,11 +5,11 @@ function DeliveryBanner() {
   return (
     <div className={style.wrapper_banner}>
       <div className={style.img}>
-        <img src='/images/delivery2.jpg' alt='' />
+        <img src='/images/delivery_banner.jpg' alt='' />
       </div>
-      <Container>
+      {/* <Container>
         <div className={style.content}>Быстрая доставка</div>
-      </Container>
+      </Container> */}
     </div>
   )
 }

@@ -8,10 +8,12 @@
     margin-bottom: 30px;
   }
   .inner {
-    overflow-x: scroll;
-
+    // overflow-x: scroll;
+    @media (max-width: 700px) {
+      overflow-x: scroll;
+    }
     .content {
-      min-width: 540px;
+      min-width: 670px;
     }
     .header {
       color: #fff;
