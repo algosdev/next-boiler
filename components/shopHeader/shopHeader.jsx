@@ -92,18 +92,18 @@ export default function ShopHeader() {
                       visible: {
                         y: 0,
                         position: 'absolute',
-                        x: '-50%',
+                        x: '0',
                         opacity: 1,
                         top: '150%',
-                        left: 'calc(50% - 13px)',
+                        right: '0',
                       },
                       stable: {
                         position: 'absolute',
                         y: -20,
                         opacity: 0,
-                        x: '-50%',
+                        x: '0',
                         top: '150%',
-                        left: 'calc(50% - 13px)',
+                        right: '0',
                       },
                     }}
                     animate={'visible'}

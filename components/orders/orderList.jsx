@@ -3,7 +3,7 @@ import style from './orders.module.scss'
 import { CashIn, CreditCard } from '../svg'
 import OrderListItem from './ordersListItem'
 import { useTranslation } from '../../i18n'
-
+import MobileOrderListItem from './mobileOrderListItem'
 function OrderList() {
   const { t } = useTranslation()
   const orderData = [
@@ -50,6 +50,11 @@ function OrderList() {
         <div className={style.order_list}>
           {orderData.map((el, index) => (
             <OrderListItem data={el} index={index} />
+          ))}
+        </div>
+        <div className={style.order_list_mobile}>
+          {orderData.map((el, index) => (
+            <MobileOrderListItem data={el} index={index} />
           ))}
         </div>
       </div>

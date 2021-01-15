@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './delivery.module.scss'
-import { OnTimeDeliveryIcon } from '../svg'
+import { OnTimeDeliveryIcon, FastDeliveryIcon, SettingsIcon } from '../svg'
 function DeliveryCard() {
   return (
     <div className={styles.wrapper_item}>

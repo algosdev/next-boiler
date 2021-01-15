@@ -20,13 +20,41 @@ export default function ProductList() {
   const { t } = useTranslation()
 
   const productListData = [
+    // {
+    //   type: t('new'),
+    //   id: '1',
+    //   price: '15490000',
+    //   name: 'Ipad',
+    //   img: '/images/ipad.png',
+    //   colors: ['grey', 'yellow', 'black'],
+    //   slug: 'ipad',
+    // },
+    // {
+    //   type: t('new'),
+    //   id: '99',
+    //   price: '18000000',
+    //   name: 'Macbook',
+    //   img: '/images/macbook.jpg',
+    //   colors: ['green', 'yellow', 'black'],
+    //   slug: 'macbook',
+    // },
+
+    // {
+    //   type: t('new'),
+    //   id: '77',
+    //   price: '5490000',
+    //   name: 'Iphone ',
+    //   img: '/images/iphone.jpg',
+    //   colors: ['green', 'yellow', 'black'],
+    //   slug: 'iphome',
+    // },
     {
       type: t('new'),
-      id: '1',
+      id: '88',
+      colors: ['green', 'yellow', 'black'],
       price: '5490000',
       name: 'AirPods Max',
       img: '/images/airpods_max.jpg',
-      colors: ['green', 'yellow', 'black'],
       slug: 'airpods-max',
     },
     {
@@ -81,7 +109,9 @@ export default function ProductList() {
               <Grid item xs={6} xl={3} sm={6} lg={4} md={6} sh={12} key={index}>
                 <Link href={`/shop/${item.slug}`} key={index}>
                   <a className={style.product}>
-                    <img src={item.img} alt={item.name} />
+                    <div className={style.img_cont}>
+                      <img src={item.img} alt={item.name} />
+                    </div>
                     <span className={style.type}>{item.type}</span>
                     <h3 className={style.name}>{item.name}</h3>
                     <span className={style.price}>

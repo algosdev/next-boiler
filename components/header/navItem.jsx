@@ -113,7 +113,11 @@ const NavItem = ({ title, subCategs }) => {
                   onKeyDown={handleListKeyDown}
                 >
                   {subCategs?.map((item, index) => (
-                    <MenuItem key={index} onClick={handleClose} diableRipple>
+                    <MenuItem
+                      key={index}
+                      disableRipple
+                      onClick={() => setOpen(false)}
+                    >
                       <Link href={`/shop?${item.link}`}>
                         <a>{item.title}</a>
                       </Link>

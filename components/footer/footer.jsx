@@ -14,17 +14,17 @@ export default function Footer() {
             <Typography variant='h6'>{t('buy_and_learn')}</Typography>
             <ul className={style.list}>
               <li className={style.listItem}>
-                <Link href='/'>
+                <Link href='/shop/iphone12-case'>
                   <a>Mac</a>
                 </Link>
               </li>
               <li className={style.listItem}>
-                <Link href='/'>
+                <Link href='/shop/iphone12-case'>
                   <a>iPad</a>
                 </Link>
               </li>
               <li className={style.listItem}>
-                <Link href='/'>
+                <Link href='/shop/iphone12-case'>
                   <a>iPhone</a>
                 </Link>
               </li>
@@ -44,7 +44,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li className={style.listItem}>
-                <Link href='/'>
+                <Link href='/shop-addresses'>
                   <a>{t('address_of_shops')}</a>
                 </Link>
               </li>
@@ -97,7 +97,7 @@ export default function Footer() {
             </ul>
           </Grid>
         </Grid>
-        <div className='copyright'>
+        <div className={style.copyright}>
           <p>{t('copyright_txt')}</p>
           <p>
             Created by{' '}

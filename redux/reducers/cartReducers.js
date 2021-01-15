@@ -5,6 +5,49 @@ const initialCartState = {
   data: [
     {
       id: '1',
+      price: '15490000',
+      name: 'Ipad',
+      img: '/images/ipad.png',
+      colors: ['grey', 'yellow', 'black'],
+      slug: 'ipad',
+      availableQuantity: 5,
+      carouselData: [
+        '/images/ipad.png',
+        '/images/airpods_max.jpg',
+        '/images/case.jpeg',
+      ],
+    },
+    {
+      id: '99',
+      price: '18000000',
+      name: 'Macbook',
+      img: '/images/macbook.jpg',
+      colors: ['green', 'yellow', 'black'],
+      slug: 'macbook',
+      availableQuantity: 5,
+      carouselData: [
+        '/images/macbook.jpg',
+        '/images/airpods_max.jpg',
+        '/images/case.jpeg',
+      ],
+    },
+
+    {
+      id: '77',
+      price: '5490000',
+      name: 'Iphone ',
+      img: '/images/iphone.jpg',
+      colors: ['green', 'yellow', 'black'],
+      slug: 'iphome',
+      availableQuantity: 5,
+      carouselData: [
+        '/images/iphone.jpg',
+        '/images/airpods_max.jpg',
+        '/images/case.jpeg',
+      ],
+    },
+    {
+      id: '1',
       availableQuantity: 5,
       price: '5490000',
       name: 'AirPods Max',

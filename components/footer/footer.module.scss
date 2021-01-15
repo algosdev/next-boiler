@@ -49,3 +49,29 @@
     }
   }
 }
+.copyright {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  color: #515154;
+  font-size: 14px;
+  @media (max-width: 576px) {
+    flex-direction: column;
+  }
+}
+.copyright p {
+  display: inline-block;
+  margin: 0;
+  @media (max-width: 576px) {
+    margin-top: 10px;
+  }
+}
+.copyright a {
+  display: inline-block;
+  font-size: 14px;
+  margin: 0;
+}
+.copyright a:hover {
+  text-decoration: underline;
+  color: #1d1d1f;
+}

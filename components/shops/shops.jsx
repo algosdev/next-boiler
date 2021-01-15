@@ -28,42 +28,44 @@ const shopsData = [
 function Shops() {
   return (
     <div className={style.wrapper}>
+      <div className={style.main_title}>Наши филиалы</div>
       <div className={style.inner}>
-        {/* <div className={style.main_title}>Наличие в магазинах</div> */}
-        <div className={style.header}>
-          <Grid container className={style.field_container}>
-            <Grid item xs={3} className={style.field}>
-              <StorefrontIcon /> Магазин
-            </Grid>
-            <Grid item xs={4} className={style.field}>
-              <LocationOnOutlinedIcon /> Адрес
-            </Grid>
-            <Grid item xs={3} className={style.field}>
-              <ScheduleRoundedIcon /> Режим работы
-            </Grid>
-            <Grid item xs={2} className={style.field}>
-              <AssignmentTurnedInOutlinedIcon /> Наличие
-            </Grid>
-          </Grid>
-        </div>
-        {shopsData.map((item, ind) => (
-          <div className={style.row} key={ind}>
+        <div className={style.content}>
+          <div className={style.header}>
             <Grid container className={style.field_container}>
               <Grid item xs={3} className={style.field}>
-                <div>{item.name}</div>
+                <StorefrontIcon /> Магазин
               </Grid>
               <Grid item xs={4} className={style.field}>
-                <div>{item.address}</div>
+                <LocationOnOutlinedIcon /> Адрес
               </Grid>
               <Grid item xs={3} className={style.field}>
-                <div>{item.workingHours}</div>
+                <ScheduleRoundedIcon /> Режим работы
               </Grid>
               <Grid item xs={2} className={style.field}>
-                <div>{item.isAvailable}</div>
+                <AssignmentTurnedInOutlinedIcon /> Наличие
               </Grid>
             </Grid>
           </div>
-        ))}
+          {shopsData.map((item, ind) => (
+            <div className={style.row} key={ind}>
+              <Grid container className={style.field_container}>
+                <Grid item xs={3} className={style.field}>
+                  <div>{item.name}</div>
+                </Grid>
+                <Grid item xs={4} className={style.field}>
+                  <div>{item.address}</div>
+                </Grid>
+                <Grid item xs={3} className={style.field}>
+                  <div>{item.workingHours}</div>
+                </Grid>
+                <Grid item xs={2} className={style.field}>
+                  <div>{item.isAvailable}</div>
+                </Grid>
+              </Grid>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )

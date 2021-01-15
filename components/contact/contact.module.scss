@@ -1,5 +1,8 @@
 .wrapper_form {
   margin: 50px 0;
+  @media (max-width: 576px) {
+    margin: 50px 0 0;
+  }
   .header {
     .main_title {
       font-size: 32px;
@@ -9,6 +12,9 @@
     .leading {
       font-size: 17px;
       line-height: 24px;
+      @media (max-width: 576px) {
+        font-size: 15px;
+      }
     }
     margin-bottom: 20px;
   }
@@ -20,8 +26,12 @@
 .wrapper {
   background: var(--secondary-color);
   margin: 50px 0;
-  padding: 16px;
+  padding: 24px 16px;
   border-radius: 8px;
+  height: min-content;
+  @media (max-width: 576px) {
+    margin: 0 0 30px;
+  }
   .title {
     font-size: 20px;
     margin-bottom: 10px;
@@ -38,5 +48,16 @@
     .item {
       cursor: pointer;
     }
+  }
+}
+.main_wrapper {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  grid-gap: 20px;
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr;
   }
 }
