@@ -102,6 +102,9 @@ function MobileHeader({ data }) {
       animation.start('stable')
       document.body.style.overflowY = 'scroll'
     }
+    return () => {
+      document.body.style.overflowY = 'scroll'
+    }
   }, [isOpen])
   console.log(data)
   return (

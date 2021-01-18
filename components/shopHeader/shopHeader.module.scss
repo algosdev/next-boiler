@@ -9,6 +9,15 @@
     align-items: center;
     max-width: 330px;
     width: 100%;
+    &.search {
+      max-width: 80%;
+      .title {
+        font-size: 40px;
+        font-weight: 500;
+        line-height: 42px;
+      }
+    
+    }
     .title {
       font-size: 40px;
       font-weight: 500;

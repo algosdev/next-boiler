@@ -8,7 +8,7 @@ import { BrandLogo, CloseIcon, ProfileIcon } from '../svg'
 import { SearchOutlined } from '@material-ui/icons'
 import { motion, useAnimation, AnimatePresence } from 'framer-motion'
 import NavItem from './navItem'
-import { useTranslation } from '../../i18n'
+import { useTranslation, Router } from '../../i18n'
 import { LocalMallOutlined } from '@material-ui/icons'
 import ProfileDropdown from './ProfileDropdown'
 import MobileHeader from './mobileHeader'
@@ -61,7 +61,7 @@ function Header(props) {
   const searchRef = useRef(null)
   const animationForm = useAnimation()
   const [isSearchVisible, setIsSearchVisible] = useState(false)
-
+const [term, setTerm] = useState("")
   const navData = [
     {
       title: t('apple_p'),
@@ -118,6 +118,9 @@ function Header(props) {
   ]
   const submitHandler = (e) => {
     e.preventDefault()
+    if(term){
+      Router.push(`/shop?term=${encodeURI(term)}`)
+    }
   }
   useEffect(() => {
     if (isSearchVisible) {
@@ -231,6 +234,7 @@ function Header(props) {
                             transition={{
                               duration: 0,
                             }}
+                            onChange={(e) => setTerm(e.target.value)}
                             ref={searchRef}
                             variants={{
                               visible: {

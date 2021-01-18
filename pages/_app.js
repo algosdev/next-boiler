@@ -11,7 +11,7 @@ import { appWithTranslation } from '../i18n.js'
 import NProgress from 'nprogress' //nprogress module
 import 'nprogress/nprogress.css'
 import { Router } from 'next/router'
-
+import { useEffect } from "react";
 Router.events.on('routeChangeStart', () => NProgress.start())
 Router.events.on('routeChangeComplete', () => {
   NProgress.done()
@@ -27,9 +27,20 @@ function scrollTop() {
     })
   }
 }
+
 function MyApp({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState)
   const persistor = persistStore(store)
+useEffect(() => {
+  if(navigator) {
+    if('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/serviceWorkers.js')
+              .then((reg) => console.log('Success: ', reg.scope))
+              .catch((err) => console.log('Failure: ', err));
+      })
+  }
+}})
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>

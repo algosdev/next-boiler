@@ -68,6 +68,7 @@ export default function ShopHeader() {
   ]
   return (
     <div className={style.shopHeader}>
+       {!router.query.term ? 
       <div className={style.top_header}>
         <Container className={style.content}>
           <div className={style.categ}>{t(router.query.category)}</div>
@@ -138,11 +139,11 @@ export default function ShopHeader() {
             </AnimatePresence>
           </div>
         </Container>
-      </div>
+      </div> : ""}
       <Container>
-        <div className={style.wrapper}>
+        <div className={`${style.wrapper} ${router.query.term ? style.search : ""}`}>
           <h1 className={style.title}>
-            {t(router.query.subcategory?.replace('_', '').replace('@', '_'))}
+            {router.query.term ? `Результаты поиска по запросу "${decodeURI(router.query.term)}"` : t(router.query.subcategory?.replace('_', '').replace('@', '_'))}
           </h1>
         </div>
       </Container>

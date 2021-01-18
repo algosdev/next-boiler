@@ -25,7 +25,7 @@ export default function SEO({ title, description, image, keywords }) {
         content={image || 'images/carousel_1.jpg'}
         key='ogimage'
       />
-
+ <link rel="manifest" href="/manifest.json" />
       <meta name='twitter:card' content='summary' />
       <meta
         name='twitter:title'

@@ -62,13 +62,13 @@ function CartListItem({ id, data, calculateTotal }) {
   }, [data])
   useEffect(() => {
     if (isdeleted) {
-      setTimeout(deleteItem(data), 200)
+      setTimeout(() => deleteItem(data), 300)
     }
   }, [isdeleted])
   return (
     <>
       <AnimatePresence>
-        {!isdeleted ? (
+        {!isdeleted && (
           <motion.div
             className={style.wrapper_item}
             exit={{ opacity: 0, x: -200 }}
@@ -143,9 +143,10 @@ function CartListItem({ id, data, calculateTotal }) {
               </div>
             </div>
           </motion.div>
-        ) : (
-          <NoItemInCart />
         )}
+        {/* //  : (
+        //   <NoItemInCart />
+        // )} */}
       </AnimatePresence>
     </>
   )
