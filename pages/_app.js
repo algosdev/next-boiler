@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import Layout from '../components/layout'
+import Layout from "../components/layout"
 import { Provider } from 'react-redux'
 import { useStore } from '../redux/store'
 import { PersistGate } from 'redux-persist/integration/react'

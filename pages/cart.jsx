@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container } from '@material-ui/core'
-import CartList from '../components/cart/cartList'
-import SEO from '../components/seo'
+import CartList from '../../components/cart/cartList'
+import SEO from '../../components/seo'
 function cart() {
   return (
     <>
