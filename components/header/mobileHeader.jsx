@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useTranslation } from '../../i18n'
-import style from './header.module.scss'
-import { BrandLogo, CloseIcon } from '../svg'
-import { LocalMallOutlined, SearchOutlined } from '@material-ui/icons'
-import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
-import { motion, useAnimation, AnimatePresence } from 'framer-motion'
-import MuiAccordion from '@material-ui/core/Accordion'
-import MuiAccordionSummary from '@material-ui/core/AccordionSummary'
-import MuiAccordionDetails from '@material-ui/core/AccordionDetails'
-import Typography from '@material-ui/core/Typography'
-import { ExpandMoreRounded } from '@material-ui/icons'
-import { withStyles } from '@material-ui/core/styles'
-import { ClickAwayListener } from '@material-ui/core'
-import LanguageDropdown from './LanguageDropdown'
-import CartDropdown from './CartDropdown'
+import React, { useState, useEffect } from 'react';
+import { Link, useTranslation, Router } from '../../i18n';
+import style from './header.module.scss';
+import { BrandLogo, CloseIcon } from '../svg';
+import { LocalMallOutlined, SearchOutlined } from '@material-ui/icons';
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import { motion, useAnimation, AnimatePresence } from 'framer-motion';
+import MuiAccordion from '@material-ui/core/Accordion';
+import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
+import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+import { ExpandMoreRounded } from '@material-ui/icons';
+import { withStyles } from '@material-ui/core/styles';
+import { ClickAwayListener } from '@material-ui/core';
+import LanguageDropdown from './LanguageDropdown';
+import CartDropdown from './CartDropdown';
 
 const Accordion = withStyles({
   root: {
@@ -35,7 +35,7 @@ const Accordion = withStyles({
     background: '#2a2a2a',
     borderBottom: '1px solid #434343 !important',
   },
-})(MuiAccordion)
+})(MuiAccordion);
 
 const AccordionSummary = withStyles({
   root: {
@@ -62,7 +62,7 @@ const AccordionSummary = withStyles({
     },
   },
   expanded: {},
-})(MuiAccordionSummary)
+})(MuiAccordionSummary);
 
 const AccordionDetails = withStyles((theme) => ({
   root: {
@@ -82,31 +82,37 @@ const AccordionDetails = withStyles((theme) => ({
       width: '100%',
     },
   },
-}))(MuiAccordionDetails)
+}))(MuiAccordionDetails);
 function MobileHeader({ data }) {
-  const { t } = useTranslation()
-  const [expanded, setExpanded] = useState('panel')
+  const { t } = useTranslation();
+  const [term, setTerm] = useState('');
+  const [expanded, setExpanded] = useState('panel');
   const handleChange = (panel) => (event, newExpanded) => {
-    setExpanded(newExpanded ? panel : false)
-  }
-  const animation = useAnimation()
-  const [isOpen, setIsOpen] = useState(false)
+    setExpanded(newExpanded ? panel : false);
+  };
+  const animation = useAnimation();
+  const [isOpen, setIsOpen] = useState(false);
+
   const submitHandler = (e) => {
-    e.preventDefault()
-  }
+    e.preventDefault();
+    if (term) {
+      setIsOpen(false);
+      Router.push(`/shop?term=${encodeURI(term)}`);
+    }
+  };
   useEffect(() => {
     if (isOpen) {
-      animation.start('open')
-      document.body.style.overflowY = 'hidden'
+      animation.start('open');
+      document.body.style.overflowY = 'hidden';
     } else {
-      animation.start('stable')
-      document.body.style.overflowY = 'scroll'
+      animation.start('stable');
+      document.body.style.overflowY = 'scroll';
     }
     return () => {
-      document.body.style.overflowY = 'scroll'
-    }
-  }, [isOpen])
-  console.log(data)
+      document.body.style.overflowY = 'scroll';
+    };
+  }, [isOpen]);
+  console.log(data);
   return (
     <>
       <div className={style.wrapper_mobile}>
@@ -183,108 +189,95 @@ function MobileHeader({ data }) {
           </Link>
         </div>
         <div className={style.cart_cont}>
-          {/* <Link href='/cart'>
-            <a>
-              <ShoppingCartOutlinedIcon />
-            </a>
-          </Link> */}
           <CartDropdown mobile={true} />
         </div>
         <LanguageDropdown />
-        {/* <div className={style.cart_cont}>
-          <Link href='/cart'>
-            <a>
-              <ShoppingCartOutlinedIcon />
-            </a>
-          </Link>
-        </div> */}
       </div>
       <AnimatePresence>
         {isOpen ? (
-          <motion.div
-            className={style.content}
-            variants={{
-              open: {
-                opacity: 1,
-                y: 0,
-              },
-              stable: {
-                // opacity: 0,
-                y: '-100%',
-              },
-            }}
-            transition={{
-              duration: 0.5,
-              type: 'twin',
-            }}
-            animate={'open'}
-            initial={'stable'}
-            exit={'stable'}
-          >
-            <form className={`${style.searchForm}`} onSubmit={submitHandler}>
-              <input type='text' placeholder={t('search')} />
-              <button className={style.icon} type='submit'>
-                <ArrowForwardIcon />
-              </button>
-            </form>
-            {data.map((categ, index) => {
-              return (
-                <Accordion
-                  square
-                  key={index}
-                  expanded={expanded === `panel${index}`}
-                  onChange={handleChange(`panel${index}`)}
-                >
-                  <AccordionSummary
-                    aria-controls='panel2d-content'
-                    id='panel2d-header'
-                    expandIcon={<ExpandMoreRounded />}
+          <ClickAwayListener onClickAway={() => setIsOpen(false)}>
+            <motion.div
+              className={style.content}
+              variants={{
+                open: {
+                  opacity: 1,
+                  y: 0,
+                },
+                stable: {
+                  // opacity: 0,
+                  y: '-100%',
+                },
+              }}
+              transition={{
+                duration: 0.5,
+                type: 'twin',
+              }}
+              animate={'open'}
+              initial={'stable'}
+              exit={'stable'}
+            >
+              <form className={`${style.searchForm}`} onSubmit={submitHandler}>
+                <input
+                  type='text'
+                  onChange={(e) => setTerm(e.target.value)}
+                  placeholder={t('search')}
+                />
+                <button className={style.icon} type='submit'>
+                  <ArrowForwardIcon />
+                </button>
+              </form>
+              {data.map((categ, index) => {
+                return (
+                  <Accordion
+                    square
+                    key={index}
+                    expanded={expanded === `panel${index}`}
+                    onChange={handleChange(`panel${index}`)}
                   >
-                    <Typography>{categ.title}</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    {categ.subCategs.map((genre, ind) => (
-                      <Typography key={ind} onClick={() => setIsOpen(false)}>
-                        <Link href={`/shop?${genre.link}`}>
-                          <a>{genre.title}</a>
-                        </Link>
-                      </Typography>
-                    ))}
-                  </AccordionDetails>
-                </Accordion>
-              )
-            })}
-            {/* {data.map((el, ind) => (
-              <li key={ind} onClick={() => setIsOpen(false)}>
-                <Link href='/shop'>
-                  <a>{el.title}</a>
-                </Link>
-              </li>
-            ))} */}
-            <ul>
-              <li onClick={() => setIsOpen(false)}>
-                <Link href='/orders'>
-                  <a>{t('orders')}</a>
-                </Link>
-              </li>
-              <li onClick={() => setIsOpen(false)}>
-                <Link href='/account'>
-                  <a>{t('profile')}</a>
-                </Link>
-              </li>
-              <li onClick={() => setIsOpen(false)}>
-                <Link href='/signin'>
-                  <a>{t('signin')}</a>
-                </Link>
-              </li>
-            </ul>
-          </motion.div>
+                    <AccordionSummary
+                      aria-controls='panel2d-content'
+                      id='panel2d-header'
+                      expandIcon={<ExpandMoreRounded />}
+                    >
+                      <Typography>{categ.title}</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      {categ.subCategs.map((genre, ind) => (
+                        <Typography key={ind} onClick={() => setIsOpen(false)}>
+                          <Link href={`/shop?${genre.link}`}>
+                            <a>{genre.title}</a>
+                          </Link>
+                        </Typography>
+                      ))}
+                    </AccordionDetails>
+                  </Accordion>
+                );
+              })}
+              <ul>
+                <li onClick={() => setIsOpen(false)}>
+                  <Link href='/orders'>
+                    <a>{t('orders')}</a>
+                  </Link>
+                </li>
+                <li onClick={() => setIsOpen(false)}>
+                  <Link href='/account'>
+                    <a>{t('profile')}</a>
+                  </Link>
+                </li>
+                <li onClick={() => setIsOpen(false)}>
+                  <Link href='/signin'>
+                    <a>{t('signin')}</a>
+                  </Link>
+                </li>
+              </ul>
+            </motion.div>
+          </ClickAwayListener>
         ) : (
           ''
         )}
       </AnimatePresence>
     </>
-  )
+  );
 }
 
-export default MobileHeader
+export default MobileHeader;
