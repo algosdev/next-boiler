@@ -1,5 +1,5 @@
 const CACHE_NAME = "version-1";
-const urlsToCache = [  '/', 'offline.html' ];
+const urlsToCache = [  "/",'/shop', 'offline.html' ];
 
 const self = this;
 
@@ -8,7 +8,7 @@ self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then((cache) => {
-                console.log('Opened cache');
+                console.log('Opened cache', cache);
                 return cache.addAll(urlsToCache);
             })
     )
@@ -18,9 +18,13 @@ self.addEventListener('install', (event) => {
 self.addEventListener('fetch', (event) => {
     event.respondWith(
         caches.match(event.request)
-            .then(() => {
-                return fetch(event.request) 
-                    .catch(() => caches.match('offline.html'))
+            .then(async () => {
+                console.log("LSW",event)
+                try {
+                    return fetch(event.request);
+                } catch (e) {
+                    return await caches.match('offline.html');
+                }
             })
     )
 });

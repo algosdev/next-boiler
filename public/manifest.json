@@ -49,9 +49,9 @@
             "type": "image/png"
         }
     ],
-    "scope": "/",
-    "start_url": "/",
-    "display": "standalone",
+    "start_url": "/en",
+    "orientation": "portrait",
+    "display": "fullscreen",
     "theme_color": "#fff",
     "background_color": "#1d1d1d"
 }
