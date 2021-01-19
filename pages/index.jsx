@@ -1,11 +1,11 @@
-import CatalogList from '../components/catalogList/catalogList'
-import Hero from '../components/hero/hero'
-import SEO from '../components/seo'
-import BannerContainer from '../components/bannerContainer/bannerContainer'
-import Banner from '../components/banner/banner'
-import { useTranslation } from '../i18n'
+import CatalogList from '../components/catalogList/catalogList';
+import Hero from '../components/hero/hero';
+import SEO from '../components/seo';
+import BannerContainer from '../components/bannerContainer/bannerContainer';
+import Banner from '../components/banner/banner';
+import { useTranslation } from '../i18n';
 export default function Home() {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const appleProducts = {
     title: t('apple_p'),
     catalog: [
@@ -45,7 +45,7 @@ export default function Home() {
         link: 'category=accessories&subcategory=covers',
       },
     ],
-  }
+  };
 
   const samsungProducts = {
     title: t('samsung_p'),
@@ -71,11 +71,11 @@ export default function Home() {
         link: 'category=acoustics&subcategory=earphones',
       },
     ],
-  }
+  };
 
   return (
     <>
-      <SEO />
+      <SEO title={t('main')} description={t('main_desc')} />
       <Hero />
       <CatalogList data={appleProducts} />
       <BannerContainer>
@@ -87,5 +87,5 @@ export default function Home() {
       </BannerContainer>
       <CatalogList data={samsungProducts} />
     </>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react';
 import {
   ClickAwayListener,
   Grow,
@@ -7,10 +7,10 @@ import {
   MenuItem,
   MenuList,
   makeStyles,
-} from '@material-ui/core'
-import { i18n, useTranslation } from '../../i18n'
-import style from './header.module.scss'
-import { English, Uzbek, Russian } from '../svg'
+} from '@material-ui/core';
+import { i18n, useTranslation } from '../../i18n';
+import style from './header.module.scss';
+import { English, Uzbek, Russian } from '../svg';
 const useStyles = makeStyles(() => ({
   paper: {
     borderRadius: '6px',
@@ -43,52 +43,55 @@ const useStyles = makeStyles(() => ({
   popper: {
     zIndex: '999',
     top: '10px !important',
+    ['@media (max-width:576px)']: {
+      top: '20px !important',
+    },
   },
-}))
+}));
 const LanguageDropdown = ({ title, subCategs }) => {
-  const { t } = useTranslation()
-  const [isBagVisible, setIsBagVisible] = useState(false)
-  const [activeLang, setActiveLang] = useState('')
-  const classes = useStyles()
-  const [open, setOpen] = useState(false)
-  const anchorRef = useRef(null)
+  const { t } = useTranslation();
+  const [isBagVisible, setIsBagVisible] = useState(false);
+  const [activeLang, setActiveLang] = useState('');
+  const classes = useStyles();
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef(null);
 
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen)
-  }
+    setOpen((prevOpen) => !prevOpen);
+  };
 
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return
+      return;
     }
 
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
-      event.preventDefault()
-      setOpen(false)
+      event.preventDefault();
+      setOpen(false);
     }
   }
 
-  const prevOpen = useRef(open)
+  const prevOpen = useRef(open);
   useEffect(() => {
     if (prevOpen.current === true && open === false) {
-      anchorRef.current.focus()
+      anchorRef.current.focus();
     }
 
-    prevOpen.current = open
-  }, [open])
+    prevOpen.current = open;
+  }, [open]);
   useEffect(() => {
     if (i18n.language === 'ru') {
-      setActiveLang('РУ')
+      setActiveLang('РУ');
     } else if (i18n.language === 'en') {
-      setActiveLang('EN')
+      setActiveLang('EN');
     } else if (i18n.language === 'uz') {
-      setActiveLang("O'Z")
+      setActiveLang("O'Z");
     }
-  }, [i18n.language])
+  }, [i18n.language]);
 
   return (
     <>
@@ -133,8 +136,8 @@ const LanguageDropdown = ({ title, subCategs }) => {
                     {i18n.language !== 'ru' ? (
                       <MenuItem
                         onClick={(e) => {
-                          handleClose(e)
-                          i18n.changeLanguage('ru')
+                          handleClose(e);
+                          i18n.changeLanguage('ru');
                         }}
                         diableRipple
                       >
@@ -146,8 +149,8 @@ const LanguageDropdown = ({ title, subCategs }) => {
                     {i18n.language !== 'en' ? (
                       <MenuItem
                         onClick={(e) => {
-                          handleClose(e)
-                          i18n.changeLanguage('en')
+                          handleClose(e);
+                          i18n.changeLanguage('en');
                         }}
                         diableRipple
                       >
@@ -159,8 +162,8 @@ const LanguageDropdown = ({ title, subCategs }) => {
                     {i18n.language !== 'uz' ? (
                       <MenuItem
                         onClick={(e) => {
-                          handleClose(e)
-                          i18n.changeLanguage('uz')
+                          handleClose(e);
+                          i18n.changeLanguage('uz');
                         }}
                         diableRipple
                       >
@@ -177,7 +180,7 @@ const LanguageDropdown = ({ title, subCategs }) => {
         </Popper>
       </li>
     </>
-  )
-}
+  );
+};
 
-export default LanguageDropdown
+export default LanguageDropdown;

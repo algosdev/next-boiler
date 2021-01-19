@@ -121,5 +121,21 @@
   "delivered": " Yetkazildi",
   "finished": "Yakunlandi",
   "compare": "Taqqoslash",
-  "compare_with_others": "Boshqalari bilan taqqoslash"
+  "compare_with_others": "Boshqalari bilan taqqoslash",
+  "code_verification": "OTP tekshiruvi",
+  "auth_desc": "Ro'yxatdan o'tish sahifasi",
+  "settings_desc": "MacBro foydalanuvchilari uchun hisob sozlamalari sahifasi",
+  "cart_desc": "Sotib olish uchun belgilangan mahsulotlar sahifasi",
+  "checkout_desc": "To'lov parametrlarini tanlash uchun sahifa",
+  "orders_desc": "Buyurtmalar qilingan mahsulotlar jadvali",
+  "product_list_desc": "Mahsulotlar jadvali",
+  "new_desc": "Eng so'nggi MacBro yangiliklari",
+  "delivery_desc": "Yetkazib berish xizmati haqida ma'lumot",
+  "contact_desc": "Kompaniya va aloqa sahifasi",
+  "compare_desc": "Mahsulotlarni taqqoslash sahifasi",
+  "installment_desc": "Rasspochka xizmati haqida ma'lumot",
+  "shop_branches_desc": "MacBro ning barcha filiallari haqida sahifa",
+  "address_of_branches": "Filial manzillari",
+  "main": "Bosh sahifa",
+  "main_desc": "MacBro elektronika do'koni. Bizning do'stona Macbro jamoasi sizga kerakli Apple mahsulotlarini topishda yordam berishga tayyor."
 }

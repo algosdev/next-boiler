@@ -1,20 +1,26 @@
-import React from 'react'
-import { Container, Grid } from '@material-ui/core'
-import CheckoutContainer from '../components/checkout/checkoutContainer'
-import CheckoutForm from '../components/checkout/checkoutForm'
-import CheckoutDetails from '../components/checkout/checkoutDetails'
-import SEO from '../components/seo'
+import React from 'react';
+import { Container, Grid } from '@material-ui/core';
+import CheckoutContainer from '../components/checkout/checkoutContainer';
+import CheckoutForm from '../components/checkout/checkoutForm';
+import CheckoutDetails from '../components/checkout/checkoutDetails';
+import SEO from '../components/seo';
+import { useTranslation } from '../i18n';
 function checkout() {
+  const { t } = useTranslation();
   return (
     <>
-      <SEO />
+      <SEO
+        title={t('checkout')}
+        description={t('checkout_desc')}
+        keywords={"оплата, payment, to'lov"}
+      />
       <div style={{ background: '#fff', padding: '50px 0' }}>
         <Container>
           <CheckoutContainer />
         </Container>
       </div>
     </>
-  )
+  );
 }
 
-export default checkout
+export default checkout;

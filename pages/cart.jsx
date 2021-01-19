@@ -1,11 +1,17 @@
-import React from 'react'
-import { Container } from '@material-ui/core'
-import CartList from '../components/cart/cartList'
-import SEO from '../components/seo'
+import React from 'react';
+import { Container } from '@material-ui/core';
+import CartList from '../components/cart/cartList';
+import SEO from '../components/seo';
+import { useTranslation } from '../i18n';
 function cart() {
+  const { t } = useTranslation();
   return (
     <>
-      <SEO />
+      <SEO
+        title={t('cart')}
+        description={t('cart_desc')}
+        keywords={'cart, корзинка, savatcha'}
+      />
       <div
         style={{
           background: '#fff',
@@ -19,7 +25,7 @@ function cart() {
         </Container>
       </div>
     </>
-  )
+  );
 }
 
-export default cart
+export default cart;
