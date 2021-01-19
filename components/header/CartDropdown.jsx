@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react';
 import {
   ClickAwayListener,
   Grow,
@@ -7,13 +7,13 @@ import {
   MenuItem,
   MenuList,
   makeStyles,
-} from '@material-ui/core'
-import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
-import { Link } from '../../i18n'
-import { numberToPrice } from '../../lib/numberToPrice'
-import style from './header.module.scss'
-import { useSelector, shallowEqual } from 'react-redux'
-import { useTranslation } from '../../i18n'
+} from '@material-ui/core';
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+import { Link } from '../../i18n';
+import { numberToPrice } from '../../lib/numberToPrice';
+import style from './header.module.scss';
+import { useSelector, shallowEqual } from 'react-redux';
+import { useTranslation } from '../../i18n';
 const useStyles = makeStyles(() => ({
   paper: {
     borderRadius: '6px',
@@ -53,69 +53,69 @@ const useStyles = makeStyles(() => ({
     top: '0 !important',
     paddingTop: '10px',
   },
-}))
+}));
 const CartDropdown = ({ mobile }) => {
-  const { t } = useTranslation()
-  const [isBagVisible, setIsBagVisible] = useState(false)
-  const [animate, setAnimate] = useState(false)
-  const classes = useStyles()
+  const { t } = useTranslation();
+  const [isBagVisible, setIsBagVisible] = useState(false);
+  const [animate, setAnimate] = useState(false);
+  const classes = useStyles();
   const calculateTotalQuantity = (data) => {
-    let sum = 0
+    let sum = 0;
     data.forEach((el) => {
-      sum += el.quantity
-    })
-    return sum
-  }
+      sum += el.quantity;
+    });
+    return sum;
+  };
   const productsInCart = useSelector(
     (state) => state?.cart?.cartItems,
     shallowEqual
-  )
+  );
   const [badgeCount, setBadgeCount] = useState(
     calculateTotalQuantity(productsInCart)
-  )
-  const [open, setOpen] = useState(false)
-  const anchorRef = useRef(null)
+  );
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef(null);
 
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen)
-  }
+    setOpen((prevOpen) => !prevOpen);
+  };
 
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return
+      return;
     }
 
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
-      event.preventDefault()
-      setOpen(false)
+      event.preventDefault();
+      setOpen(false);
     }
   }
 
-  const prevOpen = useRef(open)
+  const prevOpen = useRef(open);
   useEffect(() => {
     if (prevOpen.current === true && open === false) {
-      anchorRef.current.focus()
+      anchorRef.current.focus();
     }
 
-    prevOpen.current = open
-  }, [open])
+    prevOpen.current = open;
+  }, [open]);
   useEffect(() => {
-    setBadgeCount(calculateTotalQuantity(productsInCart))
+    setBadgeCount(calculateTotalQuantity(productsInCart));
 
     if (productsInCart?.length) {
-      animateInPeriod()
+      animateInPeriod();
     }
-  }, [productsInCart])
+  }, [productsInCart]);
   const animateInPeriod = () => {
-    setAnimate(true)
+    setAnimate(true);
     setTimeout(() => {
-      setAnimate(false)
-    }, 1500)
-  }
+      setAnimate(false);
+    }, 1500);
+  };
   return (
     <>
       <li
@@ -127,7 +127,7 @@ const CartDropdown = ({ mobile }) => {
         onMouseLeave={() => setOpen(false)}
       >
         <Link href='/cart'>
-          <a>
+          <a aria-label='Cart'>
             <div className={`${style.icon} ${animate ? style.animate : ''}`}>
               <ShoppingCartOutlinedIcon />
             </div>
@@ -229,7 +229,7 @@ const CartDropdown = ({ mobile }) => {
         )}
       </li>
     </>
-  )
-}
+  );
+};
 
-export default CartDropdown
+export default CartDropdown;

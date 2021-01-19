@@ -183,7 +183,7 @@ function MobileHeader({ data }) {
         </div>
         <div className={style.logo_cont}>
           <Link href='/'>
-            <a>
+            <a aria-label='Logo'>
               <BrandLogo />
             </a>
           </Link>
@@ -219,9 +219,11 @@ function MobileHeader({ data }) {
               <form className={`${style.searchForm}`} onSubmit={submitHandler}>
                 <input
                   type='text'
+                  id='search_input_mobile'
                   onChange={(e) => setTerm(e.target.value)}
                   placeholder={t('search')}
                 />
+                <label htmlFor='search_input_mobile'></label>
                 <button className={style.icon} type='submit'>
                   <ArrowForwardIcon />
                 </button>

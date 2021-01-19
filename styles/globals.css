@@ -66,6 +66,9 @@ html body {
 .white_bg {
   background: #fff;
 }
+label {
+  margin: 0 !important;
+}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

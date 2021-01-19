@@ -1,11 +1,11 @@
-import { Container, Grid, Typography } from '@material-ui/core'
-import React from 'react'
-import style from './footer.module.scss'
-import { Link } from '../../i18n'
-import { Facebook, Instagram, Telegram, YouTube } from '@material-ui/icons'
-import { useTranslation } from '../../i18n'
+import { Container, Grid, Typography } from '@material-ui/core';
+import React from 'react';
+import style from './footer.module.scss';
+import { Link } from '../../i18n';
+import { Facebook, Instagram, Telegram, YouTube } from '@material-ui/icons';
+import { useTranslation } from '../../i18n';
 export default function Footer() {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   return (
     <div className={style.footer}>
       <Container>
@@ -75,22 +75,22 @@ export default function Footer() {
             <Typography variant='h6'>{t('contact_us')}</Typography>
             <ul className={style.social}>
               <li className={style.socialItem}>
-                <a href='/'>
+                <a href='/' aria-label='Facebook'>
                   <Facebook />
                 </a>
               </li>
               <li className={style.socialItem}>
-                <a href='/'>
+                <a href='/' aria-label='Instagram'>
                   <Instagram />
                 </a>
               </li>
               <li className={style.socialItem}>
-                <a href='/'>
+                <a href='/' aria-label='Telegram'>
                   <Telegram />
                 </a>
               </li>
               <li className={style.socialItem}>
-                <a href='/'>
+                <a href='/' aria-label='YouTube'>
                   <YouTube />
                 </a>
               </li>
@@ -104,6 +104,7 @@ export default function Footer() {
             <a
               href='https://udevs.io'
               target='_blank'
+              aria-label='Udevs'
               rel='noreferrer noopener'
             >
               Udevs
@@ -112,5 +113,5 @@ export default function Footer() {
         </div>
       </Container>
     </div>
-  )
+  );
 }

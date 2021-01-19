@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react';
 import {
   ClickAwayListener,
   Grow,
@@ -7,11 +7,11 @@ import {
   MenuItem,
   MenuList,
   makeStyles,
-} from '@material-ui/core'
-import { ProfileIcon } from '../svg'
-import { Link } from '../../i18n'
-import style from './header.module.scss'
-import { useTranslation } from '../../i18n'
+} from '@material-ui/core';
+import { ProfileIcon } from '../svg';
+import { Link } from '../../i18n';
+import style from './header.module.scss';
+import { useTranslation } from '../../i18n';
 const useStyles = makeStyles(() => ({
   paper: {
     borderRadius: '6px',
@@ -55,41 +55,41 @@ const useStyles = makeStyles(() => ({
     paddingTop: '10px',
     top: '0 !important',
   },
-}))
+}));
 const ProfileDropdown = ({ title, subCategs }) => {
-  const { t } = useTranslation()
-  const [isBagVisible, setIsBagVisible] = useState(false)
-  const classes = useStyles()
-  const [open, setOpen] = useState(false)
-  const anchorRef = useRef(null)
+  const { t } = useTranslation();
+  const [isBagVisible, setIsBagVisible] = useState(false);
+  const classes = useStyles();
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef(null);
 
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen)
-  }
+    setOpen((prevOpen) => !prevOpen);
+  };
 
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return
+      return;
     }
 
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
-      event.preventDefault()
-      setOpen(false)
+      event.preventDefault();
+      setOpen(false);
     }
   }
 
-  const prevOpen = useRef(open)
+  const prevOpen = useRef(open);
   useEffect(() => {
     if (prevOpen.current === true && open === false) {
-      anchorRef.current.focus()
+      anchorRef.current.focus();
     }
 
-    prevOpen.current = open
-  }, [open])
+    prevOpen.current = open;
+  }, [open]);
 
   return (
     <>
@@ -103,7 +103,7 @@ const ProfileDropdown = ({ title, subCategs }) => {
         onMouseLeave={() => setOpen(false)}
       >
         <Link href='/account'>
-          <a>
+          <a aria-label='Profile'>
             <ProfileIcon />
           </a>
         </Link>
@@ -158,7 +158,7 @@ const ProfileDropdown = ({ title, subCategs }) => {
         </Popper>
       </li>
     </>
-  )
-}
+  );
+};
 
-export default ProfileDropdown
+export default ProfileDropdown;

@@ -167,7 +167,7 @@ function Header(props) {
               <div className={style.wrapper}>
                 <div className={style.brandLogo}>
                   <Link href='/'>
-                    <a>
+                    <a aria-label='Logo'>
                       <BrandLogo />
                     </a>
                   </Link>
@@ -218,18 +218,20 @@ function Header(props) {
                           exit={'stable'}
                           onSubmit={submitHandler}
                         >
-                          <div
+                          <label
+                            htmlFor='search_input'
                             className={style.icon}
                             onClick={() => setIsSearchVisible(!isSearchVisible)}
                           >
                             <SearchOutlined />
-                          </div>
+                          </label>
                           <motion.input
                             type='text'
                             placeholder={t('search')}
                             transition={{
                               duration: 0,
                             }}
+                            id='search_input'
                             onChange={(e) => setTerm(e.target.value)}
                             ref={searchRef}
                             variants={{
