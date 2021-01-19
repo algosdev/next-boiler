@@ -79,7 +79,7 @@ div div div a {
   text-decoration: none;
 }
 input[type='number'] {
-  -moz-appearance: textfield;
+  -moz-appearance: textfield !important;
 }
 
 .main_container {
