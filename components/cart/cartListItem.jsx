@@ -1,70 +1,70 @@
-import React, { useState, useEffect } from 'react'
-import style from './cart.module.scss'
-import AddIcon from '@material-ui/icons/Add'
-import RemoveIcon from '@material-ui/icons/Remove'
-import DeleteIcon from '@material-ui/icons/Delete'
-import { useDispatch } from 'react-redux'
-import { motion, AnimatePresence } from 'framer-motion'
-import NoItemInCart from './NoItemInCart'
-import { numberToPrice } from '../../lib/numberToPrice'
+import React, { useState, useEffect } from 'react';
+import style from './cart.module.scss';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { useDispatch } from 'react-redux';
+import { motion, AnimatePresence } from 'framer-motion';
+import NoItemInCart from './NoItemInCart';
+import { numberToPrice } from '../../lib/numberToPrice';
 import {
   asyncAddToCartAction,
   asyncReduceCartItemQuantityAction,
   asyncIncreaseCartItemQuantityAction,
   asyncRemoveFromCartAction,
-} from '../../redux/actions/cartActions/cartActions'
-import { useTranslation } from '../../i18n'
+} from '../../redux/actions/cartActions/cartActions';
+import { useTranslation } from '../../i18n';
 function CartListItem({ id, data, calculateTotal }) {
-  const dispatch = useDispatch()
-  const [quantity, setQuantity] = useState(data?.quantity)
-  const { t } = useTranslation()
-  const [total, setTotal] = useState(0)
+  const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(data?.quantity);
+  const { t } = useTranslation();
+  const [total, setTotal] = useState(0);
 
-  const [error, setError] = useState(false)
-  const [isdeleted, setIsDeleted] = useState(false)
+  const [error, setError] = useState(false);
+  const [isdeleted, setIsDeleted] = useState(false);
   const changeQuantity = (operator) => {
     if (operator === 'plus') {
       if (1000000 > data?.quantity) {
-        dispatch(asyncAddToCartAction(data))
-        setError(false)
-        setQuantity((old) => ++old)
+        dispatch(asyncAddToCartAction(data));
+        setError(false);
+        setQuantity((old) => ++old);
       }
     } else if (operator === 'minus') {
       if (data?.quantity !== 1) {
-        setError(false)
-        dispatch(asyncReduceCartItemQuantityAction(data))
-        setQuantity((old) => --old)
+        setError(false);
+        dispatch(asyncReduceCartItemQuantityAction(data));
+        setQuantity((old) => --old);
       }
     }
-  }
+  };
   const setCustomQuantity = (value) => {
-    const validQuantity = value > 0 ? value : 0
-    console.log(value)
+    const validQuantity = value > 0 ? value : 0;
+    console.log(value);
     if (validQuantity <= 1000000) {
-      setQuantity(value > 0 ? value : '')
-      setError(false)
+      setQuantity(value > 0 ? value : '');
+      setError(false);
       dispatch(
         asyncIncreaseCartItemQuantityAction({
           ...data,
           customQuantity: validQuantity,
         })
-      )
+      );
     } else {
-      setError(true)
+      setError(true);
     }
-  }
+  };
   const deleteItem = () => {
-    dispatch(asyncRemoveFromCartAction(data))
-  }
+    dispatch(asyncRemoveFromCartAction(data));
+  };
   useEffect(() => {
-    setTotal(data?.price * data?.quantity)
-    calculateTotal(id, data.quantity)
-  }, [data])
+    setTotal(data?.price * data?.quantity);
+    calculateTotal(id, data.quantity);
+  }, [data]);
   useEffect(() => {
     if (isdeleted) {
-      setTimeout(() => deleteItem(data), 300)
+      setTimeout(() => deleteItem(data), 300);
     }
-  }, [isdeleted])
+  }, [isdeleted]);
   return (
     <>
       <AnimatePresence>
@@ -90,6 +90,7 @@ function CartListItem({ id, data, calculateTotal }) {
                 <div className={style.quantity_inner}>
                   <button
                     className={style.minus}
+                    aria-label='reduce'
                     onClick={() => changeQuantity('minus')}
                   >
                     <RemoveIcon />
@@ -100,13 +101,14 @@ function CartListItem({ id, data, calculateTotal }) {
                     <input
                       type='number'
                       // min={0}
+                      aria-label='add'
                       pattern='[0-9]'
                       // max={data?.availableQuantity}
                       value={quantity}
                       onBlur={(e) => {
-                        setError(false)
+                        setError(false);
                         if (e.target.value === '') {
-                          setCustomQuantity(1)
+                          setCustomQuantity(1);
                         }
                       }}
                       onChange={(e) =>
@@ -135,7 +137,7 @@ function CartListItem({ id, data, calculateTotal }) {
                 <div
                   className={style.icon}
                   onClick={() => {
-                    setIsDeleted(true)
+                    setIsDeleted(true);
                   }}
                 >
                   <DeleteIcon />
@@ -149,7 +151,7 @@ function CartListItem({ id, data, calculateTotal }) {
         // )} */}
       </AnimatePresence>
     </>
-  )
+  );
 }
 
-export default CartListItem
+export default CartListItem;

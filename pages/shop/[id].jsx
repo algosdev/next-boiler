@@ -17,7 +17,10 @@ function ProductSingle({ store, slug }) {
   console.log(getData(slug));
   return (
     <>
-      <SEO title={getData(slug)?.name} description={getData(slug)?.desc} />
+      <SEO
+        title={getData(slug)?.name}
+        description={getData(slug)?.desc || 'Macbro product info'}
+      />
       <div style={{ background: '#fff', padding: '50px 0' }}>
         <Container>
           <Grid container justify='space-between' spacing={2}>

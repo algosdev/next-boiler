@@ -65,7 +65,7 @@ export default function Footer() {
               </li>
               <li className={style.listItem}>
                 <Link href='/contact'>
-                  <a>Контакты</a>
+                  <a>{t('contacts')}</a>
                   {/* <a>{t('bonuses')}</a> */}
                 </Link>
               </li>
