@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import style from './checkout.module.scss'
+import React, { useState } from 'react';
+import style from './checkout.module.scss';
 import {
   CashIn,
   CreditCard,
@@ -8,8 +8,8 @@ import {
   FastDelivery,
   TerminalIcon,
   InstallmentIcon,
-} from '../svg'
-import { useTranslation, i18n } from '../../i18n'
+} from '../svg';
+import { useTranslation, i18n } from '../../i18n';
 import {
   YMaps,
   Map,
@@ -17,15 +17,15 @@ import {
   SearchControl,
   GeolocationControl,
   ZoomControl,
-} from 'react-yandex-maps'
+} from 'react-yandex-maps';
 function CheckoutForm() {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const [values, setValues] = useState({
     address: '',
     obtaining: '',
     payment_method: '',
-  })
-  console.log(values)
+  });
+  console.log(values);
   return (
     <>
       <div className={style.wrapper_form}>
@@ -49,7 +49,7 @@ function CheckoutForm() {
                 />
                 <label htmlFor='opt1'>
                   <div>
-                    <p className={style.opt_title}>Самовывоз</p>
+                    <p className={style.opt_title}>{t('pickup')}</p>
                     <p className={style.opt_img}>
                       <PickUp />
                     </p>
@@ -69,7 +69,7 @@ function CheckoutForm() {
                 />
                 <label htmlFor='opt2'>
                   <div>
-                    <p className={style.opt_title}>Доставка в течение дня</p>
+                    <p className={style.opt_title}>{t('delivery_one')}</p>
                     <p className={style.opt_img}>
                       <DefaultDelivery />
                     </p>
@@ -89,7 +89,7 @@ function CheckoutForm() {
                 />
                 <label htmlFor='opt3'>
                   <div>
-                    <p className={style.opt_title}>Быстрая доставка</p>
+                    <p className={style.opt_title}>{t('delivery_speed')}</p>
                     <p className={style.opt_img}>
                       <FastDelivery />
                     </p>
@@ -118,30 +118,30 @@ function CheckoutForm() {
                 <input
                   required
                   className={`${style.input} input`}
-                  placeholder={'Подъезд'}
+                  placeholder={t('entrance')}
                   type='text'
                 />
                 <input
                   required
                   className={`${style.input} input`}
-                  placeholder={'Этаж'}
+                  placeholder={t('floor')}
                   type='text'
                 />
                 <input
                   required
                   className={`${style.input} input`}
-                  placeholder={'Номер квартиры / дома'}
+                  placeholder={t('num_house_flat')}
                   type='text'
                 />
                 <input
                   required
                   className={`${style.input} input`}
-                  placeholder={'Домофон'}
+                  placeholder={t('intercom')}
                   type='text'
                 />
                 <input
                   className={`${style.input} input`}
-                  placeholder={'Комментарий к заказу(необязательный)'}
+                  placeholder={t('comment_to_order')}
                   type='text'
                 />
               </div>
@@ -188,7 +188,7 @@ function CheckoutForm() {
                 />
                 <input
                   className={`${style.input} input`}
-                  placeholder={'Комментарий к заказу(необязательный)'}
+                  placeholder={t('comment_to_order')}
                   type='text'
                 />
               </div>
@@ -247,7 +247,7 @@ function CheckoutForm() {
                 />
                 <label htmlFor='opt6'>
                   <div>
-                    <p className={style.opt_title}>Терминал</p>
+                    <p className={style.opt_title}>{t('terminal')}</p>
                     {/* <p className={style.opt_desc}>
                       <TerminalIcon />
                     </p> */}
@@ -270,7 +270,7 @@ function CheckoutForm() {
                 />
                 <label htmlFor='opt9'>
                   <div>
-                    <p className={style.opt_title}>Рассрочка</p>
+                    <p className={style.opt_title}>{t('installment')}</p>
                     <p className={style.opt_img}>
                       <img
                         className={style.grey}
@@ -339,7 +339,7 @@ function CheckoutForm() {
         </form>
       </div>
     </>
-  )
+  );
 }
 
-export default CheckoutForm
+export default CheckoutForm;

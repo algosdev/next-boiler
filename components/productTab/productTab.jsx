@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
-import AppBar from '@material-ui/core/AppBar'
-import Tabs from '@material-ui/core/Tabs'
-import Tab from '@material-ui/core/Tab'
-import Typography from '@material-ui/core/Typography'
-import Box from '@material-ui/core/Box'
-import { i18n, useTranslation } from '../../i18n'
-import style from './productTab.module.scss'
-import { useStyles } from './productTabStyle'
-import Shops from '../shops/shops'
-import Feedback from '../feedback/feedback'
-import Overview from '../productDetails/overview'
-import TechSpecs from '../productDetails/techspecs'
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import { i18n, useTranslation } from '../../i18n';
+import style from './productTab.module.scss';
+import { useStyles } from './productTabStyle';
+import Shops from '../shops/shops';
+import Feedback from '../feedback/feedback';
+import Overview from '../productDetails/overview';
+import TechSpecs from '../productDetails/techspecs';
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props
+  const { children, value, index, ...other } = props;
 
   return (
     <div
@@ -30,30 +30,30 @@ function TabPanel(props) {
         </Box>
       )}
     </div>
-  )
+  );
 }
 
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
-}
+};
 
 function a11yProps(index) {
   return {
     id: `scrollable-force-tab-${index}`,
     'aria-controls': `scrollable-force-tabpanel-${index}`,
-  }
+  };
 }
 
 function ProductTab() {
-  const { t } = useTranslation()
-  const classes = useStyles()
-  const [value, setValue] = useState(0)
+  const { t } = useTranslation();
+  const classes = useStyles();
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
-    setValue(newValue)
-  }
+    setValue(newValue);
+  };
 
   return (
     <div className={style.wrapper}>
@@ -81,7 +81,7 @@ function ProductTab() {
             />
 
             <Tab
-              label={'Отзывы'}
+              label={t('feedbacks')}
               classes={{ selected: classes.selected }}
               disableRipple
               {...a11yProps(2)}
@@ -99,7 +99,7 @@ function ProductTab() {
         </TabPanel>
       </div>
     </div>
-  )
+  );
 }
 
-export default ProductTab
+export default ProductTab;

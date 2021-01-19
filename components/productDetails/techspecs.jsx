@@ -1,5 +1,5 @@
-import React from 'react'
-import style from './details.module.scss'
+import React from 'react';
+import style from './details.module.scss';
 
 const techSpecsData = [
   {
@@ -30,11 +30,11 @@ const techSpecsData = [
       {
         name: 'Дополнительная информация',
         value:
-          'беспроводная зарядка кейса; голосовое управление; 15 минут зарядки хватает на 3 часа работы или 2 часа в режиме разговора; кейс - 44.3*53.5*21.3 мм, 398 мАч, 40 г; вес одного наушника - 4г; функция «Совместный доступ к аудио» позволяет слушать песни, подкасты и любое другое аудио через две пары наушников AirPods',
+          'беспроводная зарядка кейса; голосовое управление; 15 минут зарядки хватает на 3 часа работы или 2 часа в режиме разговора; кейс - 44.3*53.5*21.3 мм, 398 мАч, 40 г',
       },
     ],
   },
-]
+];
 function TechSpecs() {
   return (
     <div className={style.wrapper}>
@@ -55,7 +55,7 @@ function TechSpecs() {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
-export default TechSpecs
+export default TechSpecs;

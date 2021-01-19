@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
-import style from './feedback.module.scss'
-import { Box, Button } from '@material-ui/core'
-import Rating from '@material-ui/lab/Rating'
+import React, { useState } from 'react';
+import style from './feedback.module.scss';
+import { Box, Button } from '@material-ui/core';
+import Rating from '@material-ui/lab/Rating';
+import { useTranslation } from '../../i18n';
 function Feedback() {
-  const [ratingValue, setRatingValue] = useState(0)
+  const { t } = useTranslation();
+  const [ratingValue, setRatingValue] = useState(0);
   const handleSubmit = (e) => {
-    e.preventDefault()
-  }
+    e.preventDefault();
+  };
   return (
     <div className={style.wrapper}>
       <div className={style.feedback_container}>
@@ -16,22 +18,22 @@ function Feedback() {
               name='simple-controlled'
               value={ratingValue}
               onChange={(event, newValue) => {
-                setRatingValue(newValue)
+                setRatingValue(newValue);
               }}
             />
           </Box>
           <textarea
             className='input'
-            placeholder='Комментировать'
+            placeholder={`${t('feedback')}...`}
             rows='4'
           ></textarea>
           <div className={style.btn_cont}>
-            <Button>Комментировать</Button>
+            <Button>{t('leave_feedback')}</Button>
           </div>
         </form>
       </div>
     </div>
-  )
+  );
 }
 
-export default Feedback
+export default Feedback;

@@ -1,6 +1,6 @@
-import React from 'react'
-import style from './productSingle.module.scss'
-import { Link } from '../../i18n'
+import React from 'react';
+import style from './productSingle.module.scss';
+import { Link, useTranslation } from '../../i18n';
 const compareData = [
   {
     name: 'iPad Pro',
@@ -50,14 +50,15 @@ const compareData = [
       'Совместим с Apple Pencil (2-го поколения)',
     ],
   },
-]
+];
 function Compare() {
+  const { t } = useTranslation();
   return (
     <div className={style.wrapper_compare}>
-      <div className={style.main_title}>Сравнить</div>
+      <div className={style.main_title}>{t('compare')}</div>
       <div className={style.desc}>
         <Link href='/compare'>
-          <a>Сравните больше продуктов</a>
+          <a>{t('compare_more')}</a>
         </Link>
       </div>
 
@@ -81,7 +82,7 @@ function Compare() {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
-export default Compare
+export default Compare;

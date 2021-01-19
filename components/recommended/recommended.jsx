@@ -1,12 +1,12 @@
-import React from 'react'
-import style from './recommended.module.scss'
-import ReactSlick from 'react-slick'
-import { numberToPrice } from '../../lib/numberToPrice'
-import { NextArrow, PrevArrow } from '../carouselArrows'
-import { Link, useTranslation } from '../../i18n'
-import { Container } from '@material-ui/core'
+import React from 'react';
+import style from './recommended.module.scss';
+import ReactSlick from 'react-slick';
+import { numberToPrice } from '../../lib/numberToPrice';
+import { NextArrow, PrevArrow } from '../carouselArrows';
+import { Link, useTranslation } from '../../i18n';
+import { Container } from '@material-ui/core';
 function Recommended() {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const productListData = [
     {
       type: t('new'),
@@ -53,7 +53,7 @@ function Recommended() {
       colors: ['brown'],
       slug: 'iphone-leather-waller',
     },
-  ]
+  ];
   const responsive = [
     {
       breakpoint: 1024,
@@ -80,12 +80,12 @@ function Recommended() {
         initialSlide: 2,
       },
     },
-  ]
+  ];
 
   return (
     <div className={style.wrapper}>
       <div className={style.inner}>
-        <div className={style.main_title}>Рекомендуется</div>
+        <div className={style.main_title}>{t('recommended')}</div>
         <Container>
           <ReactSlick
             {...{
@@ -125,7 +125,7 @@ function Recommended() {
         </Container>
       </div>
     </div>
-  )
+  );
 }
 
-export default Recommended
+export default Recommended;
