@@ -17,6 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import ProductFilter from './productFilter';
+import ProductSortBy from './productSortby';
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: 'relative',
@@ -88,7 +89,8 @@ function ProductHeader({ showFilter, setShowFilter }) {
           </div>
 
           <div className={style.sort_cont}>
-            <button
+            <ProductSortBy sortByText={t('sort_by')} data={sortByData} />
+            {/* <button
               // id=""
               className={style.btn}
               onClick={() => setSortByOpen(!sortByOpen)}
@@ -113,6 +115,7 @@ function ProductHeader({ showFilter, setShowFilter }) {
                         opacity: 1,
                         top: '200%',
                         right: '0',
+                        zIndex: 2,
                       },
                       stable: {
                         position: 'absolute',
@@ -147,7 +150,7 @@ function ProductHeader({ showFilter, setShowFilter }) {
               ) : (
                 ''
               )}
-            </AnimatePresence>
+            </AnimatePresence> */}
           </div>
         </div>
       </div>

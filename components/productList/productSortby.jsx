@@ -8,7 +8,7 @@ import {
   MenuList,
   makeStyles,
 } from '@material-ui/core';
-import style from './compare.module.scss';
+import style from './productList.module.scss';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Link } from '../../i18n';
 const useStyles = makeStyles(() => ({
@@ -43,10 +43,12 @@ const useStyles = makeStyles(() => ({
   popper: {
     zIndex: '999',
     width: '100%',
-    top: '-2px',
+    top: '16px !important',
+    right: '0',
+    minWidth: '200px',
   },
 }));
-const CompareOption = ({ data }) => {
+const ProductSortBy = ({ data, sortByText }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [activeOption, setActiveOption] = useState(data[0]);
@@ -81,15 +83,15 @@ const CompareOption = ({ data }) => {
   console.log('sadaasD', data);
 
   return (
-    <div
-      className={style.listItem}
+    <button
+      className={style.btn}
       ref={anchorRef}
       aria-controls={open ? 'menu-list-grow' : undefined}
       aria-haspopup='true'
       onClick={handleToggle}
     >
-      <span>{activeOption}</span>
-      <span className={open ? style.open : ''}>
+      <span> {sortByText}: </span> {activeOption}
+      <span className={`${style.arrow} ${open ? style.open : ''}`}>
         <ExpandMoreIcon />
       </span>
       <Popper
@@ -133,8 +135,8 @@ const CompareOption = ({ data }) => {
           </Grow>
         )}
       </Popper>
-    </div>
+    </button>
   );
 };
 
-export default CompareOption;
+export default ProductSortBy;

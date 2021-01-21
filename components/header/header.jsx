@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
-
+import QuickSearch from './QuickSearch';
 function HideOnScroll(props) {
   const { children, window } = props;
   // Note that you normally won't need to set the window ref as useScrollTrigger
@@ -123,6 +123,7 @@ function Header(props) {
       animationForm.start('visible');
     } else {
       animationForm.start('stable');
+      setTerm('');
     }
   }, [isSearchVisible]);
 
@@ -187,6 +188,7 @@ function Header(props) {
                         onClickAway={() => setIsSearchVisible(false)}
                       >
                         <motion.form
+                          autoComplete='off'
                           className={`${style.searchForm} ${
                             isSearchVisible ? style.animate : ''
                           }`}
@@ -231,6 +233,7 @@ function Header(props) {
                             transition={{
                               duration: 0,
                             }}
+                            value={term}
                             id='search_input'
                             onChange={(e) => setTerm(e.target.value)}
                             ref={searchRef}
@@ -306,6 +309,7 @@ function Header(props) {
           </Container>
         </header>
       </AppBar>
+      {term && isSearchVisible ? <QuickSearch term={term} /> : ''}
       {/* </HideOnScroll> */}
     </>
   );
