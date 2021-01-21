@@ -1,13 +1,30 @@
-import React from 'react'
-import style from './contact.module.scss'
-import { TelegramIcon, InstagramIcon, YoutubeIcon, FacebookIcon } from '../svg'
+import React from 'react';
+import style from './contact.module.scss';
+import {
+  TelegramIcon,
+  InstagramIcon,
+  YoutubeIcon,
+  FacebookIcon,
+  PhoneNumIcon,
+  LocationIcon,
+  EmailIcon,
+} from '../svg';
 function ContactDetails() {
   return (
     <div className={style.wrapper}>
       <div className={style.title}>Контактная информация</div>
-      <p>+998712220505</p>
-      <p>support@macbro.uz</p>
-      <p>45, Istiqbol ko'chasi, Mirobod tumani, Toshkent</p>
+      <p>
+        <PhoneNumIcon />
+        <span>+998712220505</span>
+      </p>
+      <p>
+        <EmailIcon />
+        <span>support@macbro.uz</span>
+      </p>
+      <p>
+        <LocationIcon />
+        <span>45, Istiqbol ko'chasi, Mirobod tumani, Toshkent</span>
+      </p>
       <div className={style.socials}>
         <div className={style.item}>
           <TelegramIcon />
@@ -23,7 +40,7 @@ function ContactDetails() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default ContactDetails
+export default ContactDetails;

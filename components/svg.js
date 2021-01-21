@@ -1,4 +1,4 @@
-import * as React from 'react'
+import * as React from 'react';
 
 export function BrandLogo(props) {
   return (
@@ -17,7 +17,7 @@ export function BrandLogo(props) {
         d='M149.84 156.65v-96.7h-.64l-39.61 96.7H94.48l-39.7-96.7h-.64v96.7H35.57V25.26h23.58l42.52 104.71h.73l42.43-104.71h23.67v131.39h-18.66zM186.53 129.42c0-16.75 12.84-27.04 35.6-28.32l26.22-1.55v-7.38c0-10.65-7.19-17.03-19.21-17.03-11.38 0-18.48 5.46-20.21 14.02h-18.57c1.09-17.3 15.84-30.05 39.52-30.05 23.22 0 38.06 12.29 38.06 31.5v66.01h-18.85v-15.75h-.46c-5.55 10.65-17.66 17.39-30.23 17.39-18.76.02-31.87-11.63-31.87-28.84zm61.82-8.65v-7.56l-23.58 1.46c-11.75.82-18.39 6.01-18.39 14.2 0 8.38 6.92 13.84 17.48 13.84 13.74.01 24.49-9.46 24.49-21.94zM350.41 93.82c-2-10.2-9.65-18.3-22.49-18.3-15.21 0-25.22 12.66-25.22 33.23 0 21.03 10.11 33.23 25.4 33.23 12.11 0 20.03-6.65 22.31-17.75h18.94c-2.09 20.4-18.39 34.24-41.43 34.24-27.41 0-45.25-18.76-45.25-49.71 0-30.41 17.85-49.62 45.07-49.62 24.67 0 39.7 15.84 41.43 34.69h-18.76zM384.46 156.65V25.26h57.18c24.67 0 40.15 12.66 40.15 32.78 0 14.39-10.74 26.4-24.67 28.5v.73c17.85 1.37 30.96 14.39 30.96 31.78 0 23.13-17.39 37.6-45.43 37.6h-58.19zm27.5-76.76h19.76c14.66 0 23.04-6.46 23.04-17.57 0-10.56-7.38-16.57-20.21-16.57h-22.58v34.14zm23.67 56.27c15.84 0 24.4-6.74 24.4-19.3 0-12.29-8.83-18.85-25.04-18.85h-23.04v38.15h23.68zM501.45 59.04h25.68v17.57h.55c3.46-12.38 11.75-19.12 23.22-19.12 3.1 0 5.74.46 7.56 1v23.4c-2.19-.91-5.83-1.55-9.65-1.55-13.11 0-20.76 8.01-20.76 21.76v54.54h-26.59v-97.6zM565.73 107.75c0-31.59 19.12-50.81 48.35-50.81s48.35 19.12 48.35 50.81c0 32.14-18.85 50.99-48.35 50.99s-48.35-18.94-48.35-50.99zm69.66.09c0-19.39-8.38-30.59-21.31-30.59-12.93 0-21.4 11.2-21.4 30.59 0 19.58 8.29 30.59 21.4 30.59 13.02.01 21.31-11.01 21.31-30.59z'
       />
     </svg>
-  )
+  );
 }
 export const TelegramIcon = () => (
   <svg
@@ -32,7 +32,7 @@ export const TelegramIcon = () => (
       fill='#1D1D1D'
     />
   </svg>
-)
+);
 export const InstagramIcon = () => (
   <svg
     width='20'
@@ -46,7 +46,7 @@ export const InstagramIcon = () => (
       fill='#1D1D1D'
     />
   </svg>
-)
+);
 export const YoutubeIcon = () => (
   <svg
     width='29'
@@ -60,7 +60,7 @@ export const YoutubeIcon = () => (
       fill='#1D1D1D'
     />
   </svg>
-)
+);
 export const FacebookIcon = () => (
   <svg
     width='20'
@@ -74,7 +74,7 @@ export const FacebookIcon = () => (
       fill='#1D1D1D'
     />
   </svg>
-)
+);
 export const CashIn = () => (
   <svg
     width='30'
@@ -100,7 +100,7 @@ export const CashIn = () => (
       fill='#1D1D1D'
     />
   </svg>
-)
+);
 export const CloseIcon = () => (
   <svg
     width='12'
@@ -114,7 +114,7 @@ export const CloseIcon = () => (
       fill='white'
     />
   </svg>
-)
+);
 export const PickUp = () => (
   <svg
     width='22'
@@ -134,7 +134,7 @@ export const PickUp = () => (
       fill='#1D1D1D'
     />
   </svg>
-)
+);
 export const InstallmentIcon = () => (
   <svg
     width='19'
@@ -148,7 +148,7 @@ export const InstallmentIcon = () => (
       fill='#1D1D1D'
     />
   </svg>
-)
+);
 export const TerminalIcon = () => (
   <svg
     width='15'
@@ -164,7 +164,7 @@ export const TerminalIcon = () => (
       fill='#1D1D1D'
     />
   </svg>
-)
+);
 export const DefaultDelivery = () => (
   <svg
     width='26'
@@ -178,7 +178,7 @@ export const DefaultDelivery = () => (
       fill='#1D1D1D'
     />
   </svg>
-)
+);
 export const FastDelivery = () => (
   <svg
     width='26'
@@ -197,7 +197,7 @@ export const FastDelivery = () => (
       fill='#1D1D1D'
     />
   </svg>
-)
+);
 export const CreditCard = () => (
   <svg
     width='27'
@@ -223,7 +223,49 @@ export const CreditCard = () => (
       fill='#1D1D1D'
     />
   </svg>
-)
+);
+export const PhoneNumIcon = () => (
+  <svg
+    width='24'
+    height='24'
+    viewBox='0 0 24 24'
+    fill='none'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <path
+      d='M20.9999 15.46L15.7299 14.85L13.2099 17.37C10.3799 15.93 8.0599 13.62 6.6199 10.78L9.1499 8.25L8.5399 3H3.0299C2.4499 13.18 10.8199 21.55 20.9999 20.97V15.46V15.46Z'
+      fill='#323232'
+    />
+  </svg>
+);
+export const LocationIcon = () => (
+  <svg
+    width='24'
+    height='24'
+    viewBox='0 0 24 24'
+    fill='none'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <path
+      d='M12 2C8.13 2 5 5.13 5 9C5 13.17 9.42 18.92 11.24 21.11C11.64 21.59 12.37 21.59 12.77 21.11C14.58 18.92 19 13.17 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z'
+      fill='#323232'
+    />
+  </svg>
+);
+export const EmailIcon = () => (
+  <svg
+    width='24'
+    height='24'
+    viewBox='0 0 24 24'
+    fill='none'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <path
+      d='M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM19.6 8.25L12.53 12.67C12.21 12.87 11.79 12.87 11.47 12.67L4.4 8.25C4.15 8.09 4 7.82 4 7.53C4 6.86 4.73 6.46 5.3 6.81L12 11L18.7 6.81C19.27 6.46 20 6.86 20 7.53C20 7.82 19.85 8.09 19.6 8.25Z'
+      fill='#323232'
+    />
+  </svg>
+);
 export const English = () => (
   <svg
     width='24'
@@ -312,7 +354,7 @@ export const English = () => (
       />
     </g>
   </svg>
-)
+);
 
 export const Russian = () => (
   <svg
@@ -332,7 +374,7 @@ export const Russian = () => (
       fill='#EEEEEE'
     />
   </svg>
-)
+);
 export const Uzbek = () => (
   <svg
     width='23'
@@ -359,7 +401,7 @@ export const Uzbek = () => (
       fill='white'
     />
   </svg>
-)
+);
 export const ProfileIcon = () => (
   <svg
     width='24'
@@ -381,7 +423,7 @@ export const ProfileIcon = () => (
       fill='white'
     />
   </svg>
-)
+);
 export const OnTimeDeliveryIcon = () => (
   <svg
     width='45'
@@ -395,7 +437,7 @@ export const OnTimeDeliveryIcon = () => (
       fill='#1D1D1D'
     />
   </svg>
-)
+);
 export const FastDeliveryIcon = () => (
   <svg
     width='63'
@@ -409,7 +451,7 @@ export const FastDeliveryIcon = () => (
       fill='#1D1D1D'
     />
   </svg>
-)
+);
 export const SettingsIcon = () => (
   <svg
     width='51'
@@ -423,4 +465,4 @@ export const SettingsIcon = () => (
       fill='#1D1D1D'
     />
   </svg>
-)
+);
