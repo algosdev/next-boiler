@@ -566,6 +566,12 @@
       }
       .item_content {
         color: #fff;
+        p {
+          margin: 0 !important;
+          &:hover {
+            text-decoration: none;
+          }
+        }
       }
     }
   }
