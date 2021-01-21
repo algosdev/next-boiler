@@ -167,7 +167,7 @@ function Header(props) {
               <div className={style.wrapper}>
                 <div className={style.brandLogo}>
                   <Link href='/'>
-                    <a aria-label='Logo'>
+                    <a id='logo_header' aria-label='Logo'>
                       <BrandLogo />
                     </a>
                   </Link>
@@ -251,6 +251,7 @@ function Header(props) {
                           <AnimatePresence>
                             {isSearchVisible ? (
                               <motion.div
+                                id='search_icon'
                                 className={style.closeSearch}
                                 variants={{
                                   visible: {

@@ -8,8 +8,10 @@ function about() {
   return (
     <>
       <SEO title={t('about')} description={t('contact_desc')} />
-      <AboutBanner />
-      <AboutContent />
+      <div style={{ background: '#fff' }}>
+        <AboutBanner />
+        <AboutContent />
+      </div>
     </>
   );
 }

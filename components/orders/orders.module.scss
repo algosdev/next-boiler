@@ -278,6 +278,11 @@
     }
   }
 }
+.border {
+  padding: 30px 0;
+  margin-top: 50px;
+  border-top: 1px solid var(--border);
+}
 .product_list {
   @media (max-width: 576px) {
     display: none;

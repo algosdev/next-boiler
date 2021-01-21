@@ -71,6 +71,7 @@ function ProductTab() {
               {...a11yProps(0)}
               classes={{ selected: classes.selected }}
               disableRipple
+              id='product_tab1'
             />
 
             <Tab
@@ -78,6 +79,7 @@ function ProductTab() {
               classes={{ selected: classes.selected }}
               {...a11yProps(1)}
               disableRipple
+              id='product_tab2'
             />
 
             <Tab
@@ -85,6 +87,7 @@ function ProductTab() {
               classes={{ selected: classes.selected }}
               disableRipple
               {...a11yProps(2)}
+              id='product_tab3'
             />
           </Tabs>
         </AppBar>

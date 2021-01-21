@@ -17,18 +17,20 @@ function Feedback() {
             <Rating
               name='simple-controlled'
               value={ratingValue}
+              id='feedback_rating_field'
               onChange={(event, newValue) => {
                 setRatingValue(newValue);
               }}
             />
           </Box>
           <textarea
+            id='feedback_textarea'
             className='input'
             placeholder={`${t('feedback')}...`}
             rows='4'
           ></textarea>
           <div className={style.btn_cont}>
-            <Button>{t('leave_feedback')}</Button>
+            <Button id='feedback_submit_btn'>{t('leave_feedback')}</Button>
           </div>
         </form>
       </div>

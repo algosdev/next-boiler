@@ -1,9 +1,9 @@
-import React from 'react'
-import style from './orders.module.scss'
-import { useTranslation } from '../../i18n'
-import { numberToPrice } from '../../lib/numberToPrice'
+import React from 'react';
+import style from './orders.module.scss';
+import { useTranslation } from '../../i18n';
+import { numberToPrice } from '../../lib/numberToPrice';
 function OrderDetails() {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   return (
     <>
       <div className={style.wrapper_details}>
@@ -68,7 +68,7 @@ function OrderDetails() {
           </div>
         </div>
 
-        <p className={style.odl_title}>{t('order_list')}</p>
+        <p className={style.border}></p>
         <div className={style.product_list}>
           <div className={style.data}>
             <div>
@@ -133,7 +133,7 @@ function OrderDetails() {
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default OrderDetails
+export default OrderDetails;

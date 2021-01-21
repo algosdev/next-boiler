@@ -1,23 +1,24 @@
-import React, { useState } from 'react'
-import style from './productList.module.scss'
-import { Link } from '../../i18n'
-import { List, KeyboardArrowDown } from '@material-ui/icons'
+import React, { useState } from 'react';
+import style from './productList.module.scss';
+import { Link } from '../../i18n';
+import { List, KeyboardArrowDown } from '@material-ui/icons';
 import {
   Grid,
   Typography,
   ClickAwayListener,
   Checkbox,
   FormControlLabel,
-} from '@material-ui/core'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useTranslation } from '../../i18n'
-import { numberToPrice } from '../../lib/numberToPrice'
-import Slider from '@material-ui/core/Slider'
-import ProductHeader from './productHeader'
-import ProductFilter from './productFilter'
+} from '@material-ui/core';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from '../../i18n';
+import { numberToPrice } from '../../lib/numberToPrice';
+import Slider from '@material-ui/core/Slider';
+import ProductHeader from './productHeader';
+import ProductFilter from './productFilter';
+import ProductListItem from './productListItem';
 
 export default function ProductList() {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   const productListData = [
     // {
@@ -93,10 +94,10 @@ export default function ProductList() {
       colors: ['brown'],
       slug: 'iphone-leather-waller',
     },
-  ]
-  const [activeSortBy, setActiveSortBy] = useState(0)
-  const [showFilter, setShowFilter] = useState(true)
-  const [sortByOpen, setSortByOpen] = useState(false)
+  ];
+  const [activeSortBy, setActiveSortBy] = useState(0);
+  const [showFilter, setShowFilter] = useState(true);
+  const [sortByOpen, setSortByOpen] = useState(false);
 
   return (
     <div className={style.productListWrapper}>
@@ -107,31 +108,12 @@ export default function ProductList() {
           <Grid container>
             {productListData.map((item, index) => (
               <Grid item xs={6} xl={3} sm={6} lg={4} md={6} sh={12} key={index}>
-                <Link href={`/shop/${item.slug}`} key={index}>
-                  <a className={style.product}>
-                    <div className={style.img_cont}>
-                      <img src={item.img} alt={item.name} />
-                    </div>
-                    <span className={style.type}>{item.type}</span>
-                    <h3 className={style.name}>{item.name}</h3>
-                    <span className={style.price}>
-                      {numberToPrice(item.price)} {t('soum')}
-                    </span>
-                    <div className={style.colors}>
-                      {item.colors.map((color, ind) => (
-                        <span
-                          key={ind}
-                          className={`${style[color]} ${style.color}`}
-                        />
-                      ))}
-                    </div>
-                  </a>
-                </Link>
+                <ProductListItem item={item} key={index} />
               </Grid>
             ))}
           </Grid>
         </div>
       </div>
     </div>
-  )
+  );
 }
