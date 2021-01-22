@@ -66,6 +66,12 @@
           display: flex;
           flex-direction: column;
         }
+        .img {
+          height: 370px;
+          @media (max-width: 766px) {
+            height: 200px;
+          }
+        }
         .title {
           max-width: 500px;
           font-weight: 600;
@@ -116,6 +122,13 @@
           img {
             transform: scale(1);
             transition: 0.4s;
+          }
+          height: 500px;
+          @media (max-width: 676px) {
+            height: 400px;
+          }
+          @media (max-width: 576px) {
+            height: 200px;
           }
         }
         &:hover {
@@ -205,6 +218,10 @@
           object-fit: cover;
           transform: scale(1.05);
           object-position: center;
+        }
+        height: 250px;
+        @media (max-width: 766px) {
+          height: 200px;
         }
       }
       .type {

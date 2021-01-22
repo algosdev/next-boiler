@@ -9,7 +9,8 @@ import {
   TerminalIcon,
   InstallmentIcon,
 } from '../svg';
-import { useTranslation, i18n } from '../../i18n';
+import { useTranslation, i18n, Router } from '../../i18n';
+
 import {
   YMaps,
   Map,
@@ -26,6 +27,7 @@ function CheckoutForm() {
     payment_method: '',
   });
   console.log(values);
+
   return (
     <>
       <div className={style.wrapper_form}>
@@ -157,8 +159,6 @@ function CheckoutForm() {
                 }}
                 apikey
               >
-                {/* <p className={style.map_title}>Локации</p> */}
-                {/* <div>My awesome application with maps!</div> */}
                 <Map
                   defaultState={{ center: [41.29, 69.2], zoom: 10 }}
                   width='100%'
@@ -261,7 +261,10 @@ function CheckoutForm() {
                   </div>
                 </label>
               </div>
-              <div className={style.radio_input}>
+              <div
+                className={style.radio_input}
+                onClick={() => Router.push('/checkout-installment')}
+              >
                 <input
                   className={`${style.input} input`}
                   type='radio'

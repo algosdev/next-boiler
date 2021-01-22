@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import style from './checkout.module.scss'
-import AddIcon from '@material-ui/icons/Add'
-import { useTranslation } from '../../i18n'
-function CheckoutListItem({ data }) {
-  const { t } = useTranslation()
-  const [quantity, setQuantity] = useState(data.quantity)
+import React, { useState, useEffect } from 'react';
+import style from './checkout_installment.module.scss';
+import AddIcon from '@material-ui/icons/Add';
+import { useTranslation } from '../../i18n';
+function InstallmentListItem({ data }) {
+  const { t } = useTranslation();
+  const [quantity, setQuantity] = useState(data.quantity);
   return (
     <>
       <div className={style.wrapper_item}>
@@ -21,7 +21,7 @@ function CheckoutListItem({ data }) {
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default CheckoutListItem
+export default InstallmentListItem;

@@ -1,6 +1,7 @@
-import { cartActionTypes } from '../actions/cartActions/cartActionTypes'
+import { cartActionTypes } from '../actions/cartActions/cartActionTypes';
 
 const initialCartState = {
+  installmentPeriod: 24,
   cartItems: [],
   data: [
     {
@@ -117,23 +118,23 @@ const initialCartState = {
       ],
     },
   ],
-}
+};
 
 const cartReducers = (state = initialCartState, action) => {
-  const { payload } = action
+  const { payload } = action;
   switch (action.type) {
     case cartActionTypes.ADD_TO_CART:
       return {
         ...state,
         cartItems: addNewProductToCart(state.cartItems, payload),
-      }
+      };
     case cartActionTypes.REMOVE_FROM_CART:
       return {
         ...state,
         cartItems: state.cartItems.filter(
           (cartItem) => cartItem.id !== payload.id
         ),
-      }
+      };
     case cartActionTypes.REDUCE_CART_ITEM_QUANTITY:
       return {
         ...state,
@@ -142,7 +143,7 @@ const cartReducers = (state = initialCartState, action) => {
             ? { ...cartItem, quantity: cartItem.quantity - 1 }
             : cartItem
         ),
-      }
+      };
     case cartActionTypes.INCREASE_CART_ITEM_QUANTITY:
       return {
         ...state,
@@ -151,7 +152,7 @@ const cartReducers = (state = initialCartState, action) => {
             ? { ...cartItem, quantity: parseInt(payload.customQuantity) }
             : cartItem
         ),
-      }
+      };
     case cartActionTypes.ADD_TO_CART_WITH_CUSTOM_QUANTITY:
       return {
         ...state,
@@ -159,33 +160,38 @@ const cartReducers = (state = initialCartState, action) => {
           state.cartItems,
           payload
         ),
-      }
+      };
     case cartActionTypes.CLEAR_CART:
       return {
         ...state,
         cartItems: [],
-      }
+      };
+    case cartActionTypes.SET_INSTALLMENT_PERIOD:
+      return {
+        ...state,
+        installmentPeriod: payload,
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
 function addNewProductToCart(cartItems, cartToAdd) {
-  const isInCart = !!cartItems.find((cartItem) => cartItem.id === cartToAdd.id)
+  const isInCart = !!cartItems.find((cartItem) => cartItem.id === cartToAdd.id);
   if (isInCart) {
     return cartItems.map((cartItem) => {
       return cartItem.id === cartToAdd.id
         ? { ...cartToAdd, quantity: parseInt(cartItem.quantity) + 1 }
-        : cartItem
-    })
+        : cartItem;
+    });
   }
-  return [...cartItems, { ...cartToAdd, quantity: 1 }]
+  return [...cartItems, { ...cartToAdd, quantity: 1 }];
 }
 function addNewProductToCartWithCustomQuantity(cartItems, cartToAdd) {
   return [
     ...cartItems,
     { ...cartToAdd, quantity: parseInt(cartToAdd.customQuantity) },
-  ]
+  ];
 }
 
-export default cartReducers
+export default cartReducers;

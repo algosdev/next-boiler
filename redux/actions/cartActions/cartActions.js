@@ -1,4 +1,4 @@
-import { cartActionTypes } from './cartActionTypes'
+import { cartActionTypes } from './cartActionTypes';
 
 export const asyncAddToCartAction = (product) => (dispatch) => {
   try {
@@ -6,12 +6,12 @@ export const asyncAddToCartAction = (product) => (dispatch) => {
   } catch (error) {
     // error
   }
-  console.log('product', product)
+  console.log('product', product);
   dispatch({
     type: cartActionTypes.ADD_TO_CART,
     payload: product,
-  })
-}
+  });
+};
 export const asyncAddToCartActionWithCustomQuantity = (product) => (
   dispatch
 ) => {
@@ -20,12 +20,12 @@ export const asyncAddToCartActionWithCustomQuantity = (product) => (
   } catch (error) {
     // error
   }
-  console.log('product', product)
+  console.log('product', product);
   dispatch({
     type: cartActionTypes.ADD_TO_CART_WITH_CUSTOM_QUANTITY,
     payload: product,
-  })
-}
+  });
+};
 export const asyncRemoveFromCartAction = (product) => (dispatch) => {
   try {
     // async code
@@ -36,8 +36,8 @@ export const asyncRemoveFromCartAction = (product) => (dispatch) => {
   dispatch({
     type: cartActionTypes.REMOVE_FROM_CART,
     payload: product,
-  })
-}
+  });
+};
 export const asyncReduceCartItemQuantityAction = (product) => (dispatch) => {
   try {
     // async code
@@ -48,8 +48,8 @@ export const asyncReduceCartItemQuantityAction = (product) => (dispatch) => {
   dispatch({
     type: cartActionTypes.REDUCE_CART_ITEM_QUANTITY,
     payload: product,
-  })
-}
+  });
+};
 export const asyncIncreaseCartItemQuantityAction = (product) => (dispatch) => {
   try {
     // async code
@@ -60,8 +60,21 @@ export const asyncIncreaseCartItemQuantityAction = (product) => (dispatch) => {
   dispatch({
     type: cartActionTypes.INCREASE_CART_ITEM_QUANTITY,
     payload: product,
-  })
-}
+  });
+};
+export const asyncSetInstallmentPeriod = (period) => (dispatch) => {
+  try {
+    // async code
+  } catch (error) {
+    // error
+  }
+
+  dispatch({
+    type: cartActionTypes.SET_INSTALLMENT_PERIOD,
+    payload: period,
+  });
+};
+
 export const clearCartAction = () => ({
   type: cartActionTypes.CLEAR_CART,
-})
+});
