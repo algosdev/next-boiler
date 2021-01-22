@@ -7,6 +7,9 @@ import {
   PickUp,
   FastDelivery,
   TerminalIcon,
+  CreditCardIcon,
+  CashIcon,
+  CalendarIcon,
   InstallmentIcon,
 } from '../svg';
 import { useTranslation, i18n, Router } from '../../i18n';
@@ -213,11 +216,12 @@ function CheckoutForm() {
                       <CashIn />
                     </p> */}
                     <p className={style.opt_img}>
-                      <img
+                      {/* <img
                         className={style.grey}
                         src='/images/cash.png'
                         alt='Cash'
-                      />
+                      /> */}
+                      <CashIcon />
                     </p>
                   </div>
                 </label>
@@ -252,11 +256,12 @@ function CheckoutForm() {
                       <TerminalIcon />
                     </p> */}
                     <p className={style.opt_img}>
-                      <img
+                      {/* <img
                         className={style.grey}
                         src='/images/terminal.png'
                         alt='Terminal'
-                      />
+                      /> */}
+                      <CreditCardIcon />
                     </p>
                   </div>
                 </label>
@@ -275,11 +280,12 @@ function CheckoutForm() {
                   <div>
                     <p className={style.opt_title}>{t('installment')}</p>
                     <p className={style.opt_img}>
-                      <img
+                      {/* <img
                         className={style.grey}
                         src='/images/installment2.png'
                         alt='Installment'
-                      />
+                      /> */}
+                      <CalendarIcon />
                     </p>
                     {/* <p className={style.opt_desc}>
                       <InstallmentIcon />

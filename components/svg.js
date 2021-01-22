@@ -355,7 +355,48 @@ export const English = () => (
     </g>
   </svg>
 );
-
+export const CalendarIcon = () => (
+  <svg
+    width='18'
+    height='20'
+    viewBox='0 0 18 20'
+    fill='none'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <path
+      d='M18 1.8H15.3V0H13.5V1.8H4.5V0H2.7V1.8H0V19.8H18V1.8ZM16.2 18H1.8V6.3H16.2V18Z'
+      fill='#323232'
+    />
+  </svg>
+);
+export const CashIcon = () => (
+  <svg
+    width='24'
+    height='24'
+    viewBox='0 0 24 24'
+    fill='none'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <path
+      d='M23 8V18C23 19.1 22.1 20 21 20H5C4.45 20 4 19.55 4 19C4 18.45 4.45 18 5 18H21V8C21 7.45 21.45 7 22 7C22.55 7 23 7.45 23 8ZM4 16C2.34 16 1 14.66 1 13V7C1 5.34 2.34 4 4 4H16C17.66 4 19 5.34 19 7V14C19 15.1 18.1 16 17 16H4ZM7 10C7 11.66 8.34 13 10 13C11.66 13 13 11.66 13 10C13 8.34 11.66 7 10 7C8.34 7 7 8.34 7 10Z'
+      fill='#323232'
+    />
+  </svg>
+);
+export const CreditCardIcon = () => (
+  <svg
+    width='24'
+    height='24'
+    viewBox='0 0 24 24'
+    fill='none'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <path
+      d='M20 4H4C2.89 4 2.01 4.89 2.01 6L2 18C2 19.11 2.89 20 4 20H20C21.11 20 22 19.11 22 18V6C22 4.89 21.11 4 20 4ZM19 18H5C4.45 18 4 17.55 4 17V12H20V17C20 17.55 19.55 18 19 18ZM20 8H4V6H20V8Z'
+      fill='#323232'
+    />
+  </svg>
+);
 export const Russian = () => (
   <svg
     width='23'

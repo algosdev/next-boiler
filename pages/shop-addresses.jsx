@@ -11,9 +11,11 @@ function shopAddresses() {
         title={t('address_of_branches')}
         description={t('shop_branches_desc')}
       />
-      <Container>
-        <Shops />
-      </Container>
+      <div style={{ background: '#fff' }}>
+        <Container>
+          <Shops />
+        </Container>
+      </div>
     </>
   );
 }

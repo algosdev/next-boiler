@@ -21,7 +21,7 @@ function ProductSingle({ store, slug }) {
         title={getData(slug)?.name}
         description={getData(slug)?.desc || 'Macbro product info'}
       />
-      <div style={{ background: '#fff', padding: '50px 0' }}>
+      <div style={{ background: '#fff' }}>
         <Container>
           <Grid container justify='space-between' spacing={2}>
             <Grid item md={6} sm={12}>

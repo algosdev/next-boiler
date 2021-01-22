@@ -37,12 +37,16 @@
     margin-bottom: 10px;
   }
   p {
-    line-height: 32px;
+    line-height: 24px;
     font-size: 17px;
     display: flex;
     align-items: center;
+    margin: 5px 0;
     span {
       margin-left: 5px;
+    }
+    svg {
+      min-width: 24px;
     }
   }
   .socials {
