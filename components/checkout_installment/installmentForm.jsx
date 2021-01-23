@@ -187,7 +187,7 @@ function InstallmentForm() {
                 </Button>
               )}
               <label htmlFor='file_passport'>
-                {values.passport_img ? (
+                {values.passport_img !== '' ? (
                   <>
                     <div className={style.img}>
                       <img src={values.passport_img} alt='Passport' />
@@ -321,7 +321,7 @@ function InstallmentForm() {
             </YMaps>
           </div>
           <div className={style.form_section}>
-            <p className={style.title}>{t('additional')}</p>
+            <p className={style.confirm_txt}>{t('additional')}</p>
             <input
               className={`${style.input} input`}
               placeholder={t('comment_to_order')}

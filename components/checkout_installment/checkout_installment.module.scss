@@ -96,7 +96,11 @@
       grid-gap: 10px;
     }
   }
-
+  .confirm_txt {
+    font-size: 14px;
+    color: var(--border);
+    line-height: 24px;
+  }
   .title {
     font-weight: 600;
     font-size: 22px;
@@ -127,6 +131,7 @@
       box-shadow: 0 0 2px 2px var(--primary-color);
     }
     label {
+      width: 100%;
       div {
         width: 100%;
         padding: 10px;
@@ -148,6 +153,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        margin: 0;
       }
 
       cursor: pointer;
@@ -228,6 +234,7 @@
     flex-direction: column;
     justify-content: center;
     position: relative;
+    min-height: 370px;
     .file_content {
       display: flex;
       flex-direction: column;
