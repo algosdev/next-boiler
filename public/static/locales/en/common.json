@@ -148,5 +148,8 @@
   "entrance": "Entrance",
   "floor": "Floor",
   "num_house_flat": "Apartment / house number",
-  "intercom": "Intercom"
+  "intercom": "Intercom",
+  "offline_txt": "It seems you are offline, please check your internet connections.",
+  "try_again": "Try again",
+  "back_home": "Go back home"
 }

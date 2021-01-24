@@ -150,5 +150,8 @@
   "entrance": "Podyez",
   "floor": "Qavat",
   "num_house_flat": "Xonadon/Uy raqami",
-  "intercom": "Domofon"
+  "intercom": "Domofon",
+  "offline_txt": "Siz tarmoqqa ulanmagansiz, iltimos terkshirib ko'ring",
+  "try_again": "Urinib ko'rish",
+  "back_home": "Bosh sahifaga qaytish"
 }

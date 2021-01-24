@@ -11,7 +11,7 @@ function OfflinePage() {
       <img src='/images/offline.png' alt='Offline' />
       <div className={style.content}>
         <p>{t('offline_txt')}</p>
-        <Button onClick={() => router.reload()}>{t('try_again')}</Button>
+        <Button onClick={() => Router.reload()}>{t('try_again')}</Button>
         <Button className={style.back} onClick={() => Router.push('/')}>
           {t('back_home')}
         </Button>
