@@ -13,7 +13,7 @@ import {
   asyncIncreaseCartItemQuantityAction,
   asyncRemoveFromCartAction,
 } from '../../redux/actions/cartActions/cartActions';
-import { useTranslation } from '../../i18n';
+import { i18n, useTranslation } from '../../i18n';
 function CartListItem({ id, data, calculateTotal }) {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(data?.quantity);
@@ -80,11 +80,7 @@ function CartListItem({ id, data, calculateTotal }) {
               </div>
               <div className={style.details}>
                 <div className={style.title}>{data.name}</div>
-                {/* <div className={style.info}>
-                  {data?.availableQuantity}{' '}
-                  {data?.availableQuantity > 1 ? t('pc1') : t('pc2')}{' '}
-                  {t('available')}
-                </div> */}
+                <div className={style.info}>{data?.color[i18n.language]} </div>
               </div>
               <div className={style.quantity_cont}>
                 <div className={style.quantity_inner}>

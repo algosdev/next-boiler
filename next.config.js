@@ -1,4 +1,5 @@
 const { nextI18NextRewrites } = require('next-i18next/rewrites');
+const runtimeCaching = require('next-pwa/cache');
 const localeSubpaths = {
   uz: 'uz',
   en: 'en',
@@ -9,6 +10,7 @@ module.exports = withPWA({
   pwa: {
     dest: 'public',
     swSrc: 'service-worker.js',
+    // runtimeCaching,
   },
   rewrites: async () => nextI18NextRewrites(localeSubpaths),
   publicRuntimeConfig: {

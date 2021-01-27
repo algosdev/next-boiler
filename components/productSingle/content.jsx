@@ -28,7 +28,7 @@ const colorsData = [
   { ru: 'Черный', en: 'Black', uz: 'Qora' },
   { ru: 'Серый', en: 'Grey', uz: 'Kulrang' },
   { ru: 'Красный', en: 'Red', uz: 'Qizil' },
-  { ru: 'Синий', en: 'Blue', kok: "Ko'k" },
+  { ru: 'Синий', en: 'Blue', uz: "Ko'k" },
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -74,6 +74,7 @@ function ProductSingleContent({ data }) {
         asyncAddToCartActionWithCustomQuantity({
           ...data,
           customQuantity: validQuantity,
+          color: colorsData[activeColorIndex],
         })
       );
       // dispatch(asyncAddToCartAction(data))
