@@ -554,6 +554,9 @@
       border-radius: 8px;
       border: 1px solid #fff;
       align-items: center;
+      &:hover {
+        text-decoration: none;
+      }
       .img {
         height: 60px;
         width: 60px;

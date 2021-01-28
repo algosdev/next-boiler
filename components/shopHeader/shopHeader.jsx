@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { KeyboardArrowDown } from '@material-ui/icons';
 import { motion, AnimatePresence } from 'framer-motion';
 import SubCategDropdown from './subCategDropdown';
-export default function ShopHeader() {
+export default function ShopHeader({ categ, subCateg, childCategs }) {
   const router = useRouter();
   const { t } = useTranslation();
   const [sortByOpen, setSortByOpen] = useState(false);
@@ -66,91 +66,19 @@ export default function ShopHeader() {
       ],
     },
   ];
-  console.log(
-    navData.filter((el) => el.title === t(router.query.category))?.[0]
-      ?.subCategs
-  );
+  console.log(subCateg);
   return (
     <div className={style.shopHeader}>
       {!router.query.term ? (
         <div className={style.top_header}>
           <Container className={style.content}>
-            <div className={style.categ}>{t(router.query.category)}</div>
+            <div className={style.categ}>{categ?.category?.name}</div>
             <div className={style.dropdown}>
               <SubCategDropdown
-                data={
-                  navData.filter(
-                    (el) => el.title === t(router.query.category)
-                  )?.[0]?.subCategs
-                }
+                data={childCategs}
+                parentCateg={categ?.category?.slug}
                 txt={t('browse_all')}
               />
-              {/* <button
-                className={style.btn}
-                onClick={() => setSortByOpen(!sortByOpen)}
-              >
-                <span>{t('browse_all')}</span>
-                <span
-                  className={`${style.arrow} ${sortByOpen ? style.open : ''}`}
-                >
-                  <KeyboardArrowDown />
-                </span>
-              </button>
-              <AnimatePresence>
-                {sortByOpen ? (
-                  <ClickAwayListener onClickAway={() => setSortByOpen(false)}>
-                    <motion.div
-                      className={style.popup}
-                      variants={{
-                        visible: {
-                          y: 0,
-                          position: 'absolute',
-                          x: '0',
-                          opacity: 1,
-                          top: '150%',
-                          right: '0',
-                        },
-                        stable: {
-                          position: 'absolute',
-                          y: -20,
-                          opacity: 0,
-                          x: '0',
-                          top: '150%',
-                          right: '0',
-                        },
-                      }}
-                      animate={'visible'}
-                      initial={'stable'}
-                      exit={'stable'}
-                    >
-                      <ul>
-                        {navData
-                          .filter(
-                            (el) => el.title === t(router.query.category)
-                          )?.[0]
-                          ?.subCategs.map((item, index) => (
-                            <li key={index}>
-                              <button
-                                onClick={() => {
-                                  setActiveSubCateg(index);
-                                  Router.push(`/shop?${item.link}`);
-                                  setSortByOpen(false);
-                                }}
-                                disabled={
-                                  index === activeSubCateg ? true : false
-                                }
-                              >
-                                {item.title}
-                              </button>
-                            </li>
-                          ))}
-                      </ul>
-                    </motion.div>
-                  </ClickAwayListener>
-                ) : (
-                  ''
-                )}
-              </AnimatePresence> */}
             </div>
           </Container>
         </div>
@@ -166,7 +94,7 @@ export default function ShopHeader() {
           <h1 className={style.title}>
             {router.query.term
               ? `Результаты поиска по запросу "${decodeURI(router.query.term)}"`
-              : t(router.query.subcategory?.replace('_', '').replace('@', '_'))}
+              : subCateg?.category?.name}
           </h1>
         </div>
       </Container>

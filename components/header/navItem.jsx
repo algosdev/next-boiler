@@ -43,7 +43,7 @@ const useStyles = makeStyles(() => ({
     top: '0 !important',
   },
 }));
-const NavItem = ({ title, subCategs }) => {
+const NavItem = ({ data, subCategs }) => {
   NavItem.muiName = Popper.muiName;
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -87,7 +87,7 @@ const NavItem = ({ title, subCategs }) => {
       onMouseLeave={() => setOpen(false)}
     >
       <span className={open ? style.open : ''}>
-        {title} <ExpandMoreIcon />
+        {data.name} <ExpandMoreIcon />
       </span>
       <Popper
         open={open}
@@ -118,8 +118,10 @@ const NavItem = ({ title, subCategs }) => {
                       disableRipple
                       onClick={() => setOpen(false)}
                     >
-                      <Link href={`/shop?${item.link}`}>
-                        <a>{item.title}</a>
+                      <Link
+                        href={`/shop?categ=${data.slug}&subcateg=${item.slug}`}
+                      >
+                        <a>{item.name}</a>
                       </Link>
                     </MenuItem>
                   ))}

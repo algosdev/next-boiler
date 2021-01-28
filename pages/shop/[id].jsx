@@ -9,6 +9,7 @@ import SEO from '../../components/seo';
 import Recommended from '../../components/recommended/recommended';
 import ProductTab from '../../components/productTab/productTab';
 import Compare from '../../components/productSingle/compare';
+import { fetchMultipleUrls } from '../../lib/fetchMultipleUrls';
 function ProductSingle({ store, slug }) {
   function getData(slug) {
     const data = store.filter((el) => el.slug === slug);
@@ -43,10 +44,13 @@ function ProductSingle({ store, slug }) {
 }
 export async function getServerSideProps(ctx) {
   const store = initializeStore();
+  const urls = ['http://46.101.122.150:1235/v1/category'];
+  const [categories] = await fetchMultipleUrls(urls);
   return {
     props: {
       store: store.getState().cart.data,
       slug: ctx.query.id,
+      categories,
     },
   };
 }

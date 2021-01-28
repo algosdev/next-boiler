@@ -4,7 +4,8 @@ import SEO from '../components/seo';
 import BannerContainer from '../components/bannerContainer/bannerContainer';
 import Banner from '../components/banner/banner';
 import { useTranslation } from '../i18n';
-export default function Home() {
+import { fetchMultipleUrls } from '../lib/fetchMultipleUrls';
+export default function Home({ categories }) {
   const { t } = useTranslation();
   const appleProducts = {
     title: t('apple_p'),
@@ -88,4 +89,15 @@ export default function Home() {
       <CatalogList data={samsungProducts} />
     </>
   );
+}
+
+export async function getServerSideProps({ req }) {
+  const urls = ['http://46.101.122.150:1235/v1/category'];
+  const [categories] = await fetchMultipleUrls(urls);
+  console.log('AAA', categories);
+  return {
+    props: {
+      categories,
+    },
+  };
 }

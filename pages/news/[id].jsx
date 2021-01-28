@@ -4,6 +4,7 @@ import LatestNewsCarousel from '../../components/news/latestNewsCarousel';
 import NewsSingleContent from '../../components/news/newsSingleContent';
 import NewsSingleHeader from '../../components/news/newsSingleHeader';
 import SEO from '../../components/seo';
+import { fetchMultipleUrls } from '../../lib/fetchMultipleUrls';
 function NewsSingle() {
   return (
     <>
@@ -15,6 +16,15 @@ function NewsSingle() {
       </div>
     </>
   );
+}
+export async function getServerSideProps() {
+  const urls = ['http://46.101.122.150:1235/v1/category'];
+  const [categories] = await fetchMultipleUrls(urls);
+  return {
+    props: {
+      categories,
+    },
+  };
 }
 
 export default NewsSingle;

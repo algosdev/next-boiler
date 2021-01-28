@@ -25,7 +25,17 @@ body {
 html body {
   font-size: 16px;
 }
-
+#nprogress .bar {
+  z-index: 999999 !important;
+  background: var(--primary-color) !important;
+}
+#nprogress .spinner {
+  z-index: 999999 !important;
+}
+#nprogress .spinner-icon {
+  border-top-color: var(--primary-color) !important;
+  border-left-color: var(--primary-color) !important;
+}
 * {
   box-sizing: border-box;
   padding: 0;

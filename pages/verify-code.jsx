@@ -3,7 +3,7 @@ import { Container, Typography } from '@material-ui/core';
 import VerifyCodeForm from '../components/authForm/verifyCodeForm';
 import SEO from '../components/seo';
 import { useTranslation } from '../i18n';
-
+import { fetchMultipleUrls } from '../lib/fetchMultipleUrls';
 function VerifyCode() {
   const { t } = useTranslation();
   return (

@@ -50,7 +50,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function Header(props) {
+function Header({ categories }) {
   const { t } = useTranslation();
   const [isMobile, setIsMobile] = useState(false);
   const classes = useStyles();
@@ -115,6 +115,7 @@ function Header(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     if (term) {
+      setIsSearchVisible(false);
       Router.push(`/shop?term=${encodeURI(term)}`);
     }
   };
@@ -175,11 +176,11 @@ function Header(props) {
                 </div>
                 <div className={style.nav}>
                   <ul className={style.list}>
-                    {navData.map((item, index) => (
+                    {categories?.map((item, index) => (
                       <NavItem
                         key={index}
-                        title={item.title}
-                        subCategs={item.subCategs}
+                        data={item}
+                        subCategs={item.children}
                       />
                     ))}
 
@@ -196,7 +197,6 @@ function Header(props) {
                             visible: {
                               left: '0',
                               right: 'auto',
-                              // x: '-100%',
                               top: '50%',
                               y: '-50%',
                               width: '100%',

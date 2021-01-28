@@ -48,13 +48,13 @@ function MyApp({ Component, pageProps }) {
       <ThemeProvider theme={theme}>
         {typeof window !== 'undefined' ? (
           <PersistGate loading={null} persistor={persistor}>
-            <Layout>
+            <Layout categories={pageProps.categories}>
               <CssBaseline />
               <Component {...pageProps} />
             </Layout>
           </PersistGate>
         ) : (
-          <Layout>
+          <Layout categories={pageProps.categories}>
             <Component {...pageProps} />
           </Layout>
         )}

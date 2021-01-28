@@ -3,6 +3,7 @@ import { Container } from '@material-ui/core';
 import CartList from '../components/cart/cartList';
 import SEO from '../components/seo';
 import { useTranslation } from '../i18n';
+import { fetchMultipleUrls } from '../lib/fetchMultipleUrls';
 function cart() {
   const { t } = useTranslation();
   return (
@@ -26,6 +27,16 @@ function cart() {
       </div>
     </>
   );
+}
+export async function getServerSideProps() {
+  const urls = ['http://46.101.122.150:1235/v1/category'];
+  const [categories] = await fetchMultipleUrls(urls);
+  console.log('AAA', categories);
+  return {
+    props: {
+      categories,
+    },
+  };
 }
 
 export default cart;

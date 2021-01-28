@@ -5,6 +5,7 @@ import ContactDetails from '../components/contact/contactDetails';
 import ContactForm from '../components/contact/contactForm';
 import ContactContainer from '../components/contact/contactContainer';
 import { useTranslation } from '../i18n';
+import { fetchMultipleUrls } from '../lib/fetchMultipleUrls';
 function contact() {
   const { t } = useTranslation();
   return (
@@ -25,6 +26,16 @@ function contact() {
       </div>
     </>
   );
+}
+export async function getServerSideProps() {
+  const urls = ['http://46.101.122.150:1235/v1/category'];
+  const [categories] = await fetchMultipleUrls(urls);
+  console.log('AAA', categories);
+  return {
+    props: {
+      categories,
+    },
+  };
 }
 
 export default contact;

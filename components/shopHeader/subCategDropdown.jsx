@@ -48,10 +48,10 @@ const useStyles = makeStyles(() => ({
     minWidth: '200px',
   },
 }));
-const SubCategDropdown = ({ data, txt }) => {
+const SubCategDropdown = ({ data, txt, parentCateg }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [activeOption, setActiveOption] = useState(data[0]);
+  const [activeOption, setActiveOption] = useState('');
   const anchorRef = useRef(null);
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -122,12 +122,14 @@ const SubCategDropdown = ({ data, txt }) => {
                       key={index}
                       onClick={(e) => {
                         setActiveOption(item);
-                        Router.push(`/shop?${item.link}`);
+                        Router.push(
+                          `/shop?categ=${parentCateg}&subcateg=${item.slug}`
+                        );
                         handleClose(e);
                       }}
                       disableRipple
                     >
-                      {item.title}
+                      {item.name}
                     </MenuItem>
                   ))}
                 </MenuList>

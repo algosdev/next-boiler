@@ -4,6 +4,7 @@ import AccountHeader from '../components/account/header';
 import AccountSettings from '../components/account/settings';
 import SEO from '../components/seo';
 import { useTranslation } from '../i18n';
+import { fetchMultipleUrls } from '../lib/fetchMultipleUrls';
 function account() {
   const { t } = useTranslation();
   return (
@@ -19,6 +20,16 @@ function account() {
       <AccountSettings />
     </>
   );
+}
+export async function getServerSideProps() {
+  const urls = ['http://46.101.122.150:1235/v1/category'];
+  const [categories] = await fetchMultipleUrls(urls);
+  console.log('AAA', categories);
+  return {
+    props: {
+      categories,
+    },
+  };
 }
 
 export default account;
