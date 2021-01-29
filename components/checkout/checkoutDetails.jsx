@@ -1,45 +1,45 @@
-import { Link } from '../../i18n'
-import React, { useState, useEffect } from 'react'
-import { useTranslation } from '../../i18n'
-import style from './checkout.module.scss'
-import CheckoutListItem from './checkoutListItem'
-import { numberToPrice } from '../../lib/numberToPrice'
-import { useSelector, shallowEqual } from 'react-redux'
+import { Link } from '../../i18n';
+import React, { useState, useEffect } from 'react';
+import { useTranslation } from '../../i18n';
+import style from './checkout.module.scss';
+import CheckoutListItem from './checkoutListItem';
+import { numberToPrice } from '../../lib/numberToPrice';
+import { useSelector, shallowEqual } from 'react-redux';
 function CheckoutDetails() {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const productsInCart = useSelector(
     (state) => state?.cart?.cartItems,
     shallowEqual
-  )
+  );
   const calculateTotalPrice = (data) => {
-    let sum = 0
+    let sum = 0;
     data.forEach((el) => {
-      sum += el.quantity * el.price
-    })
-    return sum
-  }
+      sum += el.quantity * el?.price?.price;
+    });
+    return sum;
+  };
   const calculateTotalQuantity = (data) => {
-    let sum = 0
+    let sum = 0;
     data.forEach((el) => {
-      sum += el.quantity
-    })
-    return sum
-  }
-  const [totalPrice, setTotalPrice] = useState(0)
-  const [cardItems, setCartItems] = useState(productsInCart)
+      sum += el.quantity;
+    });
+    return sum;
+  };
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [cardItems, setCartItems] = useState(productsInCart);
   const [totalQuantity, setTotalQuantity] = useState(
     calculateTotalQuantity(productsInCart)
-  )
+  );
 
-  const [shippingFee, setShippingFee] = useState(50000)
-  const [discount, setDiscount] = useState(10000)
+  const [shippingFee, setShippingFee] = useState(50000);
+  const [discount, setDiscount] = useState(10000);
   useEffect(() => {
-    setCartItems(productsInCart)
-  }, [productsInCart])
+    setCartItems(productsInCart);
+  }, [productsInCart]);
   useEffect(() => {
-    setTotalQuantity(calculateTotalQuantity(cardItems))
-    setTotalPrice(calculateTotalPrice(cardItems))
-  }, [cardItems])
+    setTotalQuantity(calculateTotalQuantity(cardItems));
+    setTotalPrice(calculateTotalPrice(cardItems));
+  }, [cardItems]);
   return (
     <div className={style.wrapper_summary}>
       <div className={style.summary_inner}>
@@ -82,7 +82,7 @@ function CheckoutDetails() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default CheckoutDetails
+export default CheckoutDetails;

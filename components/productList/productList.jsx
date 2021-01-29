@@ -17,7 +17,7 @@ import ProductHeader from './productHeader';
 import ProductFilter from './productFilter';
 import ProductListItem from './productListItem';
 import NoProduct from './NoProduct';
-export default function ProductList({ data }) {
+export default function ProductList({ data, brands, properties }) {
   const { t } = useTranslation();
 
   const productListData = [
@@ -149,7 +149,11 @@ export default function ProductList({ data }) {
       <ProductHeader showFilter={showFilter} setShowFilter={setShowFilter} />
       <div className={style.productList}>
         <div className={style.wrapper}>
-          <ProductFilter showFilter={showFilter} />
+          <ProductFilter
+            showFilter={showFilter}
+            brands={brands}
+            properties={properties}
+          />
           <Grid container>
             {data?.map((item, index) => (
               <Grid item xs={6} xl={3} sm={6} lg={4} md={6} sh={12} key={index}>

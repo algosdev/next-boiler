@@ -4,14 +4,25 @@ import SEO from '../../components/seo';
 import ShopHeader from '../../components/shopHeader/shopHeader';
 import { useTranslation } from '../../i18n';
 import { fetchMultipleUrls } from '../../lib/fetchMultipleUrls';
-export default function Shop({ categ, subCateg, childCategs, products }) {
+export default function Shop({
+  categ,
+  subCateg,
+  childCategs,
+  products,
+  brands,
+  properties,
+}) {
   const { t } = useTranslation();
   console.log('PRODUCTS', products);
   return (
     <>
       <SEO title={t('products')} description={t('product_list_desc')} />
       <ShopHeader categ={categ} subCateg={subCateg} childCategs={childCategs} />
-      <ProductList data={products?.products} />
+      <ProductList
+        data={products?.products}
+        brands={brands}
+        properties={properties}
+      />
     </>
   );
 }
@@ -21,8 +32,17 @@ export async function getServerSideProps({ query }) {
     `http://46.101.122.150:1235/v1/category/${query.categ}`,
     `http://46.101.122.150:1235/v1/category/${query.subcateg}`,
     `http://46.101.122.150:1235/v1/product?category=${query.categid}`,
+    `http://46.101.122.150:1235/v1/brand`,
+    `http://46.101.122.150:1235/v1/product-property`,
   ];
-  const [categories, categ, subCateg, products] = await fetchMultipleUrls(urls);
+  const [
+    categories,
+    categ,
+    subCateg,
+    products,
+    brands,
+    properties,
+  ] = await fetchMultipleUrls(urls);
   const childCategs = categories?.categories.filter(
     (el) => el.slug === query?.categ
   );
@@ -33,6 +53,8 @@ export async function getServerSideProps({ query }) {
       categ,
       childCategs: childCategs?.length ? childCategs[0].children : null,
       products,
+      brands,
+      properties,
     },
   };
 }

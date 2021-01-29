@@ -40,7 +40,7 @@ function InstallmentForm() {
   const calculateTotalPrice = (data) => {
     let sum = 0;
     data.forEach((el) => {
-      sum += el.quantity * el.price;
+      sum += el.quantity * el?.price?.price;
     });
     return sum;
   };
