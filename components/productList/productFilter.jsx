@@ -28,7 +28,6 @@ function ProductFilter({ showFilter, properties, brands }) {
           <p>
             {numberToPrice(value[0])} &ndash; {numberToPrice(value[1])}
           </p>
-
           <Slider
             value={value}
             onChangeCommitted={handlePriceChange}
@@ -65,27 +64,16 @@ function ProductFilter({ showFilter, properties, brands }) {
             <FormControlLabel control={<Checkbox />} label='Xiaomi' />
           </div> */}
         </div>
-        <div className={style.color}>
-          <Typography variant='h6'>Цвет</Typography>
-          <div className={style.filter_item}>
-            <FormControlLabel control={<Checkbox />} label='Черный' />
+        {properties?.product_properties?.map((property, index) => (
+          <div className={style.color} key={index}>
+            <Typography variant='h6'>{property.name}</Typography>
+            {property.options.map((opt, ind) => (
+              <div className={style.filter_item} key={ind}>
+                <FormControlLabel control={<Checkbox />} label={opt.name} />
+              </div>
+            ))}
           </div>
-          <div className={style.filter_item}>
-            <FormControlLabel control={<Checkbox />} label='Синий' />
-          </div>
-          <div className={style.filter_item}>
-            <FormControlLabel control={<Checkbox />} label='Красный' />
-          </div>
-          <div className={style.filter_item}>
-            <FormControlLabel control={<Checkbox />} label='Серый' />
-          </div>
-          <div className={style.filter_item}>
-            <FormControlLabel control={<Checkbox />} label='Коричневый' />
-          </div>
-          <div className={style.filter_item}>
-            <FormControlLabel control={<Checkbox />} label='Белый' />
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
