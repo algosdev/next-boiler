@@ -128,11 +128,16 @@ function ProductSingleContent({ data }) {
       <div className={style.inner}>
         <div className={style.type}>{t('new')}</div>
         <div className={style.name}>{data.name}</div>
-        <div className={style.desc}>
-          Требуются AirPods Max с последней версией программного обеспечения и
+        <div
+          className={style.desc}
+          dangerouslySetInnerHTML={{
+            __html: data.preview_text,
+          }}
+        >
+          {/* Требуются AirPods Max с последней версией программного обеспечения и
           модели iPhone и iPod touch с последней версией iOS; модели iPad с
           последней версией iPadOS; Модели Apple Watch с последней версией
-          watchOS;
+          watchOS; */}
         </div>
         <div className={style.colors_cont}>
           <div className={style.colors_title}>{t('colors')}</div>
@@ -203,7 +208,7 @@ function ProductSingleContent({ data }) {
           ''
         )}
         <div className={style.price}>
-          {numberToPrice(data.price)} {t('soum')}
+          {numberToPrice(data?.price?.price)} {t('soum')}
         </div>
         <div className={style.add}>
           <Button

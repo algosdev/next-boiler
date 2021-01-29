@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import CartListItem from './cartListItem'
-import CardSummary from './cartSummary'
-import { Grid } from '@material-ui/core'
-import style from './cart.module.scss'
-import NoItemInCart from './NoItemInCart'
-import { useTranslation } from '../../i18n'
-import { useSelector, shallowEqual } from 'react-redux'
+import React, { useState, useEffect } from 'react';
+import CartListItem from './cartListItem';
+import CardSummary from './cartSummary';
+import { Grid } from '@material-ui/core';
+import style from './cart.module.scss';
+import NoItemInCart from './NoItemInCart';
+import { useTranslation } from '../../i18n';
+import { useSelector, shallowEqual } from 'react-redux';
 const cartData = [
   {
     name: 'Airpods Max Series 6, Gold Aluminum Case',
@@ -31,64 +31,64 @@ const cartData = [
     id: 3,
     selectedQuantity: 1,
   },
-]
+];
 function CartList() {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const calculateTotalQuantity = (data) => {
-    let sum = 0
+    let sum = 0;
     data.forEach((el) => {
-      sum += el.quantity
-    })
-    return sum
-  }
+      sum += el.quantity;
+    });
+    return sum;
+  };
   const calculateTotalPrice = (data) => {
-    let sum = 0
+    let sum = 0;
     data.forEach((el) => {
-      sum += el.quantity * el.price
-    })
-    return sum
-  }
+      sum += el.quantity * el?.price?.price;
+    });
+    return sum;
+  };
   const productsInCart = useSelector(
     (state) => state?.cart?.cartItems,
     shallowEqual
-  )
-  const [totalPrice, setTotalPrice] = useState(0)
-  const [cardItems, setCartItems] = useState(productsInCart)
+  );
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [cardItems, setCartItems] = useState(productsInCart);
   const [totalQuantity, setTotalQuantity] = useState(
     calculateTotalQuantity(productsInCart)
-  )
+  );
 
   const calculateTotal = (id, quantity) => {
     const newItems = cardItems.map((el) => {
       if (el.id === id) {
-        el.selectedQuantity = quantity
-        return el
+        el.selectedQuantity = quantity;
+        return el;
       } else {
-        return el
+        return el;
       }
-    })
-    setCartItems(newItems)
-  }
+    });
+    setCartItems(newItems);
+  };
   const updateSummary = () => {
-    let totalQ = 0
-    let totalP = 0
+    let totalQ = 0;
+    let totalP = 0;
     cardItems.forEach((el) => {
-      totalP += el.price * el.selectedQuantity
-      totalQ += el.selectedQuantity
-    })
-    setTotalPrice(totalP)
-    setTotalQuantity(totalQ)
-  }
+      totalP += el?.price?.price * el.selectedQuantity;
+      totalQ += el.selectedQuantity;
+    });
+    setTotalPrice(totalP);
+    setTotalQuantity(totalQ);
+  };
   useEffect(() => {
-    updateSummary()
-  }, [cardItems])
+    updateSummary();
+  }, [cardItems]);
   useEffect(() => {
-    setCartItems(productsInCart)
-  }, [productsInCart])
+    setCartItems(productsInCart);
+  }, [productsInCart]);
   useEffect(() => {
-    setTotalQuantity(calculateTotalQuantity(cardItems))
-    setTotalPrice(calculateTotalPrice(cardItems))
-  }, [cardItems])
+    setTotalQuantity(calculateTotalQuantity(cardItems));
+    setTotalPrice(calculateTotalPrice(cardItems));
+  }, [cardItems]);
   return (
     <>
       <div className={style.wrapper_list}>
@@ -120,7 +120,7 @@ function CartList() {
         </Grid>
       </div>
     </>
-  )
+  );
 }
 
-export default CartList
+export default CartList;

@@ -13,7 +13,7 @@ import {
   asyncIncreaseCartItemQuantityAction,
   asyncRemoveFromCartAction,
 } from '../../redux/actions/cartActions/cartActions';
-import { i18n, useTranslation } from '../../i18n';
+import { i18n, useTranslation, Link } from '../../i18n';
 function CartListItem({ id, data, calculateTotal }) {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(data?.quantity);
@@ -57,7 +57,7 @@ function CartListItem({ id, data, calculateTotal }) {
     dispatch(asyncRemoveFromCartAction(data));
   };
   useEffect(() => {
-    setTotal(data?.price * data?.quantity);
+    setTotal(data?.price?.price * data?.quantity);
     calculateTotal(id, data.quantity);
   }, [data]);
   useEffect(() => {
@@ -75,13 +75,19 @@ function CartListItem({ id, data, calculateTotal }) {
             animate={{ opacity: 1, x: 0 }}
           >
             <div className={style.inner}>
-              <div className={style.img}>
-                <img src={data?.img} alt='Product' />
-              </div>
-              <div className={style.details}>
-                <div className={style.title}>{data.name}</div>
-                <div className={style.info}>{data?.color[i18n.language]} </div>
-              </div>
+              <Link href={`/shop/${data.slug}`}>
+                <a className={style.img}>
+                  <img src={data?.image} alt='Product' />
+                </a>
+              </Link>
+              <Link href={`/shop/${data.slug}`}>
+                <a className={style.details}>
+                  <div className={style.title}>{data.name}</div>
+                  <div className={style.info}>
+                    {data?.color[i18n.language]}{' '}
+                  </div>
+                </a>
+              </Link>
               <div className={style.quantity_cont}>
                 <div className={style.quantity_inner}>
                   <button

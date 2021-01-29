@@ -176,14 +176,15 @@ const CartDropdown = ({ mobile }) => {
                           {productsInCart.map((el, ind) => (
                             <div className={style.item} key={ind}>
                               <div className={style.img}>
-                                <img src={el.img} alt={el.name} />
+                                <img src={el.image} alt={el.name} />
                               </div>
 
                               <div className={style.details}>
                                 <div className={style.title}>{el.name}</div>
                                 <div className={style.desc}>
                                   <p>
-                                    {t('price')}: {numberToPrice(el.price)}{' '}
+                                    {t('price')}:{' '}
+                                    {numberToPrice(el?.price?.price)}{' '}
                                     {t('soum')}
                                   </p>
                                   <p>

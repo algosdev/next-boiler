@@ -4,13 +4,14 @@ import SEO from '../../components/seo';
 import ShopHeader from '../../components/shopHeader/shopHeader';
 import { useTranslation } from '../../i18n';
 import { fetchMultipleUrls } from '../../lib/fetchMultipleUrls';
-export default function Shop({ categ, subCateg, childCategs }) {
+export default function Shop({ categ, subCateg, childCategs, products }) {
   const { t } = useTranslation();
+  console.log('PRODUCTS', products);
   return (
     <>
       <SEO title={t('products')} description={t('product_list_desc')} />
       <ShopHeader categ={categ} subCateg={subCateg} childCategs={childCategs} />
-      <ProductList />
+      <ProductList data={products?.products} />
     </>
   );
 }
@@ -19,8 +20,9 @@ export async function getServerSideProps({ query }) {
     'http://46.101.122.150:1235/v1/category',
     `http://46.101.122.150:1235/v1/category/${query.categ}`,
     `http://46.101.122.150:1235/v1/category/${query.subcateg}`,
+    `http://46.101.122.150:1235/v1/product?category=${query.categid}`,
   ];
-  const [categories, categ, subCateg] = await fetchMultipleUrls(urls);
+  const [categories, categ, subCateg, products] = await fetchMultipleUrls(urls);
   const childCategs = categories?.categories.filter(
     (el) => el.slug === query?.categ
   );
@@ -30,6 +32,7 @@ export async function getServerSideProps({ query }) {
       subCateg,
       categ,
       childCategs: childCategs?.length ? childCategs[0].children : null,
+      products,
     },
   };
 }

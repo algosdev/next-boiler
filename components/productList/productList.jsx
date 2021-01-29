@@ -16,8 +16,8 @@ import Slider from '@material-ui/core/Slider';
 import ProductHeader from './productHeader';
 import ProductFilter from './productFilter';
 import ProductListItem from './productListItem';
-
-export default function ProductList() {
+import NoProduct from './NoProduct';
+export default function ProductList({ data }) {
   const { t } = useTranslation();
 
   const productListData = [
@@ -94,11 +94,56 @@ export default function ProductList() {
       colors: ['brown'],
       slug: 'iphone-leather-waller',
     },
+    {
+      type: t('new'),
+      id: '1',
+      price: '15490000',
+      name: 'Ipad',
+      img: '/images/ipad.png',
+      colors: ['grey', 'yellow', 'black'],
+      slug: 'ipad',
+      availableQuantity: 5,
+      carouselData: [
+        '/images/ipad.png',
+        '/images/airpods_max.jpg',
+        '/images/case.jpeg',
+      ],
+    },
+    {
+      type: t('new'),
+      id: '99',
+      price: '18000000',
+      name: 'Macbook',
+      img: '/images/macbook.jpg',
+      colors: ['green', 'yellow', 'black'],
+      slug: 'macbook',
+      availableQuantity: 5,
+      carouselData: [
+        '/images/macbook.jpg',
+        '/images/airpods_max.jpg',
+        '/images/case.jpeg',
+      ],
+    },
+
+    {
+      type: t('new'),
+      id: '77',
+      price: '5490000',
+      name: 'Iphone ',
+      img: '/images/iphone.jpg',
+      colors: ['green', 'yellow', 'black'],
+      slug: 'iphome',
+      availableQuantity: 5,
+      carouselData: [
+        '/images/iphone.jpg',
+        '/images/airpods_max.jpg',
+        '/images/case.jpeg',
+      ],
+    },
   ];
   const [activeSortBy, setActiveSortBy] = useState(0);
   const [showFilter, setShowFilter] = useState(true);
   const [sortByOpen, setSortByOpen] = useState(false);
-
   return (
     <div className={style.productListWrapper}>
       <ProductHeader showFilter={showFilter} setShowFilter={setShowFilter} />
@@ -106,11 +151,15 @@ export default function ProductList() {
         <div className={style.wrapper}>
           <ProductFilter showFilter={showFilter} />
           <Grid container>
-            {productListData.map((item, index) => (
+            {data?.map((item, index) => (
               <Grid item xs={6} xl={3} sm={6} lg={4} md={6} sh={12} key={index}>
                 <ProductListItem item={item} key={index} />
               </Grid>
-            ))}
+            )) || (
+              <Grid item xs={12}>
+                <NoProduct />
+              </Grid>
+            )}
           </Grid>
         </div>
       </div>

@@ -10,12 +10,12 @@ import Recommended from '../../components/recommended/recommended';
 import ProductTab from '../../components/productTab/productTab';
 import Compare from '../../components/productSingle/compare';
 import { fetchMultipleUrls } from '../../lib/fetchMultipleUrls';
-function ProductSingle({ store, slug }) {
+function ProductSingle({ store, slug, data }) {
   function getData(slug) {
     const data = store.filter((el) => el.slug === slug);
     return data?.[0];
   }
-  console.log(getData(slug));
+  console.log('SINGLE', data);
   return (
     <>
       <SEO
@@ -26,10 +26,10 @@ function ProductSingle({ store, slug }) {
         <Container>
           <Grid container justify='space-between' spacing={2}>
             <Grid item md={6} sm={12}>
-              <ProductSingleCarousel data={getData(slug)} />
+              <ProductSingleCarousel data={data?.product?.gallery} />
             </Grid>
             <Grid item md={6} sm={12}>
-              <ProductSingleContent data={getData(slug)} />
+              <ProductSingleContent data={data?.product} />
             </Grid>
           </Grid>
           <ProductTab />
@@ -44,13 +44,17 @@ function ProductSingle({ store, slug }) {
 }
 export async function getServerSideProps(ctx) {
   const store = initializeStore();
-  const urls = ['http://46.101.122.150:1235/v1/category'];
-  const [categories] = await fetchMultipleUrls(urls);
+  const urls = [
+    'http://46.101.122.150:1235/v1/category',
+    `http://46.101.122.150:1235/v1/product/${ctx.params.id}`,
+  ];
+  const [categories, data] = await fetchMultipleUrls(urls);
   return {
     props: {
       store: store.getState().cart.data,
       slug: ctx.query.id,
       categories,
+      data,
     },
   };
 }

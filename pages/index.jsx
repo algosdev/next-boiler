@@ -73,12 +73,16 @@ export default function Home({ categories }) {
       },
     ],
   };
-
   return (
     <>
       <SEO title={t('main')} description={t('main_desc')} />
       <Hero />
-      <CatalogList data={appleProducts} />
+      {categories?.categories
+        .filter((item, index) => index < 2)
+        ?.map((el, ind) => {
+          return <CatalogList data={el} key={ind} />;
+        })}
+
       <BannerContainer>
         <Banner
           size={12}
@@ -86,7 +90,11 @@ export default function Home({ categories }) {
           src='images/poster_watches.jpg'
         />
       </BannerContainer>
-      <CatalogList data={samsungProducts} />
+      {categories?.categories
+        .filter((item, index) => index > 1)
+        ?.map((el, ind) => {
+          return <CatalogList data={el} key={ind} />;
+        })}
     </>
   );
 }

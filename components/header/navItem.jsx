@@ -119,7 +119,7 @@ const NavItem = ({ data, subCategs }) => {
                       onClick={() => setOpen(false)}
                     >
                       <Link
-                        href={`/shop?categ=${data.slug}&subcateg=${item.slug}`}
+                        href={`/shop?categ=${data.slug}&categid=${data.id}&subcateg=${item.slug}&subcategid=${item.id}`}
                       >
                         <a>{item.name}</a>
                       </Link>
