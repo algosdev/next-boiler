@@ -10,7 +10,7 @@ function InstallmentListItem({ data }) {
       <div className={style.wrapper_item}>
         <div className={style.inner}>
           <div className={style.img}>
-            <img src={data.img} alt='' />
+            <img src={data.image} alt='' />
           </div>
           <div className={style.details}>
             <div className={style.title}>{data.name}</div>

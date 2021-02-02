@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from './checkout.module.scss';
 import {
   CashIn,
@@ -13,7 +13,7 @@ import {
   InstallmentIcon,
 } from '../svg';
 import { useTranslation, i18n, Router } from '../../i18n';
-
+import { createFormData } from '../../lib/createFormData';
 import {
   YMaps,
   Map,
@@ -22,20 +22,70 @@ import {
   GeolocationControl,
   ZoomControl,
 } from 'react-yandex-maps';
-function CheckoutForm() {
+import axios from 'axios';
+function CheckoutForm({ productsInCart }) {
   const { t } = useTranslation();
   const [values, setValues] = useState({
     address: '',
-    obtaining: '',
-    payment_method: '',
+    delivery_method: 'self',
+    payment_method: 'cash',
+    customer_name: '',
+    phone: '',
+    entrance: '',
+    floor: '',
+    domofon: '',
+    items: [],
+    num_house_or_flat: '',
+    long_lat: '',
   });
-  console.log(values);
+  const handleChange = (e, prop) => {
+    setValues({ ...values, [prop]: e.target.value });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(values);
+    axios
+      .post(
+        'http://46.101.122.150:1235/v1/order',
+        createFormData({
+          address: `${values.num_house_or_flat}, ${values.floor}, ${values.entrance},  ${values.domofon}`,
+          delivery_method: 'self',
+          payment_method: values.payment_method,
+          customer_name: values.customer_name,
+          phone: values.phone,
+          items: values.items,
+          note: values.note,
+          longlat: '0',
+          customer_id: 'c37359c4-ba88-4364-8443-f7f7674da511',
+        })
+      )
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200 || res.status === 201) {
+          Router.push(`/orders/${res.data.number}`);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+  useEffect(() => {
+    let productsForAPI = [];
+    productsInCart.forEach((el) => {
+      const formatted = {
+        image: el.image,
+        price: parseInt(el.price?.price || 0),
+        product_id: el.id,
+        quantity: el.quantity,
+      };
+      productsForAPI.push(formatted);
+    });
+    setValues({ ...values, items: JSON.stringify(productsForAPI) });
+  }, []);
 
   return (
     <>
       <div className={style.wrapper_form}>
         <p></p>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className={style.form_section}>
             <p className={style.title}>{t('obtaining')}</p>
             <div className={style.flex}>
@@ -47,9 +97,7 @@ function CheckoutForm() {
                   id='opt1'
                   defaultChecked
                   value='self'
-                  onChange={(e) =>
-                    setValues({ ...values, obtaining: e.target.value })
-                  }
+                  onChange={(e) => handleChange(e, 'delivery_method')}
                   name='obtaining'
                 />
                 <label htmlFor='opt1'>
@@ -67,10 +115,9 @@ function CheckoutForm() {
                   type='radio'
                   id='opt2'
                   name='obtaining'
+                  required
                   value='day'
-                  onChange={(e) =>
-                    setValues({ ...values, obtaining: e.target.value })
-                  }
+                  onChange={(e) => handleChange(e, 'delivery_method')}
                 />
                 <label htmlFor='opt2'>
                   <div>
@@ -87,10 +134,9 @@ function CheckoutForm() {
                   type='radio'
                   id='opt3'
                   name='obtaining'
+                  required
                   value='fast'
-                  onChange={(e) =>
-                    setValues({ ...values, obtaining: e.target.value })
-                  }
+                  onChange={(e) => handleChange(e, 'delivery_method')}
                 />
                 <label htmlFor='opt3'>
                   <div>
@@ -103,100 +149,94 @@ function CheckoutForm() {
               </div>
             </div>
           </div>
-          {values.obtaining !== 'self' && values.obtaining ? (
-            <>
-              <div className={style.form_section}>
-                {/* <p className={style.title}>{t('shipping_address')}</p> */}
-                <input
-                  required
-                  className={`${style.input} input`}
-                  placeholder={t('full_name')}
-                  type='text'
-                />
-
-                <input
-                  required
-                  className={`${style.input} input`}
-                  placeholder={t('phone_num')}
-                  type='text'
-                />
+          <div className={style.form_section}>
+            <input
+              required
+              className={`${style.input} input`}
+              placeholder={t('full_name')}
+              type='text'
+              value={values.customer_name}
+              onChange={(e) => handleChange(e, 'customer_name')}
+            />
+            <input
+              required
+              className={`${style.input} input`}
+              placeholder={t('phone_num')}
+              type='text'
+              value={values.phone}
+              onChange={(e) => handleChange(e, 'phone')}
+            />
+            {values.delivery_method !== 'self' && values.delivery_method ? (
+              <>
                 <input
                   required
                   className={`${style.input} input`}
                   placeholder={t('entrance')}
                   type='text'
+                  value={values.entrance}
+                  onChange={(e) => handleChange(e, 'entrance')}
                 />
                 <input
                   required
                   className={`${style.input} input`}
                   placeholder={t('floor')}
                   type='text'
+                  value={values.floor}
+                  onChange={(e) => handleChange(e, 'floor')}
                 />
                 <input
                   required
                   className={`${style.input} input`}
                   placeholder={t('num_house_flat')}
                   type='text'
+                  value={values.num_house_or_flat}
+                  onChange={(e) => handleChange(e, 'num_house_or_flat')}
                 />
                 <input
                   required
                   className={`${style.input} input`}
                   placeholder={t('intercom')}
                   type='text'
+                  value={values.domofon}
+                  onChange={(e) => handleChange(e, 'domofon')}
                 />
-                <input
-                  className={`${style.input} input`}
-                  placeholder={t('comment_to_order')}
-                  type='text'
-                />
-              </div>
-              <YMaps
-                query={{
-                  lang: `${
-                    i18n.language === 'ru'
-                      ? 'ru_RU'
-                      : i18n.language === 'en'
-                      ? 'en_RU'
-                      : 'ru_RU'
-                  }_`,
-                }}
-                apikey
-              >
-                <Map
-                  defaultState={{ center: [41.29, 69.2], zoom: 10 }}
-                  width='100%'
-                  height='400px'
+                <YMaps
+                  query={{
+                    lang: `${
+                      i18n.language === 'ru'
+                        ? 'ru_RU'
+                        : i18n.language === 'en'
+                        ? 'en_RU'
+                        : 'ru_RU'
+                    }_`,
+                  }}
+                  apikey
                 >
-                  <FullscreenControl />
-                  <GeolocationControl options={{ float: 'left' }} />
-                  <ZoomControl options={{ float: 'right' }} />
-                  <SearchControl options={{ float: 'left' }} />
-                </Map>
-              </YMaps>
-            </>
-          ) : (
-            <>
-              <div className={style.form_section}>
-                <input
-                  required
-                  className={`${style.input} input`}
-                  placeholder={t('full_name')}
-                  type='text'
-                />
-                <input
-                  required
-                  className={`${style.input} input`}
-                  placeholder={t('phone_num')}
-                  type='text'
-                />
-                <input
-                  className={`${style.input} input`}
-                  placeholder={t('comment_to_order')}
-                  type='text'
-                />
-              </div>
-            </>
-          )}
+                  <Map
+                    defaultState={{ center: [41.29, 69.2], zoom: 10 }}
+                    width='100%'
+                    height='400px'
+                    className={style.yandex_map149}
+                  >
+                    <FullscreenControl />
+                    <GeolocationControl options={{ float: 'left' }} />
+                    <ZoomControl options={{ float: 'right' }} />
+                    <SearchControl options={{ float: 'left' }} />
+                  </Map>
+                </YMaps>
+              </>
+            ) : (
+              ''
+            )}
+            <input
+              className={`${style.input} input`}
+              placeholder={t('comment_to_order')}
+              type='text'
+              value={values.note}
+              onChange={(e) => handleChange(e, 'note')}
+              required
+            />
+          </div>
           <div className={`${style.form_section}`}>
             <p className={style.title}>{t('payment_method')}</p>
             <div className={style.flex}>
@@ -208,59 +248,31 @@ function CheckoutForm() {
                   defaultChecked
                   id='opt4'
                   name='payment'
+                  value='cash'
+                  onChange={(e) => handleChange(e, 'payment_method')}
                 />
                 <label htmlFor='opt4'>
                   <div>
                     <p className={style.opt_title}>{t('incash')}</p>
-                    {/* <p className={style.opt_desc}>
-                      <CashIn />
-                    </p> */}
                     <p className={style.opt_img}>
-                      {/* <img
-                        className={style.grey}
-                        src='/images/cash.png'
-                        alt='Cash'
-                      /> */}
                       <CashIcon />
                     </p>
                   </div>
                 </label>
               </div>
-              {/* <div className={style.radio_input}>
-                <input
-                  className={`${style.input} input`}
-                  type='radio'
-                  id='opt5'
-                  name='payment'
-                />
-                <label htmlFor='opt5'>
-                  <div>
-                    <p className={style.opt_title}>{t('credit_card')}</p>
-                    <p className={style.opt_desc}>
-                      <CreditCard />
-                    </p>
-                  </div>
-                </label>
-              </div> */}
               <div className={style.radio_input}>
                 <input
                   className={`${style.input} input`}
                   type='radio'
                   id='opt6'
                   name='payment'
+                  value='terminal'
+                  onChange={(e) => handleChange(e, 'payment_method')}
                 />
                 <label htmlFor='opt6'>
                   <div>
                     <p className={style.opt_title}>{t('terminal')}</p>
-                    {/* <p className={style.opt_desc}>
-                      <TerminalIcon />
-                    </p> */}
                     <p className={style.opt_img}>
-                      {/* <img
-                        className={style.grey}
-                        src='/images/terminal.png'
-                        alt='Terminal'
-                      /> */}
                       <CreditCardIcon />
                     </p>
                   </div>
@@ -275,21 +287,15 @@ function CheckoutForm() {
                   type='radio'
                   id='opt9'
                   name='payment'
+                  value='installment'
+                  onChange={(e) => handleChange(e, 'payment_method')}
                 />
                 <label htmlFor='opt9'>
                   <div>
                     <p className={style.opt_title}>{t('installment')}</p>
                     <p className={style.opt_img}>
-                      {/* <img
-                        className={style.grey}
-                        src='/images/installment2.png'
-                        alt='Installment'
-                      /> */}
                       <CalendarIcon />
                     </p>
-                    {/* <p className={style.opt_desc}>
-                      <InstallmentIcon />
-                    </p> */}
                   </div>
                 </label>
               </div>
@@ -299,6 +305,8 @@ function CheckoutForm() {
                   type='radio'
                   id='opt7'
                   name='payment'
+                  value='click'
+                  onChange={(e) => handleChange(e, 'payment_method')}
                 />
                 <label htmlFor='opt7'>
                   <div>
@@ -315,6 +323,8 @@ function CheckoutForm() {
                   type='radio'
                   id='opt8'
                   name='payment'
+                  value='payme'
+                  onChange={(e) => handleChange(e, 'payment_method')}
                 />
                 <label htmlFor='opt8'>
                   <div>
@@ -327,15 +337,6 @@ function CheckoutForm() {
               </div>
             </div>
           </div>
-          {/* <div className={style.form_section}>
-            <p className={style.title}>{t('additional')}</p>
-            <input
-              className={`${style.input} input`}
-              placeholder={t('comment_to_order')}
-              type='text'
-            />
-          </div> */}
-          {/* <p>{t('confirm_txt')}</p> */}
           <div className={style.form_section}>
             <button
               className={`${style.submit} input`}
