@@ -4,7 +4,9 @@ import OrderContainer from '../../components/orders/orderContainer';
 import SEO from '../../components/seo';
 import { useTranslation } from '../../i18n';
 import { fetchMultipleUrls } from '../../lib/fetchMultipleUrls';
-function orders() {
+import axios from 'axios';
+function orders({ data }) {
+  console.log(data);
   const { t } = useTranslation();
   return (
     <>
@@ -18,11 +20,26 @@ function orders() {
   );
 }
 export async function getServerSideProps() {
+  let data;
   const urls = ['http://46.101.122.150:1235/v1/category'];
+  axios
+    .get('http://46.101.122.150:1235/v1/my-orders?limit=100&page=1', {
+      headers: {
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTIyNjg3MzQsImlzcyI6InVzZXIiLCJyb2xlIjoiY3VzdG9tZXIiLCJzdWIiOiIwZmI2OWU0Ny1jZTkyLTRmNWMtOTJhYi02MTQxYmE2ZTk4NjQifQ.fHXtWNUhHZpZqqSew3IpX1pazcLSPXsGe3C7vwPkUo0',
+      },
+    })
+    .then((res) => {
+      if (res.status === 200) {
+        data = res.data;
+      }
+    });
+  console.log(data);
   const [categories] = await fetchMultipleUrls(urls);
   return {
     props: {
       categories,
+      // data,
     },
   };
 }
