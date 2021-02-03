@@ -41,6 +41,7 @@ export function PhoneNumberMask(props) {
         '9',
         '9',
         '8',
+        ' ',
         /\d/,
         /\d/,
         ' ',
@@ -55,7 +56,7 @@ export function PhoneNumberMask(props) {
         /\d/,
         /\d/,
       ]}
-      placeholderChar={'\u2000'}
+      // placeholderChar={'\u2000'}
       showMask
     />
   )
