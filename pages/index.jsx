@@ -1,12 +1,12 @@
-import CatalogList from '../components/catalogList/catalogList';
-import Hero from '../components/hero/hero';
-import SEO from '../components/seo';
-import BannerContainer from '../components/bannerContainer/bannerContainer';
-import Banner from '../components/banner/banner';
-import { useTranslation } from '../i18n';
-import { fetchMultipleUrls } from '../lib/fetchMultipleUrls';
+import CatalogList from '../components/catalogList/catalogList'
+import Hero from '../components/hero/hero'
+import SEO from '../components/seo'
+import BannerContainer from '../components/bannerContainer/bannerContainer'
+import Banner from '../components/banner/banner'
+import { useTranslation } from '../i18n'
+import { fetchMultipleUrls } from '../lib/fetchMultipleUrls'
 export default function Home({ categories }) {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   const appleProducts = {
     title: t('apple_p'),
     catalog: [
@@ -46,7 +46,7 @@ export default function Home({ categories }) {
         link: 'category=accessories&subcategory=covers',
       },
     ],
-  };
+  }
 
   const samsungProducts = {
     title: t('samsung_p'),
@@ -72,7 +72,7 @@ export default function Home({ categories }) {
         link: 'category=acoustics&subcategory=earphones',
       },
     ],
-  };
+  }
   return (
     <>
       <SEO title={t('main')} description={t('main_desc')} />
@@ -80,7 +80,7 @@ export default function Home({ categories }) {
       {categories?.categories
         .filter((item, index) => index < 2)
         ?.map((el, ind) => {
-          return <CatalogList data={el} key={ind} />;
+          return <CatalogList data={el} key={ind} />
         })}
 
       <BannerContainer>
@@ -93,19 +93,19 @@ export default function Home({ categories }) {
       {categories?.categories
         .filter((item, index) => index > 1)
         ?.map((el, ind) => {
-          return <CatalogList data={el} key={ind} />;
+          return <CatalogList data={el} key={ind} />
         })}
     </>
-  );
+  )
 }
 
 export async function getServerSideProps({ req }) {
-  const urls = ['http://46.101.122.150:1235/v1/category'];
-  const [categories] = await fetchMultipleUrls(urls);
-  console.log('AAA', categories);
+  const urls = ['http://46.101.122.150:1235/v1/category']
+  const [categories] = await fetchMultipleUrls(urls)
+  console.log('AAA', categories)
   return {
     props: {
       categories,
     },
-  };
+  }
 }
