@@ -85,45 +85,7 @@ function SignInForm() {
     }
   }, [isPhoneNumValid]);
 
-  const checkExists = async (data) => {
-    console.log(data);
-    setIsLoading(true);
-    try {
-      const response = await axios.get(
-        `${process.env.LOGIN_API_URL}/exists?phone=%2B${data.phone
-          .replaceAll(' ', '')
-          .substring(1, data.phone.length)}`
-      );
-      setChecked(response.data.exists);
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const dispatch = useDispatch();
-
-  const signin = async (data) => {
-    setIsLoading(true);
-    console.log(data);
-    try {
-      const response = await axios.post(`${process.env.LOGIN_API_URL}/login`, {
-        ...data,
-        phone: data.phone.replaceAll(' ', ''),
-      });
-      if (response.status === 200) {
-        dispatch(setUser(response.data));
-        Router.push('/account');
-      }
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const checkExists = async (data) => {
     console.log(data);
@@ -142,8 +104,6 @@ function SignInForm() {
       setIsLoading(false);
     }
   };
-
-  const dispatch = useDispatch();
 
   const signin = async (data) => {
     setIsLoading(true);
