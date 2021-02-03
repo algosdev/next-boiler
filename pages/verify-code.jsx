@@ -4,8 +4,12 @@ import VerifyCodeForm from '../components/authForm/verifyCodeForm';
 import SEO from '../components/seo';
 import { useTranslation } from '../i18n';
 import { fetchMultipleUrls } from '../lib/fetchMultipleUrls';
+import { useRouter } from 'next/router';
+
 function VerifyCode() {
   const { t } = useTranslation();
+  const router = useRouter();
+
   return (
     <>
       <SEO
@@ -14,7 +18,7 @@ function VerifyCode() {
         keywords={'проверка, OTP, authorization, MacBro, form'}
       />
       <Container style={{ marginTop: 'auto' }}>
-        <VerifyCodeForm />
+        <VerifyCodeForm phone={router.query.phone} />
       </Container>
     </>
   );

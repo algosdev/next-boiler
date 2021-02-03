@@ -4,19 +4,18 @@ const localeSubpaths = {
   uz: 'uz',
   en: 'en',
 };
-const withPWA = require('next-pwa');
-module.exports =
-  // withPWA(
-  {
-    env: {},
-    pwa: {
-      dest: 'public',
-      swSrc: 'service-worker.js',
-      // runtimeCaching,
-    },
-    rewrites: async () => nextI18NextRewrites(localeSubpaths),
-    publicRuntimeConfig: {
-      localeSubpaths,
-    },
-  };
-// );
+
+module.exports = {
+  env: {
+    LOGIN_API_URL: 'http://46.101.122.150:1235/v1/customer',
+  },
+  pwa: {
+    dest: 'public',
+    swSrc: 'service-worker.js',
+    // runtimeCaching,
+  },
+  rewrites: async () => nextI18NextRewrites(localeSubpaths),
+  publicRuntimeConfig: {
+    localeSubpaths,
+  },
+};

@@ -1,32 +1,68 @@
-import React, { useState } from 'react'
-import style from './authForm.module.scss'
-import { Typography, Button, TextField } from '@material-ui/core'
-import { Router } from '../../i18n'
-import { useRouter } from 'next/router'
-import { useTranslation } from '../../i18n'
-import { useStyles } from './textFieldStyle'
-function VerifyCodeForm() {
-  const router = useRouter()
-  const classes = useStyles()
-  const { t } = useTranslation()
-  const [values, setValues] = useState({
-    code: '',
-  })
-  const submitHandler = (e) => {
-    e.preventDefault()
-    if (router.query.signup === 'true') {
-      Router.push('/account?signup=true')
-    } else {
-      Router.push('/')
+import React, { useEffect } from 'react';
+import style from './authForm.module.scss';
+import { Typography, Button, TextField } from '@material-ui/core';
+import { i18n, Router } from '../../i18n';
+import { useRouter } from 'next/router';
+import { useTranslation } from '../../i18n';
+import { useForm } from 'react-hook-form';
+import { useStyles } from './textFieldStyle';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, setUser } from '../../redux/actions/authActions/authActions';
+function VerifyCodeForm({ phone, userInfo }) {
+  const classes = useStyles();
+  const { t } = useTranslation();
+
+  // const submitHandler = (e) => {
+  //   e.preventDefault()
+  //   if (router.query.signup === 'true') {
+  //     Router.push('/account?signup=true')
+  //   } else {
+  //     Router.push('/')
+  //   }
+  // }
+  const user = useSelector((state) => state.auth.user);
+
+  const { register, handleSubmit } = useForm();
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   console.log('clean')
+  //   return function cleanup() {
+  //     dispatch(logout())
+  //   }
+  // })
+  const sendCode = async (data) => {
+    try {
+      const response = await axios.post(
+        `${process.env.LOGIN_API_URL}/verify-phone`,
+        {
+          ...data,
+          phone: phone.replaceAll(' ', ''),
+        },
+        {
+          headers: {
+            Authorization: userInfo.access_token,
+          },
+        }
+      );
+      if (response.status === 200) {
+        console.log(response);
+        dispatch(setUser(userInfo));
+        Router.push('/account');
+      }
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
+
   return (
     <div className={style.wrapper}>
       <Typography variant='h3'>
-        {t('enter_otp')} {' +99897777777'}
+        {t('enter_otp')} +{phone || ''}
       </Typography>
       <div className={style.inner}>
-        <form onSubmit={submitHandler}>
+        <form onSubmit={handleSubmit(sendCode)}>
           <div className={style.input_cont}>
             {/* <input
               className={`input`}
@@ -38,7 +74,8 @@ function VerifyCodeForm() {
             /> */}
             <TextField
               id='filled-basic'
-              name='otp'
+              name='code'
+              inputRef={register}
               variant='filled'
               fullWidth
               type='number'
@@ -61,7 +98,7 @@ function VerifyCodeForm() {
         </form>
       </div>
     </div>
-  )
+  );
 }
 
-export default VerifyCodeForm
+export default VerifyCodeForm;

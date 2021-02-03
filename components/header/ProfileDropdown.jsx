@@ -9,9 +9,11 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import { ProfileIcon } from '../svg';
-import { Link } from '../../i18n';
+import { Link, Router } from '../../i18n';
 import style from './header.module.scss';
 import { useTranslation } from '../../i18n';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../redux/actions/authActions/authActions';
 const useStyles = makeStyles(() => ({
   paper: {
     borderRadius: '6px',
@@ -57,6 +59,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 const ProfileDropdown = ({ title, subCategs }) => {
+  const user = useSelector((state) => state.auth.user);
   const { t } = useTranslation();
   const [isBagVisible, setIsBagVisible] = useState(false);
   const classes = useStyles();
@@ -81,6 +84,11 @@ const ProfileDropdown = ({ title, subCategs }) => {
       setOpen(false);
     }
   }
+  const dispatch = useDispatch();
+  const signOut = () => {
+    dispatch(logout());
+    Router.push('/');
+  };
 
   const prevOpen = useRef(open);
   useEffect(() => {
@@ -140,11 +148,19 @@ const ProfileDropdown = ({ title, subCategs }) => {
                         <a>{t('profile')}</a>
                       </Link>
                     </MenuItem>
-                    <MenuItem onClick={handleClose} diableRipple>
-                      <Link href='/signin'>
-                        <a>{t('signin')}</a>
-                      </Link>
-                    </MenuItem>
+                    {user ? (
+                      <MenuItem onClick={signOut} diableRipple>
+                        <Link href='/signin'>
+                          <a>{t('signout')}</a>
+                        </Link>
+                      </MenuItem>
+                    ) : (
+                      <MenuItem onClick={handleClose} diableRipple>
+                        <Link href='/signin'>
+                          <a>{t('signin')}</a>
+                        </Link>
+                      </MenuItem>
+                    )}
                     {/* <MenuItem onClick={handleClose} diableRipple>
                       <Link href='/'>
                         <a>{t('signout')}</a>

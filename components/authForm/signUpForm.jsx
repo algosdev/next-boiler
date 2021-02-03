@@ -1,129 +1,188 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Typography,
   Checkbox,
   CircularProgress,
   Button,
   TextField,
-} from '@material-ui/core'
-import style from './authForm.module.scss'
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
-import { Link } from '../../i18n'
-import { Router } from '../../i18n'
-import { useForm, Controller } from 'react-hook-form'
-import composeRefs from '@seznam/compose-react-refs'
-import InputMask from 'react-input-mask'
-import { useTranslation } from '../../i18n'
-import { useStyles, PhoneNumberMask } from './textFieldStyle'
-function SignInForm() {
-  const { t } = useTranslation()
-  const classes = useStyles()
-  const router = Router
-  const phoneNumRef = useRef(null)
-  const passwordRef = useRef(null)
-  const [rememberMe, setRememberMe] = useState(false)
-  const [isPhoneNumValid, setIsPhoneNumValid] = useState(false)
-  const { register, handleSubmit, errors, watch, control } = useForm()
-  const [isPasswordValid, setIsPasswordValid] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [values, setValues] = useState({
-    phoneNum: '',
-    password: '',
-  })
-  const submitHandlerPhone = (e) => {
-    e.preventDefault()
-    checkPhoneNum()
-  }
-  const submitHandlerPassword = (e) => {
-    e.preventDefault()
-    checkPassword()
-  }
-  const checkPhoneNum = () => {
-    setIsLoading(true)
-    setTimeout(() => {
-      setIsPhoneNumValid(true)
-      setIsLoading(false)
-      router.push('/verify-code?signup=true')
-    }, 2000)
-    if (isPhoneNumValid) {
-      checkPassword()
-    }
-  }
-  const checkPassword = () => {
-    setIsLoading(true)
-    setTimeout(() => {
-      setIsPasswordValid(true)
-      setIsLoading(false)
-      router.push('/verify-code?signup=true')
-    }, 2000)
-  }
-  const checkPhoneNumberLength = (string) => {
-    let count = 0
-    string.split('').forEach((el) => {
-      if (el < 10) {
-        count++
-      }
-    })
-    const result = count >= 12 ? true : false
-    console.log(result)
-    return result
-  }
-  useEffect(() => {
-    if (phoneNumRef.current && passwordRef.current && isPhoneNumValid) {
-      phoneNumRef.current.blur()
-      passwordRef.current.focus()
-    }
-  }, [isPhoneNumValid])
+} from '@material-ui/core';
+import style from './authForm.module.scss';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import { Link } from '../../i18n';
+import { Router } from '../../i18n';
+import { useForm, Controller } from 'react-hook-form';
+import composeRefs from '@seznam/compose-react-refs';
+import InputMask from 'react-input-mask';
+import { useTranslation } from '../../i18n';
+import { useStyles, PhoneNumberMask } from './textFieldStyle';
+import axios from 'axios';
+import { setUser } from '../../redux/actions/authActions/authActions';
+import { useDispatch } from 'react-redux';
+import VerifyCodeForm from './verifyCodeForm';
 
-  return (
+function SignUpForm() {
+  const { t } = useTranslation();
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const router = Router;
+  // const phoneNumRef = useRef(null)
+  // const passwordRef = useRef(null)
+  const [disabled, setDisabled] = useState(false);
+  // const [isPhoneNumValid, setIsPhoneNumValid] = useState(false)
+  const { register, handleSubmit } = useForm();
+  const [checked, isChecked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [values, setValues] = useState({
+    pre_password: '',
+    password: '',
+  });
+  const [phone, setPhone] = useState('');
+  const [customer, setCustomer] = useState('');
+  const checkPassword = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+    console.log(values);
+  };
+
+  useEffect(() => {
+    prePasswordCheck();
+  }, [values]);
+
+  const prePasswordCheck = () => {
+    if (values.pre_password) {
+      if (values.pre_password === values.password) {
+        setDisabled(false);
+      } else {
+        setDisabled(true);
+      }
+    }
+  };
+
+  // useEffect(() => {
+  //   if (phoneNumRef.current && passwordRef.current && isPhoneNumValid) {
+  //     phoneNumRef.current.blur()
+  //     passwordRef.current.focus()
+  //   }
+  // }, [isPhoneNumValid])
+
+  const createUser = async (data) => {
+    try {
+      setIsLoading(true);
+      const response = await axios.post(
+        `${process.env.LOGIN_API_URL}/register`,
+        {
+          ...data,
+          phone: data.phone.replaceAll(' ', ''),
+        }
+      );
+      if (response.status === 200) {
+        setCustomer(response.data);
+        setPhone(data.phone);
+        isChecked(true);
+        //Router.push(`/verify-code?phone=${data.phone}`)
+      }
+      console.log(response);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // const saveUser = async (userInfo) => {
+  //   dispatch(setUser(userInfo))
+  // }
+
+  return !checked ? (
     <div className={style.wrapper}>
       <Typography variant='h2'>{t('signup_title')}</Typography>
       <div className={style.inner}>
-        <form onSubmit={submitHandlerPhone} autoComplete='off'>
+        <form onSubmit={handleSubmit(createUser)} autoComplete='off'>
           <div className={style.input_cont}>
             <TextField
               value={values.textmask}
               variant='filled'
               fullWidth
+              inputRef={register}
               type='tel'
               className={classes.root}
-              name='phoneNum'
+              name='phone'
               id='formatted-text-mask-input'
               InputProps={{
                 inputComponent: PhoneNumberMask,
               }}
-              onChange={(e) =>
-                setValues({ ...values, phoneNum: e.target.value })
-              }
               required
               label={t('phone_num')}
             />
-            {/* <TextField
+          </div>
+          <div className={style.input_cont}>
+            <TextField
               id='filled-basic'
-              name='phoneNum'
+              name='name'
               variant='filled'
               fullWidth
-              type='tel'
+              type='text'
               className={classes.root}
-              onChange={(e) =>
-                setValues({ ...values, phoneNum: e.target.value })
-              }
               required
-              label={t('phone_num')}
-            /> */}
-            {/* <Controller
-              as={TextField}
-              name={'phoneNum'}
-              control={control}
-              defaultValue=''
-              label={t('phone_num')}
-              fullWidth={true}
-              InputLabelProps={{
-                required: true,
-                variant: 'filled',
-              }}
-            /> */}
-            {/* <Controller
+              label={t('name')}
+              inputRef={register}
+            />
+          </div>
+          <div className={style.input_cont}>
+            <TextField
+              id='filled-basic'
+              name='lastname'
+              variant='filled'
+              fullWidth
+              type='text'
+              className={classes.root}
+              required
+              label={t('surname')}
+              inputRef={register}
+            />
+          </div>
+          <div className={style.input_cont}>
+            <TextField
+              id='filled-basic'
+              name='password'
+              variant='filled'
+              fullWidth
+              type='password'
+              className={classes.root}
+              required
+              onChange={checkPassword}
+              label={t('password')}
+              inputRef={register}
+            />
+          </div>
+          <div className={style.input_cont}>
+            <TextField
+              error={disabled}
+              id='filled-basic'
+              name='pre_password'
+              variant='filled'
+              fullWidth
+              type='password'
+              className={classes.root}
+              inputRef={register}
+              onChange={checkPassword}
+              required
+              label={t('confirm_password')}
+              helperText={disabled ? 'Пароль не совпадает' : ''}
+            />
+          </div>
+          {/* <Controller
+            as={TextField}
+            name={'phoneNum'}
+            control={control}
+            defaultValue=''
+            label={t('phone_num')}
+            fullWidth={true}
+            InputLabelProps={{
+              required: true,
+              variant: 'filled',
+            }}
+          /> */}
+          {/* <Controller
               control={control}
               name='test'
               render={({ onChange, onBlur, value }) => (
@@ -153,7 +212,7 @@ function SignInForm() {
                 </InputMask>
               )}
             /> */}
-          </div>
+
           {/* {isPhoneNumValid ? (
             <div className={style.input_cont}>
               <TextField
@@ -173,7 +232,7 @@ function SignInForm() {
           ) : (
             ''
           )} */}
-          <Button fullWidth type='submit'>
+          <Button disabled={disabled} fullWidth type='submit'>
             {isLoading ? (
               <CircularProgress className={style.progress} color='inherit' />
             ) : (
@@ -248,7 +307,9 @@ function SignInForm() {
         </div> */}
       </div>
     </div>
-  )
+  ) : (
+    <VerifyCodeForm phone={phone} userInfo={customer} />
+  );
 }
 
-export default SignInForm
+export default SignUpForm;

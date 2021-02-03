@@ -1,92 +1,145 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Typography,
   Checkbox,
   CircularProgress,
   Button,
   TextField,
-} from '@material-ui/core'
-import style from './authForm.module.scss'
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
-import { Link } from '../../i18n'
-import { Router } from '../../i18n'
-import { useForm, Controller } from 'react-hook-form'
-import composeRefs from '@seznam/compose-react-refs'
-import InputMask from 'react-input-mask'
-import { useTranslation } from '../../i18n'
-import { useStyles, PhoneNumberMask } from './textFieldStyle'
+} from '@material-ui/core';
+import style from './authForm.module.scss';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import { Link } from '../../i18n';
+import { Router } from '../../i18n';
+import { useForm, Controller } from 'react-hook-form';
+import composeRefs from '@seznam/compose-react-refs';
+import InputMask from 'react-input-mask';
+import { useTranslation } from '../../i18n';
+import { useStyles, PhoneNumberMask } from './textFieldStyle';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../redux/actions/authActions/authActions';
 function SignInForm() {
-  const { t } = useTranslation()
-  const classes = useStyles()
-  const router = Router
-  const phoneNumRef = useRef(null)
-  const passwordRef = useRef(null)
-  const [rememberMe, setRememberMe] = useState(false)
-  const [isPhoneNumValid, setIsPhoneNumValid] = useState(false)
-  const { register, handleSubmit, errors, watch, control } = useForm()
-  const [isPasswordValid, setIsPasswordValid] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+  const { t } = useTranslation();
+  const classes = useStyles();
+  const router = Router;
+  const phoneNumRef = useRef(null);
+  const passwordRef = useRef(null);
+  const [rememberMe, setRememberMe] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [isPhoneNumValid, setIsPhoneNumValid] = useState(false);
+  const { register, handleSubmit, errors, watch, control } = useForm();
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState({
     phoneNum: '',
     password: '',
-  })
+  });
+
   const submitHandlerPhone = (e) => {
-    e.preventDefault()
-    checkPhoneNum()
-  }
+    e.preventDefault();
+    checkPhoneNum();
+  };
   const submitHandlerPassword = (e) => {
-    e.preventDefault()
-    checkPassword()
-  }
+    e.preventDefault();
+    checkPassword();
+  };
   const checkPhoneNum = () => {
-    setIsLoading(true)
+    setIsLoading(true);
     setTimeout(() => {
-      setIsPhoneNumValid(true)
-      setIsLoading(false)
-      router.push('/verify-code?signin=true')
-    }, 2000)
+      setIsPhoneNumValid(true);
+      setIsLoading(false);
+      router.push('/verify-code?signin=true');
+    }, 2000);
     if (isPhoneNumValid) {
-      checkPassword()
+      checkPassword();
     }
-  }
+  };
   const checkPassword = () => {
-    setIsLoading(true)
+    setIsLoading(true);
     setTimeout(() => {
-      setIsPasswordValid(true)
-      setIsLoading(false)
-      router.push('/verify-code?signin=true')
-    }, 2000)
-  }
+      setIsPasswordValid(true);
+      setIsLoading(false);
+      router.push('/verify-code?signin=true');
+    }, 2000);
+  };
   const checkPhoneNumberLength = (string) => {
-    let count = 0
+    let count = 0;
     string.split('').forEach((el) => {
       if (el < 10) {
-        count++
+        count++;
       }
-    })
-    const result = count >= 12 ? true : false
-    console.log(result)
-    return result
-  }
+    });
+    const result = count >= 12 ? true : false;
+    console.log(result);
+    return result;
+  };
+
+  // const signin = async () => {
+  //   const response = axios.post()
+  // }
+
   useEffect(() => {
     if (phoneNumRef.current && passwordRef.current && isPhoneNumValid) {
-      phoneNumRef.current.blur()
-      passwordRef.current.focus()
+      phoneNumRef.current.blur();
+      passwordRef.current.focus();
     }
-  }, [isPhoneNumValid])
+  }, [isPhoneNumValid]);
+
+  const checkExists = async (data) => {
+    console.log(data);
+    setIsLoading(true);
+    try {
+      const response = await axios.get(
+        `${process.env.LOGIN_API_URL}/exists?phone=%2B${data.phone
+          .replaceAll(' ', '')
+          .substring(1, data.phone.length)}`
+      );
+      setChecked(response.data.exists);
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const dispatch = useDispatch();
+
+  const signin = async (data) => {
+    setIsLoading(true);
+    console.log(data);
+    try {
+      const response = await axios.post(`${process.env.LOGIN_API_URL}/login`, {
+        ...data,
+        phone: data.phone.replaceAll(' ', ''),
+      });
+      if (response.status === 200) {
+        dispatch(setUser(response.data));
+        Router.push('/account');
+      }
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className={style.wrapper}>
       <Typography variant='h2'>{t('signin')}</Typography>
       <div className={style.inner}>
-        <form onSubmit={submitHandlerPhone} autoComplete='off'>
+        <form
+          onSubmit={handleSubmit(checked ? signin : checkExists)}
+          autoComplete='off'
+        >
           <div className={style.input_cont}>
             <TextField
               value={values.textmask}
               variant='filled'
               fullWidth
               className={classes.root}
-              name='phoneNum'
+              name='phone'
               type='tel'
               id='formatted-text-mask-input'
               InputProps={{
@@ -96,6 +149,7 @@ function SignInForm() {
                 setValues({ ...values, phoneNum: e.target.value })
               }
               required
+              inputRef={register}
               label={t('phone_num')}
             />
             {/* <TextField
@@ -154,6 +208,23 @@ function SignInForm() {
               )}
             /> */}
           </div>
+          {checked ? (
+            <div className={style.input_cont}>
+              <TextField
+                id='filled-basic'
+                name='password'
+                variant='filled'
+                fullWidth
+                type='password'
+                className={classes.root}
+                required
+                label={t('password')}
+                inputRef={register}
+              />
+            </div>
+          ) : (
+            ''
+          )}
           {/* {isPhoneNumValid ? (
             <div className={style.input_cont}>
               <TextField
@@ -248,7 +319,7 @@ function SignInForm() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default SignInForm
+export default SignInForm;
