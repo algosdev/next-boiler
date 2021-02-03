@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import Shipment from './shipment'
-import Payment from './payment'
-import style from './account.module.scss'
-import EditIcon from '@material-ui/icons/Edit'
-import Item from './item'
+import React, { useState, useEffect } from 'react';
+import Shipment from './shipment';
+import Payment from './payment';
+import style from './account.module.scss';
+import EditIcon from '@material-ui/icons/Edit';
+import Item from './item';
 import {
   Dialog,
   DialogContent,
@@ -12,35 +12,35 @@ import {
   Button,
   Slide,
   Container,
-} from '@material-ui/core'
-import { useTranslation, Router } from '../../i18n'
-import { useRouter } from 'next/router'
+} from '@material-ui/core';
+import { useTranslation, Router } from '../../i18n';
+import { useRouter } from 'next/router';
 const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction='up' ref={ref} {...props} />
-})
-function AccountSettings() {
-  const router = useRouter()
-  const { t } = useTranslation()
-  const [open, setOpen] = useState(false)
+  return <Slide direction='up' ref={ref} {...props} />;
+});
+function AccountSettings({ user }) {
+  const router = useRouter();
+  const { t } = useTranslation();
+  const [open, setOpen] = useState(false);
   const [data, setData] = useState({
-    firstname: 'Samandar',
-    lastname: 'Toshkuvvatov',
-    phone_num: '+998916545454',
-    address1: "45, Istiqbol ko'chasi, Mirobod tumani, Toshkent",
+    firstname: user?.name || '',
+    lastname: user?.lastname || '',
+    phone_num: user?.phone || '',
+    address1: user?.address || '',
     address2: '',
     address3: '',
-  })
+  });
   const handleClickOpen = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
   const handleSubmit = (e) => {
-    e.preventDefault()
-    handleClose()
-  }
+    e.preventDefault();
+    handleClose();
+  };
 
   const handleClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
   useEffect(() => {
     if (router.query.signup === 'true') {
       setData({
@@ -50,10 +50,11 @@ function AccountSettings() {
         address1: '',
         address2: '',
         address3: '',
-      })
-      setOpen(true)
+      });
+      setOpen(true);
     }
-  }, [router])
+  }, [router]);
+  console.log(user);
   return (
     <>
       <Container>
@@ -84,9 +85,11 @@ function AccountSettings() {
                 <div className={style.wrapper_single_item}>
                   <div className={style.sub_title}>{t('shipping_address')}</div>
                   <div className={style.leading}>
-                    {[data.address1, data.address2, data.address3].map((el) => (
-                      <p>{el}</p>
-                    ))}
+                    {[data.address1, data.address2, data.address3].map(
+                      (el, index) => (
+                        <p key={index}>{el}</p>
+                      )
+                    )}
                   </div>
                 </div>
                 {/* <Item title={t('shipping_address')} details={data.address1} /> */}
@@ -180,7 +183,7 @@ function AccountSettings() {
         </DialogContent>
       </Dialog>
     </>
-  )
+  );
 }
 
-export default AccountSettings
+export default AccountSettings;

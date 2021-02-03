@@ -27,7 +27,7 @@ function SignUpForm() {
   const router = Router;
   // const phoneNumRef = useRef(null)
   // const passwordRef = useRef(null)
-  const [disabled, setDisabled] = useState(false);
+  const [error, setError] = useState(false);
   // const [isPhoneNumValid, setIsPhoneNumValid] = useState(false)
   const { register, handleSubmit } = useForm();
   const [checked, isChecked] = useState(false);
@@ -50,9 +50,9 @@ function SignUpForm() {
   const prePasswordCheck = () => {
     if (values.pre_password) {
       if (values.pre_password === values.password) {
-        setDisabled(false);
+        setError(false);
       } else {
-        setDisabled(true);
+        setError(true);
       }
     }
   };
@@ -156,7 +156,8 @@ function SignUpForm() {
           </div>
           <div className={style.input_cont}>
             <TextField
-              error={disabled}
+              error={error}
+              helperText={error ? 'Пароль не совпадает' : ''}
               id='filled-basic'
               name='pre_password'
               variant='filled'
@@ -167,7 +168,6 @@ function SignUpForm() {
               onChange={checkPassword}
               required
               label={t('confirm_password')}
-              helperText={disabled ? 'Пароль не совпадает' : ''}
             />
           </div>
           {/* <Controller
@@ -232,7 +232,7 @@ function SignUpForm() {
           ) : (
             ''
           )} */}
-          <Button disabled={disabled} fullWidth type='submit'>
+          <Button disabled={error} fullWidth type='submit'>
             {isLoading ? (
               <CircularProgress className={style.progress} color='inherit' />
             ) : (

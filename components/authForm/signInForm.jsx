@@ -24,6 +24,8 @@ function SignInForm() {
   const router = Router;
   const phoneNumRef = useRef(null);
   const passwordRef = useRef(null);
+  const [error, setError] = useState(false);
+  const [errorPassword, setErrorPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [checked, setChecked] = useState(false);
   const [isPhoneNumValid, setIsPhoneNumValid] = useState(false);
@@ -97,6 +99,11 @@ function SignInForm() {
           .substring(1, data.phone.length)}`
       );
       setChecked(response.data.exists);
+      if (!response.data.exists) {
+        setError(true);
+      } else {
+        setError(false);
+      }
       console.log(response);
     } catch (err) {
       console.log(err);
@@ -107,6 +114,8 @@ function SignInForm() {
 
   const signin = async (data) => {
     setIsLoading(true);
+    setError(false);
+    setErrorPassword(false);
     console.log(data);
     try {
       const response = await axios.post(`${process.env.LOGIN_API_URL}/login`, {
@@ -120,6 +129,7 @@ function SignInForm() {
       console.log(response);
     } catch (err) {
       console.log(err);
+      setErrorPassword(true);
     } finally {
       setIsLoading(false);
     }
@@ -140,6 +150,10 @@ function SignInForm() {
               fullWidth
               className={classes.root}
               name='phone'
+              error={error}
+              helperText={
+                error ? 'Пользователь не найден, зарегистрируйтесь!' : ''
+              }
               type='tel'
               id='formatted-text-mask-input'
               InputProps={{
@@ -220,6 +234,8 @@ function SignInForm() {
                 required
                 label={t('password')}
                 inputRef={register}
+                error={errorPassword}
+                helperText={errorPassword ? 'Неверный пароль' : ''}
               />
             </div>
           ) : (

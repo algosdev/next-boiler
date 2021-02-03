@@ -102,7 +102,6 @@ export default function Home({ categories }) {
 export async function getServerSideProps({ req }) {
   const urls = ['http://46.101.122.150:1235/v1/category'];
   const [categories] = await fetchMultipleUrls(urls);
-  console.log('AAA', categories);
   return {
     props: {
       categories,

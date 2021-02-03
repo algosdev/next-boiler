@@ -1,24 +1,24 @@
-import React from 'react'
-import style from './orders.module.scss'
-import { numberToPrice } from '../../lib/numberToPrice'
-import { useTranslation, Link } from '../../i18n'
+import React from 'react';
+import style from './orders.module.scss';
+import { numberToPrice } from '../../lib/numberToPrice';
+import { useTranslation, Link } from '../../i18n';
 function MobileOrderListItem({ data, index }) {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const setStatusColor = (status) => {
     switch (status) {
       case t('in_progress'):
-        return style.blue
+        return style.blue;
       case t('finished'):
-        return style.green
+        return style.green;
       case t('delivered'):
-        return style.green
+        return style.green;
       default:
-        return ''
+        return '';
     }
-  }
+  };
   return (
     <>
-      <Link href={`/orders/${data.number}`}>
+      {/* <Link href={`/orders/${data.number}`}>
         <a>
           <div className={style.wrapper_mobile_item}>
             <div className={style.inner}>
@@ -44,9 +44,9 @@ function MobileOrderListItem({ data, index }) {
             </div>
           </div>
         </a>
-      </Link>
+      </Link> */}
     </>
-  )
+  );
 }
 
-export default MobileOrderListItem
+export default MobileOrderListItem;

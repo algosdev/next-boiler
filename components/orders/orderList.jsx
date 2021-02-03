@@ -48,17 +48,12 @@ function OrderList({ data }) {
           <div className={style.column}>{t('total_sum')}</div>
         </div>
         <div className={style.order_list}>
-          {orderData.map((el, index) => (
-            <OrderListItem data={el} index={index} />
-          ))}
-        </div>
-        {/* <div className={style.order_list}>
           {data?.orders?.map((el, index) => (
             <OrderListItem data={el} index={index} />
           ))}
-        </div> */}
+        </div>
         <div className={style.order_list_mobile}>
-          {orderData.map((el, index) => (
+          {data?.orders?.map((el, index) => (
             <MobileOrderListItem data={el} index={index} />
           ))}
         </div>

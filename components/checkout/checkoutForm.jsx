@@ -22,9 +22,11 @@ import {
   GeolocationControl,
   ZoomControl,
 } from 'react-yandex-maps';
+import { useDispatch, shallowEqual, useSelector } from 'react-redux';
 import axios from 'axios';
 function CheckoutForm({ productsInCart }) {
   const { t } = useTranslation();
+  const user = useSelector((state) => state.auth.user, shallowEqual);
   const [values, setValues] = useState({
     address: '',
     delivery_method: 'self',
@@ -56,7 +58,7 @@ function CheckoutForm({ productsInCart }) {
           items: values.items,
           note: values.note,
           longlat: '0',
-          customer_id: 'c37359c4-ba88-4364-8443-f7f7674da511',
+          customer_id: user.id,
         })
       )
       .then((res) => {

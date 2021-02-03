@@ -5,15 +5,16 @@ import SEO from '../../components/seo';
 import { useTranslation } from '../../i18n';
 import { fetchMultipleUrls } from '../../lib/fetchMultipleUrls';
 import axios from 'axios';
+import { useDispatch, shallowEqual, useSelector } from 'react-redux';
 function orders() {
-  const [data, setData] = useState;
-  console.log(data);
+  const [data, setData] = useState(null);
+  const user = useSelector((state) => state.auth.user, shallowEqual);
+
   useEffect(() => {
     axios
       .get('http://46.101.122.150:1235/v1/my-orders?limit=100&page=1', {
         headers: {
-          Authorization:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTIyNjg3MzQsImlzcyI6InVzZXIiLCJyb2xlIjoiY3VzdG9tZXIiLCJzdWIiOiIwZmI2OWU0Ny1jZTkyLTRmNWMtOTJhYi02MTQxYmE2ZTk4NjQifQ.fHXtWNUhHZpZqqSew3IpX1pazcLSPXsGe3C7vwPkUo0',
+          Authorization: user.access_token,
         },
       })
       .then((res) => {
@@ -22,6 +23,7 @@ function orders() {
         }
       });
   }, []);
+  console.log(data);
   const { t } = useTranslation();
   return (
     <>
