@@ -48,6 +48,7 @@ function OrderItem({ data, index }) {
               <div className={style.column}>{data.number}</div>
               <div className={style.column}>
                 {calculateTotalQuantity(data.items)}
+                {calculateTotalQuantity(data.items) > 1 ? t('pc2') : t('pc1')}
               </div>
               <div className={style.column}>{formatDate(data.created_at)}</div>
               <div className={`${style.column} ${setStatusColor(data.status)}`}>
