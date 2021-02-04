@@ -1,9 +1,9 @@
-import React from 'react';
-import ProductList from '../../components/productList/productList';
-import SEO from '../../components/seo';
-import ShopHeader from '../../components/shopHeader/shopHeader';
-import { useTranslation } from '../../i18n';
-import { fetchMultipleUrls } from '../../lib/fetchMultipleUrls';
+import React from 'react'
+import ProductList from '../../components/productList/productList'
+import SEO from '../../components/seo'
+import ShopHeader from '../../components/shopHeader/shopHeader'
+import { useTranslation } from '../../i18n'
+import { fetchMultipleUrls } from '../../lib/fetchMultipleUrls'
 export default function Shop({
   categ,
   subCateg,
@@ -12,19 +12,21 @@ export default function Shop({
   brands,
   properties,
 }) {
-  const { t } = useTranslation();
-  console.log('PRODUCTS', products);
+  const { t } = useTranslation()
+  console.log('PRODUCTS', products)
+  console.log('categoryid', categ)
   return (
     <>
       <SEO title={t('products')} description={t('product_list_desc')} />
       <ShopHeader categ={categ} subCateg={subCateg} childCategs={childCategs} />
       <ProductList
+        categoryId={categ.category.id}
         data={products?.products}
         brands={brands}
         properties={properties}
       />
     </>
-  );
+  )
 }
 export async function getServerSideProps({ query }) {
   const urls = [
@@ -34,7 +36,7 @@ export async function getServerSideProps({ query }) {
     `http://46.101.122.150:1235/v1/product?category=${query.categid}`,
     `http://46.101.122.150:1235/v1/brand`,
     `http://46.101.122.150:1235/v1/product-property`,
-  ];
+  ]
   const [
     categories,
     categ,
@@ -42,10 +44,10 @@ export async function getServerSideProps({ query }) {
     products,
     brands,
     properties,
-  ] = await fetchMultipleUrls(urls);
+  ] = await fetchMultipleUrls(urls)
   const childCategs = categories?.categories.filter(
     (el) => el.slug === query?.categ
-  );
+  )
   return {
     props: {
       categories,
@@ -56,5 +58,5 @@ export async function getServerSideProps({ query }) {
       brands,
       properties,
     },
-  };
+  }
 }

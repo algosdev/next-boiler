@@ -4,13 +4,8 @@ import { useTranslation } from '../../i18n';
 import style from './checkout.module.scss';
 import CheckoutListItem from './checkoutListItem';
 import { numberToPrice } from '../../lib/numberToPrice';
-import { useSelector, shallowEqual } from 'react-redux';
-function CheckoutDetails() {
+function CheckoutDetails({ productsInCart }) {
   const { t } = useTranslation();
-  const productsInCart = useSelector(
-    (state) => state?.cart?.cartItems,
-    shallowEqual
-  );
   const calculateTotalPrice = (data) => {
     let sum = 0;
     data.forEach((el) => {

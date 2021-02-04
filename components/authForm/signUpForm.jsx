@@ -1,61 +1,61 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Typography,
   Checkbox,
   CircularProgress,
   Button,
   TextField,
-} from '@material-ui/core'
-import style from './authForm.module.scss'
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
-import { Link } from '../../i18n'
-import { Router } from '../../i18n'
-import { useForm, Controller } from 'react-hook-form'
-import composeRefs from '@seznam/compose-react-refs'
-import InputMask from 'react-input-mask'
-import { useTranslation } from '../../i18n'
-import { useStyles, PhoneNumberMask } from './textFieldStyle'
-import axios from 'axios'
-import { setUser } from '../../redux/actions/authActions/authActions'
-import { useDispatch } from 'react-redux'
-import VerifyCodeForm from './verifyCodeForm'
+} from '@material-ui/core';
+import style from './authForm.module.scss';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import { Link } from '../../i18n';
+import { Router } from '../../i18n';
+import { useForm, Controller } from 'react-hook-form';
+import composeRefs from '@seznam/compose-react-refs';
+import InputMask from 'react-input-mask';
+import { useTranslation } from '../../i18n';
+import { useStyles, PhoneNumberMask } from './textFieldStyle';
+import axios from 'axios';
+import { setUser } from '../../redux/actions/authActions/authActions';
+import { useDispatch } from 'react-redux';
+import VerifyCodeForm from './verifyCodeForm';
 
 function SignUpForm() {
-  const { t } = useTranslation()
-  const classes = useStyles()
-  const dispatch = useDispatch()
-  const router = Router
+  const { t } = useTranslation();
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const router = Router;
   // const phoneNumRef = useRef(null)
   // const passwordRef = useRef(null)
-  const [disabled, setDisabled] = useState(false)
+  const [error, setError] = useState(false);
   // const [isPhoneNumValid, setIsPhoneNumValid] = useState(false)
-  const { register, handleSubmit } = useForm()
-  const [checked, isChecked] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+  const { register, handleSubmit } = useForm();
+  const [checked, isChecked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState({
     pre_password: '',
     password: '',
-  })
-  const [phone, setPhone] = useState('')
-  const [customer, setCustomer] = useState('')
+  });
+  const [phone, setPhone] = useState('');
+  const [customer, setCustomer] = useState('');
   const checkPassword = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value })
-    console.log(values)
-  }
+    setValues({ ...values, [e.target.name]: e.target.value });
+    console.log(values);
+  };
 
   useEffect(() => {
-    prePasswordCheck()
-  }, [values])
+    prePasswordCheck();
+  }, [values]);
 
   const prePasswordCheck = () => {
     if (values.pre_password) {
       if (values.pre_password === values.password) {
-        setDisabled(false)
+        setError(false);
       } else {
-        setDisabled(true)
+        setError(true);
       }
     }
-  }
+  };
 
   // useEffect(() => {
   //   if (phoneNumRef.current && passwordRef.current && isPhoneNumValid) {
@@ -66,27 +66,27 @@ function SignUpForm() {
 
   const createUser = async (data) => {
     try {
-      setIsLoading(true)
+      setIsLoading(true);
       const response = await axios.post(
         `${process.env.LOGIN_API_URL}/register`,
         {
           ...data,
           phone: data.phone.replaceAll(' ', ''),
         }
-      )
+      );
       if (response.status === 200) {
-        setCustomer(response.data)
-        setPhone(data.phone)
-        isChecked(true)
+        setCustomer(response.data);
+        setPhone(data.phone);
+        isChecked(true);
         //Router.push(`/verify-code?phone=${data.phone}`)
       }
-      console.log(response)
+      console.log(response);
     } catch (err) {
-      console.error(err)
+      console.error(err);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   // const saveUser = async (userInfo) => {
   //   dispatch(setUser(userInfo))
@@ -156,7 +156,8 @@ function SignUpForm() {
           </div>
           <div className={style.input_cont}>
             <TextField
-              error={disabled}
+              error={error}
+              helperText={error ? 'Пароль не совпадает' : ''}
               id='filled-basic'
               name='pre_password'
               variant='filled'
@@ -167,7 +168,6 @@ function SignUpForm() {
               onChange={checkPassword}
               required
               label={t('confirm_password')}
-              helperText={disabled ? 'Пароль не совпадает' : ''}
             />
           </div>
           {/* <Controller
@@ -232,7 +232,7 @@ function SignUpForm() {
           ) : (
             ''
           )} */}
-          <Button disabled={disabled} fullWidth type='submit'>
+          <Button disabled={error} fullWidth type='submit'>
             {isLoading ? (
               <CircularProgress className={style.progress} color='inherit' />
             ) : (
@@ -309,7 +309,7 @@ function SignUpForm() {
     </div>
   ) : (
     <VerifyCodeForm phone={phone} userInfo={customer} />
-  )
+  );
 }
 
-export default SignUpForm
+export default SignUpForm;

@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
-import style from './orders.module.scss'
-import { CashIn, CreditCard } from '../svg'
-import OrderListItem from './ordersListItem'
-import { useTranslation } from '../../i18n'
-import MobileOrderListItem from './mobileOrderListItem'
-function OrderList() {
-  const { t } = useTranslation()
+import React, { useState } from 'react';
+import style from './orders.module.scss';
+import { CashIn, CreditCard } from '../svg';
+import OrderListItem from './ordersListItem';
+import { useTranslation } from '../../i18n';
+import MobileOrderListItem from './mobileOrderListItem';
+function OrderList({ data }) {
+  const { t } = useTranslation();
   const orderData = [
     {
       number: '4656',
@@ -35,7 +35,7 @@ function OrderList() {
       status: t('finished'),
       quantity: `4 ${t('pc1')}.`,
     },
-  ]
+  ];
   return (
     <>
       <div className={style.wrapper_list}>
@@ -48,18 +48,18 @@ function OrderList() {
           <div className={style.column}>{t('total_sum')}</div>
         </div>
         <div className={style.order_list}>
-          {orderData.map((el, index) => (
+          {data?.orders?.map((el, index) => (
             <OrderListItem data={el} index={index} />
           ))}
         </div>
         <div className={style.order_list_mobile}>
-          {orderData.map((el, index) => (
+          {data?.orders?.map((el, index) => (
             <MobileOrderListItem data={el} index={index} />
           ))}
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default OrderList
+export default OrderList;

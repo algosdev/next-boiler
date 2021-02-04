@@ -1,23 +1,43 @@
-import React, { useState, useEffect } from 'react'
-import style from './orders.module.scss'
-import { Link } from '../../i18n'
-import { Button } from '@material-ui/core'
-import { useTranslation, Router } from '../../i18n'
-import { numberToPrice } from '../../lib/numberToPrice'
+import React, { useState, useEffect } from 'react';
+import style from './orders.module.scss';
+import { Link } from '../../i18n';
+import { Button } from '@material-ui/core';
+import { useTranslation, Router } from '../../i18n';
+import { numberToPrice } from '../../lib/numberToPrice';
+import { formatDate } from '../../lib/formatDate';
 function OrderItem({ data, index }) {
-  const { t } = useTranslation()
+  console.log(data);
+  const { t } = useTranslation();
   const setStatusColor = (status) => {
     switch (status) {
-      case t('in_progress'):
-        return style.blue
+      case 'in-progress':
+        return style.blue;
+        break;
       case t('finished'):
-        return style.green
+        return style.green;
+        break;
+
       case t('delivered'):
-        return style.green
+        return style.green;
+        break;
       default:
-        return ''
+        return '';
     }
-  }
+  };
+  const calculateTotalQuantity = (data) => {
+    let sum = 0;
+    data.forEach((el) => {
+      sum += el.quantity;
+    });
+    return sum;
+  };
+  const calculateTotalPrice = (data) => {
+    let sum = 0;
+    data.forEach((el) => {
+      sum += parseInt(el.quantity) * parseInt(el?.price);
+    });
+    return sum;
+  };
   return (
     <>
       <Link href={`/orders/${data.number}`}>
@@ -26,50 +46,26 @@ function OrderItem({ data, index }) {
             <div className={style.inner}>
               <div className={style.column}>{index + 1}</div>
               <div className={style.column}>{data.number}</div>
-              <div className={style.column}>{data.quantity}</div>
-              <div className={style.column}>{data.date}</div>
+              <div className={style.column}>
+                {calculateTotalQuantity(data.items)}
+                {calculateTotalQuantity(data.items) > 1 ? t('pc2') : t('pc1')}
+              </div>
+              <div className={style.column}>{formatDate(data.created_at)}</div>
               <div className={`${style.column} ${setStatusColor(data.status)}`}>
-                <div>{data.status}</div>
+                <div>{t(`${data.status}`)}</div>
               </div>
               <div className={style.column}>
                 <span>
-                  {numberToPrice(data.total)} {t('soum')}
+                  {numberToPrice(calculateTotalPrice(data.items))}
+                  {` ${t('soum')}`}
                 </span>
               </div>
-              {/* <div className={`${style.column} ${style.info}`}>
-            <Button
-              className={`${style.btn}`}
-              onClick={() => Router.push(`/orders/${data.number}`)}
-            >
-              Посмотреть
-            </Button>
-          </div> */}
             </div>
           </div>
-          {/* </a>
-      </Link> */}
-          {/* <Link href={`/orders/${data.number}`}>
-        <a>
-          <div className={style.wrapper_item}>
-            <div className={style.inner}>
-              <div className={style.header}>№ {data.number}</div>
-              <div className={style.details}>
-                <span>{t('date')}: </span>
-                <span>{t('status')}: </span>
-                <span>{t('total')}: </span>
-                <p>{data.date}</p>
-                <p>{t('in_progress')}</p>
-                <p>
-                  {numberToPrice(data.total)} {t('soum')}
-                </p>
-              </div>
-            </div>
-          </div>
-           */}
         </a>
       </Link>
     </>
-  )
+  );
 }
 
-export default OrderItem
+export default OrderItem;

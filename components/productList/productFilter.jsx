@@ -1,23 +1,106 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react'
 import {
   Typography,
   Slider,
   FormControlLabel,
   Checkbox,
-} from '@material-ui/core';
-import style from './productList.module.scss';
-import { Link, useTranslation } from '../../i18n';
-import { numberToPrice } from '../../lib/numberToPrice';
-function ProductFilter({ showFilter, properties, brands }) {
-  const [value, setValue] = useState([2000000, 9990000]);
+} from '@material-ui/core'
+import style from './productList.module.scss'
+import { Link, useTranslation } from '../../i18n'
+import { numberToPrice } from '../../lib/numberToPrice'
+function ProductFilter({
+  showFilter,
+  properties,
+  brands,
+  setFilter,
+  filters,
+  value,
+  setValue,
+}) {
   const handlePriceChange = (e, newValue) => {
-    console.log(newValue);
-  };
+    console.log(newValue)
+    setValue(newValue)
+  }
   const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-  const { t } = useTranslation();
-  console.log('>>>', brands);
+    setValue(newValue)
+    console.log('hn', newValue)
+    //setFilter({ ...filters, price_from: value[0], rice_till: value[1] })
+  }
+  const { t } = useTranslation()
+  console.log('>>>', properties)
+
+  const hadleChangeBrand = (e) => {
+    const isEmpty = filters.brand.includes(e.target.value)
+    if (isEmpty) {
+      const newFilter = filters.brand.filter((item) => item !== e.target.value)
+      setFilter({ ...filters, brand: [...newFilter] })
+    } else {
+      setFilter({ ...filters, brand: [...filters.brand, e.target.value] })
+    }
+  }
+
+  const handleChangePropery = (id, val) => {
+    const addNewProp = []
+    console.log('proper', filters.properties)
+    const newProperties = filters.properties.find(
+      (item) => item.property_id === id
+    )
+    console.log('prop', newProperties)
+    if (newProperties) {
+      const values = newProperties.value.split(',')
+      console.log('colors', values)
+      if (values.includes(val)) {
+        if (values.length < 2) {
+          filters.properties.map((item) => {
+            if (item.property_id !== id) {
+              addNewProp.push(item)
+            }
+          })
+          setFilter({
+            ...filters,
+            properties: addNewProp,
+          })
+        } else {
+          filters.properties.map((item) => {
+            if (item.property_id === id) {
+              const items = item.value.split(',').filter((item) => item !== val)
+              item.value = items.join(',')
+              addNewProp.push(item)
+            } else {
+              addNewProp.push(item)
+            }
+          })
+          setFilter({
+            ...filters,
+            properties: addNewProp,
+          })
+        }
+      } else {
+        console.log('item change')
+        filters.properties.map((item) => {
+          console.log('valss', item)
+          if (item.property_id === id) {
+            console.log('item', item)
+            item.value = `${item.value},${val}`
+
+            addNewProp.push(item)
+          } else {
+            addNewProp.push(item)
+          }
+        })
+        setFilter({
+          ...filters,
+          properties: addNewProp,
+        })
+      }
+    } else {
+      setFilter({
+        ...filters,
+        properties: [...filters.properties, { property_id: id, value: val }],
+      })
+    }
+  }
+
   return (
     <div className={`${style.filterWrapper} ${!showFilter ? style.hide : ''}`}>
       <div
@@ -25,16 +108,20 @@ function ProductFilter({ showFilter, properties, brands }) {
       >
         <div className={style.price}>
           <Typography variant='h6'>{t('price')}</Typography>
-          <p>
-            {numberToPrice(value[0])} &ndash; {numberToPrice(value[1])}
-          </p>
+          {value.length > 0 ? (
+            <p>
+              {numberToPrice(value[0])} &ndash; {numberToPrice(value[1])}
+            </p>
+          ) : (
+            ''
+          )}
           <Slider
             value={value}
             onChangeCommitted={handlePriceChange}
             onChange={handleChange}
             max={9990000}
             track={false}
-            min={2000000}
+            min={0}
             aria-labelledby='range-slider'
           />
         </div>
@@ -43,7 +130,14 @@ function ProductFilter({ showFilter, properties, brands }) {
           {brands?.brands.map((brand, index) => (
             <div className={style.filter_item} key={index}>
               <FormControlLabel
-                control={<Checkbox name={brand.slug} />}
+                control={
+                  <Checkbox
+                    name={brand.slug}
+                    value={brand.id}
+                    onChange={hadleChangeBrand}
+                    checked={filters.brand.includes(brand.id)}
+                  />
+                }
                 label={brand.name}
               />
             </div>
@@ -69,14 +163,24 @@ function ProductFilter({ showFilter, properties, brands }) {
             <Typography variant='h6'>{property.name}</Typography>
             {property.options.map((opt, ind) => (
               <div className={style.filter_item} key={ind}>
-                <FormControlLabel control={<Checkbox />} label={opt.name} />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      onChange={(e) => {
+                        handleChangePropery(property.id, e.target.value)
+                      }}
+                      value={opt.name}
+                    />
+                  }
+                  label={opt.name}
+                />
               </div>
             ))}
           </div>
         ))}
       </div>
     </div>
-  );
+  )
 }
 
-export default ProductFilter;
+export default ProductFilter

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react';
 import {
   ClickAwayListener,
   Grow,
@@ -7,13 +7,13 @@ import {
   MenuItem,
   MenuList,
   makeStyles,
-} from '@material-ui/core'
-import { ProfileIcon } from '../svg'
-import { Link, Router } from '../../i18n'
-import style from './header.module.scss'
-import { useTranslation } from '../../i18n'
-import { useDispatch, useSelector } from 'react-redux'
-import { logout } from '../../redux/actions/authActions/authActions'
+} from '@material-ui/core';
+import { ProfileIcon } from '../svg';
+import { Link, Router } from '../../i18n';
+import style from './header.module.scss';
+import { useTranslation } from '../../i18n';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../redux/actions/authActions/authActions';
 const useStyles = makeStyles(() => ({
   paper: {
     borderRadius: '6px',
@@ -57,47 +57,47 @@ const useStyles = makeStyles(() => ({
     paddingTop: '10px',
     top: '0 !important',
   },
-}))
+}));
 const ProfileDropdown = ({ title, subCategs }) => {
-  const user = useSelector((state) => state.auth.user)
-  const { t } = useTranslation()
-  const [isBagVisible, setIsBagVisible] = useState(false)
-  const classes = useStyles()
-  const [open, setOpen] = useState(false)
-  const anchorRef = useRef(null)
+  const user = useSelector((state) => state.auth.user);
+  const { t } = useTranslation();
+  const [isBagVisible, setIsBagVisible] = useState(false);
+  const classes = useStyles();
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef(null);
 
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen)
-  }
+    setOpen((prevOpen) => !prevOpen);
+  };
 
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return
+      return;
     }
 
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
-      event.preventDefault()
-      setOpen(false)
+      event.preventDefault();
+      setOpen(false);
     }
   }
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const signOut = () => {
-    dispatch(logout())
-    Router.push('/')
-  }
+    dispatch(logout());
+    Router.push('/');
+  };
 
-  const prevOpen = useRef(open)
+  const prevOpen = useRef(open);
   useEffect(() => {
     if (prevOpen.current === true && open === false) {
-      anchorRef.current.focus()
+      anchorRef.current.focus();
     }
 
-    prevOpen.current = open
-  }, [open])
+    prevOpen.current = open;
+  }, [open]);
 
   return (
     <>
@@ -174,7 +174,7 @@ const ProfileDropdown = ({ title, subCategs }) => {
         </Popper>
       </li>
     </>
-  )
-}
+  );
+};
 
-export default ProfileDropdown
+export default ProfileDropdown;

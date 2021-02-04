@@ -1,5 +1,4 @@
 const { nextI18NextRewrites } = require('next-i18next/rewrites')
-const runtimeCaching = require('next-pwa/cache')
 const localeSubpaths = {
   uz: 'uz',
   en: 'en',
@@ -8,12 +7,13 @@ const localeSubpaths = {
 module.exports = {
   env: {
     LOGIN_API_URL: 'http://46.101.122.150:1235/v1/customer',
+    FILTER_PRODUCT_API_URL: 'http://46.101.122.150:1235/v1/product/filter',
   },
-  pwa: {
-    dest: 'public',
-    swSrc: 'service-worker.js',
-    // runtimeCaching,
-  },
+  // pwa: {
+  //   dest: 'public',
+  //   swSrc: 'service-worker.js',
+  //   runtimeCaching,
+  // },
   rewrites: async () => nextI18NextRewrites(localeSubpaths),
   publicRuntimeConfig: {
     localeSubpaths,

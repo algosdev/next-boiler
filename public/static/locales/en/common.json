@@ -98,7 +98,7 @@
   "price": "Price",
   "quantity": "Quantity",
   "total_sum": "Total sum",
-  "in_progress": "In progress",
+  "in-process": "In progress",
   "date": "Date",
   "company": "Company",
   "news": "News",

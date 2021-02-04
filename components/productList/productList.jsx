@@ -1,24 +1,26 @@
-import React, { useState } from 'react';
-import style from './productList.module.scss';
-import { Link } from '../../i18n';
-import { List, KeyboardArrowDown } from '@material-ui/icons';
+import React, { useEffect, useState } from 'react'
+import style from './productList.module.scss'
+import { i18n, Link } from '../../i18n'
+import { List, KeyboardArrowDown } from '@material-ui/icons'
 import {
   Grid,
   Typography,
   ClickAwayListener,
   Checkbox,
   FormControlLabel,
-} from '@material-ui/core';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useTranslation } from '../../i18n';
-import { numberToPrice } from '../../lib/numberToPrice';
-import Slider from '@material-ui/core/Slider';
-import ProductHeader from './productHeader';
-import ProductFilter from './productFilter';
-import ProductListItem from './productListItem';
-import NoProduct from './NoProduct';
-export default function ProductList({ data, brands, properties }) {
-  const { t } = useTranslation();
+} from '@material-ui/core'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useTranslation } from '../../i18n'
+import { numberToPrice } from '../../lib/numberToPrice'
+import Slider from '@material-ui/core/Slider'
+import ProductHeader from './productHeader'
+import ProductFilter from './productFilter'
+import ProductListItem from './productListItem'
+import NoProduct from './NoProduct'
+import axios from 'axios'
+import { createFormData } from '../../lib/createFormData'
+export default function ProductList({ data, brands, properties, categoryId }) {
+  const { t } = useTranslation()
 
   const productListData = [
     // {
@@ -140,10 +142,68 @@ export default function ProductList({ data, brands, properties }) {
         '/images/case.jpeg',
       ],
     },
-  ];
-  const [activeSortBy, setActiveSortBy] = useState(0);
-  const [showFilter, setShowFilter] = useState(true);
-  const [sortByOpen, setSortByOpen] = useState(false);
+  ]
+
+  const [showFilter, setShowFilter] = useState(true)
+  const [products, setProducts] = useState(data)
+  const [value, setValue] = useState([0, 123213213])
+  const [filters, setFilter] = useState({
+    category: categoryId,
+    brand: [],
+    properties: [],
+  })
+
+  useEffect(() => {
+    filterProduct()
+    // if (value.length === 0) {
+    //   let sortedProductsByPrice = products.sort(
+    //     (a, b) => a.price.price - b.price.price
+    //   )
+    //   if (
+    //     sortedProductsByPrice[0] ===
+    //     sortedProductsByPrice[sortedProductsByPrice.length - 1]
+    //   ) {
+    //     setValue([
+    //       +0,
+    //       +sortedProductsByPrice[sortedProductsByPrice.length - 1].price.price,
+    //     ])
+    //   } else {
+    //     setValue([
+    //       +sortedProductsByPrice[0].price.price,
+    //       +sortedProductsByPrice[sortedProductsByPrice.length - 1].price.price,
+    //     ])
+    //   }
+    // }
+
+    console.log('prod filter', filters)
+  }, [filters])
+
+  const filterProduct = async () => {
+    const { category, brand, properties } = filters
+    const formData = createFormData({
+      category: category,
+      brand: brand.length > 0 ? brand.join(',') : '',
+      properties: JSON.stringify(properties),
+      lang: i18n.language,
+      inactive: true,
+      active: true,
+      // limit: productLimit.toString(),
+      page: '1',
+      // price_from: value.length > 0 ? value[0] : '0',
+      // price_till: value.length > 0 ? value[1] : '0',
+      search: '',
+      sort: '',
+    })
+    const response = await axios.post(
+      `${process.env.FILTER_PRODUCT_API_URL}`,
+      formData
+    )
+    if (response.status === 200) {
+      setProducts(response.data.products)
+    }
+    console.log('filter=>>>>', response)
+  }
+
   return (
     <div className={style.productListWrapper}>
       <ProductHeader showFilter={showFilter} setShowFilter={setShowFilter} />
@@ -153,9 +213,13 @@ export default function ProductList({ data, brands, properties }) {
             showFilter={showFilter}
             brands={brands}
             properties={properties}
+            setFilter={setFilter}
+            filters={filters}
+            value={value}
+            setValue={setValue}
           />
           <Grid container>
-            {data?.map((item, index) => (
+            {products?.map((item, index) => (
               <Grid item xs={6} xl={3} sm={6} lg={4} md={6} sh={12} key={index}>
                 <ProductListItem item={item} key={index} />
               </Grid>
@@ -168,5 +232,5 @@ export default function ProductList({ data, brands, properties }) {
         </div>
       </div>
     </div>
-  );
+  )
 }

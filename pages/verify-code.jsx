@@ -1,14 +1,14 @@
-import React from 'react'
-import { Container, Typography } from '@material-ui/core'
-import VerifyCodeForm from '../components/authForm/verifyCodeForm'
-import SEO from '../components/seo'
-import { useTranslation } from '../i18n'
-import { fetchMultipleUrls } from '../lib/fetchMultipleUrls'
-import { useRouter } from 'next/router'
+import React from 'react';
+import { Container, Typography } from '@material-ui/core';
+import VerifyCodeForm from '../components/authForm/verifyCodeForm';
+import SEO from '../components/seo';
+import { useTranslation } from '../i18n';
+import { fetchMultipleUrls } from '../lib/fetchMultipleUrls';
+import { useRouter } from 'next/router';
 
 function VerifyCode() {
-  const { t } = useTranslation()
-  const router = useRouter()
+  const { t } = useTranslation();
+  const router = useRouter();
 
   return (
     <>
@@ -21,7 +21,7 @@ function VerifyCode() {
         <VerifyCodeForm phone={router.query.phone} />
       </Container>
     </>
-  )
+  );
 }
 
-export default VerifyCode
+export default VerifyCode;

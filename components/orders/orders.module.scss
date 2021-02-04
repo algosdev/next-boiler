@@ -169,6 +169,11 @@
     grid-gap: 10px;
     @media (max-width: 576px) {
     }
+    .has_svg {
+      svg {
+        margin-right: 5px;
+      }
+    }
     div {
       display: flex;
       align-items: center;
