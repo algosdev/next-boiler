@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import style from './header.module.scss';
-import { Container, ClickAwayListener, makeStyles } from '@material-ui/core';
+import {
+  Container,
+  ClickAwayListener,
+  makeStyles,
+  Button,
+} from '@material-ui/core';
 import CartDropdown from './CartDropdown';
 import LanguageDropdown from './LanguageDropdown';
 import { BrandLogo, CloseIcon, ProfileIcon } from '../svg';
@@ -50,7 +55,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function Header({ categories }) {
+function Header({ categories, hasLogged }) {
   const { t } = useTranslation();
   const [isMobile, setIsMobile] = useState(false);
   const classes = useStyles();
@@ -297,8 +302,19 @@ function Header({ categories }) {
                         </a>
                       </Link>
                     </li> */}
-                    <CartDropdown />
-                    <ProfileDropdown />
+                    {hasLogged ? (
+                      <>
+                        <CartDropdown />
+                        <ProfileDropdown />
+                      </>
+                    ) : (
+                      <Button
+                        onClick={() => Router.push('signin')}
+                        className={style.login_btn}
+                      >
+                        Войти
+                      </Button>
+                    )}
                     <LanguageDropdown />
                   </ul>
                 </div>
