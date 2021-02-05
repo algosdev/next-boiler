@@ -4,20 +4,20 @@ import {
   Paper,
   Typography,
   makeStyles,
-} from '@material-ui/core';
-import React from 'react';
-import style from './catalogList.module.scss';
-import { Link, useTranslation } from '../../i18n';
+} from '@material-ui/core'
+import React from 'react'
+import style from './catalogList.module.scss'
+import { Link, useTranslation } from '../../i18n'
 const useStyles = makeStyles(() => ({
   root: {
     borderRadius: '18px',
     boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
   },
-}));
+}))
 export default function CatalogList({ data }) {
-  const { t } = useTranslation();
-  const classes = useStyles();
-  console.log(data);
+  const { t } = useTranslation()
+  const classes = useStyles()
+  console.log(data)
   return (
     <div className={style.catalogList}>
       <Container>
@@ -30,7 +30,8 @@ export default function CatalogList({ data }) {
               <Grid item lg={3} sm={6} xs={12} key={index}>
                 <Paper className={classes.root}>
                   <Link
-                    href={`/shop?categ=${data.slug}&categid=${data.id}&subcateg=${item.slug}&subcategid=${item.id}`}
+                    // href={`/shop?categ=${data.slug}&categid=${data.id}&subcateg=${item.slug}&subcategid=${item.id}`}
+                    href={`/shop/${item.slug}`}
                   >
                     <a className={style.wrapper}>
                       <Typography variant='h3'>{item.name}</Typography>
@@ -46,5 +47,5 @@ export default function CatalogList({ data }) {
         </div>
       </Container>
     </div>
-  );
+  )
 }

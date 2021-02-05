@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react'
 import {
   ClickAwayListener,
   Grow,
@@ -7,10 +7,10 @@ import {
   MenuItem,
   MenuList,
   makeStyles,
-} from '@material-ui/core';
-import style from './header.module.scss';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Link } from '../../i18n';
+} from '@material-ui/core'
+import style from './header.module.scss'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import { Link } from '../../i18n'
 const useStyles = makeStyles(() => ({
   paper: {
     borderRadius: '6px',
@@ -42,39 +42,39 @@ const useStyles = makeStyles(() => ({
     paddingTop: '10px',
     top: '0 !important',
   },
-}));
+}))
 const NavItem = ({ data, subCategs }) => {
-  NavItem.muiName = Popper.muiName;
-  const classes = useStyles();
-  const [open, setOpen] = useState(false);
-  const anchorRef = useRef(null);
+  NavItem.muiName = Popper.muiName
+  const classes = useStyles()
+  const [open, setOpen] = useState(false)
+  const anchorRef = useRef(null)
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
+    setOpen((prevOpen) => !prevOpen)
+  }
 
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
+      return
     }
 
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
-      event.preventDefault();
-      setOpen(false);
+      event.preventDefault()
+      setOpen(false)
     }
   }
 
-  const prevOpen = useRef(open);
+  const prevOpen = useRef(open)
   useEffect(() => {
     if (prevOpen.current === true && open === false) {
-      anchorRef.current.focus();
+      anchorRef.current.focus()
     }
 
-    prevOpen.current = open;
-  }, [open]);
+    prevOpen.current = open
+  }, [open])
 
   return (
     <li
@@ -118,9 +118,7 @@ const NavItem = ({ data, subCategs }) => {
                       disableRipple
                       onClick={() => setOpen(false)}
                     >
-                      <Link
-                        href={`/shop?categ=${data.slug}&categid=${data.id}&subcateg=${item.slug}&subcategid=${item.id}`}
-                      >
+                      <Link href={`/shop/${item.slug}`}>
                         <a>{item.name}</a>
                       </Link>
                     </MenuItem>
@@ -132,7 +130,7 @@ const NavItem = ({ data, subCategs }) => {
         )}
       </Popper>
     </li>
-  );
-};
+  )
+}
 
-export default NavItem;
+export default NavItem

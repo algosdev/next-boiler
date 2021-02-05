@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react'
 import {
   ClickAwayListener,
   Grow,
@@ -7,10 +7,10 @@ import {
   MenuItem,
   MenuList,
   makeStyles,
-} from '@material-ui/core';
-import style from './shopHeader.module.scss';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Link, Router } from '../../i18n';
+} from '@material-ui/core'
+import style from './shopHeader.module.scss'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import { Link, Router } from '../../i18n'
 const useStyles = makeStyles(() => ({
   paper: {
     borderRadius: '6px',
@@ -47,40 +47,40 @@ const useStyles = makeStyles(() => ({
     right: '0',
     minWidth: '200px',
   },
-}));
+}))
 const SubCategDropdown = ({ data, txt, parentCateg }) => {
-  const classes = useStyles();
-  const [open, setOpen] = useState(false);
-  const [activeOption, setActiveOption] = useState('');
-  const anchorRef = useRef(null);
+  const classes = useStyles()
+  const [open, setOpen] = useState(false)
+  const [activeOption, setActiveOption] = useState('')
+  const anchorRef = useRef(null)
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
+    setOpen((prevOpen) => !prevOpen)
+  }
 
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
+      return
     }
 
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
-      event.preventDefault();
-      setOpen(false);
+      event.preventDefault()
+      setOpen(false)
     }
   }
 
-  const prevOpen = useRef(open);
+  const prevOpen = useRef(open)
   useEffect(() => {
     if (prevOpen.current === true && open === false) {
-      anchorRef.current.focus();
+      anchorRef.current.focus()
     }
 
-    prevOpen.current = open;
-  }, [open]);
-  console.log('sadaasD', data);
+    prevOpen.current = open
+  }, [open])
+  console.log('sadaasD', data)
 
   return (
     <button
@@ -121,11 +121,9 @@ const SubCategDropdown = ({ data, txt, parentCateg }) => {
                     <MenuItem
                       key={index}
                       onClick={(e) => {
-                        setActiveOption(item);
-                        Router.push(
-                          `/shop?categ=${parentCateg}&subcateg=${item.slug}`
-                        );
-                        handleClose(e);
+                        setActiveOption(item)
+                        Router.push(`/shop/${item.slug}`)
+                        handleClose(e)
                       }}
                       disableRipple
                     >
@@ -139,7 +137,7 @@ const SubCategDropdown = ({ data, txt, parentCateg }) => {
         )}
       </Popper>
     </button>
-  );
-};
+  )
+}
 
-export default SubCategDropdown;
+export default SubCategDropdown

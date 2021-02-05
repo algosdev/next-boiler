@@ -142,7 +142,7 @@ function ProductSingleContent({ data }) {
         <div className={style.colors_cont}>
           <div className={style.colors_title}>{t('colors')}</div>
           <Grid container spacing={2}>
-            {colorsData.map((item, index) => (
+            {data.properties[0].property.options.map((item, index) => (
               <Grid
                 item
                 xs={6}
@@ -157,11 +157,9 @@ function ProductSingleContent({ data }) {
                 >
                   <div className={style.inner}>
                     <div
-                      className={`${style.color_ball} ${
-                        style[item.en.toLowerCase()]
-                      }`}
+                      className={`${style.color_ball} ${style[item.value]}`}
                     ></div>
-                    <div className={style.color_name}>{item[language]}</div>
+                    <div className={style.color_name}>{item.name}</div>
                   </div>
                 </div>
               </Grid>

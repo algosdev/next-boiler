@@ -1,16 +1,16 @@
-import { Container, ClickAwayListener } from '@material-ui/core';
-import React, { useState } from 'react';
-import style from './shopHeader.module.scss';
-import { useTranslation, Link, Router } from '../../i18n';
-import { useRouter } from 'next/router';
-import { KeyboardArrowDown } from '@material-ui/icons';
-import { motion, AnimatePresence } from 'framer-motion';
-import SubCategDropdown from './subCategDropdown';
+import { Container, ClickAwayListener } from '@material-ui/core'
+import React, { useState } from 'react'
+import style from './shopHeader.module.scss'
+import { useTranslation, Link, Router } from '../../i18n'
+import { useRouter } from 'next/router'
+import { KeyboardArrowDown } from '@material-ui/icons'
+import { motion, AnimatePresence } from 'framer-motion'
+import SubCategDropdown from './subCategDropdown'
 export default function ShopHeader({ categ, subCateg, childCategs }) {
-  const router = useRouter();
-  const { t } = useTranslation();
-  const [sortByOpen, setSortByOpen] = useState(false);
-  const [activeSubCateg, setActiveSubCateg] = useState('');
+  const router = useRouter()
+  const { t } = useTranslation()
+  const [sortByOpen, setSortByOpen] = useState(false)
+  const [activeSubCateg, setActiveSubCateg] = useState('')
   const navData = [
     {
       title: t('apple_p'),
@@ -65,14 +65,16 @@ export default function ShopHeader({ categ, subCateg, childCategs }) {
         },
       ],
     },
-  ];
-  console.log(subCateg);
+  ]
+
+  console.log('subcat', subCateg)
+  // console.log(subCateg);
   return (
     <div className={style.shopHeader}>
       {!router.query.term ? (
         <div className={style.top_header}>
           <Container className={style.content}>
-            <div className={style.categ}>{categ?.category?.name}</div>
+            <div className={style.categ}>{categ?.name}</div>
             <div className={style.dropdown}>
               <SubCategDropdown
                 data={childCategs}
@@ -94,10 +96,10 @@ export default function ShopHeader({ categ, subCateg, childCategs }) {
           <h1 className={style.title}>
             {router.query.term
               ? `Результаты поиска по запросу "${decodeURI(router.query.term)}"`
-              : subCateg?.category?.name}
+              : subCateg?.name}
           </h1>
         </div>
       </Container>
     </div>
-  );
+  )
 }

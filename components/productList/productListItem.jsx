@@ -1,12 +1,14 @@
-import React from 'react';
-import { Link, useTranslation } from '../../i18n';
-import { numberToPrice } from '../../lib/numberToPrice';
-import style from './productList.module.scss';
+import React from 'react'
+import { Link, useTranslation } from '../../i18n'
+import { numberToPrice } from '../../lib/numberToPrice'
+import style from './productList.module.scss'
 function ProductListItem({ item }) {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
+
+  console.log('product', item)
   return (
     <>
-      <Link href={`/shop/${item.slug}`}>
+      <Link href={`/product/${item.slug}`}>
         <a className={style.product}>
           <div className={style.img_cont}>
             <figure>
@@ -26,7 +28,7 @@ function ProductListItem({ item }) {
         </a>
       </Link>
     </>
-  );
+  )
 }
 
-export default ProductListItem;
+export default ProductListItem

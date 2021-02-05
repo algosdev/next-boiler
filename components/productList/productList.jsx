@@ -146,40 +146,32 @@ export default function ProductList({ data, brands, properties, categoryId }) {
 
   const [showFilter, setShowFilter] = useState(true)
   const [products, setProducts] = useState(data)
-  const [value, setValue] = useState([0, 123213213])
+  const [value, setValue] = useState([])
   const [filters, setFilter] = useState({
     category: categoryId,
     brand: [],
     properties: [],
+    sort: '',
+    priceRange: [],
   })
 
   useEffect(() => {
     filterProduct()
-    // if (value.length === 0) {
-    //   let sortedProductsByPrice = products.sort(
-    //     (a, b) => a.price.price - b.price.price
-    //   )
-    //   if (
-    //     sortedProductsByPrice[0] ===
-    //     sortedProductsByPrice[sortedProductsByPrice.length - 1]
-    //   ) {
-    //     setValue([
-    //       +0,
-    //       +sortedProductsByPrice[sortedProductsByPrice.length - 1].price.price,
-    //     ])
-    //   } else {
-    //     setValue([
-    //       +sortedProductsByPrice[0].price.price,
-    //       +sortedProductsByPrice[sortedProductsByPrice.length - 1].price.price,
-    //     ])
-    //   }
-    // }
 
-    console.log('prod filter', filters)
+    //console.log('price range', sortedProductsByPrice)
+
+    // setValue([
+    //   parseInt(sortedProductsByPrice[0].price.price),
+    //   parseInt(
+    //     sortedProductsByPrice[sortedProductsByPrice.length - 1].price.price
+    //   ),
+    // ])
+
+    console.log('state', filters)
   }, [filters])
 
   const filterProduct = async () => {
-    const { category, brand, properties } = filters
+    const { category, brand, properties, priceRange, sort } = filters
     const formData = createFormData({
       category: category,
       brand: brand.length > 0 ? brand.join(',') : '',
@@ -189,10 +181,10 @@ export default function ProductList({ data, brands, properties, categoryId }) {
       active: true,
       // limit: productLimit.toString(),
       page: '1',
-      // price_from: value.length > 0 ? value[0] : '0',
-      // price_till: value.length > 0 ? value[1] : '0',
+      price_from: priceRange.length > 0 ? priceRange[0] : '0',
+      price_till: priceRange.length > 0 ? priceRange[1] : '0',
       search: '',
-      sort: '',
+      sort: sort ? sort : '',
     })
     const response = await axios.post(
       `${process.env.FILTER_PRODUCT_API_URL}`,
@@ -200,13 +192,45 @@ export default function ProductList({ data, brands, properties, categoryId }) {
     )
     if (response.status === 200) {
       setProducts(response.data.products)
+      if (response.data.products) {
+        let sortedProductsByPrice = response.data.products.sort(
+          (a, b) => a.price.price - b.price.price
+        )
+        if (value.length === 0) {
+          if (
+            sortedProductsByPrice[0].price.price ===
+            sortedProductsByPrice[sortedProductsByPrice.length - 1].price.price
+          ) {
+            setValue([
+              0,
+              parseInt(
+                sortedProductsByPrice[sortedProductsByPrice.length - 1].price
+                  .price
+              ),
+            ])
+          } else {
+            setValue([
+              parseInt(sortedProductsByPrice[0].price.price),
+              parseInt(
+                sortedProductsByPrice[sortedProductsByPrice.length - 1].price
+                  .price
+              ),
+            ])
+          }
+        }
+      }
     }
     console.log('filter=>>>>', response)
   }
 
   return (
     <div className={style.productListWrapper}>
-      <ProductHeader showFilter={showFilter} setShowFilter={setShowFilter} />
+      <ProductHeader
+        showFilter={showFilter}
+        setFilter={setFilter}
+        filters={filters}
+        setShowFilter={setShowFilter}
+      />
       <div className={style.productList}>
         <div className={style.wrapper}>
           <ProductFilter
@@ -218,6 +242,7 @@ export default function ProductList({ data, brands, properties, categoryId }) {
             value={value}
             setValue={setValue}
           />
+
           <Grid container>
             {products?.map((item, index) => (
               <Grid item xs={6} xl={3} sm={6} lg={4} md={6} sh={12} key={index}>

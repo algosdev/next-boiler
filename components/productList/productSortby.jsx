@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react'
 import {
   ClickAwayListener,
   Grow,
@@ -7,10 +7,10 @@ import {
   MenuItem,
   MenuList,
   makeStyles,
-} from '@material-ui/core';
-import style from './productList.module.scss';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Link } from '../../i18n';
+} from '@material-ui/core'
+import style from './productList.module.scss'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import { Link } from '../../i18n'
 const useStyles = makeStyles(() => ({
   paper: {
     borderRadius: '6px',
@@ -47,40 +47,39 @@ const useStyles = makeStyles(() => ({
     right: '0',
     minWidth: '200px',
   },
-}));
-const ProductSortBy = ({ data, sortByText }) => {
-  const classes = useStyles();
-  const [open, setOpen] = useState(false);
-  const [activeOption, setActiveOption] = useState(data[0]);
-  const anchorRef = useRef(null);
+}))
+const ProductSortBy = ({ data, sortByText, setFilter, filters }) => {
+  const classes = useStyles()
+  const [open, setOpen] = useState(false)
+  const [activeOption, setActiveOption] = useState(data[0].name)
+  const anchorRef = useRef(null)
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
+    setOpen((prevOpen) => !prevOpen)
+  }
 
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
+      return
     }
 
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
-      event.preventDefault();
-      setOpen(false);
+      event.preventDefault()
+      setOpen(false)
     }
   }
 
-  const prevOpen = useRef(open);
+  const prevOpen = useRef(open)
   useEffect(() => {
     if (prevOpen.current === true && open === false) {
-      anchorRef.current.focus();
+      anchorRef.current.focus()
     }
-
-    prevOpen.current = open;
-  }, [open]);
-  console.log('sadaasD', data);
+    prevOpen.current = open
+  }, [open])
+  console.log('sort', data)
 
   return (
     <button
@@ -117,18 +116,20 @@ const ProductSortBy = ({ data, sortByText }) => {
                   id='menu-list-grow'
                   onKeyDown={handleListKeyDown}
                 >
-                  {data?.map((item, index) => (
-                    <MenuItem
-                      key={index}
-                      onClick={(e) => {
-                        handleClose(e);
-                        setActiveOption(item);
-                      }}
-                      disableRipple
-                    >
-                      {item}
-                    </MenuItem>
-                  ))}
+                  {data &&
+                    data.map((item, index) => (
+                      <MenuItem
+                        key={index}
+                        onClick={(e) => {
+                          handleClose(e)
+                          setActiveOption(item.name)
+                          setFilter({ ...filters, sort: `price|${item.sort}` })
+                        }}
+                        disableRipple
+                      >
+                        {item.name}
+                      </MenuItem>
+                    ))}
                 </MenuList>
               </ClickAwayListener>
             </Paper>
@@ -136,7 +137,7 @@ const ProductSortBy = ({ data, sortByText }) => {
         )}
       </Popper>
     </button>
-  );
-};
+  )
+}
 
-export default ProductSortBy;
+export default ProductSortBy

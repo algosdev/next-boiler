@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import style from './productList.module.scss';
-import { Link, useTranslation } from '../../i18n';
-import { List, KeyboardArrowDown } from '@material-ui/icons';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ClickAwayListener, makeStyles, Container } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItem from '@material-ui/core/ListItem';
+import React, { useState } from 'react'
+import style from './productList.module.scss'
+import { Link, useTranslation } from '../../i18n'
+import { List, KeyboardArrowDown } from '@material-ui/icons'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ClickAwayListener, makeStyles, Container } from '@material-ui/core'
+import Button from '@material-ui/core/Button'
+import Dialog from '@material-ui/core/Dialog'
+import ListItemText from '@material-ui/core/ListItemText'
+import ListItem from '@material-ui/core/ListItem'
 // import List from '@material-ui/core/List'
-import Divider from '@material-ui/core/Divider';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import CloseIcon from '@material-ui/icons/Close';
-import Slide from '@material-ui/core/Slide';
-import ProductFilter from './productFilter';
-import ProductSortBy from './productSortby';
+import Divider from '@material-ui/core/Divider'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import IconButton from '@material-ui/core/IconButton'
+import Typography from '@material-ui/core/Typography'
+import CloseIcon from '@material-ui/icons/Close'
+import Slide from '@material-ui/core/Slide'
+import ProductFilter from './productFilter'
+import ProductSortBy from './productSortby'
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: 'relative',
@@ -42,31 +42,31 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '400px',
     marginLeft: '0',
   },
-}));
+}))
 const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction='up' ref={ref} {...props} />;
-});
-function ProductHeader({ showFilter, setShowFilter }) {
-  const { t } = useTranslation();
-  const classes = useStyles();
+  return <Slide direction='up' ref={ref} {...props} />
+})
+function ProductHeader({ showFilter, setShowFilter, setFilter, filters }) {
+  const { t } = useTranslation()
+  const classes = useStyles()
   const sortByData = [
-    t('sort_recommended'),
-    t('sort_new'),
-    t('sort_price_low'),
-    t('sort_price_high'),
-  ];
-  const [open, setOpen] = React.useState(false);
+    // { name: t('sort_recommended'), sort: 'sort' },
+    { name: t('sort_new'), sort: '' },
+    { name: t('sort_price_low'), sort: 'desc' },
+    { name: t('sort_price_high'), sort: 'asc' },
+  ]
+  const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const handleClose = () => {
-    setOpen(false);
-  };
-  const [activeSortBy, setActiveSortBy] = useState(0);
+    setOpen(false)
+  }
+  const [activeSortBy, setActiveSortBy] = useState(0)
   //   const [showFilter, setShowFilter] = useState(true)
-  const [sortByOpen, setSortByOpen] = useState(false);
+  const [sortByOpen, setSortByOpen] = useState(false)
   return (
     <>
       <div className={style.navBar}>
@@ -75,10 +75,10 @@ function ProductHeader({ showFilter, setShowFilter }) {
             <button
               className={style.btn}
               onClick={() => {
-                setShowFilter(!showFilter);
+                setShowFilter(!showFilter)
                 if (window) {
                   if (window.innerWidth < 576) {
-                    handleClickOpen();
+                    handleClickOpen()
                   }
                 }
               }}
@@ -89,7 +89,12 @@ function ProductHeader({ showFilter, setShowFilter }) {
           </div>
 
           <div className={style.sort_cont}>
-            <ProductSortBy sortByText={t('sort_by')} data={sortByData} />
+            <ProductSortBy
+              setFilter={setFilter}
+              sortByText={t('sort_by')}
+              data={sortByData}
+              filters={filters}
+            />
             {/* <button
               // id=""
               className={style.btn}
@@ -200,7 +205,7 @@ function ProductHeader({ showFilter, setShowFilter }) {
         </List> */}
       </Dialog>
     </>
-  );
+  )
 }
 
-export default ProductHeader;
+export default ProductHeader

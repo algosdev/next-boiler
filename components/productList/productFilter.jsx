@@ -17,15 +17,24 @@ function ProductFilter({
   value,
   setValue,
 }) {
+  const [val, setVal] = useState(value)
+  useEffect(() => {
+    setVal(value)
+  }, [value])
+
+  console.log(value)
   const handlePriceChange = (e, newValue) => {
+    setFilter({ ...filters, priceRange: newValue })
     console.log(newValue)
-    setValue(newValue)
+    //setVal(newValue)
   }
   const handleChange = (event, newValue) => {
-    setValue(newValue)
+    setVal(newValue)
     console.log('hn', newValue)
     //setFilter({ ...filters, price_from: value[0], rice_till: value[1] })
   }
+
+  console.log(val)
   const { t } = useTranslation()
   console.log('>>>', properties)
 
@@ -41,14 +50,13 @@ function ProductFilter({
 
   const handleChangePropery = (id, val) => {
     const addNewProp = []
-    console.log('proper', filters.properties)
+
     const newProperties = filters.properties.find(
       (item) => item.property_id === id
     )
-    console.log('prop', newProperties)
+
     if (newProperties) {
       const values = newProperties.value.split(',')
-      console.log('colors', values)
       if (values.includes(val)) {
         if (values.length < 2) {
           filters.properties.map((item) => {
@@ -76,13 +84,9 @@ function ProductFilter({
           })
         }
       } else {
-        console.log('item change')
         filters.properties.map((item) => {
-          console.log('valss', item)
           if (item.property_id === id) {
-            console.log('item', item)
             item.value = `${item.value},${val}`
-
             addNewProp.push(item)
           } else {
             addNewProp.push(item)
@@ -101,6 +105,8 @@ function ProductFilter({
     }
   }
 
+  console.log('value range', val)
+
   return (
     <div className={`${style.filterWrapper} ${!showFilter ? style.hide : ''}`}>
       <div
@@ -108,20 +114,20 @@ function ProductFilter({
       >
         <div className={style.price}>
           <Typography variant='h6'>{t('price')}</Typography>
-          {value.length > 0 ? (
+          {val.length > 0 ? (
             <p>
-              {numberToPrice(value[0])} &ndash; {numberToPrice(value[1])}
+              {numberToPrice(val[0])} &ndash; {numberToPrice(val[1])}
             </p>
           ) : (
             ''
           )}
           <Slider
-            value={value}
+            value={val}
             onChangeCommitted={handlePriceChange}
             onChange={handleChange}
-            max={9990000}
+            max={value[1]}
             track={false}
-            min={0}
+            min={value[0]}
             aria-labelledby='range-slider'
           />
         </div>
@@ -169,7 +175,7 @@ function ProductFilter({
                       onChange={(e) => {
                         handleChangePropery(property.id, e.target.value)
                       }}
-                      value={opt.name}
+                      value={opt.value}
                     />
                   }
                   label={opt.name}
