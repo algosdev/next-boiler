@@ -18,16 +18,22 @@ const overviewData = [
   },
 ]
 
-function Overview() {
+function Overview({ product }) {
+  console.log('overview', product)
   return (
     <div className={style.overview}>
-      <div className={style.content}>
-        {overviewData.map(({ title, details }, index) => (
+      <div
+        className={style.content}
+        dangerouslySetInnerHTML={{
+          __html: product.preview_text,
+        }}
+      >
+        {/* {overviewData.map(({ title, details }, index) => (
           <div key={index}>
             <div className={style.title}>{title}</div>
             <p>{details}</p>
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   )

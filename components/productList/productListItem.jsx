@@ -20,11 +20,11 @@ function ProductListItem({ item }) {
           <span className={style.price}>
             {numberToPrice(item.price?.price)} {t('soum')}
           </span>
-          <div className={style.colors}>
+          {/* <div className={style.colors}>
             {['green', 'yellow', 'black'].map((color, ind) => (
               <span key={ind} className={`${style[color]} ${style.color}`} />
             ))}
-          </div>
+          </div> */}
         </a>
       </Link>
     </>

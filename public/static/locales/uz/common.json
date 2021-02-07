@@ -110,7 +110,7 @@
   "delivery": "Yetkazib berish",
   "bonuses": "Bonuslar",
   "contact_us": "Biz bilan bog'laning",
-  "contacts":"Aloqa",
+  "contacts": "Aloqa",
   "copyright_txt": "Onlayn do'kon MacBro.uz. Barcha huquqlar himoyalangan.",
   "buy_and_learn": "Sotib ol va O'rgan",
   "speakers": "Karnaylar",
@@ -153,5 +153,7 @@
   "intercom": "Domofon",
   "offline_txt": "Siz tarmoqqa ulanmagansiz, iltimos terkshirib ko'ring",
   "try_again": "Urinib ko'rish",
-  "back_home": "Bosh sahifaga qaytish"
+  "back_home": "Bosh sahifaga qaytish",
+  "comment-condition": "Izoh berishdan oldin, iltimos, baho bering",
+  "comment-add": "Sharhlar muvaffaqiyatli qo'shildi"
 }

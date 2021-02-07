@@ -20,5 +20,55 @@
       font-weight: bold;
       padding: 10px 0;
     }
+    .input {
+      margin-bottom: 15px;
+    }
+  }
+}
+.progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  width: 24px !important;
+  height: 24px !important;
+}
+.view_list {
+  margin-top: 40px;
+  .view_card {
+    background-color: var(--secondary-color);
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    .review_text {
+      margin-top: 30px;
+      p {
+        margin: 0;
+        font-size: 16px;
+        line-height: 22px;
+      }
+    }
+    .review_header {
+      display: flex;
+      align-items: center;
+
+      .head_review {
+        margin-left: 20px;
+        .date {
+          margin-top: 5px;
+          font-size: 12px;
+        }
+        .head_content {
+          display: flex;
+          align-items: center;
+          p {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 600;
+            margin-right: 10px;
+          }
+        }
+      }
+    }
   }
 }

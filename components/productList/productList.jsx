@@ -171,56 +171,62 @@ export default function ProductList({ data, brands, properties, categoryId }) {
   }, [filters])
 
   const filterProduct = async () => {
-    const { category, brand, properties, priceRange, sort } = filters
-    const formData = createFormData({
-      category: category,
-      brand: brand.length > 0 ? brand.join(',') : '',
-      properties: JSON.stringify(properties),
-      lang: i18n.language,
-      inactive: true,
-      active: true,
-      // limit: productLimit.toString(),
-      page: '1',
-      price_from: priceRange.length > 0 ? priceRange[0] : '0',
-      price_till: priceRange.length > 0 ? priceRange[1] : '0',
-      search: '',
-      sort: sort ? sort : '',
-    })
-    const response = await axios.post(
-      `${process.env.FILTER_PRODUCT_API_URL}`,
-      formData
-    )
-    if (response.status === 200) {
-      setProducts(response.data.products)
-      if (response.data.products) {
-        let sortedProductsByPrice = response.data.products.sort(
-          (a, b) => a.price.price - b.price.price
-        )
-        if (value.length === 0) {
-          if (
-            sortedProductsByPrice[0].price.price ===
-            sortedProductsByPrice[sortedProductsByPrice.length - 1].price.price
-          ) {
-            setValue([
-              0,
-              parseInt(
-                sortedProductsByPrice[sortedProductsByPrice.length - 1].price
-                  .price
-              ),
-            ])
-          } else {
-            setValue([
-              parseInt(sortedProductsByPrice[0].price.price),
-              parseInt(
-                sortedProductsByPrice[sortedProductsByPrice.length - 1].price
-                  .price
-              ),
-            ])
+    try {
+      const { category, brand, properties, priceRange, sort } = filters
+      const formData = createFormData({
+        category: category,
+        brand: brand.length > 0 ? brand.join(',') : '',
+        properties: JSON.stringify(properties),
+        lang: i18n.language,
+        inactive: true,
+        active: true,
+        // limit: productLimit.toString(),
+        page: '1',
+        price_from: priceRange.length > 0 ? priceRange[0] : '0',
+        price_till: priceRange.length > 0 ? priceRange[1] : '0',
+        search: '',
+        sort: sort ? sort : '',
+      })
+
+      const response = await axios.post(
+        `${process.env.FILTER_PRODUCT_API_URL}`,
+        formData
+      )
+      console.log('filter=>>>>', response)
+      if (response.status === 200) {
+        setProducts(response.data.products)
+        if (response.data.products) {
+          let sortedProductsByPrice = response.data.products.sort(
+            (a, b) => a.price.price - b.price.price
+          )
+          if (value.length === 0) {
+            if (
+              sortedProductsByPrice[0].price.price ===
+              sortedProductsByPrice[sortedProductsByPrice.length - 1].price
+                .price
+            ) {
+              setValue([
+                0,
+                parseInt(
+                  sortedProductsByPrice[sortedProductsByPrice.length - 1].price
+                    .price
+                ),
+              ])
+            } else {
+              setValue([
+                parseInt(sortedProductsByPrice[0].price.price),
+                parseInt(
+                  sortedProductsByPrice[sortedProductsByPrice.length - 1].price
+                    .price
+                ),
+              ])
+            }
           }
         }
       }
+    } catch (err) {
+      console.log(err)
     }
-    console.log('filter=>>>>', response)
   }
 
   return (

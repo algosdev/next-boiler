@@ -1,43 +1,45 @@
-import React, { useState, useEffect, useRef } from 'react';
-import style from './header.module.scss';
+import React, { useState, useEffect, useRef } from 'react'
+import style from './header.module.scss'
 import {
   Container,
   ClickAwayListener,
   makeStyles,
   Button,
-} from '@material-ui/core';
-import CartDropdown from './CartDropdown';
-import LanguageDropdown from './LanguageDropdown';
-import { BrandLogo, CloseIcon, ProfileIcon } from '../svg';
-import { SearchOutlined } from '@material-ui/icons';
-import { motion, useAnimation, AnimatePresence } from 'framer-motion';
-import NavItem from './navItem';
-import { useTranslation, Router, Link } from '../../i18n';
-import ProfileDropdown from './ProfileDropdown';
-import MobileHeader from './mobileHeader';
-import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Slide from '@material-ui/core/Slide';
-import QuickSearch from './QuickSearch';
+} from '@material-ui/core'
+import CartDropdown from './CartDropdown'
+import LanguageDropdown from './LanguageDropdown'
+import { BrandLogo, CloseIcon, ProfileIcon } from '../svg'
+import { SearchOutlined } from '@material-ui/icons'
+import { motion, useAnimation, AnimatePresence } from 'framer-motion'
+import NavItem from './navItem'
+import { useTranslation, Router, Link } from '../../i18n'
+import ProfileDropdown from './ProfileDropdown'
+import MobileHeader from './mobileHeader'
+import PropTypes from 'prop-types'
+import AppBar from '@material-ui/core/AppBar'
+import useScrollTrigger from '@material-ui/core/useScrollTrigger'
+import Slide from '@material-ui/core/Slide'
+import QuickSearch from './QuickSearch'
+import axios from 'axios'
+
 function HideOnScroll(props) {
-  const { children, window } = props;
+  const { children, window } = props
   // Note that you normally won't need to set the window ref as useScrollTrigger
   // will default to window.
   // This is only being set here because the demo is in an iframe.
-  const trigger = useScrollTrigger({ target: window ? window() : undefined });
+  const trigger = useScrollTrigger({ target: window ? window() : undefined })
 
   return (
     <Slide appear={false} direction='down' in={!trigger}>
       {children}
     </Slide>
-  );
+  )
 }
 
 HideOnScroll.propTypes = {
   children: PropTypes.element.isRequired,
   window: PropTypes.func,
-};
+}
 const useStyles = makeStyles(() => ({
   select: {
     '& .MuiInput-root::before': {
@@ -53,16 +55,18 @@ const useStyles = makeStyles(() => ({
       background: 'transparent',
     },
   },
-}));
+}))
 
 function Header({ categories, hasLogged }) {
-  const { t } = useTranslation();
-  const [isMobile, setIsMobile] = useState(false);
-  const classes = useStyles();
-  const searchRef = useRef(null);
-  const animationForm = useAnimation();
-  const [isSearchVisible, setIsSearchVisible] = useState(false);
-  const [term, setTerm] = useState('');
+  const { t } = useTranslation()
+  const [isMobile, setIsMobile] = useState(false)
+  const classes = useStyles()
+  const searchRef = useRef(null)
+  const animationForm = useAnimation()
+  const [loading, setLoading] = useState(false)
+  const [isSearchVisible, setIsSearchVisible] = useState(false)
+  const [term, setTerm] = useState('')
+  const [products, setProducts] = useState([])
   const navData = [
     {
       title: t('apple_p'),
@@ -116,54 +120,88 @@ function Header({ categories, hasLogged }) {
         },
       ],
     },
-  ];
+  ]
   const submitHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (term) {
-      setIsSearchVisible(false);
-      Router.push(`/shop?term=${encodeURI(term)}`);
+      setIsSearchVisible(false)
+      Router.push(`/search?search=${encodeURI(term)}`)
     }
-  };
+  }
   useEffect(() => {
     if (isSearchVisible) {
-      animationForm.start('visible');
+      animationForm.start('visible')
     } else {
-      animationForm.start('stable');
-      setTerm('');
+      animationForm.start('stable')
+      setTerm('')
     }
-  }, [isSearchVisible]);
+  }, [isSearchVisible])
 
   useEffect(() => {
     if (searchRef.current) {
       if (isSearchVisible) {
-        searchRef.current.focus();
+        searchRef.current.focus()
       } else {
-        searchRef.current.blur();
+        searchRef.current.blur()
       }
     }
-  }, [isSearchVisible]);
+  }, [isSearchVisible])
+
+  useEffect(() => {
+    if (term && term.length > 2) {
+      searchProduct()
+    } else if (term === '') {
+      setProducts([])
+    }
+  }, [term])
+
+  const searchProduct = async () => {
+    try {
+      setLoading(true)
+      const response = await axios.get(
+        `http://46.101.122.150:1235/v1/product?lang=ru&search=${term}&active=true`
+      )
+
+      setProducts(response.data.products)
+      console.log(response)
+    } catch (err) {
+      console.log(err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleSearch = () => {
+    if (term) {
+      setIsSearchVisible(false)
+      Router.push(`/search?search=${term}`)
+    } else {
+      setIsSearchVisible(!isSearchVisible)
+    }
+  }
+
   useEffect(() => {
     if (window) {
-      setIsMobile(window.innerWidth > 876 ? false : true);
+      setIsMobile(window.innerWidth > 876 ? false : true)
       window.addEventListener('resize', () =>
         setIsMobile(window.innerWidth > 876 ? false : true)
-      );
+      )
     }
     document.addEventListener(
       'keydown',
       (e) => {
         if (e.keyCode === 27) {
-          setIsSearchVisible(false);
+          setIsSearchVisible(false)
         }
       },
       false
-    );
+    )
 
     return () => {
-      window.removeEventListener('resize', () => {});
-      document.removeEventListener('keydown', (e) => console.log(e), false);
-    };
-  }, []);
+      window.removeEventListener('resize', () => {})
+      document.removeEventListener('keydown', (e) => console.log(e), false)
+    }
+  }, [])
   return (
     <>
       {/* <HideOnScroll {...props}> */}
@@ -228,7 +266,7 @@ function Header({ categories, hasLogged }) {
                           <label
                             htmlFor='search_input'
                             className={style.icon}
-                            onClick={() => setIsSearchVisible(!isSearchVisible)}
+                            onClick={handleSearch}
                           >
                             <SearchOutlined />
                           </label>
@@ -302,14 +340,12 @@ function Header({ categories, hasLogged }) {
                         </a>
                       </Link>
                     </li> */}
+                    <CartDropdown />
                     {hasLogged ? (
-                      <>
-                        <CartDropdown />
-                        <ProfileDropdown />
-                      </>
+                      <ProfileDropdown />
                     ) : (
                       <Button
-                        onClick={() => Router.push('signin')}
+                        onClick={() => Router.push('/signin')}
                         className={style.login_btn}
                       >
                         Войти
@@ -325,9 +361,13 @@ function Header({ categories, hasLogged }) {
           </Container>
         </header>
       </AppBar>
-      {term && isSearchVisible ? <QuickSearch term={term} /> : ''}
+      {term && isSearchVisible ? (
+        <QuickSearch term={term} loading={loading} products={products} />
+      ) : (
+        ''
+      )}
       {/* </HideOnScroll> */}
     </>
-  );
+  )
 }
-export default Header;
+export default Header

@@ -109,7 +109,7 @@
   "delivery": "Delivery",
   "bonuses": "Bonuses",
   "contact_us": "Get in touch",
-  "contacts":"Contacts",
+  "contacts": "Contacts",
   "copyright_txt": "Online shopping MacBro.uz. All rights reserved.",
   "buy_and_learn": "Buy and Learn",
   "speakers": "Speakers",
@@ -127,7 +127,7 @@
   "settings_desc": "Account settings page for MacBro users",
   "cart_desc": "Page of products you labelled to buy",
   "checkout_desc": "Page to choose payment details",
-  "orders_desc" :"Details of ordered products",
+  "orders_desc": "Details of ordered products",
   "product_list_desc": "Product list with filter",
   "new_desc": "Latest news of Macbro",
   "delivery_desc": "Information about delivery service",
@@ -151,5 +151,7 @@
   "intercom": "Intercom",
   "offline_txt": "It seems you are offline, please check your internet connections.",
   "try_again": "Try again",
-  "back_home": "Go back home"
+  "back_home": "Go back home",
+  "comment-condition": "Before commenting please rate",
+  "comment-add": "Comments added successfully"
 }

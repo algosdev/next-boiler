@@ -1,17 +1,35 @@
-import React from 'react';
-import style from './header.module.scss';
-import { Link, useTranslation } from '../../i18n';
-import { numberToPrice } from '../../lib/numberToPrice';
-import { Container, CircularProgress } from '@material-ui/core';
-function QuickSearch({ term }) {
-  const { t } = useTranslation();
+import React from 'react'
+import style from './header.module.scss'
+import { Link, useTranslation } from '../../i18n'
+import { numberToPrice } from '../../lib/numberToPrice'
+import { Container, CircularProgress } from '@material-ui/core'
+function QuickSearch({ term, products, loading }) {
+  const { t } = useTranslation()
+  console.log(products)
   return (
     <div className={style.wrapper_quickSearch}>
       <Container>
         <div className={style.inner}>
           {term.length > 2 ? (
             <>
-              <Link href='/shop/homepod'>
+              {products &&
+                products.map((item) => (
+                  <Link href={`/product/${item.slug}`}>
+                    <a className={style.item}>
+                      <div className={style.img}>
+                        <img src={item.image} alt={item.name} />
+                      </div>
+                      <div className={style.item_content}>
+                        <p className={style.price}>{item.name}</p>
+                        <p className={style.price}>
+                          {t('price')}: {numberToPrice(item.price.price)}{' '}
+                          {t('soum')}
+                        </p>
+                      </div>
+                    </a>
+                  </Link>
+                ))}
+              {/* <Link href='/shop/homepod'>
                 <a className={style.item}>
                   <div className={style.img}>
                     <img src='/images/homepod_mini.png' alt='AirPod' />
@@ -63,12 +81,12 @@ function QuickSearch({ term }) {
                     </p>
                   </div>
                 </a>
-              </Link>
+              </Link> */}
             </>
           ) : (
             ''
           )}
-          {term.length < 3 ? (
+          {loading ? (
             <div className={style.spinner}>
               <CircularProgress />
             </div>
@@ -78,7 +96,7 @@ function QuickSearch({ term }) {
         </div>
       </Container>
     </div>
-  );
+  )
 }
 
-export default QuickSearch;
+export default QuickSearch

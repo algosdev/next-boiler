@@ -7,16 +7,13 @@ import { fetchMultipleUrls } from '../../lib/fetchMultipleUrls'
 export default function Shop({
   products,
   categoryId,
-  query,
   category,
   parentCategory,
   brands,
   properties,
-  categories,
 }) {
   const { t } = useTranslation()
-  console.log('category ', category)
-  console.log('categoryid', categoryId)
+
   return (
     <>
       <SEO title={t('products')} description={t('product_list_desc')} />
@@ -76,38 +73,10 @@ export async function getServerSideProps({ query, req }) {
     'http://46.101.122.150:1235/v1/product-property',
   ])
 
-  // const urls = [
-  //   'http://46.101.122.150:1235/v1/category',
-  //   `http://46.101.122.150:1235/v1/category/${query.categ}`,
-  //   `http://46.101.122.150:1235/v1/category/${query.subcateg}`,
-  //   `http://46.101.122.150:1235/v1/product?category=${query.categid}`,
-  //   `http://46.101.122.150:1235/v1/brand`,
-  //   `http://46.101.122.150:1235/v1/product-property`,
-  // ]
-  // const [
-  //   categories,
-  //   categ,
-  //   subCateg,
-  //   products,
-  //   brands,
-  //   properties,
-  // ] = await fetchMultipleUrls(urls)
-  // const childCategs = categories?.categories.filter(
-  //   (el) => el.slug === query?.categ
-  // )
   return {
-    // props: {
-    //   categories,
-    //   subCateg,
-    //   categ,
-    //   childCategs: childCategs?.length ? childCategs[0].children : null,
-    //   products,
-    //   brands,
-    //   properties,
-    // },
     props: {
       products,
-      categories: categories.categories,
+      categories: categories,
       category,
       brands,
       properties,

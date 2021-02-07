@@ -139,33 +139,34 @@ function ProductSingleContent({ data }) {
           последней версией iPadOS; Модели Apple Watch с последней версией
           watchOS; */}
         </div>
-        <div className={style.colors_cont}>
+        {/* <div className={style.colors_cont}>
           <div className={style.colors_title}>{t('colors')}</div>
           <Grid container spacing={2}>
-            {data.properties[0].property.options.map((item, index) => (
-              <Grid
-                item
-                xs={6}
-                key={index}
-                onClick={() => setActiveColorIndex(index)}
-              >
-                <div
-                  id={`product_color${index}`}
-                  className={`${style.color_cont} ${
-                    activeColorIndex === index ? style.active : ''
-                  }`}
+            {data.properties &&
+              data.properties[0].property.options.map((item, index) => (
+                <Grid
+                  item
+                  xs={6}
+                  key={index}
+                  onClick={() => setActiveColorIndex(index)}
                 >
-                  <div className={style.inner}>
-                    <div
-                      className={`${style.color_ball} ${style[item.value]}`}
-                    ></div>
-                    <div className={style.color_name}>{item.name}</div>
+                  <div
+                    id={`product_color${index}`}
+                    className={`${style.color_cont} ${
+                      activeColorIndex === index ? style.active : ''
+                    }`}
+                  >
+                    <div className={style.inner}>
+                      <div
+                        className={`${style.color_ball} ${style[item.value]}`}
+                      ></div>
+                      <div className={style.color_name}>{item.name}</div>
+                    </div>
                   </div>
-                </div>
-              </Grid>
-            ))}
+                </Grid>
+              ))}
           </Grid>
-        </div>
+        </div> */}
         {!addedToCart ? (
           <div className={style.quantity_cont}>
             <div className={style.quantity_inner}>
@@ -239,7 +240,7 @@ function ProductSingleContent({ data }) {
                 t('add_to_cart')
               ))}
           </Button>
-          <Button
+          {/* <Button
             fullWidth
             id='product_compare_btn'
             className={style.secondary}
@@ -248,7 +249,7 @@ function ProductSingleContent({ data }) {
             }}
           >
             {t('compare_with_others')}
-          </Button>
+          </Button> */}
         </div>
       </div>
     </div>

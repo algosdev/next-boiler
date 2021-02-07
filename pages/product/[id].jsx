@@ -32,10 +32,10 @@ function ProductSingle({ store, slug, data }) {
               <ProductSingleContent data={data?.product} />
             </Grid>
           </Grid>
-          <ProductTab />
+          <ProductTab product={data?.product} />
           {/* <Shops />
           <Feedback /> */}
-          <Compare />
+          {/* <Compare /> */}
           <Recommended />
         </Container>
       </div>

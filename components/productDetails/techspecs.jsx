@@ -1,5 +1,5 @@
-import React from 'react';
-import style from './details.module.scss';
+import React from 'react'
+import style from './details.module.scss'
 
 const techSpecsData = [
   {
@@ -34,12 +34,17 @@ const techSpecsData = [
       },
     ],
   },
-];
-function TechSpecs() {
+]
+function TechSpecs({ product }) {
   return (
     <div className={style.wrapper}>
-      <div className={style.tech_specs}>
-        {techSpecsData.map((el, index) => (
+      <div
+        className={style.tech_specs}
+        dangerouslySetInnerHTML={{
+          __html: product.description,
+        }}
+      >
+        {/* {techSpecsData.map((el, index) => (
           <React.Fragment key={index}>
             <div className={style.title}>{el.title}</div>
             <ul>
@@ -52,10 +57,10 @@ function TechSpecs() {
               ))}
             </ul>
           </React.Fragment>
-        ))}
+        ))} */}
       </div>
     </div>
-  );
+  )
 }
 
-export default TechSpecs;
+export default TechSpecs

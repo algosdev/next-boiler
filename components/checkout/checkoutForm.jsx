@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import style from './checkout.module.scss';
+import React, { useState, useEffect } from 'react'
+import style from './checkout.module.scss'
 import {
   CashIn,
   CreditCard,
@@ -11,9 +11,9 @@ import {
   CashIcon,
   CalendarIcon,
   InstallmentIcon,
-} from '../svg';
-import { useTranslation, i18n, Router } from '../../i18n';
-import { createFormData } from '../../lib/createFormData';
+} from '../svg'
+import { useTranslation, i18n, Router } from '../../i18n'
+import { createFormData } from '../../lib/createFormData'
 import {
   YMaps,
   Map,
@@ -21,31 +21,31 @@ import {
   SearchControl,
   GeolocationControl,
   ZoomControl,
-} from 'react-yandex-maps';
-import { useDispatch, shallowEqual, useSelector } from 'react-redux';
-import axios from 'axios';
+} from 'react-yandex-maps'
+import { useDispatch, shallowEqual, useSelector } from 'react-redux'
+import axios from 'axios'
 function CheckoutForm({ productsInCart }) {
-  const { t } = useTranslation();
-  const user = useSelector((state) => state.auth.user, shallowEqual);
+  const { t } = useTranslation()
+  const user = useSelector((state) => state.auth.user, shallowEqual)
   const [values, setValues] = useState({
     address: '',
     delivery_method: 'self',
     payment_method: 'cash',
-    customer_name: '',
-    phone: '',
+    customer_name: `${user.name} ${user.lastname}`,
+    phone: user.phone,
     entrance: '',
     floor: '',
     domofon: '',
     items: [],
     num_house_or_flat: '',
     long_lat: '',
-  });
+  })
   const handleChange = (e, prop) => {
-    setValues({ ...values, [prop]: e.target.value });
-  };
+    setValues({ ...values, [prop]: e.target.value })
+  }
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(values);
+    e.preventDefault()
+    console.log(values)
     axios
       .post(
         'http://46.101.122.150:1235/v1/order',
@@ -62,26 +62,28 @@ function CheckoutForm({ productsInCart }) {
         })
       )
       .then((res) => {
-        console.log(res);
+        console.log(res)
         if (res.status === 200 || res.status === 201) {
-          Router.push(`/orders/${res.data.number}`);
+          Router.push(`/orders/${res.data.number}`)
         }
       })
-      .catch((err) => console.log(err));
-  };
+      .catch((err) => console.log(err))
+  }
   useEffect(() => {
-    let productsForAPI = [];
+    let productsForAPI = []
     productsInCart.forEach((el) => {
       const formatted = {
         image: el.image,
         price: parseInt(el.price?.price || 0),
         product_id: el.id,
         quantity: el.quantity,
-      };
-      productsForAPI.push(formatted);
-    });
-    setValues({ ...values, items: JSON.stringify(productsForAPI) });
-  }, []);
+      }
+      productsForAPI.push(formatted)
+    })
+    setValues({ ...values, items: JSON.stringify(productsForAPI) })
+  }, [])
+
+  console.log(user)
 
   return (
     <>
@@ -351,7 +353,7 @@ function CheckoutForm({ productsInCart }) {
         </form>
       </div>
     </>
-  );
+  )
 }
 
-export default CheckoutForm;
+export default CheckoutForm
