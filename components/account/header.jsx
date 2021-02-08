@@ -3,7 +3,7 @@ import { Container } from '@material-ui/core'
 import style from './account.module.scss'
 import Link from 'next/link'
 import { useTranslation } from '../../i18n'
-function AccountHeader() {
+function AccountHeader({ userName }) {
   const { t } = useTranslation()
   return (
     <div className={style.wrapper_header}>
@@ -14,7 +14,9 @@ function AccountHeader() {
             <a className={style.btn}>{t('signout')}</a>
           </Link>
         </div> */}
-        <div className={style.title}>{t('hi')}, Samandar</div>
+        <div className={style.title}>
+          {t('hi')}, {userName}
+        </div>
       </Container>
     </div>
   )

@@ -18,7 +18,7 @@ function Account() {
           'account, profile, счет, settings, настройка, sozlamalar, hisob'
         }
       />
-      <AccountHeader />
+      <AccountHeader userName={user && user.name} />
       <AccountSettings user={user} />
     </>
   )

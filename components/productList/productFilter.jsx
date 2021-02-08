@@ -116,7 +116,8 @@ function ProductFilter({
           <Typography variant='h6'>{t('price')}</Typography>
           {val.length > 0 ? (
             <p>
-              {numberToPrice(val[0])} &ndash; {numberToPrice(val[1])}
+              {numberToPrice(val[0]) + ' ' + t('soum')} &ndash;
+              {numberToPrice(val[1]) + ' ' + t('soum')}
             </p>
           ) : (
             ''
