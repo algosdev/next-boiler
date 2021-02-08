@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { Container } from '@material-ui/core'
+import React from 'react'
 import AccountHeader from '../components/account/header'
 import AccountSettings from '../components/account/settings'
 import SEO from '../components/seo'
 import { useTranslation } from '../i18n'
-import { initializeStore } from '../redux/store'
 import { fetchMultipleUrls } from '../lib/fetchMultipleUrls'
-import { useDispatch, shallowEqual, useSelector } from 'react-redux'
-import axios from 'axios'
-function account() {
-  const [data, setState] = useState(null)
+import { shallowEqual, useSelector } from 'react-redux'
+
+function Account() {
   const { t } = useTranslation()
   const user = useSelector((state) => state.auth.user, shallowEqual)
   return (
@@ -27,7 +24,6 @@ function account() {
   )
 }
 export async function getServerSideProps({ req }) {
-  const store = initializeStore()
   const urls = [`${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`]
   const [categories] = await fetchMultipleUrls(urls)
   return {
@@ -37,4 +33,4 @@ export async function getServerSideProps({ req }) {
   }
 }
 
-export default account
+export default Account

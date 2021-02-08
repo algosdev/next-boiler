@@ -33,10 +33,13 @@ export default function Shop({
 }
 export async function getServerSideProps({ query, req }) {
   const urls = [process.env.CATEGORY_API_URL]
+
   const [categories] = await fetchMultipleUrls(urls)
+
   let categoryId = null
   let foundChildCategory = null
   let parentCategory = null
+
   categories.categories.forEach((category) => {
     let foundCategory
     if (category.children) {
@@ -76,7 +79,7 @@ export async function getServerSideProps({ query, req }) {
   return {
     props: {
       products,
-      categories: categories,
+      categories,
       category,
       brands,
       properties,
