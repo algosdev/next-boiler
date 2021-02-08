@@ -16,10 +16,10 @@ function orders({ data }) {
     </>
   )
 }
-export async function getServerSideProps(ctx, { req }) {
+export async function getServerSideProps({ req, query }) {
   const urls = [
     `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,
-    `${process.env.ORDER_API_URL}/${ctx.params.id}`,
+    `${process.env.ORDER_API_URL}/${query.id}`,
   ]
   const [categories, data] = await fetchMultipleUrls(urls)
   return {

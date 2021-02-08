@@ -49,17 +49,17 @@ function ProductSingle({ store, slug, data }) {
   )
 }
 
-export async function getServerSideProps(ctx, { req }) {
+export async function getServerSideProps({ req, query }) {
   const store = initializeStore()
   const urls = [
     `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,
-    `${process.env.PRODUCT_API_URL}/${ctx.params.id}`,
+    `${process.env.PRODUCT_API_URL}/${query.id}`,
   ]
   const [categories, data] = await fetchMultipleUrls(urls)
   return {
     props: {
       store: store.getState().cart.data,
-      slug: ctx.query.id,
+      slug: query.id,
       categories,
       data,
     },
