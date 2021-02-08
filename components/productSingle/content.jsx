@@ -126,19 +126,16 @@ function ProductSingleContent({ data }) {
   return (
     <div className={style.wrapper_content}>
       <div className={style.inner}>
-        <div className={style.type}>{t('new')}</div>
+        {/* <div className={style.type}>{t('new')}</div> */}
         <div className={style.name}>{data.name}</div>
-        <div
+        {/* <div
           className={style.desc}
           dangerouslySetInnerHTML={{
             __html: data.preview_text,
           }}
         >
-          {/* Требуются AirPods Max с последней версией программного обеспечения и
-          модели iPhone и iPod touch с последней версией iOS; модели iPad с
-          последней версией iPadOS; Модели Apple Watch с последней версией
-          watchOS; */}
-        </div>
+          
+        </div> */}
         {/* <div className={style.colors_cont}>
           <div className={style.colors_title}>{t('colors')}</div>
           <Grid container spacing={2}>
