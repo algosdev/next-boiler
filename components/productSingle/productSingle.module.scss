@@ -146,6 +146,10 @@
     }
     .desc {
       font-size: 16px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 8;
+      -webkit-box-orient: vertical;
     }
     .colors_title {
       font-size: 16px;

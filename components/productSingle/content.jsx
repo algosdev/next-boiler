@@ -128,14 +128,12 @@ function ProductSingleContent({ data }) {
       <div className={style.inner}>
         {/* <div className={style.type}>{t('new')}</div> */}
         <div className={style.name}>{data.name}</div>
-        {/* <div
+        <div
           className={style.desc}
           dangerouslySetInnerHTML={{
             __html: data.preview_text,
           }}
-        >
-          
-        </div> */}
+        ></div>
         {/* <div className={style.colors_cont}>
           <div className={style.colors_title}>{t('colors')}</div>
           <Grid container spacing={2}>
