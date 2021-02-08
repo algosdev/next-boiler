@@ -157,17 +157,6 @@ export default function ProductList({ data, brands, properties, categoryId }) {
 
   useEffect(() => {
     filterProduct()
-
-    //console.log('price range', sortedProductsByPrice)
-
-    // setValue([
-    //   parseInt(sortedProductsByPrice[0].price.price),
-    //   parseInt(
-    //     sortedProductsByPrice[sortedProductsByPrice.length - 1].price.price
-    //   ),
-    // ])
-
-    console.log('state', filters)
   }, [filters])
 
   const filterProduct = async () => {

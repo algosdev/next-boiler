@@ -35,13 +35,13 @@ const techSpecsData = [
     ],
   },
 ]
-function TechSpecs({ product }) {
+function TechSpecs({ description }) {
   return (
     <div className={style.wrapper}>
       <div
         className={style.tech_specs}
         dangerouslySetInnerHTML={{
-          __html: product.description,
+          __html: description,
         }}
       >
         {/* {techSpecsData.map((el, index) => (

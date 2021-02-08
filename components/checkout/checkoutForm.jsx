@@ -13,6 +13,7 @@ import {
   InstallmentIcon,
 } from '../svg'
 import { useTranslation, i18n, Router } from '../../i18n'
+import { clearCartAction } from '../../redux/actions/cartActions/cartActions'
 import { createFormData } from '../../lib/createFormData'
 import {
   YMaps,
@@ -31,8 +32,8 @@ function CheckoutForm({ productsInCart }) {
     address: '',
     delivery_method: 'self',
     payment_method: 'cash',
-    customer_name: `${user.name} ${user.lastname}`,
-    phone: user.phone,
+    customer_name: `${user && user.name} ${user && user.lastname}`,
+    phone: user && user.phone,
     entrance: '',
     floor: '',
     domofon: '',
@@ -40,9 +41,13 @@ function CheckoutForm({ productsInCart }) {
     num_house_or_flat: '',
     long_lat: '',
   })
-  const handleChange = (e, prop) => {
-    setValues({ ...values, [prop]: e.target.value })
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value })
+
+    console.log(values)
   }
+
+  const dispatch = useDispatch()
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(values)
@@ -64,6 +69,7 @@ function CheckoutForm({ productsInCart }) {
       .then((res) => {
         console.log(res)
         if (res.status === 200 || res.status === 201) {
+          dispatch(clearCartAction())
           Router.push(`/orders/${res.data.number}`)
         }
       })
@@ -99,10 +105,10 @@ function CheckoutForm({ productsInCart }) {
                   className={`${style.input} input`}
                   type='radio'
                   id='opt1'
-                  defaultChecked
+                  checked={values.delivery_method === 'self'}
                   value='self'
-                  onChange={(e) => handleChange(e, 'delivery_method')}
-                  name='obtaining'
+                  name='delivery_method'
+                  onChange={(e) => handleChange(e)}
                 />
                 <label htmlFor='opt1'>
                   <div>
@@ -118,10 +124,11 @@ function CheckoutForm({ productsInCart }) {
                   className={`${style.input} input`}
                   type='radio'
                   id='opt2'
-                  name='obtaining'
+                  checked={values.delivery_method === 'day'}
                   required
+                  name='delivery_method'
                   value='day'
-                  onChange={(e) => handleChange(e, 'delivery_method')}
+                  onChange={(e) => handleChange(e)}
                 />
                 <label htmlFor='opt2'>
                   <div>
@@ -137,10 +144,11 @@ function CheckoutForm({ productsInCart }) {
                   className={`${style.input} input`}
                   type='radio'
                   id='opt3'
-                  name='obtaining'
                   required
                   value='fast'
-                  onChange={(e) => handleChange(e, 'delivery_method')}
+                  checked={values.delivery_method === 'fast'}
+                  name='delivery_method'
+                  onChange={(e) => handleChange(e)}
                 />
                 <label htmlFor='opt3'>
                   <div>
@@ -159,8 +167,9 @@ function CheckoutForm({ productsInCart }) {
               className={`${style.input} input`}
               placeholder={t('full_name')}
               type='text'
+              name='customer_name'
               value={values.customer_name}
-              onChange={(e) => handleChange(e, 'customer_name')}
+              onChange={(e) => handleChange(e)}
             />
             <input
               required
@@ -168,7 +177,8 @@ function CheckoutForm({ productsInCart }) {
               placeholder={t('phone_num')}
               type='text'
               value={values.phone}
-              onChange={(e) => handleChange(e, 'phone')}
+              name='phone'
+              onChange={(e) => handleChange(e)}
             />
             {values.delivery_method !== 'self' && values.delivery_method ? (
               <>
@@ -178,7 +188,8 @@ function CheckoutForm({ productsInCart }) {
                   placeholder={t('entrance')}
                   type='text'
                   value={values.entrance}
-                  onChange={(e) => handleChange(e, 'entrance')}
+                  name='entrance'
+                  onChange={(e) => handleChange(e)}
                 />
                 <input
                   required
@@ -186,7 +197,8 @@ function CheckoutForm({ productsInCart }) {
                   placeholder={t('floor')}
                   type='text'
                   value={values.floor}
-                  onChange={(e) => handleChange(e, 'floor')}
+                  name='floor'
+                  onChange={(e) => handleChange(e)}
                 />
                 <input
                   required
@@ -194,7 +206,8 @@ function CheckoutForm({ productsInCart }) {
                   placeholder={t('num_house_flat')}
                   type='text'
                   value={values.num_house_or_flat}
-                  onChange={(e) => handleChange(e, 'num_house_or_flat')}
+                  name='num_house_or_flat'
+                  onChange={(e) => handleChange(e)}
                 />
                 <input
                   required
@@ -202,7 +215,8 @@ function CheckoutForm({ productsInCart }) {
                   placeholder={t('intercom')}
                   type='text'
                   value={values.domofon}
-                  onChange={(e) => handleChange(e, 'domofon')}
+                  name='domofon'
+                  onChange={(e) => handleChange(e)}
                 />
                 <YMaps
                   query={{
@@ -237,8 +251,8 @@ function CheckoutForm({ productsInCart }) {
               placeholder={t('comment_to_order')}
               type='text'
               value={values.note}
-              onChange={(e) => handleChange(e, 'note')}
-              required
+              name='note'
+              onChange={(e) => handleChange(e)}
             />
           </div>
           <div className={`${style.form_section}`}>
@@ -251,9 +265,9 @@ function CheckoutForm({ productsInCart }) {
                   type='radio'
                   defaultChecked
                   id='opt4'
-                  name='payment'
+                  name='payment_method'
                   value='cash'
-                  onChange={(e) => handleChange(e, 'payment_method')}
+                  onChange={(e) => handleChange(e)}
                 />
                 <label htmlFor='opt4'>
                   <div>
@@ -269,9 +283,9 @@ function CheckoutForm({ productsInCart }) {
                   className={`${style.input} input`}
                   type='radio'
                   id='opt6'
-                  name='payment'
+                  name='payment_method'
                   value='terminal'
-                  onChange={(e) => handleChange(e, 'payment_method')}
+                  onChange={(e) => handleChange(e)}
                 />
                 <label htmlFor='opt6'>
                   <div>
@@ -290,9 +304,9 @@ function CheckoutForm({ productsInCart }) {
                   className={`${style.input} input`}
                   type='radio'
                   id='opt9'
-                  name='payment'
+                  name='payment_method'
                   value='installment'
-                  onChange={(e) => handleChange(e, 'payment_method')}
+                  onChange={(e) => handleChange(e)}
                 />
                 <label htmlFor='opt9'>
                   <div>
@@ -308,9 +322,9 @@ function CheckoutForm({ productsInCart }) {
                   className={`${style.input} input`}
                   type='radio'
                   id='opt7'
-                  name='payment'
+                  name='payment_method'
                   value='click'
-                  onChange={(e) => handleChange(e, 'payment_method')}
+                  onChange={(e) => handleChange(e)}
                 />
                 <label htmlFor='opt7'>
                   <div>
@@ -326,9 +340,9 @@ function CheckoutForm({ productsInCart }) {
                   className={`${style.input} input`}
                   type='radio'
                   id='opt8'
-                  name='payment'
+                  name='payment_method'
                   value='payme'
-                  onChange={(e) => handleChange(e, 'payment_method')}
+                  onChange={(e) => handleChange(e)}
                 />
                 <label htmlFor='opt8'>
                   <div>

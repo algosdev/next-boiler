@@ -10,11 +10,13 @@ import Recommended from '../../components/recommended/recommended'
 import ProductTab from '../../components/productTab/productTab'
 import Compare from '../../components/productSingle/compare'
 import { fetchMultipleUrls } from '../../lib/fetchMultipleUrls'
+
 function ProductSingle({ store, slug, data }) {
   function getData(slug) {
     const data = store.filter((el) => el.slug === slug)
     return data?.[0]
   }
+
   console.log('SINGLE', data)
   return (
     <>
@@ -32,21 +34,26 @@ function ProductSingle({ store, slug, data }) {
               <ProductSingleContent data={data?.product} />
             </Grid>
           </Grid>
-          <ProductTab product={data?.product} />
+          <ProductTab
+            slug={data?.product?.slug}
+            previewText={data?.product?.preview_text}
+            description={data?.product?.description}
+          />
           {/* <Shops />
           <Feedback /> */}
           {/* <Compare /> */}
-          <Recommended />
+          <Recommended relatedProducts={data?.product?.related_products} />
         </Container>
       </div>
     </>
   )
 }
-export async function getServerSideProps(ctx) {
+
+export async function getServerSideProps(ctx, { req }) {
   const store = initializeStore()
   const urls = [
-    'http://46.101.122.150:1235/v1/category',
-    `http://46.101.122.150:1235/v1/product/${ctx.params.id}`,
+    `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,
+    `${process.env.PRODUCT_API_URL}/${ctx.params.id}`,
   ]
   const [categories, data] = await fetchMultipleUrls(urls)
   return {

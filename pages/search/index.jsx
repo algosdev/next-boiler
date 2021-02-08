@@ -15,8 +15,8 @@ export default function Search({ products, search }) {
 }
 export async function getServerSideProps({ query, req }) {
   const urls = [
-    `http://46.101.122.150:1235/v1/product?lang=ru&search=${query.search}&active=true`,
-    'http://46.101.122.150:1235/v1/category',
+    `${process.env.PRODUCT_API_URL}?lang=ru&search=${query.search}&active=true`,
+    `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,
   ]
   const [products, categories] = await fetchMultipleUrls(urls)
 

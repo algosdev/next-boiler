@@ -1,11 +1,11 @@
-import React from 'react';
-import AboutBanner from '../components/about/aboutBanner';
-import AboutContent from '../components/about/aboutContent';
-import SEO from '../components/seo';
-import { useTranslation } from '../i18n';
-import { fetchMultipleUrls } from '../lib/fetchMultipleUrls';
+import React from 'react'
+import AboutBanner from '../components/about/aboutBanner'
+import AboutContent from '../components/about/aboutContent'
+import SEO from '../components/seo'
+import { useTranslation } from '../i18n'
+import { fetchMultipleUrls } from '../lib/fetchMultipleUrls'
 function about() {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   return (
     <>
       <SEO title={t('about')} description={t('contact_desc')} />
@@ -14,16 +14,16 @@ function about() {
         <AboutContent />
       </div>
     </>
-  );
+  )
 }
-export async function getServerSideProps() {
-  const urls = ['http://46.101.122.150:1235/v1/category'];
-  const [categories] = await fetchMultipleUrls(urls);
+export async function getServerSideProps({ req }) {
+  const urls = [`${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`]
+  const [categories] = await fetchMultipleUrls(urls)
   return {
     props: {
       categories,
     },
-  };
+  }
 }
 
-export default about;
+export default about

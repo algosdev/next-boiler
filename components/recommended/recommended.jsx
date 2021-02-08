@@ -1,12 +1,12 @@
-import React from 'react';
-import style from './recommended.module.scss';
-import ReactSlick from 'react-slick';
-import { numberToPrice } from '../../lib/numberToPrice';
-import { NextArrow, PrevArrow } from '../carouselArrows';
-import { Link, useTranslation } from '../../i18n';
-import { Container } from '@material-ui/core';
-function Recommended() {
-  const { t } = useTranslation();
+import React from 'react'
+import style from './recommended.module.scss'
+import ReactSlick from 'react-slick'
+import { numberToPrice } from '../../lib/numberToPrice'
+import { NextArrow, PrevArrow } from '../carouselArrows'
+import { Link, useTranslation } from '../../i18n'
+import { Container } from '@material-ui/core'
+function Recommended({ relatedProducts }) {
+  const { t } = useTranslation()
   const productListData = [
     {
       type: t('new'),
@@ -53,7 +53,7 @@ function Recommended() {
       colors: ['brown'],
       slug: 'iphone-leather-waller',
     },
-  ];
+  ]
   const responsive = [
     {
       breakpoint: 1024,
@@ -80,7 +80,7 @@ function Recommended() {
         initialSlide: 2,
       },
     },
-  ];
+  ]
 
   return (
     <div className={style.wrapper}>
@@ -99,33 +99,34 @@ function Recommended() {
               prevArrow: <PrevArrow />,
             }}
           >
-            {productListData.map((item, ind) => (
-              <div className={style.product} key={ind}>
-                <Link href={`/shop/${item.slug}`}>
-                  <a>
-                    <img src={item.img} alt={item.name} />
-                    <span className={style.type}>{item.type}</span>
-                    <h3 className={style.name}>{item.name}</h3>
-                    <span className={style.price}>
-                      {numberToPrice(item.price)} {t('soum')}
-                    </span>
-                    <div className={style.colors}>
+            {relatedProducts &&
+              relatedProducts.map((item, ind) => (
+                <div className={style.product} key={item.id}>
+                  <Link href={`/shop/${item.slug}`}>
+                    <a>
+                      <img src={item.image} alt={item.name} />
+                      {/* <span className={style.type}>{item.type}</span> */}
+                      <h3 className={style.name}>{item.name}</h3>
+                      <span className={style.price}>
+                        {numberToPrice(item.price.price)} {t('soum')}
+                      </span>
+                      {/* <div className={style.colors}>
                       {item.colors.map((color, ind) => (
                         <span
                           key={ind}
                           className={`${style[color]} ${style.color}`}
                         />
                       ))}
-                    </div>
-                  </a>
-                </Link>
-              </div>
-            ))}
+                    </div> */}
+                    </a>
+                  </Link>
+                </div>
+              ))}
           </ReactSlick>
         </Container>
       </div>
     </div>
-  );
+  )
 }
 
-export default Recommended;
+export default Recommended

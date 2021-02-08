@@ -1,10 +1,10 @@
-import { Link } from '@material-ui/core';
-import React from 'react';
-import LatestNewsCarousel from '../../components/news/latestNewsCarousel';
-import NewsSingleContent from '../../components/news/newsSingleContent';
-import NewsSingleHeader from '../../components/news/newsSingleHeader';
-import SEO from '../../components/seo';
-import { fetchMultipleUrls } from '../../lib/fetchMultipleUrls';
+import React from 'react'
+import LatestNewsCarousel from '../../components/news/latestNewsCarousel'
+import NewsSingleContent from '../../components/news/newsSingleContent'
+import NewsSingleHeader from '../../components/news/newsSingleHeader'
+import SEO from '../../components/seo'
+import { fetchMultipleUrls } from '../../lib/fetchMultipleUrls'
+
 function NewsSingle() {
   return (
     <>
@@ -15,16 +15,17 @@ function NewsSingle() {
         <LatestNewsCarousel />
       </div>
     </>
-  );
+  )
 }
-export async function getServerSideProps() {
-  const urls = ['http://46.101.122.150:1235/v1/category'];
-  const [categories] = await fetchMultipleUrls(urls);
+
+export async function getServerSideProps({ req }) {
+  const urls = [`${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`]
+  const [categories] = await fetchMultipleUrls(urls)
   return {
     props: {
       categories,
     },
-  };
+  }
 }
 
-export default NewsSingle;
+export default NewsSingle

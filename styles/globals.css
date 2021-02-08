@@ -176,6 +176,10 @@ input.input:focus {
   padding: 10px;
   font-size: 11px !important;
 }
+
+#nprogress .spinner {
+  display: none !important;
+}
 @media (max-width: 876px) {
   .main_container .header_margin {
     height: 60px;

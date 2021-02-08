@@ -24,7 +24,7 @@ function Feedback({ slug }) {
   const getReviews = async () => {
     try {
       const response = await axios.get(
-        `http://46.101.122.150:1235/v1/feedback?product=${slug}&limit=${limit}&active=true`
+        `${process.env.FEEDBACK_API_URL}?product=${slug}&limit=${limit}&active=true`
       )
       if (response.status === 200) {
         setData(response.data.feedbacks)

@@ -32,7 +32,7 @@ export default function Shop({
   )
 }
 export async function getServerSideProps({ query, req }) {
-  const urls = ['http://46.101.122.150:1235/v1/category']
+  const urls = [process.env.CATEGORY_API_URL]
   const [categories] = await fetchMultipleUrls(urls)
   let categoryId = null
   let foundChildCategory = null
@@ -67,10 +67,10 @@ export async function getServerSideProps({ query, req }) {
     brands,
     properties,
   ] = await fetchMultipleUrls([
-    `http://46.101.122.150:1235/v1/product?active=true&category=${categoryId}&lang=${req.i18n.language}`,
-    `http://46.101.122.150:1235/v1/category/${query.id}?lang=${req.i18n.language}`,
-    'http://46.101.122.150:1235/v1/brand',
-    'http://46.101.122.150:1235/v1/product-property',
+    `${process.env.PRODUCT_API_URL}?active=true&category=${categoryId}&lang=${req.i18n.language}`,
+    `${process.env.CATEGORY_API_URL}/${query.id}?lang=${req.i18n.language}`,
+    `${process.env.BRAND_API_URL}?lang=${req.i18n.language}`,
+    `${process.env.PRODUCT_PROPERTY_API_URL}?lang=${req.i18n.language}`,
   ])
 
   return {

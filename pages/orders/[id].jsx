@@ -1,12 +1,12 @@
-import React from 'react';
-import { Container } from '@material-ui/core';
-import SEO from '../../components/seo';
-import OrderSingleContainer from '../../components/orders/orderSingleContainer';
-import { useTranslation } from '../../i18n';
-import { fetchMultipleUrls } from '../../lib/fetchMultipleUrls';
+import React from 'react'
+import { Container } from '@material-ui/core'
+import SEO from '../../components/seo'
+import OrderSingleContainer from '../../components/orders/orderSingleContainer'
+import { useTranslation } from '../../i18n'
+import { fetchMultipleUrls } from '../../lib/fetchMultipleUrls'
 function orders({ data }) {
-  const { t } = useTranslation();
-  console.log('DDD', data);
+  const { t } = useTranslation()
+  console.log('DDD', data)
   return (
     <>
       <SEO title={`${t('order')} №6546`} />
@@ -14,20 +14,20 @@ function orders({ data }) {
         <OrderSingleContainer data={data} />
       </Container>
     </>
-  );
+  )
 }
-export async function getServerSideProps(ctx) {
+export async function getServerSideProps(ctx, { req }) {
   const urls = [
-    'http://46.101.122.150:1235/v1/category',
-    `http://46.101.122.150:1235/v1/order/${ctx.params.id}`,
-  ];
-  const [categories, data] = await fetchMultipleUrls(urls);
+    `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,
+    `${process.env.ORDER_API_URL}/${ctx.params.id}`,
+  ]
+  const [categories, data] = await fetchMultipleUrls(urls)
   return {
     props: {
       categories,
       data,
     },
-  };
+  }
 }
 
-export default orders;
+export default orders

@@ -22,8 +22,8 @@ function signIn() {
     </>
   )
 }
-export async function getServerSideProps() {
-  const urls = ['http://46.101.122.150:1235/v1/category']
+export async function getServerSideProps({ req }) {
+  const urls = [`${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`]
   const [categories] = await fetchMultipleUrls(urls)
   console.log('AAA', categories)
   return {

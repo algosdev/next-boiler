@@ -4,18 +4,20 @@ const localeSubpaths = {
   en: 'en',
 }
 
+const baseUrl = 'http://46.101.122.150:1235/'
+
 module.exports = {
   env: {
-    LOGIN_API_URL: 'http://46.101.122.150:1235/v1/customer',
-    FILTER_PRODUCT_API_URL: 'http://46.101.122.150:1235/v1/product/filter',
-    MIN_PRICE: 1000,
-    MAX_PRICE: 100000000,
+    LOGIN_API_URL: `${baseUrl}v1/customer`,
+    FILTER_PRODUCT_API_URL: `${baseUrl}v1/product/filter`,
+    CATEGORY_API_URL: `${baseUrl}v1/category`,
+    ORDER_API_URL: `${baseUrl}v1/order`,
+    USER_ORDERS_API_URL: `${baseUrl}v1/my-orders`,
+    PRODUCT_API_URL: `${baseUrl}v1/product`,
+    PRODUCT_PROPERTY_API_URL: `${baseUrl}v1/product-property`,
+    FEEDBACK_API_URL: `${baseUrl}v1/feedback`,
+    BRAND_API_URL: `${baseUrl}v1/brand`,
   },
-  // pwa: {
-  //   dest: 'public',
-  //   swSrc: 'service-worker.js',
-  //   runtimeCaching,
-  // },
   rewrites: async () => nextI18NextRewrites(localeSubpaths),
   publicRuntimeConfig: {
     localeSubpaths,

@@ -1,11 +1,11 @@
-import React from 'react';
-import { useTranslation } from '../i18n';
-import SEO from '../components/seo';
-import { Container } from '@material-ui/core';
-import { fetchMultipleUrls } from '../lib/fetchMultipleUrls';
-import InstallmentContainer from '../components/checkout_installment/installmentContainer';
+import React from 'react'
+import { useTranslation } from '../i18n'
+import SEO from '../components/seo'
+import { Container } from '@material-ui/core'
+import { fetchMultipleUrls } from '../lib/fetchMultipleUrls'
+import InstallmentContainer from '../components/checkout_installment/installmentContainer'
 function checkoutInstallment() {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   return (
     <>
       <SEO
@@ -19,17 +19,17 @@ function checkoutInstallment() {
         </Container>
       </div>
     </>
-  );
+  )
 }
-export async function getServerSideProps() {
-  const urls = ['http://46.101.122.150:1235/v1/category'];
-  const [categories] = await fetchMultipleUrls(urls);
-  console.log('AAA', categories);
+export async function getServerSideProps({ req }) {
+  const urls = [`${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`]
+  const [categories] = await fetchMultipleUrls(urls)
+  console.log('AAA', categories)
   return {
     props: {
       categories,
     },
-  };
+  }
 }
 
-export default checkoutInstallment;
+export default checkoutInstallment

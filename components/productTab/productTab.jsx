@@ -46,7 +46,7 @@ function a11yProps(index) {
   }
 }
 
-function ProductTab({ slug, product }) {
+function ProductTab({ slug, previewText, description }) {
   const { t } = useTranslation()
   const classes = useStyles()
   const [value, setValue] = useState(0)
@@ -92,13 +92,13 @@ function ProductTab({ slug, product }) {
           </Tabs>
         </AppBar>
         <TabPanel value={value} index={0}>
-          <Overview product={product} />
+          <Overview previewText={previewText} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <TechSpecs product={product} />
+          <TechSpecs description={description} />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <Feedback slug={product?.slug} />
+          <Feedback slug={slug} />
         </TabPanel>
       </div>
     </div>
