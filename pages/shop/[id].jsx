@@ -15,7 +15,7 @@ export default function Shop({
 }) {
   const { t } = useTranslation()
   const { query } = useRouter()
-
+  console.log('cat', category)
   return (
     <>
       <SEO title={t('products')} description={t('product_list_desc')} />
@@ -35,7 +35,7 @@ export default function Shop({
   )
 }
 export async function getServerSideProps({ query, req }) {
-  const urls = [process.env.CATEGORY_API_URL]
+  const urls = [`${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`]
 
   const [categories] = await fetchMultipleUrls(urls)
 

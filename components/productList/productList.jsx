@@ -173,7 +173,7 @@ export default function ProductList({
         brand: brand.length > 0 ? brand.join(',') : '',
         properties: JSON.stringify(properties),
         lang: i18n.language,
-        inactive: true,
+        inactive: false,
         active: true,
         // limit: productLimit.toString(),
         page: '1',
