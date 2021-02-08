@@ -74,6 +74,8 @@ export default function Home({ categories }) {
       },
     ],
   }
+
+  console.log('categoris', categories)
   return (
     <>
       <SEO title={t('main')} description={t('main_desc')} />

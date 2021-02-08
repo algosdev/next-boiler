@@ -26,7 +26,7 @@ export default function CatalogList({ data }) {
         </Typography>
         <div className={style.catalogListWrapper}>
           <Grid container spacing={3}>
-            {data.children.map((item, index) => (
+            {data?.children?.map((item, index) => (
               <Grid item lg={3} sm={6} xs={12} key={index}>
                 <Paper className={classes.root}>
                   <Link

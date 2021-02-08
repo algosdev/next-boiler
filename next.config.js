@@ -4,7 +4,7 @@ const localeSubpaths = {
   en: 'en',
 }
 
-const baseUrl = 'http://46.101.122.150:1235/'
+const baseUrl = 'https://api.macbro.uz/'
 
 module.exports = {
   env: {
