@@ -515,6 +515,15 @@
     }
   }
 }
+
+.not_product {
+  width: 100%;
+  p {
+    font-size: 20px;
+    line-height: 44px;
+    color: #fff;
+  }
+}
 @keyframes badge {
   0% {
     transform: scale(1);

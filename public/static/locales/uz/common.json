@@ -155,5 +155,7 @@
   "try_again": "Urinib ko'rish",
   "back_home": "Bosh sahifaga qaytish",
   "comment-condition": "Izoh berishdan oldin, iltimos, baho bering",
-  "comment-add": "Sharhlar muvaffaqiyatli qo'shildi"
+  "comment-add": "Sharhlar muvaffaqiyatli qo'shildi",
+  "search-product-empty": "So'rov bo'yicha mahsulot topilmadi",
+  "filter-product-empty": "Filtr orqali mahsulot topilmadi"
 }

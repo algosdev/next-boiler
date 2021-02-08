@@ -251,7 +251,7 @@ export default function ProductList({
               </Grid>
             )) || (
               <Grid item xs={12}>
-                <NoProduct />
+                <NoProduct description={t('filter-product-empty')} />
               </Grid>
             )}
           </Grid>

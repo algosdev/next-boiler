@@ -153,5 +153,7 @@
   "try_again": "Try again",
   "back_home": "Go back home",
   "comment-condition": "Before commenting please rate",
-  "comment-add": "Comments added successfully"
+  "comment-add": "Comments added successfully",
+  "search-product-empty": "No products found on request",
+  "filter-product-empty": "No products found by filter"
 }

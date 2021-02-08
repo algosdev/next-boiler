@@ -5,9 +5,10 @@ import ProductHeader from './productHeader'
 import ProductListItem from './productListItem'
 import NoProduct from './NoProduct'
 import axios from 'axios'
+import { useTranslation } from '../../i18n'
 
 export default function ProductSearchList({ data, search }) {
-  // const { t } = useTranslation()
+  const { t } = useTranslation()
   const [products, setProducts] = useState(data)
 
   const [showFilter, setShowFilter] = useState(true)
@@ -55,7 +56,7 @@ export default function ProductSearchList({ data, search }) {
               </Grid>
             )) || (
               <Grid item xs={12}>
-                <NoProduct />
+                <NoProduct description={t('search-product-empty')} />
               </Grid>
             )}
           </Grid>

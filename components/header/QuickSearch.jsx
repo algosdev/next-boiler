@@ -6,13 +6,14 @@ import { Container, CircularProgress } from '@material-ui/core'
 function QuickSearch({ term, products, loading }) {
   const { t } = useTranslation()
   console.log(products)
+
   return (
     <div className={style.wrapper_quickSearch}>
       <Container>
         <div className={style.inner}>
           {term.length > 2 ? (
             <>
-              {products &&
+              {products ? (
                 products.map((item) => (
                   <Link href={`/product/${item.slug}`}>
                     <a className={style.item}>
@@ -28,7 +29,12 @@ function QuickSearch({ term, products, loading }) {
                       </div>
                     </a>
                   </Link>
-                ))}
+                ))
+              ) : (
+                <div className={style.not_product}>
+                  <p>{t('search-product-empty')}</p>
+                </div>
+              )}
               {/* <Link href='/shop/homepod'>
                 <a className={style.item}>
                   <div className={style.img}>
