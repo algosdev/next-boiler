@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import React from 'react'
 import ProductList from '../../components/productList/productList'
 import SEO from '../../components/seo'
@@ -13,6 +14,7 @@ export default function Shop({
   properties,
 }) {
   const { t } = useTranslation()
+  const { query } = useRouter()
 
   return (
     <>
@@ -23,6 +25,7 @@ export default function Shop({
         subCateg={category}
       />
       <ProductList
+        query={query}
         categoryId={categoryId}
         data={products}
         brands={brands}

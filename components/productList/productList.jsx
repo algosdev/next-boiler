@@ -19,7 +19,13 @@ import ProductListItem from './productListItem'
 import NoProduct from './NoProduct'
 import axios from 'axios'
 import { createFormData } from '../../lib/createFormData'
-export default function ProductList({ data, brands, properties, categoryId }) {
+export default function ProductList({
+  data,
+  brands,
+  properties,
+  categoryId,
+  query,
+}) {
   const { t } = useTranslation()
 
   const productListData = [
@@ -157,13 +163,13 @@ export default function ProductList({ data, brands, properties, categoryId }) {
 
   useEffect(() => {
     filterProduct()
-  }, [filters])
+  }, [filters, query])
 
   const filterProduct = async () => {
     try {
-      const { category, brand, properties, priceRange, sort } = filters
+      const { brand, properties, priceRange, sort } = filters
       const formData = createFormData({
-        category: category,
+        category: categoryId,
         brand: brand.length > 0 ? brand.join(',') : '',
         properties: JSON.stringify(properties),
         lang: i18n.language,
