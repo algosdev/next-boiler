@@ -15,7 +15,8 @@ export default function Shop({
 }) {
   const { t } = useTranslation()
   const { query } = useRouter()
-  console.log('cat', category)
+  console.log('property', properties)
+  console.log('cat', category.product_properties)
   return (
     <>
       <SEO title={t('products')} description={t('product_list_desc')} />
@@ -29,7 +30,7 @@ export default function Shop({
         categoryId={categoryId}
         data={products}
         brands={brands}
-        properties={category.product_properties}
+        properties={category}
       />
     </>
   )
