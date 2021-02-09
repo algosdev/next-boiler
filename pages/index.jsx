@@ -81,7 +81,7 @@ export default function Home({ categories }) {
       <SEO title={t('main')} description={t('main_desc')} />
       <Hero />
       {categories?.categories
-        .filter((item, index) => index < 2)
+        ?.filter((item, index) => index < 2)
         ?.map((el, ind) => {
           return <CatalogList data={el} key={ind} />
         })}
@@ -94,7 +94,7 @@ export default function Home({ categories }) {
         />
       </BannerContainer>
       {categories?.categories
-        .filter((item, index) => index > 1)
+        ?.filter((item, index) => index > 1)
         ?.map((el, ind) => {
           return <CatalogList data={el} key={ind} />
         })}

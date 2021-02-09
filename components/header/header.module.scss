@@ -332,6 +332,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
   & > div {
     flex-grow: 1;
     max-height: 100%;
@@ -356,6 +357,8 @@
   .logo_cont {
     display: flex;
     justify-content: center;
+    position: absolute;
+    left: calc(50% - 60px);
     a {
       height: 100%;
       // width: 100%;
