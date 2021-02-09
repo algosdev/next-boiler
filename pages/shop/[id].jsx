@@ -29,7 +29,7 @@ export default function Shop({
         categoryId={categoryId}
         data={products}
         brands={brands}
-        properties={properties}
+        properties={category.product_properties}
       />
     </>
   )
@@ -75,7 +75,7 @@ export async function getServerSideProps({ query, req }) {
   ] = await fetchMultipleUrls([
     `${process.env.PRODUCT_API_URL}?active=true&category=${categoryId}&lang=${req.i18n.language}`,
     `${process.env.CATEGORY_API_URL}/${query.id}?lang=${req.i18n.language}`,
-    `${process.env.BRAND_API_URL}?lang=${req.i18n.language}`,
+    `${process.env.BRAND_API_URL}?lang=${req.i18n.language}&category=${categoryId}`,
     `${process.env.PRODUCT_PROPERTY_API_URL}?lang=${req.i18n.language}`,
   ])
 

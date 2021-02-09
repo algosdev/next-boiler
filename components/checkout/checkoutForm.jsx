@@ -53,7 +53,7 @@ function CheckoutForm({ productsInCart }) {
     console.log(values)
     axios
       .post(
-        'http://46.101.122.150:1235/v1/order',
+        process.env.ORDER_API_URL,
         createFormData({
           address: `${values.num_house_or_flat}, ${values.floor}, ${values.entrance},  ${values.domofon}`,
           delivery_method: 'self',

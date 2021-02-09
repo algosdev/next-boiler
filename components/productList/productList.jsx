@@ -277,51 +277,27 @@ export default function ProductList({
                 )
               }
             >
-              <Grid container>
-                {products?.map((item, index) => (
-                  <Grid
-                    item
-                    xs={6}
-                    xl={3}
-                    sm={6}
-                    lg={4}
-                    md={6}
-                    sh={12}
-                    key={index}
-                  >
-                    <ProductListItem item={item} key={index} />
-                  </Grid>
-                )) || (
-                  <Grid item xs={12}>
-                    <NoProduct description={t('filter-product-empty')} />
-                  </Grid>
-                )}
-              </Grid>
+              {gridProducts(products)}
             </InfiniteScroll>
           ) : (
-            <Grid container>
-              {products?.map((item, index) => (
-                <Grid
-                  item
-                  xs={6}
-                  xl={3}
-                  sm={6}
-                  lg={4}
-                  md={6}
-                  sh={12}
-                  key={index}
-                >
-                  <ProductListItem item={item} key={index} />
-                </Grid>
-              )) || (
-                <Grid item xs={12}>
-                  <NoProduct description={t('filter-product-empty')} />
-                </Grid>
-              )}
-            </Grid>
+            gridProducts(products)
           )}
         </div>
       </div>
     </div>
   )
 }
+
+const gridProducts = (products) => (
+  <Grid container>
+    {products?.map((item, index) => (
+      <Grid item xs={6} xl={3} sm={6} lg={4} md={6} sh={12} key={index}>
+        <ProductListItem item={item} key={index} />
+      </Grid>
+    )) || (
+      <Grid item xs={12}>
+        <NoProduct description={t('filter-product-empty')} />
+      </Grid>
+    )}
+  </Grid>
+)
