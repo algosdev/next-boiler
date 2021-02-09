@@ -11,12 +11,11 @@ export default function Shop({
   category,
   parentCategory,
   brands,
-  properties,
 }) {
   const { t } = useTranslation()
+
   const { query } = useRouter()
-  console.log('property', properties)
-  console.log('cat', category.product_properties)
+  console.log('brands', brands, categoryId)
   return (
     <>
       <SEO title={t('products')} description={t('product_list_desc')} />
@@ -68,16 +67,10 @@ export async function getServerSideProps({ query, req }) {
     }
   })
 
-  const [
-    { products },
-    { category },
-    brands,
-    properties,
-  ] = await fetchMultipleUrls([
+  const [{ products }, { category }, brands] = await fetchMultipleUrls([
     `${process.env.PRODUCT_API_URL}?active=true&category=${categoryId}&lang=${req.i18n.language}`,
     `${process.env.CATEGORY_API_URL}/${query.id}?lang=${req.i18n.language}`,
-    `${process.env.BRAND_API_URL}?lang=${req.i18n.language}&category=${categoryId}`,
-    `${process.env.PRODUCT_PROPERTY_API_URL}?lang=${req.i18n.language}`,
+    `${process.env.BRAND_API_URL}?category=${categoryId}`,
   ])
 
   return {
@@ -86,7 +79,6 @@ export async function getServerSideProps({ query, req }) {
       categories,
       category,
       brands,
-      properties,
       parentCategory,
       categoryId,
     },

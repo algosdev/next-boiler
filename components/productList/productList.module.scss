@@ -88,6 +88,12 @@
   }
 }
 
+.search_result {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
 .progress {
   padding: 20px;
   display: flex;
@@ -209,6 +215,10 @@
         font-size: 17px;
         font-weight: 500;
         line-height: 25px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
       }
       .price {
         display: block;

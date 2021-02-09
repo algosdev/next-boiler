@@ -157,5 +157,6 @@
   "comment-condition": "Izoh berishdan oldin, iltimos, baho bering",
   "comment-add": "Sharhlar muvaffaqiyatli qo'shildi",
   "search-product-empty": "So'rov bo'yicha mahsulot topilmadi",
-  "filter-product-empty": "Filtr orqali mahsulot topilmadi"
+  "filter-product-empty": "Filtr orqali mahsulot topilmadi",
+  "search-result": "Qidiruv natijalari"
 }

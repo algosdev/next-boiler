@@ -28,7 +28,9 @@ export default function ProductSearchList({ data, search }) {
   const filterProduct = async () => {
     try {
       const response = await axios.get(
-        `http://46.101.122.150:1235/v1/product?lang=ru&search=${search}&active=true&sort=${
+        `${
+          process.env.PRODUCT_API_URL
+        }?lang=ru&search=${search}&active=true&sort=${
           filters.sort ? `${filters.sort}` : ''
         }`
       )
@@ -45,13 +47,14 @@ export default function ProductSearchList({ data, search }) {
         showFilter={showFilter}
         setFilter={setFilter}
         filters={filters}
+        search={true}
         setShowFilter={setShowFilter}
       />
       <div className={style.productList}>
         <div className={style.wrapper}>
           <Grid container>
             {products?.map((item, index) => (
-              <Grid item xs={6} xl={3} sm={6} lg={4} md={6} sh={12} key={index}>
+              <Grid item xs={6} xl={3} sm={6} lg={3} md={6} sh={12} key={index}>
                 <ProductListItem item={item} key={index} />
               </Grid>
             )) || (

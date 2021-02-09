@@ -1,17 +1,12 @@
-import React, { useState } from 'react';
-import style from './productSingle.module.scss';
-import { Container, Box } from '@material-ui/core';
-import Lightbox from 'react-image-lightbox';
-import Rating from '@material-ui/lab/Rating';
-const carouselData = [
-  '/images/airpods_max.jpg',
-  '/images/case.jpeg',
-  '/images/homepod_mini.jpeg',
-];
+import React, { useState } from 'react'
+import style from './productSingle.module.scss'
+import { Container } from '@material-ui/core'
+import Lightbox from 'react-image-lightbox'
+
 function ProductSingleCarousel({ data }) {
-  const carouselData = data;
-  const [photoIndex, setPhotoIndex] = useState(0);
-  const [isLightBoxOpen, setIsLightBoxOpen] = useState(false);
+  const carouselData = data
+  const [photoIndex, setPhotoIndex] = useState(0)
+  const [isLightBoxOpen, setIsLightBoxOpen] = useState(false)
   return (
     <>
       <div className={style.wrapper_carousel}>
@@ -22,7 +17,7 @@ function ProductSingleCarousel({ data }) {
                 className={style.img_cont}
                 onClick={() => {
                   // setPhotoIndex(photoIndex)
-                  setIsLightBoxOpen(true);
+                  setIsLightBoxOpen(true)
                 }}
               >
                 <img src={carouselData[photoIndex]} alt='AirPods Max' />
@@ -36,7 +31,7 @@ function ProductSingleCarousel({ data }) {
                     photoIndex === ind ? style.active : ''
                   }`}
                   onClick={() => {
-                    setPhotoIndex(ind);
+                    setPhotoIndex(ind)
                   }}
                 >
                   <img src={el} alt='AirPods Max' />
@@ -79,7 +74,7 @@ function ProductSingleCarousel({ data }) {
         />
       )}
     </>
-  );
+  )
 }
 
-export default ProductSingleCarousel;
+export default ProductSingleCarousel

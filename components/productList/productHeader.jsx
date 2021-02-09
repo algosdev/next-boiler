@@ -46,7 +46,13 @@ const useStyles = makeStyles((theme) => ({
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />
 })
-function ProductHeader({ showFilter, setShowFilter, setFilter, filters }) {
+function ProductHeader({
+  showFilter,
+  setShowFilter,
+  setFilter,
+  filters,
+  search = false,
+}) {
   const { t } = useTranslation()
   const classes = useStyles()
   const sortByData = [
@@ -72,20 +78,24 @@ function ProductHeader({ showFilter, setShowFilter, setFilter, filters }) {
       <div className={style.navBar}>
         <div className={style.wrapper}>
           <div>
-            <button
-              className={style.btn}
-              onClick={() => {
-                setShowFilter(!showFilter)
-                if (window) {
-                  if (window.innerWidth < 576) {
-                    handleClickOpen()
+            {!search ? (
+              <button
+                className={style.btn}
+                onClick={() => {
+                  setShowFilter(!showFilter)
+                  if (window) {
+                    if (window.innerWidth < 576) {
+                      handleClickOpen()
+                    }
                   }
-                }
-              }}
-            >
-              <List />
-              {t('filter')}
-            </button>
+                }}
+              >
+                <List />
+                {t('filter')}
+              </button>
+            ) : (
+              <p className={style.search_result}>{t('search-result')}</p>
+            )}
           </div>
 
           <div className={style.sort_cont}>

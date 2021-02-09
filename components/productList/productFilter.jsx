@@ -6,8 +6,9 @@ import {
   Checkbox,
 } from '@material-ui/core'
 import style from './productList.module.scss'
-import { Link, useTranslation } from '../../i18n'
+import { useTranslation } from '../../i18n'
 import { numberToPrice } from '../../lib/numberToPrice'
+
 function ProductFilter({
   showFilter,
   properties,
@@ -15,28 +16,22 @@ function ProductFilter({
   setFilter,
   filters,
   value,
-  setValue,
 }) {
   const [val, setVal] = useState(value)
+
   useEffect(() => {
     setVal(value)
   }, [value])
 
-  console.log(value)
   const handlePriceChange = (e, newValue) => {
     setFilter({ ...filters, priceRange: newValue })
-    console.log(newValue)
-    //setVal(newValue)
-  }
-  const handleChange = (event, newValue) => {
-    setVal(newValue)
-    console.log('hn', newValue)
-    //setFilter({ ...filters, price_from: value[0], rice_till: value[1] })
   }
 
-  console.log(val)
+  const handleChange = (event, newValue) => {
+    setVal(newValue)
+  }
+
   const { t } = useTranslation()
-  console.log('>>>', properties)
 
   const hadleChangeBrand = (e) => {
     const isEmpty = filters.brand.includes(e.target.value)
@@ -105,8 +100,6 @@ function ProductFilter({
     }
   }
 
-  console.log('value range', val)
-
   return (
     <div className={`${style.filterWrapper} ${!showFilter ? style.hide : ''}`}>
       <div
@@ -153,21 +146,6 @@ function ProductFilter({
               />
             </div>
           ))}
-          {/* <div className={style.filter_item}>
-            <FormControlLabel
-              control={<Checkbox name='gilad' />}
-              label='Apple'
-            />
-          </div>
-          <div className={style.filter_item}>
-            <FormControlLabel
-              control={<Checkbox name='gilad' />}
-              label='Samsung'
-            />
-          </div> */}
-          {/* <div className={style.filter_item}>
-            <FormControlLabel control={<Checkbox />} label='Xiaomi' />
-          </div> */}
         </div>
         {properties?.product_properties?.map((property, index) => (
           <div className={style.color} key={index}>

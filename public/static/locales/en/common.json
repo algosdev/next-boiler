@@ -155,5 +155,6 @@
   "comment-condition": "Before commenting please rate",
   "comment-add": "Comments added successfully",
   "search-product-empty": "No products found on request",
-  "filter-product-empty": "No products found by filter"
+  "filter-product-empty": "No products found by filter",
+  "search-result": "Search results"
 }
