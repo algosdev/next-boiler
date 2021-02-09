@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import style from './productList.module.scss'
 import { i18n, Link } from '../../i18n'
+import InfiniteScroll from 'react-infinite-scroll-component'
 import { List, KeyboardArrowDown } from '@material-ui/icons'
 import {
   Grid,
@@ -8,6 +9,7 @@ import {
   ClickAwayListener,
   Checkbox,
   FormControlLabel,
+  CircularProgress,
 } from '@material-ui/core'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from '../../i18n'
@@ -149,9 +151,10 @@ export default function ProductList({
       ],
     },
   ]
-
+  const didMountRef = useRef(false)
   const [showFilter, setShowFilter] = useState(true)
   const [products, setProducts] = useState(data)
+  const [loading, setLoading] = useState(false)
   const [value, setValue] = useState([])
   const [filters, setFilter] = useState({
     category: categoryId,
@@ -159,15 +162,25 @@ export default function ProductList({
     properties: [],
     sort: '',
     priceRange: [],
+    limit: 6,
+    page: 1,
   })
 
   useEffect(() => {
-    filterProduct()
-  }, [filters, query])
+    if (didMountRef.current) filterProduct(false)
+    else {
+      didMountRef.current = true
+    }
+  }, [filters])
 
-  const filterProduct = async () => {
+  useEffect(() => {
+    setValue([])
+    filterProduct(true)
+  }, [query])
+
+  const filterProduct = async (isQuery) => {
     try {
-      const { brand, properties, priceRange, sort } = filters
+      const { brand, properties, priceRange, sort, limit, page } = filters
       const formData = createFormData({
         category: categoryId,
         brand: brand.length > 0 ? brand.join(',') : '',
@@ -175,10 +188,10 @@ export default function ProductList({
         lang: i18n.language,
         inactive: false,
         active: true,
-        // limit: productLimit.toString(),
-        page: '1',
-        price_from: priceRange.length > 0 ? priceRange[0] : '0',
-        price_till: priceRange.length > 0 ? priceRange[1] : '0',
+        limit,
+        page,
+        price_from: priceRange.length && !isQuery > 0 ? priceRange[0] : '0',
+        price_till: priceRange.length && !isQuery > 0 ? priceRange[1] : '0',
         search: '',
         sort: sort ? sort : '',
       })
@@ -190,23 +203,19 @@ export default function ProductList({
       console.log('filter=>>>>', response)
       if (response.status === 200) {
         setProducts(response.data.products)
+
         if (response.data.products) {
-          let sortedProductsByPrice = response.data.products.sort(
-            (a, b) => a.price.price - b.price.price
-          )
-          if (value.length === 0) {
+          if (isQuery) {
+            let sortedProductsByPrice = response.data.products?.sort(
+              (a, b) => a.price.price - b.price.price
+            )
+
             if (
               sortedProductsByPrice[0].price.price ===
               sortedProductsByPrice[sortedProductsByPrice.length - 1].price
                 .price
             ) {
-              setValue([
-                0,
-                parseInt(
-                  sortedProductsByPrice[sortedProductsByPrice.length - 1].price
-                    .price
-                ),
-              ])
+              setValue([])
             } else {
               setValue([
                 parseInt(sortedProductsByPrice[0].price.price),
@@ -221,8 +230,17 @@ export default function ProductList({
       }
     } catch (err) {
       console.log(err)
+    } finally {
+      setLoading(false)
     }
   }
+
+  const fetchMoreData = () => {
+    setLoading(true)
+    setFilter({ ...filters, limit: filters.limit + 6 })
+  }
+
+  console.log(products)
 
   return (
     <div className={style.productListWrapper}>
@@ -244,17 +262,64 @@ export default function ProductList({
             setValue={setValue}
           />
 
-          <Grid container>
-            {products?.map((item, index) => (
-              <Grid item xs={6} xl={3} sm={6} lg={4} md={6} sh={12} key={index}>
-                <ProductListItem item={item} key={index} />
+          {products && products.length >= 6 ? (
+            <InfiniteScroll
+              dataLength={products.length}
+              next={fetchMoreData}
+              hasMore={true}
+              loader={
+                loading ? (
+                  <div className={style.progress}>
+                    <CircularProgress />
+                  </div>
+                ) : (
+                  ''
+                )
+              }
+            >
+              <Grid container>
+                {products?.map((item, index) => (
+                  <Grid
+                    item
+                    xs={6}
+                    xl={3}
+                    sm={6}
+                    lg={4}
+                    md={6}
+                    sh={12}
+                    key={index}
+                  >
+                    <ProductListItem item={item} key={index} />
+                  </Grid>
+                )) || (
+                  <Grid item xs={12}>
+                    <NoProduct description={t('filter-product-empty')} />
+                  </Grid>
+                )}
               </Grid>
-            )) || (
-              <Grid item xs={12}>
-                <NoProduct description={t('filter-product-empty')} />
-              </Grid>
-            )}
-          </Grid>
+            </InfiniteScroll>
+          ) : (
+            <Grid container>
+              {products?.map((item, index) => (
+                <Grid
+                  item
+                  xs={6}
+                  xl={3}
+                  sm={6}
+                  lg={4}
+                  md={6}
+                  sh={12}
+                  key={index}
+                >
+                  <ProductListItem item={item} key={index} />
+                </Grid>
+              )) || (
+                <Grid item xs={12}>
+                  <NoProduct description={t('filter-product-empty')} />
+                </Grid>
+              )}
+            </Grid>
+          )}
         </div>
       </div>
     </div>

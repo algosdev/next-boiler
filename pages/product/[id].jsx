@@ -53,7 +53,7 @@ export async function getServerSideProps({ req, query }) {
   const store = initializeStore()
   const urls = [
     `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,
-    `${process.env.PRODUCT_API_URL}/${query.id}`,
+    `${process.env.PRODUCT_API_URL}/${query.id}?limit=6`,
   ]
   const [categories, data] = await fetchMultipleUrls(urls)
   return {

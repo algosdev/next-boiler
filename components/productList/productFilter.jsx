@@ -112,26 +112,30 @@ function ProductFilter({
       <div
         className={`${style.filterContent} ${!showFilter ? style.hide : ''}`}
       >
-        <div className={style.price}>
-          <Typography variant='h6'>{t('price')}</Typography>
-          {val.length > 0 ? (
-            <p>
-              {numberToPrice(val[0]) + ' ' + t('soum')} &ndash;
-              {numberToPrice(val[1]) + ' ' + t('soum')}
-            </p>
-          ) : (
-            ''
-          )}
-          <Slider
-            value={val}
-            onChangeCommitted={handlePriceChange}
-            onChange={handleChange}
-            max={value[1]}
-            track={false}
-            min={value[0]}
-            aria-labelledby='range-slider'
-          />
-        </div>
+        {value.length > 0 ? (
+          <div className={style.price}>
+            <Typography variant='h6'>{t('price')}</Typography>
+            {val.length > 0 ? (
+              <p>
+                {numberToPrice(val[0]) + ' ' + t('soum')} &ndash;
+                {numberToPrice(val[1]) + ' ' + t('soum')}
+              </p>
+            ) : (
+              ''
+            )}
+            <Slider
+              value={val}
+              onChangeCommitted={handlePriceChange}
+              onChange={handleChange}
+              max={value[1]}
+              track={false}
+              min={value[0]}
+              aria-labelledby='range-slider'
+            />
+          </div>
+        ) : (
+          ''
+        )}
         <div className={style.brand}>
           <Typography variant='h6'>{t('brand')}</Typography>
           {brands?.brands.map((brand, index) => (
