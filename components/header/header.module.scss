@@ -359,6 +359,7 @@
     justify-content: center;
     position: absolute;
     left: calc(50% - 60px);
+    z-index: 99;
     a {
       height: 100%;
       // width: 100%;
