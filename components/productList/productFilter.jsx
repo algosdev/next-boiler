@@ -131,7 +131,7 @@ function ProductFilter({
         )}
         <div className={style.brand}>
           <Typography variant='h6'>{t('brand')}</Typography>
-          {brands?.brands.map((brand, index) => (
+          {brands?.brands?.map((brand, index) => (
             <div className={style.filter_item} key={index}>
               <FormControlLabel
                 control={
