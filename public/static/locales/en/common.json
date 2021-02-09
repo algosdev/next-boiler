@@ -156,5 +156,10 @@
   "comment-add": "Comments added successfully",
   "search-product-empty": "No products found on request",
   "filter-product-empty": "No products found by filter",
-  "search-result": "Search results"
+  "search-result": "Search results",
+  "no-user-error": "User not found, register!",
+  "check-password-error": "Incorrect password",
+  "phone-number-error": "Enter your phone number in full",
+  "match-password": "Password does not match",
+  "user-exists": "The specified number is busy by another user"
 }

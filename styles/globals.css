@@ -180,6 +180,13 @@ input.input:focus {
 #nprogress .spinner {
   display: none !important;
 }
+
+.notification {
+  box-shadow: none !important;
+  background-color: #f21404 !important;
+  opacity: 1 !important;
+  border-radius: 8px !important;
+}
 @media (max-width: 876px) {
   .main_container .header_margin {
     height: 60px;

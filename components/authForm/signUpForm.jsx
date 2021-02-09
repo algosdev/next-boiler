@@ -19,16 +19,18 @@ import axios from 'axios'
 import { setUser } from '../../redux/actions/authActions/authActions'
 import { useDispatch } from 'react-redux'
 import VerifyCodeForm from './verifyCodeForm'
+import { NotificationContainer, NotificationManager } from 'react-notifications'
 
 function SignUpForm() {
   const { t } = useTranslation()
   const classes = useStyles()
   const dispatch = useDispatch()
   const router = Router
-  // const phoneNumRef = useRef(null)
-  // const passwordRef = useRef(null)
-  const [error, setError] = useState(false)
-  // const [isPhoneNumValid, setIsPhoneNumValid] = useState(false)
+  const [error, setError] = useState({
+    error: '',
+    text: '',
+  })
+
   const { register, handleSubmit } = useForm()
   const [checked, isChecked] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -51,21 +53,27 @@ function SignUpForm() {
   const prePasswordCheck = () => {
     if (values.pre_password) {
       if (values.pre_password === values.password) {
-        setError(false)
+        setError({
+          error: '',
+          text: '',
+        })
       } else {
-        setError(true)
+        setError({ error: 'phone-match', text: t('match-password') })
       }
     }
   }
 
-  // useEffect(() => {
-  //   if (phoneNumRef.current && passwordRef.current && isPhoneNumValid) {
-  //     phoneNumRef.current.blur()
-  //     passwordRef.current.focus()
-  //   }
-  // }, [isPhoneNumValid])
-
   const createUser = async (data) => {
+    if (data.phone.length < 13) {
+      setError({ error: 'phone', text: t('phone-number-error') })
+      return
+    }
+
+    if (data.password.length < 4) {
+      setError({ error: 'password', text: t('phone-number-error') })
+      return
+    }
+
     try {
       setIsLoading(true)
       const response = await axios.post(
@@ -79,19 +87,17 @@ function SignUpForm() {
         setCustomer(response.data)
         setPhone(data.phone)
         isChecked(true)
-        //Router.push(`/verify-code?phone=${data.phone}`)
       }
-      console.log(response)
     } catch (err) {
-      console.error(err)
+      if (err.response.status === 400) {
+        NotificationManager.error(t('user-exists'), '', 5000, () => {
+          console.log('hello')
+        })
+      }
     } finally {
       setIsLoading(false)
     }
   }
-
-  // const saveUser = async (userInfo) => {
-  //   dispatch(setUser(userInfo))
-  // }
 
   const phoneRegEx = /^([0-9+]+)$/
 
@@ -114,6 +120,8 @@ function SignUpForm() {
           <div className={style.input_cont}>
             <TextField
               value={values.phone}
+              error={error.error === 'phone'}
+              helperText={error && error.error === 'phone' ? error.text : ''}
               variant='filled'
               name='phone'
               fullWidth
@@ -168,8 +176,10 @@ function SignUpForm() {
           </div>
           <div className={style.input_cont}>
             <TextField
-              error={error}
-              helperText={error ? 'Пароль не совпадает' : ''}
+              error={error.error === 'phone-match'}
+              helperText={
+                error && error.error === 'phone-match' ? error.text : ''
+              }
               id='filled-basic'
               name='pre_password'
               variant='filled'
@@ -244,7 +254,7 @@ function SignUpForm() {
           ) : (
             ''
           )} */}
-          <Button disabled={error} fullWidth type='submit'>
+          <Button disabled={error.error} fullWidth type='submit'>
             {isLoading ? (
               <CircularProgress className={style.progress} color='inherit' />
             ) : (

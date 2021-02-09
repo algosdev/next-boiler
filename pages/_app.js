@@ -12,6 +12,8 @@ import NProgress from 'nprogress' //nprogress module
 import 'nprogress/nprogress.css'
 import { Router } from 'next/router'
 import { useEffect } from 'react'
+import { NotificationContainer } from 'react-notifications'
+import 'react-notifications/lib/notifications.css'
 Router.events.on('routeChangeStart', () => NProgress.start())
 Router.events.on('routeChangeComplete', () => {
   NProgress.done()
@@ -51,6 +53,7 @@ function MyApp({ Component, pageProps }) {
             <Layout categories={pageProps.categories}>
               <CssBaseline />
               <Component {...pageProps} />
+              <NotificationContainer />
             </Layout>
           </PersistGate>
         ) : (

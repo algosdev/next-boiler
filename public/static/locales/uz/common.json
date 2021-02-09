@@ -158,5 +158,10 @@
   "comment-add": "Sharhlar muvaffaqiyatli qo'shildi",
   "search-product-empty": "So'rov bo'yicha mahsulot topilmadi",
   "filter-product-empty": "Filtr orqali mahsulot topilmadi",
-  "search-result": "Qidiruv natijalari"
+  "search-result": "Qidiruv natijalari",
+  "no-user-error": "Foydalanuvchi topilmadi, ro'yxatdan o'ting!",
+  "check-password-error": "Parol noto‘g‘ri",
+  "phone-number-error": "Telefon raqamingizni to'liq kiriting",
+  "match-password": "Parol mos emas",
+  "user-exists": "Ko'rsatilgan raqam boshqa foydalanuvchi tomonidan band"
 }
