@@ -1,61 +1,62 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react'
 import {
   Typography,
   Checkbox,
   CircularProgress,
   Button,
   TextField,
-} from '@material-ui/core';
-import style from './authForm.module.scss';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import { Link } from '../../i18n';
-import { Router } from '../../i18n';
-import { useForm, Controller } from 'react-hook-form';
-import composeRefs from '@seznam/compose-react-refs';
-import InputMask from 'react-input-mask';
-import { useTranslation } from '../../i18n';
-import { useStyles, PhoneNumberMask } from './textFieldStyle';
-import axios from 'axios';
-import { setUser } from '../../redux/actions/authActions/authActions';
-import { useDispatch } from 'react-redux';
-import VerifyCodeForm from './verifyCodeForm';
+} from '@material-ui/core'
+import style from './authForm.module.scss'
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
+import { Link } from '../../i18n'
+import { Router } from '../../i18n'
+import { useForm, Controller } from 'react-hook-form'
+import composeRefs from '@seznam/compose-react-refs'
+import InputMask from 'react-input-mask'
+import { useTranslation } from '../../i18n'
+import { useStyles, PhoneNumberMask } from './textFieldStyle'
+import axios from 'axios'
+import { setUser } from '../../redux/actions/authActions/authActions'
+import { useDispatch } from 'react-redux'
+import VerifyCodeForm from './verifyCodeForm'
 
 function SignUpForm() {
-  const { t } = useTranslation();
-  const classes = useStyles();
-  const dispatch = useDispatch();
-  const router = Router;
+  const { t } = useTranslation()
+  const classes = useStyles()
+  const dispatch = useDispatch()
+  const router = Router
   // const phoneNumRef = useRef(null)
   // const passwordRef = useRef(null)
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(false)
   // const [isPhoneNumValid, setIsPhoneNumValid] = useState(false)
-  const { register, handleSubmit } = useForm();
-  const [checked, isChecked] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const { register, handleSubmit } = useForm()
+  const [checked, isChecked] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [values, setValues] = useState({
     pre_password: '',
     password: '',
-  });
-  const [phone, setPhone] = useState('');
-  const [customer, setCustomer] = useState('');
+    phone: '+998',
+  })
+  const [phone, setPhone] = useState('')
+  const [customer, setCustomer] = useState('')
   const checkPassword = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-    console.log(values);
-  };
+    setValues({ ...values, [e.target.name]: e.target.value })
+    console.log(values)
+  }
 
   useEffect(() => {
-    prePasswordCheck();
-  }, [values]);
+    prePasswordCheck()
+  }, [values])
 
   const prePasswordCheck = () => {
     if (values.pre_password) {
       if (values.pre_password === values.password) {
-        setError(false);
+        setError(false)
       } else {
-        setError(true);
+        setError(true)
       }
     }
-  };
+  }
 
   // useEffect(() => {
   //   if (phoneNumRef.current && passwordRef.current && isPhoneNumValid) {
@@ -66,31 +67,44 @@ function SignUpForm() {
 
   const createUser = async (data) => {
     try {
-      setIsLoading(true);
+      setIsLoading(true)
       const response = await axios.post(
         `${process.env.LOGIN_API_URL}/register`,
         {
           ...data,
-          phone: data.phone.replaceAll(' ', ''),
+          phone: data.phone,
         }
-      );
+      )
       if (response.status === 200) {
-        setCustomer(response.data);
-        setPhone(data.phone);
-        isChecked(true);
+        setCustomer(response.data)
+        setPhone(data.phone)
+        isChecked(true)
         //Router.push(`/verify-code?phone=${data.phone}`)
       }
-      console.log(response);
+      console.log(response)
     } catch (err) {
-      console.error(err);
+      console.error(err)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   // const saveUser = async (userInfo) => {
   //   dispatch(setUser(userInfo))
   // }
+
+  const phoneRegEx = /^([0-9+]+)$/
+
+  const handleChange = (event) => {
+    if (event.target.name === 'phone' || event.target.name === 'code') {
+      if (
+        event.target.value.length === 0 ||
+        (event.target.value.length <= 13 && phoneRegEx.test(event.target.value))
+      ) {
+        setValues({ ...values, [event.target.name]: event.target.value })
+      }
+    } else setValues({ ...values, [event.target.name]: event.target.value })
+  }
 
   return !checked ? (
     <div className={style.wrapper}>
@@ -99,17 +113,15 @@ function SignUpForm() {
         <form onSubmit={handleSubmit(createUser)} autoComplete='off'>
           <div className={style.input_cont}>
             <TextField
-              value={values.textmask}
+              value={values.phone}
               variant='filled'
+              name='phone'
               fullWidth
               inputRef={register}
               type='tel'
               className={classes.root}
-              name='phone'
+              onChange={handleChange}
               id='formatted-text-mask-input'
-              InputProps={{
-                inputComponent: PhoneNumberMask,
-              }}
               required
               label={t('phone_num')}
             />
@@ -309,7 +321,7 @@ function SignUpForm() {
     </div>
   ) : (
     <VerifyCodeForm phone={phone} userInfo={customer} />
-  );
+  )
 }
 
-export default SignUpForm;
+export default SignUpForm

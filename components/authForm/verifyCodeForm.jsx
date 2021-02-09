@@ -39,7 +39,7 @@ function VerifyCodeForm({ phone, userInfo }) {
         `${process.env.LOGIN_API_URL}/verify-phone`,
         {
           ...data,
-          phone: phone.replaceAll(' ', ''),
+          phone: phone,
         },
         {
           headers: {

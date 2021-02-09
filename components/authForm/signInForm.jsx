@@ -31,7 +31,7 @@ function SignInForm() {
   // const [isPasswordValid, setIsPasswordValid] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [values, setValues] = useState({
-    phoneNum: '',
+    phone: '+998',
     password: '',
   })
 
@@ -92,9 +92,10 @@ function SignInForm() {
     setIsLoading(true)
     try {
       const response = await axios.get(
-        `${process.env.LOGIN_API_URL}/exists?phone=%2B${data.phone
-          .replaceAll(' ', '')
-          .substring(1, data.phone.length)}`
+        `${process.env.LOGIN_API_URL}/exists?phone=%2B${data.phone.substring(
+          1,
+          data.phone.length
+        )}`
       )
       setChecked(response.data.exists)
       if (!response.data.exists) {
@@ -118,7 +119,7 @@ function SignInForm() {
     try {
       const response = await axios.post(`${process.env.LOGIN_API_URL}/login`, {
         ...data,
-        phone: data.phone.replaceAll(' ', ''),
+        phone: data.phone,
       })
       if (response.status === 200) {
         dispatch(setUser(response.data))
@@ -133,6 +134,19 @@ function SignInForm() {
     }
   }
 
+  const phoneRegEx = /^([0-9+]+)$/
+
+  const handleChange = (event) => {
+    if (event.target.name === 'phone' || event.target.name === 'code') {
+      if (
+        event.target.value.length === 0 ||
+        (event.target.value.length <= 13 && phoneRegEx.test(event.target.value))
+      ) {
+        setValues({ ...values, [event.target.name]: event.target.value })
+      }
+    } else setValues({ ...values, [event.target.name]: event.target.value })
+  }
+
   return (
     <div className={style.wrapper}>
       <Typography variant='h2'>{t('signin')}</Typography>
@@ -143,7 +157,7 @@ function SignInForm() {
         >
           <div className={style.input_cont}>
             <TextField
-              value={values.textmask}
+              value={values.phone}
               variant='filled'
               fullWidth
               className={classes.root}
@@ -154,71 +168,11 @@ function SignInForm() {
               }
               type='tel'
               id='formatted-text-mask-input'
-              InputProps={{
-                inputComponent: PhoneNumberMask,
-              }}
-              onChange={(e) =>
-                setValues({ ...values, phoneNum: e.target.value })
-              }
+              onChange={handleChange}
               required
               inputRef={register}
               label={t('phone_num')}
             />
-            {/* <TextField
-              id='filled-basic'
-              name='phoneNum'
-              variant='filled'
-              fullWidth
-             
-              className={classes.root}
-              onChange={(e) =>
-                setValues({ ...values, phoneNum: e.target.value })
-              }
-              required
-              label={t('phone_num')}
-            /> */}
-            {/* <Controller
-              as={TextField}
-              name={'phoneNum'}
-              control={control}
-              defaultValue=''
-              label={t('phone_num')}
-              fullWidth={true}
-              InputLabelProps={{
-                required: true,
-                variant: 'filled',
-              }}
-            /> */}
-            {/* <Controller
-              control={control}
-              name='test'
-              render={({ onChange, onBlur, value }) => (
-                <InputMask
-                  mask='+99999-999-99-99'
-                  disabled={false}
-                  maskChar={' '}
-                  defaultValue='+998'
-                  name='phoneNum'
-                  type='tel'
-                >
-                  {(inputProps) => (
-                    <TextField
-                      {...inputProps}
-                      disableunderline
-                      id='filled-basic'
-                      name='phoneNum'
-                      ref={register({
-                        validate: (value) => checkPhoneNumberLength(value),
-                        setValueAs: (value) =>
-                          value.trim().replace(/_/g, '').replace(/\s/g, ''),
-                      })}
-                      label={t('phone_num')}
-                      variant='filled'
-                    />
-                  )}
-                </InputMask>
-              )}
-            /> */}
           </div>
           {checked ? (
             <div className={style.input_cont}>
