@@ -1,31 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Typography,
-  Checkbox,
   CircularProgress,
   Button,
   TextField,
 } from '@material-ui/core'
 import style from './authForm.module.scss'
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
-import { Link } from '../../i18n'
-import { Router } from '../../i18n'
-import { useForm, Controller } from 'react-hook-form'
-import composeRefs from '@seznam/compose-react-refs'
-import InputMask from 'react-input-mask'
+import { useForm } from 'react-hook-form'
 import { useTranslation } from '../../i18n'
-import { useStyles, PhoneNumberMask } from './textFieldStyle'
+import { useStyles } from './textFieldStyle'
 import axios from 'axios'
-import { setUser } from '../../redux/actions/authActions/authActions'
-import { useDispatch } from 'react-redux'
 import VerifyCodeForm from './verifyCodeForm'
-import { NotificationContainer, NotificationManager } from 'react-notifications'
+import { NotificationManager } from 'react-notifications'
 
 function SignUpForm() {
   const { t } = useTranslation()
   const classes = useStyles()
-  const dispatch = useDispatch()
-  const router = Router
   const [error, setError] = useState({
     error: '',
     text: '',

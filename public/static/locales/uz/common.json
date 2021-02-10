@@ -164,5 +164,6 @@
   "phone-number-error": "Telefon raqamingizni to'liq kiriting",
   "match-password": "Parol mos emas",
   "user-exists": "Ko'rsatilgan raqam boshqa foydalanuvchi tomonidan band",
-  "user-password-error": "Parol kamida 4 ta belgidan iborat bo'lishi kerak"
+  "user-password-error": "Parol kamida 4 ta belgidan iborat bo'lishi kerak",
+  "otp-error": "OTP noto'g'ri!"
 }

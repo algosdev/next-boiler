@@ -1,40 +1,30 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import style from './authForm.module.scss'
-import { Typography, Button, TextField } from '@material-ui/core'
-import { i18n, Router } from '../../i18n'
-import { useRouter } from 'next/router'
+import {
+  Typography,
+  Button,
+  TextField,
+  CircularProgress,
+} from '@material-ui/core'
+import { Router } from '../../i18n'
 import { useTranslation } from '../../i18n'
 import { useForm } from 'react-hook-form'
 import { useStyles } from './textFieldStyle'
 import axios from 'axios'
-import { useDispatch, useSelector } from 'react-redux'
-import { logout, setUser } from '../../redux/actions/authActions/authActions'
+import { useDispatch } from 'react-redux'
+import { setUser } from '../../redux/actions/authActions/authActions'
 function VerifyCodeForm({ phone, userInfo }) {
   const classes = useStyles()
   const { t } = useTranslation()
   const [error, setError] = useState(false)
-  // const submitHandler = (e) => {
-  //   e.preventDefault()
-  //   if (router.query.signup === 'true') {
-  //     Router.push('/account?signup=true')
-  //   } else {
-  //     Router.push('/')
-  //   }
-  // }
-  const user = useSelector((state) => state.auth.user)
-
+  const [loading, setLoading] = useState(false)
   const { register, handleSubmit } = useForm()
   const dispatch = useDispatch()
 
-  // useEffect(() => {
-  //   console.log('clean')
-  //   return function cleanup() {
-  //     dispatch(logout())
-  //   }
-  // })
   const sendCode = async (data) => {
     setError(false)
     try {
+      setLoading(true)
       const response = await axios.post(
         `${process.env.LOGIN_API_URL}/verify-phone`,
         {
@@ -55,8 +45,11 @@ function VerifyCodeForm({ phone, userInfo }) {
         setError(true)
       }
     } catch (err) {
-      setError(true)
-      console.log(err)
+      if (err.response.status === 400) {
+        setError(true)
+      }
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -68,14 +61,6 @@ function VerifyCodeForm({ phone, userInfo }) {
       <div className={style.inner}>
         <form onSubmit={handleSubmit(sendCode)}>
           <div className={style.input_cont}>
-            {/* <input
-              className={`input`}
-              value={values.code}
-              onChange={(e) => setValues({ ...values, code: e.target.value })}
-              type='num'
-              placeholder='OTP code'
-              required
-            /> */}
             <TextField
               id='filled-basic'
               name='code'
@@ -85,21 +70,19 @@ function VerifyCodeForm({ phone, userInfo }) {
               type='number'
               className={classes.root}
               error={error}
-              helperText={error ? 'OTP неверен!' : ''}
-              // onChange={(e) =>
-              //   setValues({ ...values, phoneNum: e.target.value })
-              // }
+              helperText={error ? t('otp-error') : ''}
               required
               label={t('otp')}
             />
           </div>
           <div className={style.input_cont}>
             <Button fullWidth type='submit'>
-              {t('continue')}
+              {loading ? (
+                <CircularProgress className={style.progress} color='inherit' />
+              ) : (
+                t('continue')
+              )}
             </Button>
-            {/* <button className='input' type='submit'>
-              Submit
-            </button> */}
           </div>
         </form>
       </div>
