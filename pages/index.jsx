@@ -6,8 +6,9 @@ import Banner from '../components/banner/banner'
 import { useTranslation } from '../i18n'
 import { fetchMultipleUrls } from '../lib/fetchMultipleUrls'
 
-export default function Home({ categories }) {
+export default function Home({ categories, banners }) {
   const { t } = useTranslation()
+  console.log('banners', banners)
   const appleProducts = {
     title: t('apple_p'),
     catalog: [
@@ -103,11 +104,15 @@ export default function Home({ categories }) {
 }
 
 export async function getServerSideProps({ req }) {
-  const urls = [`${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`]
-  const [categories] = await fetchMultipleUrls(urls)
+  const urls = [
+    `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,
+    `${process.env.BANNER_API_URL}?position=home-page&active=true`,
+  ]
+  const [categories, banners] = await fetchMultipleUrls(urls)
   return {
     props: {
       categories,
+      banners,
     },
   }
 }

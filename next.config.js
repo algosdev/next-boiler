@@ -17,6 +17,7 @@ module.exports = {
     PRODUCT_PROPERTY_API_URL: `${baseUrl}v1/product-property`,
     FEEDBACK_API_URL: `${baseUrl}v1/feedback`,
     BRAND_API_URL: `${baseUrl}v1/brand`,
+    BANNER_API_URL: `${baseUrl}v1/banner`,
   },
   rewrites: async () => nextI18NextRewrites(localeSubpaths),
   publicRuntimeConfig: {
