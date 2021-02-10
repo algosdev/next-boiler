@@ -277,10 +277,10 @@ export default function ProductList({
                 )
               }
             >
-              {gridProducts(products)}
+              {gridProducts(products, t('filter-product-empty'))}
             </InfiniteScroll>
           ) : (
-            gridProducts(products)
+            gridProducts(products, t('filter-product-empty'))
           )}
         </div>
       </div>
@@ -288,7 +288,7 @@ export default function ProductList({
   )
 }
 
-const gridProducts = (products) => (
+const gridProducts = (products, emptyTitle) => (
   <Grid container>
     {products?.map((item, index) => (
       <Grid item xs={6} xl={3} sm={6} lg={4} md={6} sh={12} key={index}>
@@ -296,7 +296,7 @@ const gridProducts = (products) => (
       </Grid>
     )) || (
       <Grid item xs={12}>
-        <NoProduct description={t('filter-product-empty')} />
+        <NoProduct description={emptyTitle} />
       </Grid>
     )}
   </Grid>
