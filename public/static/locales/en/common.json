@@ -161,5 +161,6 @@
   "check-password-error": "Incorrect password",
   "phone-number-error": "Enter your phone number in full",
   "match-password": "Password does not match",
-  "user-exists": "The specified number is busy by another user"
+  "user-exists": "The specified number is busy by another user",
+  "user-password-error": "Password must contain at least 4 characters"
 }

@@ -70,7 +70,7 @@ function SignUpForm() {
     }
 
     if (data.password.length < 4) {
-      setError({ error: 'password', text: t('phone-number-error') })
+      setError({ error: 'password', text: t('user-password-error') })
       return
     }
 
@@ -172,6 +172,8 @@ function SignUpForm() {
               onChange={checkPassword}
               label={t('password')}
               inputRef={register}
+              error={error.error === 'password'}
+              helperText={error && error.error === 'password' ? error.text : ''}
             />
           </div>
           <div className={style.input_cont}>
