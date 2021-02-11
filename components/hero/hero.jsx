@@ -4,8 +4,9 @@ import { Container } from '@material-ui/core'
 import Carousel from 'react-bootstrap/Carousel'
 import { Link, useTranslation, i18n } from '../../i18n'
 import 'bootstrap/dist/css/bootstrap.min.css'
-export default function Hero() {
+export default function Hero({ banners }) {
   const { t } = useTranslation()
+  console.log(banners)
   const data1 = {
     en: {
       slogan: "Power. It's in the air.",
@@ -48,7 +49,39 @@ export default function Hero() {
         className={style.background}
       /> */}
       <Carousel interval={80000000}>
-        <Carousel.Item>
+        {banners?.map((item, i) => (
+          <Carousel.Item>
+            <Carousel.Caption>
+              <Container>
+                <div className={style.wrapper}>
+                  <span className={style.new}>{t('new')}</span>
+                  <h2 className={style.title}>{item.title}</h2>
+                  {/* <div className={style.desc}>
+                    {data1[i18n.language]?.slogan}
+                  </div> */}
+                  <p
+                    className={style.content}
+                    dangerouslySetInnerHTML={{
+                      __html: item.description,
+                    }}
+                  >
+                    {/* {data1[i18n.language]?.t2} <br />
+                    {data1[i18n.language]?.t3} */}
+                  </p>
+                  <Link href='/shop/macbook'>
+                    <a className={style.callToAction}>{t('buy')}</a>
+                  </Link>
+                </div>
+                <img
+                  src={item.image}
+                  alt='Macbook air'
+                  className={style.background}
+                />
+              </Container>
+            </Carousel.Caption>
+          </Carousel.Item>
+        ))}
+        {/* <Carousel.Item>
           <Carousel.Caption>
             <Container>
               <div className={style.wrapper}>
@@ -93,7 +126,7 @@ export default function Hero() {
               className={style.background}
             />
           </Carousel.Caption>
-        </Carousel.Item>
+        </Carousel.Item> */}
       </Carousel>
     </div>
   )

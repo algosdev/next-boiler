@@ -80,7 +80,7 @@ export default function Home({ categories, banners }) {
   return (
     <>
       <SEO title={t('main')} description={t('main_desc')} />
-      <Hero />
+      <Hero banners={banners.banners} />
       {categories?.categories
         ?.filter((item, index) => index < 2)
         ?.map((el, ind) => {
