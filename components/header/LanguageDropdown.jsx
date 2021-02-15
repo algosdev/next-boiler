@@ -146,11 +146,11 @@ const LanguageDropdown = ({ title, subCategs }) => {
                     ) : (
                       ''
                     )}
-                    {/* {i18n.language !== 'en' ? (
+                    {i18n.language !== 'en' ? (
                       <MenuItem
                         onClick={(e) => {
-                          handleClose(e);
-                          i18n.changeLanguage('en');
+                          handleClose(e)
+                          i18n.changeLanguage('en')
                         }}
                         diableRipple
                       >
@@ -158,7 +158,7 @@ const LanguageDropdown = ({ title, subCategs }) => {
                       </MenuItem>
                     ) : (
                       ''
-                    )} */}
+                    )}
                     {i18n.language !== 'uz' ? (
                       <MenuItem
                         onClick={(e) => {
