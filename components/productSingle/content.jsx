@@ -30,7 +30,33 @@ const colorsData = [
   { ru: 'Красный', en: 'Red', uz: 'Qizil' },
   { ru: 'Синий', en: 'Blue', uz: "Ko'k" },
 ]
+const models = [
+  {
+    name: 'iPhone 12 mini',
+    disp: '5.4-inch display',
+    price: 'From $29.12/mo.per monthor $699 before trade-in*',
+  },
+  {
+    name: 'iPhone 12',
+    disp: '6.1-inch display1',
+    price: 'From $33.29/mo.per monthor $799 before trade-in*',
+  },
+]
 
+const storages = [
+  {
+    name: '64GB',
+    disp: '$29.12/mo. or $699.00 before trade-in*',
+  },
+  {
+    name: '128GB',
+    disp: '$31.20/mo. or $749.00 before trade-in*',
+  },
+  {
+    name: '256GB',
+    disp: '$35.37/mo. or $849.00 before trade-in*',
+  },
+]
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -67,6 +93,8 @@ function ProductSingleContent({ data }) {
   const { language } = i18n
   const { t } = useTranslation()
   const [activeColorIndex, setActiveColorIndex] = useState(0)
+  const [activeColorIndex2, setActiveColorIndex2] = useState(0)
+  const [activeColorIndex3, setActiveColorIndex3] = useState(0)
   const addToCart = () => {
     if (!addedToCart) {
       const validQuantity = quantity > 0 ? quantity : 0
@@ -134,34 +162,88 @@ function ProductSingleContent({ data }) {
             __html: data.preview_text,
           }}
         ></div>
-        {/* <div className={style.colors_cont}>
+        <div className={style.colors_cont}>
           <div className={style.colors_title}>{t('colors')}</div>
           <Grid container spacing={2}>
-            {data.properties &&
-              data.properties[0].property.options.map((item, index) => (
-                <Grid
-                  item
-                  xs={6}
-                  key={index}
-                  onClick={() => setActiveColorIndex(index)}
+            {colorsData.map((item, index) => (
+              <Grid
+                item
+                xs={6}
+                key={index}
+                onClick={() => setActiveColorIndex(index)}
+              >
+                <div
+                  id={`product_color${index}`}
+                  className={`${style.color_cont} ${
+                    activeColorIndex === index ? style.active : ''
+                  }`}
                 >
-                  <div
-                    id={`product_color${index}`}
-                    className={`${style.color_cont} ${
-                      activeColorIndex === index ? style.active : ''
-                    }`}
-                  >
-                    <div className={style.inner}>
-                      <div
-                        className={`${style.color_ball} ${style[item.value]}`}
-                      ></div>
-                      <div className={style.color_name}>{item.name}</div>
-                    </div>
+                  <div className={style.inner}>
+                    <div
+                      className={`${style.color_ball} ${
+                        style[item.en.toLowerCase()]
+                      }`}
+                    ></div>
+                    <div className={style.color_name}>{item[language]}</div>
                   </div>
-                </Grid>
-              ))}
+                </div>
+              </Grid>
+            ))}
           </Grid>
-        </div> */}
+        </div>
+        <div className={style.colors_cont}>
+          <div className={style.colors_title}>Choose your model.</div>
+          <Grid container spacing={2}>
+            {models.map((item, index) => (
+              <Grid
+                item
+                xs={12}
+                key={index}
+                onClick={() => setActiveColorIndex2(index)}
+              >
+                <div
+                  id={`product_color${index}`}
+                  className={`${style.color_cont} ${style.model_prop} ${
+                    activeColorIndex2 === index ? style.active : ''
+                  }`}
+                >
+                  <div className={style.inner}>
+                    <h4>{item.name}</h4>
+                    <span>{item.disp}</span>
+                  </div>
+                  <div className={style.inner}>
+                    <p>{item.price}</p>
+                  </div>
+                </div>
+              </Grid>
+            ))}
+          </Grid>
+        </div>
+        <div className={style.colors_cont}>
+          <div className={style.colors_title}>Choose your capacity.</div>
+          <Grid container spacing={2}>
+            {storages.map((item, index) => (
+              <Grid
+                item
+                xs={4}
+                key={index}
+                onClick={() => setActiveColorIndex3(index)}
+              >
+                <div
+                  id={`product_color${index}`}
+                  className={`${style.color_cont} ${style.capacity} ${
+                    activeColorIndex3 === index ? style.active : ''
+                  }`}
+                >
+                  <div className={style.inner}>
+                    <h4>{item.name}</h4>
+                    <span>{item.disp}</span>
+                  </div>
+                </div>
+              </Grid>
+            ))}
+          </Grid>
+        </div>
         {!addedToCart ? (
           <div className={style.quantity_cont}>
             <div className={style.quantity_inner}>

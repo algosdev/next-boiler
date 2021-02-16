@@ -106,7 +106,7 @@ export default function Home({ categories, banners }) {
 export async function getServerSideProps({ req }) {
   const urls = [
     `${process.env.CATEGORY_API_URL}?lang=${req.i18n.language}`,
-    `${process.env.BANNER_API_URL}?position=home-page&active=true`,
+    `${process.env.BANNER_API_URL}?position=home-page&active=true&lang=${req.i18n.language}`,
   ]
   const [categories, banners] = await fetchMultipleUrls(urls)
   return {
