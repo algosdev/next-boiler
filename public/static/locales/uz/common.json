@@ -165,5 +165,7 @@
   "match-password": "Parol mos emas",
   "user-exists": "Ko'rsatilgan raqam boshqa foydalanuvchi tomonidan band",
   "user-password-error": "Parol kamida 4 ta belgidan iborat bo'lishi kerak",
-  "otp-error": "OTP noto'g'ri!"
+  "otp-error": "OTP noto'g'ri!",
+  "choose-model": "Modelni tanlang",
+  "choose-capacity": "Xotirani tanlang"
 }

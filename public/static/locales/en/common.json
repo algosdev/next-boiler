@@ -163,5 +163,7 @@
   "match-password": "Password does not match",
   "user-exists": "The specified number is busy by another user",
   "user-password-error": "Password must contain at least 4 characters",
-  "otp-error": "OTP is incorrect!"
+  "otp-error": "OTP is incorrect!",
+  "choose-model": "Choose your model",
+  "choose-capacity": "Choose your capacity"
 }

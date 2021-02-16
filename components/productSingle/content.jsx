@@ -192,7 +192,7 @@ function ProductSingleContent({ data }) {
           </Grid>
         </div>
         <div className={style.colors_cont}>
-          <div className={style.colors_title}>Choose your model.</div>
+          <div className={style.colors_title}>{t('choose-model')}</div>
           <Grid container spacing={2}>
             {models.map((item, index) => (
               <Grid
@@ -220,12 +220,13 @@ function ProductSingleContent({ data }) {
           </Grid>
         </div>
         <div className={style.colors_cont}>
-          <div className={style.colors_title}>Choose your capacity.</div>
+          <div className={style.colors_title}>{t('choose-capacity')}</div>
           <Grid container spacing={2}>
             {storages.map((item, index) => (
               <Grid
                 item
-                xs={4}
+                md={4}
+                xs={6}
                 key={index}
                 onClick={() => setActiveColorIndex3(index)}
               >
