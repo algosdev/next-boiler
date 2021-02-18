@@ -1,24 +1,22 @@
 import '../styles/globals.css'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import Layout from '../components/layout'
+import React from 'react'
 import { Provider } from 'react-redux'
 import { useStore } from '../redux/store'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
-import { ThemeProvider } from '@material-ui/core/styles'
-import theme from '../theme/theme'
-import { appWithTranslation } from '../i18n.js'
-import NProgress from 'nprogress' //nprogress module
-import 'nprogress/nprogress.css'
-import { Router } from 'next/router'
-import { useEffect } from 'react'
-import { NotificationContainer } from 'react-notifications'
-import 'react-notifications/lib/notifications.css'
+import PropTypes from 'prop-types'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Layout from '../components/layout'
+import { appWithTranslation } from '../i18n'
+import NProgress from 'nprogress'
+import Router from 'next/router'
+
 Router.events.on('routeChangeStart', () => NProgress.start())
 Router.events.on('routeChangeComplete', () => {
   NProgress.done()
   scrollTop()
 })
+
 Router.events.on('routeChangeError', () => NProgress.done())
 function scrollTop() {
   if (window) {
@@ -33,37 +31,27 @@ function scrollTop() {
 function MyApp({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState)
   const persistor = persistStore(store)
-  // useEffect(() => {
-  //   if (navigator) {
-  //     if ("serviceWorker" in navigator) {
-  //       window.addEventListener("load", () => {
-  //         navigator.serviceWorker
-  //           .register("/serviceWorkers.js")
-  //           .then((reg) => console.log("Success: ", reg))
-  //           .catch((err) => console.log("Failure: ", err));
-  //       });
-  //     }
-  //   }
-  // });
   return (
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        {typeof window !== 'undefined' ? (
-          <PersistGate loading={null} persistor={persistor}>
-            <Layout categories={pageProps.categories}>
-              <CssBaseline />
-              <Component {...pageProps} />
-              <NotificationContainer />
-            </Layout>
-          </PersistGate>
-        ) : (
-          <Layout categories={pageProps.categories}>
+      <CssBaseline />
+      {typeof window !== 'undefined' ? (
+        <PersistGate loading={null} persistor={persistor}>
+          <Layout category={pageProps.categories}>
             <Component {...pageProps} />
           </Layout>
-        )}
-      </ThemeProvider>
+        </PersistGate>
+      ) : (
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      )}
     </Provider>
   )
+}
+
+MyApp.propTypes = {
+  Component: PropTypes.elementType.isRequired,
+  pageProps: PropTypes.object.isRequired,
 }
 
 export default appWithTranslation(MyApp)

@@ -1,11 +1,9 @@
-import Head from "next/head";
-
+import Head from 'next/head'
 export default function SEO({ title, description, image, keywords }) {
   return (
     <Head>
       <meta name='viewport' content='width=device-width, initial-scale=1' />
       <meta charSet='utf-8' />
-
       <title>{title ? `${title} | MacBro` : `MacBro`}</title>
       <meta name='description' content={description} />
       <meta name='keywords' content={keywords} />
@@ -54,5 +52,5 @@ export default function SEO({ title, description, image, keywords }) {
       <meta name='twitter:site' content='MacBro' />
       <meta name='twitter:creator' content='DeveloperBoy' />
     </Head>
-  );
+  )
 }

@@ -1,5 +1,0 @@
-export DEPLOYMENT=frontend
-
-APP=mb_frontend
-PROJECT_NAME=macbro
-REGISTRY=gitlab.udevs.io:5050

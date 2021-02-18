@@ -7,10 +7,7 @@ const nextI18n = new NextI18Next({
   otherLanguages: ['uz', 'en'],
   localeSubpaths,
   localePath: path.resolve('./public/static/locales'),
-  //browserLanguageDetection: false,
-  //serverLanguageDetection: false,
 })
 
 module.exports = nextI18n
-
 exports.i18n = nextI18n.i18n
